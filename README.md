@@ -20,6 +20,8 @@
 ├── db.js                  # Подключение к PostgreSQL
 ├── package.json           # Зависимости проекта
 ├── .env                   # Переменные окружения
+├── Dockerfile             # Docker образ
+├── .dockerignore          # Исключения для Docker
 ├── middleware/
 │   └── auth.js           # JWT аутентификация
 └── routes/
@@ -57,9 +59,32 @@ docker ps | grep postgres
 
 ## Запуск
 
+### Локальный запуск
+
 ```bash
 npm start
 ```
+
+### Запуск в Docker
+
+**Сборка Docker образа:**
+```bash
+docker build -t siteemb:latest .
+```
+
+**Запуск контейнера:**
+```bash
+docker run -d \
+  --name website \
+  -p 3000:3000 \
+  --network your_network \
+  -e DATABASE_URL=postgresql://postgres:postgres@postgres:5432/serverreport \
+  -e JWT_SECRET=ваш_секретный_ключ \
+  -e NODE_ENV=production \
+  siteemb:latest
+```
+
+**Важно:** Контейнер должен быть в той же Docker сети, что и PostgreSQL.
 
 Сервер будет доступен по адресу: `http://localhost:3000`
 
