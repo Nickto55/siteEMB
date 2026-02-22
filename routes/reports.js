@@ -1,137 +1,203 @@
 const express = require('express');
-const { body, validationResult } = require('express-validator');
-const pool = require('../db');
-const authMiddleware = require('../middleware/auth');
-
 const router = express.Router();
+const pool = require('../db');
+const { authenticateToken } = require('../middleware/auth');
 
-// Получить все отчеты (только защищенный доступ)
-router.get('/', authMiddleware, async (req, res) => {
+// Все роуты требуют аутентификации
+router.use(authenticateToken);
+
+// GET /api/reports - Получить список отчетов
+router.get('/', async (req, res) => {
     try {
-        const result = await pool.query(
-            'SELECT r.id, r.title, r.description, r.created_at, r.user_id, u.name FROM reports r JOIN users u ON r.user_id = u.id ORDER BY r.created_at DESC'
-        );
-        res.json(result.rows);
-    } catch (err) {
-        console.error('Ошибка при получении отчетов:', err);
-        res.status(500).json({ message: 'Ошибка сервера' });
+        const { status, limit = 50, offset = 0 } = req.query;
+
+        let query = `
+      SELECT r.*, u.username as author_username
+      FROM reports r
+      JOIN users u ON r.user_id = u.id
+    `;
+        const params = [];
+
+        // Фильтр по статусу
+        if (status) {
+            params.push(status);
+            query += ` WHERE r.status = $${params.length}`;
+        }
+
+        query += ' ORDER BY r.created_at DESC LIMIT $' + (params.length + 1) + ' OFFSET $' + (params.length + 2);
+        params.push(limit, offset);
+
+        const result = await pool.query(query, params);
+
+        res.json({
+            reports: result.rows,
+            count: result.rows.length
+        });
+    } catch (error) {
+        console.error('Ошибка при получении отчетов:', error);
+        res.status(500).json({ error: 'Ошибка сервера при получении отчетов' });
     }
 });
 
-// Получить отчет по ID
-router.get('/:id', authMiddleware, async (req, res) => {
+// GET /api/reports/:id - Получить отчет по ID
+router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
+
         const result = await pool.query(
-            'SELECT r.id, r.title, r.description, r.created_at, r.user_id, u.name FROM reports r JOIN users u ON r.user_id = u.id WHERE r.id = $1',
+            `SELECT r.*, u.username as author_username
+       FROM reports r
+       JOIN users u ON r.user_id = u.id
+       WHERE r.id = $1`,
             [id]
         );
 
         if (result.rows.length === 0) {
-            return res.status(404).json({ message: 'Отчет не найден' });
+            return res.status(404).json({ error: 'Отчет не найден' });
         }
 
-        res.json(result.rows[0]);
-    } catch (err) {
-        console.error('Ошибка при получении отчета:', err);
-        res.status(500).json({ message: 'Ошибка сервера' });
+        res.json({ report: result.rows[0] });
+    } catch (error) {
+        console.error('Ошибка при получении отчета:', error);
+        res.status(500).json({ error: 'Ошибка сервера' });
     }
 });
 
-// Создать новый отчет
-router.post(
-    '/',
-    authMiddleware,
-    [
-        body('title').trim().notEmpty().withMessage('Название отчета не может быть пустым'),
-        body('description').trim().notEmpty().withMessage('Описание не может быть пустым')
-    ],
-    async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+// POST /api/reports - Создать новый отчет
+router.post('/', async (req, res) => {
+    try {
+        const { title, description, server_name } = req.body;
+
+        // Валидация входных данных
+        if (!title || !description) {
+            return res.status(400).json({ error: 'Название и описание обязательны' });
         }
 
-        try {
-            const { title, description } = req.body;
-            const userId = req.user.id;
-
-            const result = await pool.query(
-                'INSERT INTO reports (title, description, user_id) VALUES ($1, $2, $3) RETURNING id, title, description, created_at, user_id',
-                [title, description, userId]
-            );
-
-            res.status(201).json({ message: 'Отчет успешно создан', report: result.rows[0] });
-        } catch (err) {
-            console.error('Ошибка при создании отчета:', err);
-            res.status(500).json({ message: 'Ошибка сервера' });
+        if (title.length < 5) {
+            return res.status(400).json({ error: 'Название должно быть минимум 5 символов' });
         }
+
+        if (description.length < 10) {
+            return res.status(400).json({ error: 'Описание должно быть минимум 10 символов' });
+        }
+
+        // Создание отчета
+        const result = await pool.query(
+            `INSERT INTO reports (user_id, title, description, server_name, status)
+       VALUES ($1, $2, $3, $4, 'pending')
+       RETURNING *`,
+            [req.user.id, title, description, server_name || null]
+        );
+
+        res.status(201).json({
+            message: 'Отчет успешно создан',
+            report: result.rows[0]
+        });
+    } catch (error) {
+        console.error('Ошибка при создании отчета:', error);
+        res.status(500).json({ error: 'Ошибка сервера при создании отчета' });
     }
-);
+});
 
-// Обновить отчет
-router.put(
-    '/:id',
-    authMiddleware,
-    [
-        body('title').trim().notEmpty().withMessage('Название отчета не может быть пустым'),
-        body('description').trim().notEmpty().withMessage('Описание не может быть пустым')
-    ],
-    async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-
-        try {
-            const { id } = req.params;
-            const { title, description } = req.body;
-            const userId = req.user.id;
-
-            // Проверяем, что пользователь является автором отчета
-            const reportCheck = await pool.query('SELECT user_id FROM reports WHERE id = $1', [id]);
-            if (reportCheck.rows.length === 0) {
-                return res.status(404).json({ message: 'Отчет не найден' });
-            }
-
-            if (reportCheck.rows[0].user_id !== userId) {
-                return res.status(403).json({ message: 'У вас нет прав на редактирование этого отчета' });
-            }
-
-            const result = await pool.query(
-                'UPDATE reports SET title = $1, description = $2 WHERE id = $3 RETURNING id, title, description, created_at, user_id',
-                [title, description, id]
-            );
-
-            res.json({ message: 'Отчет успешно обновлен', report: result.rows[0] });
-        } catch (err) {
-            console.error('Ошибка при обновлении отчета:', err);
-            res.status(500).json({ message: 'Ошибка сервера' });
-        }
-    }
-);
-
-// Удалить отчет
-router.delete('/:id', authMiddleware, async (req, res) => {
+// PUT /api/reports/:id - Обновить отчет
+router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const userId = req.user.id;
+        const { title, description, server_name, status } = req.body;
 
-        // Проверяем, что пользователь является автором отчета
-        const reportCheck = await pool.query('SELECT user_id FROM reports WHERE id = $1', [id]);
+        // Проверка существования отчета
+        const reportCheck = await pool.query('SELECT * FROM reports WHERE id = $1', [id]);
         if (reportCheck.rows.length === 0) {
-            return res.status(404).json({ message: 'Отчет не найден' });
+            return res.status(404).json({ error: 'Отчет не найден' });
         }
 
-        if (reportCheck.rows[0].user_id !== userId) {
-            return res.status(403).json({ message: 'У вас нет прав на удаление этого отчета' });
+        const report = reportCheck.rows[0];
+
+        // Обычные пользователи могут редактировать только свои отчеты
+        if (req.user.role !== 'admin' && report.user_id !== req.user.id) {
+            return res.status(403).json({ error: 'Нет прав на редактирование этого отчета' });
         }
 
+        // Только админы могут менять статус
+        if (status && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Только администратор может изменять статус отчета' });
+        }
+
+        // Валидация статуса
+        if (status && !['pending', 'in_progress', 'resolved', 'closed'].includes(status)) {
+            return res.status(400).json({ error: 'Недопустимый статус' });
+        }
+
+        // Обновление отчета
+        const updateFields = [];
+        const params = [];
+        let paramCount = 1;
+
+        if (title !== undefined) {
+            updateFields.push(`title = $${paramCount}`);
+            params.push(title);
+            paramCount++;
+        }
+        if (description !== undefined) {
+            updateFields.push(`description = $${paramCount}`);
+            params.push(description);
+            paramCount++;
+        }
+        if (server_name !== undefined) {
+            updateFields.push(`server_name = $${paramCount}`);
+            params.push(server_name);
+            paramCount++;
+        }
+        if (status !== undefined && req.user.role === 'admin') {
+            updateFields.push(`status = $${paramCount}`);
+            params.push(status);
+            paramCount++;
+        }
+
+        if (updateFields.length === 0) {
+            return res.status(400).json({ error: 'Нет данных для обновления' });
+        }
+
+        params.push(id);
+        const query = `UPDATE reports SET ${updateFields.join(', ')} WHERE id = $${paramCount} RETURNING *`;
+
+        const result = await pool.query(query, params);
+
+        res.json({
+            message: 'Отчет успешно обновлен',
+            report: result.rows[0]
+        });
+    } catch (error) {
+        console.error('Ошибка при обновлении отчета:', error);
+        res.status(500).json({ error: 'Ошибка сервера при обновлении отчета' });
+    }
+});
+
+// DELETE /api/reports/:id - Удалить отчет
+router.delete('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Проверка существования отчета
+        const reportCheck = await pool.query('SELECT * FROM reports WHERE id = $1', [id]);
+        if (reportCheck.rows.length === 0) {
+            return res.status(404).json({ error: 'Отчет не найден' });
+        }
+
+        const report = reportCheck.rows[0];
+
+        // Обычные пользователи могут удалять только свои отчеты
+        if (req.user.role !== 'admin' && report.user_id !== req.user.id) {
+            return res.status(403).json({ error: 'Нет прав на удаление этого отчета' });
+        }
+
+        // Удаление отчета
         await pool.query('DELETE FROM reports WHERE id = $1', [id]);
+
         res.json({ message: 'Отчет успешно удален' });
-    } catch (err) {
-        console.error('Ошибка при удалении отчета:', err);
-        res.status(500).json({ message: 'Ошибка сервера' });
+    } catch (error) {
+        console.error('Ошибка при удалении отчета:', error);
+        res.status(500).json({ error: 'Ошибка сервера при удалении отчета' });
     }
 });
 

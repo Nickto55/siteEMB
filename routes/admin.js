@@ -1,73 +1,106 @@
 const express = require('express');
-const pool = require('../db');
-const authMiddleware = require('../middleware/auth');
-
 const router = express.Router();
+const pool = require('../db');
+const { authenticateToken, requireAdmin } = require('../middleware/auth');
 
-// Middleware для проверки администратора
-const isAdmin = async (req, res, next) => {
-    try {
-        const result = await pool.query('SELECT is_admin FROM users WHERE id = $1', [req.user.id]);
-        if (result.rows.length === 0 || !result.rows[0].is_admin) {
-            return res.status(403).json({ message: 'Доступ запрещен. Требуются права администратора' });
-        }
-        next();
-    } catch (err) {
-        res.status(500).json({ message: 'Ошибка сервера' });
-    }
-};
+// Все роуты требуют аутентификации и прав администратора
+router.use(authenticateToken);
+router.use(requireAdmin);
 
-// Получить всех пользователей (только для админов)
-router.get('/users', authMiddleware, isAdmin, async (req, res) => {
+// GET /api/admin/users - Получить список всех пользователей
+router.get('/users', async (req, res) => {
     try {
         const result = await pool.query(
-            'SELECT id, email, name, is_admin, created_at FROM users ORDER BY created_at DESC'
+            'SELECT id, username, email, role, created_at FROM users ORDER BY created_at DESC'
         );
-        res.json(result.rows);
-    } catch (err) {
-        console.error('Ошибка при получении пользователей:', err);
-        res.status(500).json({ message: 'Ошибка сервера' });
-    }
-});
-
-// Получить статистику (только для админов)
-router.get('/stats', authMiddleware, isAdmin, async (req, res) => {
-    try {
-        const usersCount = await pool.query('SELECT COUNT(*) FROM users');
-        const reportsCount = await pool.query('SELECT COUNT(*) FROM reports');
-        const commentsCount = await pool.query('SELECT COUNT(*) FROM comments');
 
         res.json({
-            totalUsers: parseInt(usersCount.rows[0].count),
-            totalReports: parseInt(reportsCount.rows[0].count),
-            totalComments: parseInt(commentsCount.rows[0].count)
+            users: result.rows,
+            count: result.rows.length
         });
-    } catch (err) {
-        console.error('Ошибка при получении статистики:', err);
-        res.status(500).json({ message: 'Ошибка сервера' });
+    } catch (error) {
+        console.error('Ошибка при получении пользователей:', error);
+        res.status(500).json({ error: 'Ошибка сервера при получении пользователей' });
     }
 });
 
-// Удалить пользователя (только для админов)
-router.delete('/users/:id', authMiddleware, isAdmin, async (req, res) => {
+// GET /api/admin/users/:id - Получить информацию о пользователе
+router.get('/users/:id', async (req, res) => {
     try {
         const { id } = req.params;
 
-        // Не разрешаем удалять себя
-        if (parseInt(id) === req.user.id) {
-            return res.status(400).json({ message: 'Вы не можете удалить свой аккаунт через панель администратора' });
-        }
+        const result = await pool.query(
+            'SELECT id, username, email, role, created_at FROM users WHERE id = $1',
+            [id]
+        );
 
-        const result = await pool.query('SELECT email FROM users WHERE id = $1', [id]);
         if (result.rows.length === 0) {
-            return res.status(404).json({ message: 'Пользователь не найден' });
+            return res.status(404).json({ error: 'Пользователь не найден' });
         }
 
+        res.json({ user: result.rows[0] });
+    } catch (error) {
+        console.error('Ошибка при получении пользователя:', error);
+        res.status(500).json({ error: 'Ошибка сервера' });
+    }
+});
+
+// PUT /api/admin/users/:id/role - Изменить роль пользователя
+router.put('/users/:id/role', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { role } = req.body;
+
+        // Валидация роли
+        if (!['user', 'admin'].includes(role)) {
+            return res.status(400).json({ error: 'Недопустимая роль. Допустимые значения: user, admin' });
+        }
+
+        // Проверка существования пользователя
+        const userCheck = await pool.query('SELECT id FROM users WHERE id = $1', [id]);
+        if (userCheck.rows.length === 0) {
+            return res.status(404).json({ error: 'Пользователь не найден' });
+        }
+
+        // Обновление роли
+        const result = await pool.query(
+            'UPDATE users SET role = $1 WHERE id = $2 RETURNING id, username, email, role',
+            [role, id]
+        );
+
+        res.json({
+            message: 'Роль пользователя успешно обновлена',
+            user: result.rows[0]
+        });
+    } catch (error) {
+        console.error('Ошибка при обновлении роли:', error);
+        res.status(500).json({ error: 'Ошибка сервера при обновлении роли' });
+    }
+});
+
+// DELETE /api/admin/users/:id - Удалить пользователя
+router.delete('/users/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Запрет на удаление самого себя
+        if (parseInt(id) === req.user.id) {
+            return res.status(400).json({ error: 'Нельзя удалить свою собственную учетную запись' });
+        }
+
+        // Проверка существования пользователя
+        const userCheck = await pool.query('SELECT id FROM users WHERE id = $1', [id]);
+        if (userCheck.rows.length === 0) {
+            return res.status(404).json({ error: 'Пользователь не найден' });
+        }
+
+        // Удаление пользователя
         await pool.query('DELETE FROM users WHERE id = $1', [id]);
-        res.json({ message: `Пользователь ${result.rows[0].email} успешно удален` });
-    } catch (err) {
-        console.error('Ошибка при удалении пользователя:', err);
-        res.status(500).json({ message: 'Ошибка сервера' });
+
+        res.json({ message: 'Пользователь успешно удален' });
+    } catch (error) {
+        console.error('Ошибка при удалении пользователя:', error);
+        res.status(500).json({ error: 'Ошибка сервера при удалении пользователя' });
     }
 });
 
