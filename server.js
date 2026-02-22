@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const helmet = require('helmet');
 const cors = require('cors');
 const pool = require('./db');
@@ -12,8 +13,17 @@ const reportsRoutes = require('./routes/reports');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Безопасность - Helmet
-app.use(helmet());
+// Безопасность - Helmet (настроено для работы с inline скриптами)
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'"],
+            styleSrc: ["'self'", "'unsafe-inline'"],
+            imgSrc: ["'self'", "data:", "https:"],
+        }
+    }
+}));
 
 // CORS
 app.use(cors({
@@ -24,6 +34,9 @@ app.use(cors({
 // Парсинг JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Раздача статических файлов
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Логирование запросов
 app.use((req, res, next) => {
@@ -56,8 +69,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/reports', reportsRoutes);
 
-// Корневой роут
-app.get('/', (req, res) => {
+// API информация
+app.get('/api', (req, res) => {
     res.json({
         message: 'Express.js REST API для управления пользователями и отчетами',
         version: '1.0.0',
@@ -82,6 +95,11 @@ app.get('/', (req, res) => {
             }
         }
     });
+});
+
+// Корневой роут - веб-интерфейс
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // 404 обработчик
