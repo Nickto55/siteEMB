@@ -17,10 +17,27 @@ function checkAuth() {
 
     if (authToken && userData) {
         currentUser = JSON.parse(userData);
-        showMainSection();
-        loadReports();
+
+        // Проверяем, на какой странице мы находимся
+        const currentPage = window.location.pathname.split('/').pop();
+
+        // Если на dashboard.html - показываем содержимое
+        if (currentPage === 'dashboard.html') {
+            showMainSection();
+            loadReports();
+        }
+        // Если на login.html и уже авторизован - перенаправляем на dashboard
+        else if (currentPage === 'login.html') {
+            window.location.href = 'dashboard.html';
+        }
     } else {
-        showAuthSection();
+        // Если не авторизован и находится на dashboard, перенаправляем на login
+        const currentPage = window.location.pathname.split('/').pop();
+        if (currentPage === 'dashboard.html') {
+            window.location.href = 'login.html';
+        } else if (currentPage === 'login.html') {
+            showAuthSection();
+        }
     }
 }
 
@@ -98,9 +115,11 @@ async function login(event) {
             localStorage.setItem('userData', JSON.stringify(currentUser));
 
             showNotification(`Добро пожаловать, ${currentUser.username}!`, 'success');
-            showMainSection();
-            loadReports();
-            event.target.reset();
+
+            // Перенаправление на dashboard
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 500);
         } else {
             showNotification(data.error || 'Ошибка входа', 'error');
         }
@@ -115,8 +134,12 @@ function logout() {
     localStorage.removeItem('userData');
     authToken = null;
     currentUser = null;
-    showAuthSection();
     showNotification('Вы вышли из системы', 'info');
+
+    // Перенаправление на главную страницу
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 500);
 }
 
 // Создание отчета

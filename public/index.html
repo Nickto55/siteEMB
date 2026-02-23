@@ -4,115 +4,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Система управления отчетами</title>
+    <title>Система управления отчетами - Главная</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="container">
-        <header>
-            <h1>📊 Система управления отчетами</h1>
-            <nav>
-                <a href="rules.html">Правила</a>
-                <div id="user-info" class="user-info" style="display: none;">
-                    <span id="username-display"></span>
-                    <button onclick="logout()" class="btn btn-secondary">Выйти</button>
-                </div>
-            </nav>
-        </header>
+    <!-- Навигационное меню -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">📊</span>
+                <span class="logo-text">ReportSystem</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Главная</a>
+                <a href="#about" class="nav-link">О системе</a>
+                <a href="#features" class="nav-link">Возможности</a>
+                <a href="#contact" class="nav-link">Контакты</a>
+                <a href="login.html" class="nav-link login-btn">Войти</a>
+            </div>
+        </div>
+    </nav>
 
-        <!-- Аутентификация -->
-        <div id="auth-section" class="section">
-            <div class="auth-container">
-                <div class="auth-tabs">
-                    <button id="login-tab" class="tab-btn active" onclick="switchTab('login')">Вход</button>
-                    <button id="register-tab" class="tab-btn" onclick="switchTab('register')">Регистрация</button>
-                </div>
-
-                <!-- Форма входа -->
-                <div id="login-form" class="auth-form">
-                    <h2>Вход в систему</h2>
-                    <form onsubmit="login(event)">
-                        <div class="form-group">
-                            <label>Имя пользователя:</label>
-                            <input type="text" id="login-username" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Пароль:</label>
-                            <input type="password" id="login-password" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Войти</button>
-                    </form>
-                </div>
-
-                <!-- Форма регистрации -->
-                <div id="register-form" class="auth-form" style="display: none;">
-                    <h2>Регистрация</h2>
-                    <form onsubmit="register(event)">
-                        <div class="form-group">
-                            <label>Имя пользователя:</label>
-                            <input type="text" id="register-username" required minlength="3">
-                        </div>
-                        <div class="form-group">
-                            <label>Email:</label>
-                            <input type="email" id="register-email" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Пароль:</label>
-                            <input type="password" id="register-password" required minlength="6">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-                    </form>
+    <!-- Главный экран (Hero Section) -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Управление отчетами стало проще</h1>
+            <p class="hero-subtitle">Мощная система для создания, отслеживания и управления отчетами вашей команды</p>
+            <div class="hero-buttons">
+                <a href="login.html" class="btn btn-hero-primary">Начать работу</a>
+                <a href="#features" class="btn btn-hero-secondary">Узнать больше</a>
+            </div>
+        </div>
+        <div class="hero-illustration">
+            <div class="illustration-card">
+                <div class="illustration-header">📈</div>
+                <div class="illustration-body">
+                    <div class="illustration-line"></div>
+                    <div class="illustration-line short"></div>
+                    <div class="illustration-line medium"></div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Главная секция (после входа) -->
-        <div id="main-section" class="section" style="display: none;">
-            <!-- Создание отчета -->
-            <div class="card">
-                <h2>Создать отчет</h2>
-                <form onsubmit="createReport(event)">
-                    <div class="form-group">
-                        <label>Название:</label>
-                        <input type="text" id="report-title" required minlength="5">
-                    </div>
-                    <div class="form-group">
-                        <label>Описание:</label>
-                        <textarea id="report-description" required minlength="10" rows="4"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Сервер (опционально):</label>
-                        <input type="text" id="report-server">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Создать отчет</button>
-                </form>
-            </div>
-
-            <!-- Список отчетов -->
-            <div class="card">
-                <div class="card-header">
-                    <h2>Мои отчеты</h2>
-                    <button onclick="loadReports()" class="btn btn-secondary">🔄 Обновить</button>
+    <!-- О системе -->
+    <section id="about" class="section-white">
+        <div class="container">
+            <h2 class="section-title">О системе</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">🎯</div>
+                    <h3>Простота использования</h3>
+                    <p>Интуитивный интерфейс позволяет создавать и управлять отчетами за считанные минуты</p>
                 </div>
-                <div id="reports-list" class="reports-list">
-                    <p class="loading">Загрузка...</p>
+                <div class="about-card">
+                    <div class="about-icon">🔒</div>
+                    <h3>Безопасность</h3>
+                    <p>Ваши данные защищены современными методами шифрования и аутентификации</p>
                 </div>
-            </div>
-
-            <!-- Панель администратора -->
-            <div id="admin-section" class="card" style="display: none;">
-                <h2>👤 Управление пользователями (Администратор)</h2>
-                <button onclick="loadUsers()" class="btn btn-secondary">Загрузить пользователей</button>
-                <div id="users-list" class="users-list"></div>
+                <div class="about-card">
+                    <div class="about-icon">⚡</div>
+                    <h3>Быстродействие</h3>
+                    <p>Оптимизированная система обеспечивает мгновенную работу с большими объемами данных</p>
+                </div>
             </div>
         </div>
+    </section>
 
-        <!-- Уведомления -->
-        <div id="notification" class="notification"></div>
-    </div>
+    <!-- Возможности -->
+    <section id="features" class="section-gray">
+        <div class="container">
+            <h2 class="section-title">Возможности системы</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">📝</div>
+                    <h3>Создание отчетов</h3>
+                    <p>Быстрое создание структурированных отчетов с поддержкой различных форматов</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">👥</div>
+                    <h3>Командная работа</h3>
+                    <p>Совместная работа над отчетами с возможностью распределения ролей</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h3>Аналитика</h3>
+                    <p>Детальная статистика и визуализация данных по всем отчетам</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Уведомления</h3>
+                    <p>Своевременное оповещение о важных событиях и изменениях</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💾</div>
+                    <h3>Хранение данных</h3>
+                    <p>Надежное хранение всех отчетов с возможностью быстрого поиска</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Настройка</h3>
+                    <p>Гибкая настройка системы под ваши индивидуальные требования</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <script src="app.js"></script>
+    <!-- Контакты -->
+    <section id="contact" class="section-white">
+        <div class="container">
+            <h2 class="section-title">Связаться с нами</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Остались вопросы?</h3>
+                    <p>Мы всегда готовы помочь вам разобраться с системой и ответить на любые вопросы.</p>
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <span>support@reportsystem.ru</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">💬</span>
+                        <span>Telegram: @reportsystem_support</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">🌐</span>
+                        <span>GitHub: Nickto55/siteEMB</span>
+                    </div>
+                </div>
+                <div class="contact-cta">
+                    <h3>Готовы начать?</h3>
+                    <p>Зарегистрируйтесь прямо сейчас и получите доступ ко всем возможностям системы</p>
+                    <a href="login.html" class="btn btn-primary btn-large">Начать работу</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ReportSystem</h4>
+                    <p>Современная система управления отчетами</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <a href="index.html">Главная</a>
+                    <a href="#about">О системе</a>
+                    <a href="#features">Возможности</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Поддержка</h4>
+                    <a href="#contact">Контакты</a>
+                    <a href="rules.html">Правила</a>
+                    <a href="login.html">Вход</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ReportSystem. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
