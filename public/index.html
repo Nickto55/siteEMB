@@ -91,16 +91,22 @@
 
     <main>
         <!-- Hero Section with Background Image -->
-        <section id="home" class="relative overflow-hidden bg-mc-darker" style="min-height: 200vh;">
+        <section id="home" class="relative overflow-hidden bg-mc-dark" style="min-height: 200vh;">
             <!-- Background Image -->
             <div class="fixed inset-0 w-full h-screen flex items-center justify-center">
                 <img src="../static/photo_2026-02-24_00-49-59.jpg" alt="Server Banner"
-                    class="w-full h-full object-contain opacity-40">
+                    class="w-full h-full object-contain opacity-90">
             </div>
 
-            <!-- Gradient Overlays -->
-            <div class="fixed inset-0 bg-gradient-to-b from-mc-darker/60 via-transparent to-mc-darker/60"></div>
-            <div class="fixed inset-0 bg-gradient-to-r from-mc-darker/40 via-transparent to-mc-darker/40"></div>
+            <!-- Gradient fog effect - starts from title and reaches full mc-dark -->
+            <div
+                class="absolute inset-0 bg-gradient-to-b from-transparent from-[55vh] via-mc-dark/30 via-[75vh] to-mc-dark to-[100vh] z-[5]">
+            </div>
+
+            <!-- Additional gradient for stronger transition -->
+            <div
+                class="absolute inset-x-0 bottom-0 h-[90vh] bg-gradient-to-b from-transparent from-0% via-mc-dark/70 via-50% to-mc-dark to-100% z-[6]">
+            </div>
 
             <!-- Заголовок - виден сразу -->
             <div class="h-screen flex items-end justify-center relative z-10 pb-10">
@@ -121,39 +127,8 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <p
                         class="max-w-2xl mx-auto text-xl text-gray-300 mb-12 leading-relaxed animate-fade-in-up animation-delay-200">
-                        Лучший приватный Minecraft сервер для спонсоров проекта. Безопасность, оптимизация и активное
-                        сообщество.
+                        тут что то надо придумать, но я не знаю что
                     </p>
-
-                    <div
-                        class="max-w-md mx-auto bg-mc-dark/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl mb-12 transform hover:scale-105 transition-all duration-300 animate-fade-in-up animation-delay-400">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="font-mono text-sm text-gray-400">Статус сервера</span>
-                            <span class="text-xs text-mc-greenLight font-mono" id="ping">12 ms</span>
-                        </div>
-
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="text-left">
-                                <div class="text-3xl font-bold text-white" id="player-count">23</div>
-                                <div class="text-sm text-gray-400">спонсоров онлайн</div>
-                            </div>
-                            <div class="h-12 w-px bg-white/10"></div>
-                            <div class="text-right">
-                                <div class="text-sm text-gray-400">50 слотов</div>
-                            </div>
-                        </div>
-
-                        <button onclick="copyIP()"
-                            class="w-full bg-gradient-to-r from-mc-green to-mc-greenLight hover:from-mc-greenLight hover:to-mc-green text-white font-bold py-4 px-6 rounded-xl transition-all transform hover:scale-[1.02] flex items-center justify-center gap-3 shadow-lg shadow-mc-green/25">
-                            <span class="font-mono text-lg tracking-wider">play.embromine.ru</span>
-                        </button>
-                    </div>
-
-                    <a href="#about"
-                        class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors bg-white/5 px-6 py-3 rounded-full border border-white/10 hover:border-mc-green/50 hover:bg-white/10 transition-all animate-fade-in-up animation-delay-600">
-                        <span>Узнать больше</span>
-                        <span>↓</span>
-                    </a>
                 </div>
             </div>
         </section>
@@ -162,8 +137,8 @@
         <section id="about" class="py-24 bg-mc-dark relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Преимущества EmbroMine</h2>
-                    <p class="text-gray-400 max-w-2xl mx-auto">Почему спонсоры выбирают именно наш сервер</p>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Интересные факты</h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">Почему и зачем</p>
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-8">
@@ -173,9 +148,8 @@
                             class="w-14 h-14 bg-mc-green/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-mc-green/20 transition-colors text-3xl font-bold text-mc-green">
                             S
                         </div>
-                        <h3 class="text-xl font-bold mb-3">Защита</h3>
-                        <p class="text-gray-400 leading-relaxed">Приватизация через WorldGuard, защита от гриферства,
-                            безопасное хранилище ценностей</p>
+                        <h3 class="text-xl font-bold mb-3">фк 1</h3>
+                        <p class="text-gray-400 leading-relaxed">об 1</p>
                     </div>
 
                     <div
@@ -184,9 +158,8 @@
                             class="w-14 h-14 bg-cyan-400/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-cyan-400/20 transition-colors text-3xl font-bold text-cyan-400">
                             P
                         </div>
-                        <h3 class="text-xl font-bold mb-3">Оптимизация</h3>
-                        <p class="text-gray-400 leading-relaxed">Мощный сервер на оптимизированных плагинах. TPS всегда
-                            20, без лагов даже при 40+ игроках</p>
+                        <h3 class="text-xl font-bold mb-3">фк 2</h3>
+                        <p class="text-gray-400 leading-relaxed">об 2</p>
                     </div>
 
                     <div
@@ -195,9 +168,8 @@
                             class="w-14 h-14 bg-yellow-400/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-yellow-400/20 transition-colors text-3xl font-bold text-yellow-400">
                             E
                         </div>
-                        <h3 class="text-xl font-bold mb-3">Экономика</h3>
-                        <p class="text-gray-400 leading-relaxed">Стабильная экономика с магазинами, банком и системой
-                            инвестиций для спонсоров</p>
+                        <h3 class="text-xl font-bold mb-3">фк 3</h3>
+                        <p class="text-gray-400 leading-relaxed">об 3</p>
                     </div>
                 </div>
             </div>
@@ -206,180 +178,51 @@
         <!-- Features Section -->
         <section id="features" class="py-24 bg-mc-darker relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Режимы игры</h2>
-                    <p class="text-gray-400 max-w-2xl mx-auto">Выберите свой любимый способ игры</p>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div
-                        class="bg-mc-dark p-8 rounded-2xl border border-white/5 hover:border-mc-green/30 transition-all">
-                        <h3 class="text-2xl font-bold mb-3">Survival</h3>
-                        <p class="text-gray-400 mb-4">Выживание с приватизацией, экономикой и событиями. Закройте вашу
-                            базу и развивайтесь в безопасности</p>
-                        <div class="flex gap-2">
-                            <span class="px-3 py-1 bg-mc-green/20 text-mc-greenLight text-sm rounded-full">PvE</span>
-                            <span
-                                class="px-3 py-1 bg-mc-green/20 text-mc-greenLight text-sm rounded-full">Приватизация</span>
+                <div class="grid md:grid-cols-4 gap-8 mb-8">
+                    <div class="col-span-2">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-8 h-8 bg-mc-green rounded-lg flex items-center justify-center">
+                                <span class="text-white text-lg font-bold">E</span>
+                            </div>
+                            <span class="text-lg font-bold">EmbroMine</span>
                         </div>
+                        <p class="text-gray-500 text-sm leading-relaxed max-w-xs">
+                            Приватный Minecraft сервер для спонсоров проекта.
+                        </p>
                     </div>
 
-                    <div
-                        class="bg-mc-dark p-8 rounded-2xl border border-white/5 hover:border-blue-400/30 transition-all">
-                        <h3 class="text-2xl font-bold mb-3">Creative</h3>
-                        <p class="text-gray-400 mb-4">Творческий режим с неограниченными блоками и возможностями.
-                            Строите своё королевство</p>
-                        <div class="flex gap-2">
-                            <span class="px-3 py-1 bg-blue-400/20 text-blue-300 text-sm rounded-full">Творчество</span>
-                            <span class="px-3 py-1 bg-blue-400/20 text-blue-300 text-sm rounded-full">Без
-                                ограничений</span>
-                        </div>
+                    <div>
+                        <h4 class="font-bold mb-4 text-sm uppercase tracking-wider text-gray-400">Навигация</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#home"
+                                    class="text-gray-500 hover:text-mc-greenLight transition-colors">Главная</a>
+                            </li>
+                            <li><a href="#about" class="text-gray-500 hover:text-mc-greenLight transition-colors">О
+                                    сервере</a></li>
+                            <li><a href="#features"
+                                    class="text-gray-500 hover:text-mc-greenLight transition-colors">Режимы</a></li>
+                            <li><a href="#rules"
+                                    class="text-gray-500 hover:text-mc-greenLight transition-colors">Правила</a></li>
+                        </ul>
                     </div>
 
-                    <div
-                        class="bg-mc-dark p-8 rounded-2xl border border-white/5 hover:border-purple-400/30 transition-all">
-                        <h3 class="text-2xl font-bold mb-3">Minigames</h3>
-                        <p class="text-gray-400 mb-4">Мини-игры для развлечения: Паркур, Скай вары и другие. Выигрывайте
-                            награды и репутацию</p>
-                        <div class="flex gap-2">
-                            <span class="px-3 py-1 bg-purple-400/20 text-purple-300 text-sm rounded-full">Игры</span>
-                            <span class="px-3 py-1 bg-purple-400/20 text-purple-300 text-sm rounded-full">Награды</span>
-                        </div>
-                    </div>
-
-                    <div
-                        class="bg-mc-dark p-8 rounded-2xl border border-white/5 hover:border-red-400/30 transition-all">
-                        <h3 class="text-2xl font-bold mb-3">События</h3>
-                        <p class="text-gray-400 mb-4">Еженедельные события, турниры и челленджи. Участвуйте и получайте
-                            уникальные призы</p>
-                        <div class="flex gap-2">
-                            <span class="px-3 py-1 bg-red-400/20 text-red-300 text-sm rounded-full">Турниры</span>
-                            <span class="px-3 py-1 bg-red-400/20 text-red-300 text-sm rounded-full">Призы</span>
-                        </div>
+                    <div>
+                        <h4 class="font-bold mb-4 text-sm uppercase tracking-wider text-gray-400">Контакты</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li class="text-gray-500">support@embromine.ru</li>
+                            <li class="text-gray-500">24/7 Поддержка</li>
+                        </ul>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Rules Section -->
-        <section id="rules" class="py-24 bg-mc-dark">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Правила сервера</h2>
-                    <p class="text-gray-400">Уважайте друг друга, играйте честно</p>
-                </div>
-
-                <div class="space-y-4">
-                    <div
-                        class="flex items-start gap-4 p-6 bg-mc-darker rounded-xl border border-white/5 hover:border-red-500/30 transition-colors">
-                        <div class="text-2xl font-bold text-red-500 min-w-max">NO</div>
-                        <div>
-                            <h3 class="font-bold text-lg mb-2">Запрещено читерство и баги</h3>
-                            <p class="text-gray-400 text-sm">Читы, x-ray, AutoClicker = перманентный бан. Баги
-                                обязательно репортьте</p>
-                        </div>
-                    </div>
-
-                    <div
-                        class="flex items-start gap-4 p-6 bg-mc-darker rounded-xl border border-white/5 hover:border-yellow-500/30 transition-colors">
-                        <div class="text-2xl font-bold text-yellow-500 min-w-max">!</div>
-                        <div>
-                            <h3 class="font-bold text-lg mb-2">Вежливое общение</h3>
-                            <p class="text-gray-400 text-sm">Токсичность, оскорбления, спам = бан. Используйте
-                                цивилизованный язык</p>
-                        </div>
-                    </div>
-
-                    <div
-                        class="flex items-start gap-4 p-6 bg-mc-darker rounded-xl border border-white/5 hover:border-green-500/30 transition-colors">
-                        <div class="text-2xl font-bold text-mc-green min-w-max">OK</div>
-                        <div>
-                            <h3 class="font-bold text-lg mb-2">Защита имущества</h3>
-                            <p class="text-gray-400 text-sm">Приватизируйте постройки через WorldGuard. Гриферство = бан
-                            </p>
-                        </div>
-                    </div>
-
-                    <div
-                        class="flex items-start gap-4 p-6 bg-mc-darker rounded-xl border border-white/5 hover:border-blue-500/30 transition-colors">
-                        <div class="text-2xl font-bold text-blue-400 min-w-max">FAIR</div>
-                        <div>
-                            <h3 class="font-bold text-lg mb-2">Честная игра</h3>
-                            <p class="text-gray-400 text-sm">Запрещены дюпы и манипуляции с экономикой. Нарушители будут
-                                наказаны</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="py-24 relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-r from-mc-green/20 to-blue-500/20"></div>
-            <div class="absolute inset-0 bg-mc-darker/80"></div>
-
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6">Присоединяйся к нам</h2>
-                <p class="text-xl text-gray-400 mb-8">Discord сервер для общения и поддержки</p>
-
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="https://discord.gg/"
-                        class="inline-flex items-center justify-center gap-3 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold py-4 px-8 rounded-xl transition-all transform hover:scale-105 shadow-lg">
-                        <span>Discord сервер</span>
-                    </a>
-                    <button onclick="copyIP()"
-                        class="inline-flex items-center justify-center gap-3 bg-mc-dark border border-white/20 hover:border-mc-green hover:bg-mc-green/10 text-white font-bold py-4 px-8 rounded-xl transition-all">
-                        <span>Скопировать IP</span>
-                    </button>
+                <div class="border-t border-white/10 pt-8">
+                    <p class="text-gray-600 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
+                    </p>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-mc-darker border-t border-white/10 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div class="col-span-2">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-8 h-8 bg-mc-green rounded-lg flex items-center justify-center">
-                            <span class="text-white text-lg font-bold">E</span>
-                        </div>
-                        <span class="text-lg font-bold">EmbroMine</span>
-                    </div>
-                    <p class="text-gray-500 text-sm leading-relaxed max-w-xs">
-                        Приватный Minecraft сервер для спонсоров проекта.
-                    </p>
-                </div>
-
-                <div>
-                    <h4 class="font-bold mb-4 text-sm uppercase tracking-wider text-gray-400">Навигация</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#home" class="text-gray-500 hover:text-mc-greenLight transition-colors">Главная</a>
-                        </li>
-                        <li><a href="#about" class="text-gray-500 hover:text-mc-greenLight transition-colors">О
-                                сервере</a></li>
-                        <li><a href="#features"
-                                class="text-gray-500 hover:text-mc-greenLight transition-colors">Режимы</a></li>
-                        <li><a href="#rules"
-                                class="text-gray-500 hover:text-mc-greenLight transition-colors">Правила</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-bold mb-4 text-sm uppercase tracking-wider text-gray-400">Контакты</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li class="text-gray-500">support@embromine.ru</li>
-                        <li class="text-gray-500">24/7 Поддержка</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="border-t border-white/10 pt-8">
-                <p class="text-gray-600 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.</p>
-            </div>
-        </div>
-    </footer>
 
     <script src="script.js"></script>
 </body>
