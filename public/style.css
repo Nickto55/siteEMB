@@ -5,31 +5,56 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
+    padding: 20px;
 }
 
 header {
-    background: white;
+    background: #fff;
     padding: 20px 30px;
-    border-radius: 12px;
+    border-bottom: 3px solid #667eea;
     margin-bottom: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
     color: #667eea;
-    font-size: 28px;
+    font-size: 24px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+nav a,
+nav button {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+nav a:hover,
+nav button:hover {
+    background-color: #f0f0f0;
+    color: #764ba2;
 }
 
 .user-info {
@@ -40,12 +65,45 @@ header h1 {
 
 .user-info span {
     font-weight: 600;
-    color: #4a5568;
+    color: #666;
 }
 
-/* Секции */
+/* Секции и контент */
 .section {
-    animation: fadeIn 0.5s;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.section h2 {
+    color: #667eea;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.section h3 {
+    color: #764ba2;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.section p {
+    margin-bottom: 12px;
+    color: #555;
+}
+
+.section ul,
+.section ol {
+    margin-left: 20px;
+    margin-bottom: 12px;
+}
+
+.section li {
+    margin-bottom: 8px;
+    color: #555;
 }
 
 /* Карточки */
@@ -83,25 +141,26 @@ header h1 {
     display: flex;
     gap: 10px;
     margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
 }
 
 .tab-btn {
     flex: 1;
     padding: 12px;
-    background: #f7fafc;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
-    color: #718096;
+    color: #999;
     transition: all 0.3s;
 }
 
 .tab-btn.active {
-    background: #667eea;
-    color: white;
-    border-color: #667eea;
+    background: none;
+    color: #667eea;
+    border-bottom-color: #667eea;
 }
 
 .auth-form h2 {
@@ -140,63 +199,75 @@ header h1 {
     border-color: #667eea;
 }
 
-textarea {
-    resize: vertical;
-    font-family: inherit;
+/* Таблицы */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
 }
 
-/* Кнопки */
-.btn {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f5f5f5;
+    color: #667eea;
     font-weight: 600;
-    cursor: pointer;
+}
+
+table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Вспомогательные классы */
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.auth-form h2 {
+    text-align: center;
+    color: #2d3748;
+    margin-bottom: 25px;
+}
+
+.loading {
+    text-align: center;
+    color: #718096;
+    padding: 40px;
+}
+
+/* Вкладки/навигация правил */
+.rules-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+.rules-nav a {
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+    color: #667eea;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
     transition: all 0.3s;
 }
 
-.btn-primary {
-    background: #667eea;
+.rules-nav a:hover,
+.rules-nav a.active {
+    background-color: #667eea;
     color: white;
-    width: 100%;
-}
-
-.btn-primary:hover {
-    background: #5568d3;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-}
-
-.btn-secondary {
-    background: #e2e8f0;
-    color: #4a5568;
-}
-
-.btn-secondary:hover {
-    background: #cbd5e0;
-}
-
-.btn-danger {
-    background: #f56565;
-    color: white;
-    padding: 8px 15px;
-    font-size: 14px;
-}
-
-.btn-danger:hover {
-    background: #e53e3e;
-}
-
-.btn-success {
-    background: #48bb78;
-    color: white;
-    padding: 8px 15px;
-    font-size: 14px;
-}
-
-.btn-success:hover {
-    background: #38a169;
 }
 
 /* Список отчетов */
@@ -362,13 +433,6 @@ textarea {
     color: white;
 }
 
-/* Утилиты */
-.loading {
-    text-align: center;
-    color: #718096;
-    padding: 40px;
-}
-
 /* Анимация */
 @keyframes fadeIn {
     from {
@@ -382,11 +446,26 @@ textarea {
     }
 }
 
+.section {
+    animation: fadeIn 0.3s ease;
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
     header {
         flex-direction: column;
         gap: 15px;
+        text-align: center;
+    }
+
+    nav {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    nav a,
+    nav button {
+        width: 100%;
         text-align: center;
     }
 
@@ -408,5 +487,31 @@ textarea {
     .user-item {
         flex-direction: column;
         gap: 15px;
+    }
+
+    .rules-nav {
+        flex-direction: column;
+    }
+
+    .rules-nav a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .section {
+        padding: 20px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    table th,
+    table td {
+        padding: 8px;
     }
 }

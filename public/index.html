@@ -11,98 +11,20 @@
 <body>
     <div class="container">
         <header>
-            <h1>📊 Система управления отчетами</h1>
-            <div id="user-info" class="user-info" style="display: none;">
-                <span id="username-display"></span>
-                <button onclick="logout()" class="btn btn-secondary">Выйти</button>
-            </div>
+            <h1>📊 EmbroMine</h1>
+            <nav id="main-nav">
+                <a href="/" onclick="navigateTo(event, '/')">Главная</a>
+                <a href="/rules" onclick="navigateTo(event, '/rules')">Правила</a>
+                <div id="user-info" class="user-info" style="display: none;">
+                    <span id="username-display"></span>
+                    <button onclick="logout()" class="btn btn-secondary">Выйти</button>
+                </div>
+            </nav>
         </header>
 
-        <!-- Аутентификация -->
-        <div id="auth-section" class="section">
-            <div class="auth-container">
-                <div class="auth-tabs">
-                    <button id="login-tab" class="tab-btn active" onclick="switchTab('login')">Вход</button>
-                    <button id="register-tab" class="tab-btn" onclick="switchTab('register')">Регистрация</button>
-                </div>
-
-                <!-- Форма входа -->
-                <div id="login-form" class="auth-form">
-                    <h2>Вход в систему</h2>
-                    <form onsubmit="login(event)">
-                        <div class="form-group">
-                            <label>Имя пользователя:</label>
-                            <input type="text" id="login-username" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Пароль:</label>
-                            <input type="password" id="login-password" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Войти</button>
-                    </form>
-                </div>
-
-                <!-- Форма регистрации -->
-                <div id="register-form" class="auth-form" style="display: none;">
-                    <h2>Регистрация</h2>
-                    <form onsubmit="register(event)">
-                        <div class="form-group">
-                            <label>Имя пользователя:</label>
-                            <input type="text" id="register-username" required minlength="3">
-                        </div>
-                        <div class="form-group">
-                            <label>Email:</label>
-                            <input type="email" id="register-email" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Пароль:</label>
-                            <input type="password" id="register-password" required minlength="6">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Главная секция (после входа) -->
-        <div id="main-section" class="section" style="display: none;">
-            <!-- Создание отчета -->
-            <div class="card">
-                <h2>Создать отчет</h2>
-                <form onsubmit="createReport(event)">
-                    <div class="form-group">
-                        <label>Название:</label>
-                        <input type="text" id="report-title" required minlength="5">
-                    </div>
-                    <div class="form-group">
-                        <label>Описание:</label>
-                        <textarea id="report-description" required minlength="10" rows="4"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Сервер (опционально):</label>
-                        <input type="text" id="report-server">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Создать отчет</button>
-                </form>
-            </div>
-
-            <!-- Список отчетов -->
-            <div class="card">
-                <div class="card-header">
-                    <h2>Мои отчеты</h2>
-                    <button onclick="loadReports()" class="btn btn-secondary">🔄 Обновить</button>
-                </div>
-                <div id="reports-list" class="reports-list">
-                    <p class="loading">Загрузка...</p>
-                </div>
-            </div>
-
-            <!-- Панель администратора -->
-            <div id="admin-section" class="card" style="display: none;">
-                <h2>👤 Управление пользователями (Администратор)</h2>
-                <button onclick="loadUsers()" class="btn btn-secondary">Загрузить пользователей</button>
-                <div id="users-list" class="users-list"></div>
-            </div>
+        <!-- Основной контейнер для контента -->
+        <div id="app-content" class="section">
+            <!-- Контент будет загружаться сюда динамически -->
         </div>
 
         <!-- Уведомления -->
