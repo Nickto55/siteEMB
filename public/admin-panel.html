@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель - EmbroMine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mc: {
+                            dark: '#1a1a1a',
+                            darker: '#0f0f0f',
+                            green: '#5D8C30',
+                            greenLight: '#7EB342'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body id="admin-panel" class="bg-mc-darker text-white font-sans antialiased overflow-x-hidden">
+    <!-- Floating Particles Background -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-mc-darker/80 backdrop-blur-md border-b border-white/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-mc-green rounded-lg flex items-center justify-center shadow-lg shadow-mc-green/20">
+                        <span class="text-white text-lg font-bold">⛏</span>
+                    </div>
+                    <a href="index.html"
+                        class="text-xl font-bold tracking-tight hover:text-mc-greenLight transition-colors">Embro<span
+                            class="text-mc-greenLight">Mine</span></a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <span id="admin-user" class="text-mc-greenLight font-semibold">Администратор</span>
+                    <button onclick="handleLogout()"
+                        class="text-gray-400 hover:text-mc-greenLight transition-colors px-3 py-2">Выход</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="min-h-screen pt-20 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <h1
+                class="text-3xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-mc-greenLight bg-clip-text text-transparent">
+                Панель администратора
+            </h1>
+
+            <!-- Tabs -->
+            <div class="flex gap-4 mb-8 border-b border-white/10 pb-4 flex-wrap">
+                <button class="tab-btn active" onclick="switchAdminTab('users');">👥 Пользователи</button>
+                <button class="tab-btn" onclick="switchAdminTab('reports');">📋 Отчеты</button>
+                <button class="tab-btn" onclick="switchAdminTab('settings');">⚙️ Настройки</button>
+            </div>
+
+            <!-- Users Tab -->
+            <div id="users-tab" class="block">
+                <div class="dashboard-card mb-6">
+                    <h2 class="text-2xl font-bold mb-6">Управление пользователями</h2>
+
+                    <div class="mb-6">
+                        <input type="text" id="search-users" placeholder="Поиск пользователя..." class="auth-input"
+                            style="margin-bottom: 0;">
+                    </div>
+
+                    <div id="users-list" class="space-y-4">
+                        <div class="p-4 bg-white/5 rounded-lg text-center text-gray-400">
+                            Загрузка пользователей...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Tab -->
+            <div id="reports-tab" class="block hidden">
+                <div class="dashboard-card mb-6">
+                    <h2 class="text-2xl font-bold mb-6">Управление отчетами</h2>
+
+                    <div class="mb-6">
+                        <select id="status-filter" class="auth-input" style="margin-bottom: 0;">
+                            <option value="">Все статусы</option>
+                            <option value="pending">Ожидающие</option>
+                            <option value="in_progress">В процессе</option>
+                            <option value="resolved">Разрешены</option>
+                            <option value="closed">Закрыты</option>
+                        </select>
+                    </div>
+
+                    <div id="reports-list" class="space-y-4">
+                        <div class="p-4 bg-white/5 rounded-lg text-center text-gray-400">
+                            Загрузка отчетов...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="settings-tab" class="block hidden">
+                <div class="dashboard-card mb-6">
+                    <h2 class="text-2xl font-bold mb-6">Настройки сервера</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Версия Minecraft</label>
+                            <input type="text" value="1.20.1" class="auth-input bg-white/5" style="margin-bottom: 0;">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">IP адрес сервера</label>
+                            <input type="text" value="play.embromine.ru" readonly class="auth-input bg-white/5"
+                                style="margin-bottom: 0;">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Максимум игроков</label>
+                            <input type="number" value="50" min="1" class="auth-input" style="margin-bottom: 0;">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Описание сервера</label>
+                            <textarea class="auth-input"
+                                style="min-height: 100px; margin-bottom: 0;">Minecraft сервер для спонсоров</textarea>
+                        </div>
+
+                        <button
+                            class="w-full bg-gradient-to-r from-mc-green to-mc-greenLight hover:from-mc-greenLight hover:to-mc-green text-white font-bold py-3 rounded-lg transition-all">
+                            Сохранить настройки
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function switchAdminTab(tab) {
+            document.querySelectorAll('[id$="-tab"]').forEach(el => el.classList.add('hidden'));
+            document.getElementById(tab + '-tab').classList.remove('hidden');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Stub functions for admin panel
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAdminAccess();
+        });
+
+        function checkAdminAccess() {
+            const user = localStorage.getItem('user');
+            if (user) {
+                const userData = JSON.parse(user);
+                document.getElementById('admin-user').textContent = `👑 ${userData.username}`;
+            }
+        }
+    </script>
+</body>
+
+</html>

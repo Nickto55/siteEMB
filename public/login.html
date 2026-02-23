@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход - EmbroMine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mc: {
+                            dark: '#1a1a1a',
+                            darker: '#0f0f0f',
+                            green: '#5D8C30',
+                            greenLight: '#7EB342',
+                            red: '#B02E26'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-mc-darker text-white font-sans antialiased overflow-x-hidden">
+    <!-- Floating Particles Background -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-mc-darker/80 backdrop-blur-md border-b border-white/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-mc-green rounded-lg flex items-center justify-center shadow-lg shadow-mc-green/20">
+                        <span class="text-white text-lg font-bold">⛏</span>
+                    </div>
+                    <a href="index.html"
+                        class="text-xl font-bold tracking-tight hover:text-mc-greenLight transition-colors">Embro<span
+                            class="text-mc-greenLight">Mine</span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Auth Container -->
+    <div class="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-md w-full bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
+            <!-- Tabs -->
+            <div class="flex gap-4 mb-8 border-b border-white/10 pb-4">
+                <button class="tab-btn active flex-1 text-center" onclick="switchTab('login'); event.preventDefault();">
+                    Вход
+                </button>
+                <button class="tab-btn flex-1 text-center" onclick="switchTab('register'); event.preventDefault();">
+                    Регистрация
+                </button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" onsubmit="handleLogin(event); return false;" style="display: block;">
+                <h2 class="text-2xl font-bold mb-6 text-center">Вход в систему</h2>
+
+                <div class="form-group">
+                    <label>Имя пользователя</label>
+                    <input type="text" name="username" class="auth-input" placeholder="Введите имя пользователя"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" name="password" class="auth-input" placeholder="Введите пароль" required>
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-gradient-to-r from-mc-green to-mc-greenLight hover:from-mc-greenLight hover:to-mc-green text-white font-bold py-3 px-6 rounded-xl transition-all transform hover:scale-[1.02] shadow-lg shadow-mc-green/25 mt-4">
+                    Войти
+                </button>
+
+                <div id="login-message" style="margin-top: 16px;"></div>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" onsubmit="handleRegister(event); return false;" style="display: none;">
+                <h2 class="text-2xl font-bold mb-6 text-center">Регистрация</h2>
+
+                <div class="form-group">
+                    <label>Имя пользователя</label>
+                    <input type="text" name="username" class="auth-input" placeholder="Выберите имя пользователя"
+                        min="3" max="30" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" class="auth-input" placeholder="Введите ваш email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" name="password" class="auth-input" placeholder="Придумайте надежный пароль"
+                        minlength="6" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Подтверждение пароля</label>
+                    <input type="password" name="password_confirm" class="auth-input" placeholder="Повторите пароль"
+                        required>
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-gradient-to-r from-mc-green to-mc-greenLight hover:from-mc-greenLight hover:to-mc-green text-white font-bold py-3 px-6 rounded-xl transition-all transform hover:scale-[1.02] shadow-lg shadow-mc-green/25 mt-4">
+                    Зарегистрироваться
+                </button>
+
+                <div id="register-message" style="margin-top: 16px;"></div>
+            </form>
+
+            <div class="mt-6 pt-6 border-t border-white/10">
+                <p class="text-center text-gray-400 text-sm">
+                    Нет аккаунта? <a href="login.html"
+                        class="text-mc-greenLight hover:text-mc-green transition-colors font-semibold">Зарегистрируйся</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="fixed bottom-0 w-full bg-mc-darker border-t border-white/10 py-4 text-center text-gray-600 text-sm">
+        <p>© 2026 EmbroMine. Not affiliated with Mojang Studios.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

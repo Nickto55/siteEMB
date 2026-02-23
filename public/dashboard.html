@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль - EmbroMine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mc: {
+                            dark: '#1a1a1a',
+                            darker: '#0f0f0f',
+                            green: '#5D8C30',
+                            greenLight: '#7EB342'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body id="dashboard" class="bg-mc-darker text-white font-sans antialiased overflow-x-hidden">
+    <!-- Floating Particles Background -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-mc-darker/80 backdrop-blur-md border-b border-white/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-mc-green rounded-lg flex items-center justify-center shadow-lg shadow-mc-green/20">
+                        <span class="text-white text-lg font-bold">⛏</span>
+                    </div>
+                    <a href="index.html"
+                        class="text-xl font-bold tracking-tight hover:text-mc-greenLight transition-colors">Embro<span
+                            class="text-mc-greenLight">Mine</span></a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <span id="user-info" class="text-mc-greenLight font-semibold"></span>
+                    <button onclick="handleLogout()"
+                        class="text-gray-400 hover:text-mc-greenLight transition-colors px-3 py-2">Выход</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="min-h-screen pt-20 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <h1
+                class="text-3xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-white to-mc-greenLight bg-clip-text text-transparent">
+                Личный кабинет
+            </h1>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <!-- Profile Card -->
+                <div class="dashboard-card">
+                    <h2 class="text-xl font-bold mb-6 text-mc-greenLight">Ваш профиль</h2>
+
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-gray-400 text-sm mb-1">Имя</p>
+                            <p class="text-white font-semibold" id="profile-username">Загрузка...</p>
+                        </div>
+
+                        <div>
+                            <p class="text-gray-400 text-sm mb-1">Email</p>
+                            <p class="text-white font-semibold" id="profile-email">Загрузка...</p>
+                        </div>
+
+                        <div>
+                            <p class="text-gray-400 text-sm mb-1">Статус</p>
+                            <p
+                                class="inline-block px-3 py-1 bg-mc-green/20 text-mc-greenLight rounded-full text-sm font-semibold">
+                                Спонсор</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Server Status -->
+                <div class="dashboard-card">
+                    <h2 class="text-xl font-bold mb-6 text-mc-greenLight">📊 Статус сервера</h2>
+
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-gray-400 text-sm mb-1">Адрес</p>
+                            <p class="text-white font-mono">play.embromine.ru</p>
+                        </div>
+
+                        <div>
+                            <p class="text-gray-400 text-sm mb-1">Игроки онлайн</p>
+                            <p class="text-2xl font-bold text-mc-greenLight" id="player-count">23</p>
+                        </div>
+
+                        <div>
+                            <p class="text-gray-400 text-sm mb-1">Ping</p>
+                            <p class="text-white font-mono" id="ping">12 ms</p>
+                        </div>
+
+                        <button onclick="copyIP()"
+                            class="w-full bg-mc-green hover:bg-mc-greenLight text-white font-bold py-2 px-4 rounded-lg transition-all mt-4">
+                            Скопировать IP
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="dashboard-card">
+                    <h2 class="text-xl font-bold mb-6 text-mc-greenLight">🔗 Быстрые ссылки</h2>
+
+                    <div class="space-y-3">
+                        <a href="index.html"
+                            class="block w-full p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-all text-center text-gray-300 hover:text-mc-greenLight">
+                            Главная страница
+                        </a>
+
+                        <a href="index.html#rules"
+                            class="block w-full p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-all text-center text-gray-300 hover:text-mc-greenLight">
+                            Правила сервера
+                        </a>
+
+                        <a href="https://discord.gg/"
+                            class="block w-full p-3 bg-[#5865F2]/20 hover:bg-[#5865F2]/30 border border-[#5865F2]/30 rounded-lg transition-all text-center text-blue-300 hover:text-blue-200">
+                            Discord сервер
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Box -->
+            <div class="dashboard-card mb-8">
+                <h2 class="text-2xl font-bold mb-4">🎮 Добро пожаловать на EmbroMine!</h2>
+                <p class="text-gray-300 mb-4">
+                    Вы являетесь спонсором проекта EmbroMine. Это означает, что вы получили доступ к эксклюзивному Minecraft
+                    серверу с уникальным контентом и активным сообществом.
+                </p>
+                <div class="text-gray-400 text-sm space-y-1">
+                    <p><strong>📦 Версия сервера:</strong> 1.20.1</p>
+                    <p><strong>🎮 Режимы:</strong> Survival, Creative, Minigames, Event Arena</p>
+                    <p><strong>💾 Бэкапы:</strong> Ежедневные (00:00 UTC)</p>
+                    <p><strong>🛡️ Защита:</strong> WorldGuard, AntiCheat, 24/7 Модерация</p>
+                    <p><strong>⚡ Оптимизация:</strong> TPS 20, Timings профайл</p>
+                </div>
+            </div>
+
+            <!-- Admin Panel Link -->
+            <div class="dashboard-card" id="admin-section" style="display: none;">
+                <h2 class="text-xl font-bold mb-4 text-mc-greenLight">👑 Админ-панель</h2>
+                <a href="admin-panel.html"
+                    class="inline-block px-6 py-3 bg-gradient-to-r from-mc-green to-mc-greenLight hover:from-mc-greenLight hover:to-mc-green text-white font-bold rounded-lg transition-all transform hover:scale-105">
+                    Перейти в админ-панель
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
