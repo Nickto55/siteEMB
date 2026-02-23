@@ -4,51 +4,11 @@ const API_URL = '/api';
 // Глобальные переменные
 let currentUser = null;
 let authToken = null;
-let currentRoute = '/';
-
-// Маршруты и их контент
-const routes = {
-    '/': loadHomePage,
-    '/rules': loadRulesPage,
-    '/rules/mods': loadRulesMods,
-    '/rules/concept': loadRulesConcept,
-    '/rules/basics': loadRulesBasics,
-    '/rules/punishments': loadRulesPunishments,
-    '/rules/communication': loadRulesCommunication,
-    '/rules/gameplay': loadRulesGameplay
-};
 
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     checkAuth();
-    handleRouting();
-
-    // Обработка кнопок назад/вперед
-    window.addEventListener('popstate', handleRouting);
 });
-
-// Навигация между страницами
-function navigateTo(event, path) {
-    if (event) event.preventDefault();
-    window.history.pushState({ path }, '', path);
-    handleRouting();
-}
-
-// Обработка маршрутов
-function handleRouting() {
-    const path = window.location.pathname;
-    currentRoute = path;
-
-    // Если не аутентифицирован и идет на не-публичный маршрут
-    if (!authToken && path !== '/rules' && !path.startsWith('/rules/')) {
-        loadAuthPage();
-        return;
-    }
-
-    // Ищем маршрут
-    const route = routes[path] || routes['/'];
-    route();
-}
 
 // Проверка аутентификации
 function checkAuth() {
@@ -57,354 +17,15 @@ function checkAuth() {
 
     if (authToken && userData) {
         currentUser = JSON.parse(userData);
-        updateUserInfo();
-    }
-}
-
-// Обновление информации о пользователе в шапке
-function updateUserInfo() {
-    const userInfo = document.getElementById('user-info');
-    const usernameDisplay = document.getElementById('username-display');
-
-    if (currentUser) {
-        usernameDisplay.textContent = `👤 ${currentUser.username}`;
-        userInfo.style.display = 'flex';
+        showMainSection();
+        loadReports();
     } else {
-        userInfo.style.display = 'none';
+        showAuthSection();
     }
 }
 
-// ===== ЗАГРУЗКА СТРАНИЦ =====
-
-// Страница аутентификации
-function loadAuthPage() {
-    const content = document.getElementById('app-content');
-    content.innerHTML = `
-        <div class="auth-container">
-            <div class="auth-tabs">
-                <button id="login-tab" class="tab-btn active" onclick="switchTab(event, 'login')">Вход</button>
-                <button id="register-tab" class="tab-btn" onclick="switchTab(event, 'register')">Регистрация</button>
-            </div>
-
-            <div id="login-form" class="auth-form active">
-                <h2>Вход в систему</h2>
-                <form onsubmit="login(event)">
-                    <div class="form-group">
-                        <label>Имя пользователя:</label>
-                        <input type="text" id="login-username" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Пароль:</label>
-                        <input type="password" id="login-password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Войти</button>
-                </form>
-            </div>
-
-            <div id="register-form" class="auth-form">
-                <h2>Регистрация</h2>
-                <form onsubmit="register(event)">
-                    <div class="form-group">
-                        <label>Имя пользователя:</label>
-                        <input type="text" id="register-username" required minlength="3">
-                    </div>
-                    <div class="form-group">
-                        <label>Email:</label>
-                        <input type="email" id="register-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Пароль:</label>
-                        <input type="password" id="register-password" required minlength="6">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-                </form>
-            </div>
-        </div>
-    `;
-}
-
-// Главная страница (отчеты)
-function loadHomePage() {
-    const content = document.getElementById('app-content');
-
-    if (!authToken) {
-        loadAuthPage();
-        return;
-    }
-
-    content.innerHTML = `
-        <div class="card">
-            <h2>Создать отчет</h2>
-            <form onsubmit="createReport(event)">
-                <div class="form-group">
-                    <label>Название:</label>
-                    <input type="text" id="report-title" required minlength="5">
-                </div>
-                <div class="form-group">
-                    <label>Описание:</label>
-                    <textarea id="report-description" required minlength="10" rows="4"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Сервер (опционально):</label>
-                    <input type="text" id="report-server">
-                </div>
-                <button type="submit" class="btn btn-primary">Создать отчет</button>
-            </form>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <h2>Мои отчеты</h2>
-                <button onclick="loadReports()" class="btn btn-secondary">🔄 Обновить</button>
-            </div>
-            <div id="reports-list" class="reports-list">
-                <p class="loading">Загрузка...</p>
-            </div>
-        </div>
-
-        <div id="admin-section" class="card" style="display: none;">
-            <h2>👤 Управление пользователями (Администратор)</h2>
-            <button onclick="loadUsers()" class="btn btn-secondary">Загрузить пользователей</button>
-            <div id="users-list" class="users-list"></div>
-        </div>
-    `;
-
-    loadReports();
-    if (currentUser && currentUser.role === 'admin') {
-        document.getElementById('admin-section').style.display = 'block';
-    }
-}
-
-// Главная страница правил
-function loadRulesPage() {
-    const content = document.getElementById('app-content');
-    content.innerHTML = `
-        <h2>📚 Правила EmbroMine</h2>
-        <p>Добро пожаловать в официальный раздел правил сервера EmbroMine! Здесь вы найдете полную информацию о том, как играть на нашем сервере, какие моды разрешены, правила общения и система наказаний.</p>
-        
-        <div class="rules-nav">
-            <a href="/rules/mods" onclick="navigateTo(event, '/rules/mods')">📦 Моды</a>
-            <a href="/rules/concept" onclick="navigateTo(event, '/rules/concept')">🎯 Концепция сезона</a>
-            <a href="/rules/basics" onclick="navigateTo(event, '/rules/basics')">📋 Базовые принципы</a>
-            <a href="/rules/punishments" onclick="navigateTo(event, '/rules/punishments')">⚖️ Наказания</a>
-            <a href="/rules/communication" onclick="navigateTo(event, '/rules/communication')">💬 Общение</a>
-            <a href="/rules/gameplay" onclick="navigateTo(event, '/rules/gameplay')">🎮 Игровые правила</a>
-        </div>
-
-        <h3>Основная информация</h3>
-        <p>Все игроки на сервере обязаны соблюдать следующие правила. Нарушение правил может привести к предупреждениям, временным блокировкам или перманентному бану.</p>
-        <p>Если у вас возникли вопросы по правилам, обратитесь к администрации сервера.</p>
-    `;
-}
-
-// Функции загрузки правил
-function loadRulesMods() {
-    loadRulesTemplate('📦 Моды', `
-        <h3>Список разрешенных и запрещенных модов</h3>
-        <h3>✅ Разрешенные моды</h3>
-        <ul>
-            <li><strong>OptiFine</strong> - оптимизация производительности</li>
-            <li><strong>Sodium</strong> - альтернативный видеоредактор</li>
-            <li><strong>Litematica</strong> - помощник при строительстве</li>
-            <li><strong>Minimap моды</strong> - Xaero's Minimap, WAWLA</li>
-            <li><strong>Damage Indicators</strong> - отображение здоровья</li>
-            <li><strong>JourneyMap</strong> - создание карты мира</li>
-            <li><strong>Replay Mod</strong> - запись реплеев</li>
-        </ul>
-        <h3>❌ Запрещенные моды</h3>
-        <ul>
-            <li><strong>X-Ray</strong> - просмотр через блоки</li>
-            <li><strong>Huzuni</strong> - хак-клиент с читами</li>
-            <li><strong>Aimbot</strong> - автоушки в боях</li>
-            <li><strong>Speedhack</strong> - увеличение скорости</li>
-            <li><strong>NoFall</strong> - отключение урона от падения</li>
-            <li><strong>Kill Aura</strong> - автоматические атаки</li>
-            <li><strong>Fly Hack</strong> - полет без эндерперлов</li>
-        </ul>
-        <h3>⚠️ Важно</h3>
-        <p>Использование запрещенных модов приведет к немедленному бану. Если вы не уверены, спросите администрацию.</p>
-    `);
-}
-
-function loadRulesConcept() {
-    loadRulesTemplate('🎯 Концепция сезона', `
-        <h3>Концепция текущего сезона</h3>
-        <p>Текущий сезон сервера EmbroMine предоставляет полную свободу в строительстве и выживании.</p>
-        <h3>Основные цели</h3>
-        <ul>
-            <li>Создание собственной базы и развитие</li>
-            <li>Добыча ресурсов и крафт</li>
-            <li>Взаимодействие с игроками</li>
-            <li>Участие в PvP и войнах кланов</li>
-        </ul>
-        <h3>Система кланов</h3>
-        <ul>
-            <li>Создавайте клан: /clan create</li>
-            <li>Приглашайте друзей</li>
-            <li>Защищайте территорию ClaimBlocks</li>
-            <li>Участвуйте в войнах</li>
-        </ul>
-        <h3>Вознаграждения</h3>
-        <ul>
-            <li>💰 Валюта за квесты</li>
-            <li>🏆 Титулы и значки</li>
-            <li>📦 Специальные предметы</li>
-            <li>⭐ Рейтинги</li>
-        </ul>
-        <p>Сезон длится <strong>6 месяцев</strong>.</p>
-    `);
-}
-
-function loadRulesBasics() {
-    loadRulesTemplate('📋 Базовые принципы', `
-        <h3>Базовые принципы сервера</h3>
-        <h3>Принцип 1: Уважение</h3>
-        <p>Все игроки имеют право на уважение:</p>
-        <ul>
-            <li>Нет оскорблениям</li>
-            <li>Нет преследованиям</li>
-            <li>Нет дискриминации</li>
-            <li>Нет спаму</li>
-        </ul>
-        <h3>Принцип 2: Честная игра</h3>
-        <ul>
-            <li>Запрещены читы</li>
-            <li>Запрещена эксплуатация ошибок</li>
-            <li>Запрещен дубинг</li>
-        </ul>
-        <h3>Принцип 3: Безопасность сервера</h3>
-        <ul>
-            <li>Нет лаг-машин</li>
-            <li>Нет попыток обвала</li>
-            <li>Оптимизация нужна всем</li>
-        </ul>
-    `);
-}
-
-function loadRulesPunishments() {
-    loadRulesTemplate('⚖️ Система наказаний', `
-        <h3>Уровни нарушений и наказания</h3>
-        <h3>🟡 Легкие нарушения</h3>
-        <ul>
-            <li>Спам - мут на 30 мин</li>
-            <li>Флуд - мут на 1-24 часа</li>
-            <li>Мягкие оскорбления - предупреждение + мут</li>
-        </ul>
-        <h3>🟠 Средние нарушения</h3>
-        <ul>
-            <li>Грубые оскорбления - мут 24ч + предупр</li>
-            <li>Попытка читов - бан 7 дней</li>
-            <li>Кража - штраф + мут</li>
-        </ul>
-        <h3>🔴 Серьезные нарушения</h3>
-        <ul>
-            <li>Подтвержденные читы - перма-бан</li>
-            <li>X-Ray - перма-бан</li>
-            <li>Дубинг - бан 14 дней</li>
-            <li>DDoS - перма-бан</li>
-        </ul>
-        <h3>Система предупреждений</h3>
-        <ol>
-            <li>Устное замечание</li>
-            <li>Письменное предупреждение</li>
-            <li>Мут на 24 часа</li>
-            <li>Бан на 7 дней</li>
-            <li>Перманентный бан</li>
-        </ol>
-    `);
-}
-
-function loadRulesCommunication() {
-    loadRulesTemplate('💬 Правила общения', `
-        <h3>Правила общения на сервере</h3>
-        <h3>Основные принципы</h3>
-        <ul>
-            <li>✅ Будьте вежливы</li>
-            <li>✅ Используйте русский язык</li>
-            <li>✅ Помогайте новичкам</li>
-            <li>✅ Аргументируйте спор</li>
-        </ul>
-        <h3>❌ Запрещено в чате</h3>
-        <h4>Оскорбления и унижения</h4>
-        <ul>
-            <li>Личные оскорбления</li>
-            <li>Мат и нецензурная брань</li>
-            <li>Унижающие комментарии</li>
-            <li>Издевательства</li>
-        </ul>
-        <h4>Спам и флуд</h4>
-        <ul>
-            <li>Повторяющиеся сообщения</li>
-            <li>Множество сообщений подряд</li>
-            <li>Капс (БОЛЬШИЕ БУКВЫ)</li>
-            <li>Реклама другихсерверов</li>
-        </ul>
-        <h4>Дискриминация</h4>
-        <ul>
-            <li>По расе и национальности</li>
-            <li>По полу и ориентации</li>
-            <li>Религиозные оскорбления</li>
-        </ul>
-    `);
-}
-
-function loadRulesGameplay() {
-    loadRulesTemplate('🎮 Игровые правила', `
-        <h3>Правила геймплея</h3>
-        <h3>Строительство и территория</h3>
-        <h4>✅ Разрешено</h4>
-        <ul>
-            <li>Строить базу везде (кроме спавна)</li>
-            <li>Создавать шахты и фермы</li>
-            <li>Протектить территорию ClaimBlocks</li>
-            <li>Использовать редстоун</li>
-        </ul>
-        <h4>❌ Запрещено</h4>
-        <ul>
-            <li>Строить < 100 блоков от другой базы</li>
-            <li>Лаг-машины</li>
-            <li>Занимать огромные территории</li>
-            <li>Копировать проекты</li>
-        </ul>
-        <h3>PvP и войны</h3>
-        <h4>✅ Разрешено</h4>
-        <ul>
-            <li>Войны между кланами</li>
-            <li>Рейд врагов на войне</li>
-            <li>Турниры</li>
-        </ul>
-        <h4>❌ Запрещено</h4>
-        <ul>
-            <li>Убийство без причины</li>
-            <li>Рейд мирных</li>
-            <li>Убийство новичков</li>
-            <li>Использование читов</li>
-        </ul>
-        <h3>Экономика</h3>
-        <ul>
-            <li>Валюта: Coins (Монеты)</li>
-            <li>Получение: квесты, рейды, достижения</li>
-            <li>Максимум: 10,000,000 монет</li>
-        </ul>
-    `);
-}
-
-// Шаблон для страниц правил
-function loadRulesTemplate(title, content) {
-    const appContent = document.getElementById('app-content');
-    appContent.innerHTML = `
-        <h2>${title}</h2>
-        <div class="rules-nav">
-            <a href="/rules" onclick="navigateTo(event, '/rules')">← Все правила</a>
-        </div>
-        ${content}
-    `;
-}
-
-// ===== ФУНКЦИИ АУТЕНТИФИКАЦИИ =====
-
-function switchTab(event, tab) {
-    event.preventDefault();
+// Переключение вкладок аутентификации
+function switchTab(tab) {
     const loginTab = document.getElementById('login-tab');
     const registerTab = document.getElementById('register-tab');
     const loginForm = document.getElementById('login-form');
@@ -413,16 +34,17 @@ function switchTab(event, tab) {
     if (tab === 'login') {
         loginTab.classList.add('active');
         registerTab.classList.remove('active');
-        loginForm.classList.add('active');
-        registerForm.classList.remove('active');
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'none';
     } else {
         registerTab.classList.add('active');
         loginTab.classList.remove('active');
-        registerForm.classList.add('active');
-        loginForm.classList.remove('active');
+        registerForm.style.display = 'block';
+        loginForm.style.display = 'none';
     }
 }
 
+// Регистрация
 async function register(event) {
     event.preventDefault();
 
@@ -441,7 +63,7 @@ async function register(event) {
 
         if (response.ok) {
             showNotification('Регистрация успешна! Теперь войдите в систему', 'success');
-            switchTab(event, 'login');
+            switchTab('login');
             document.getElementById('login-username').value = username;
             event.target.reset();
         } else {
@@ -452,6 +74,7 @@ async function register(event) {
     }
 }
 
+// Вход
 async function login(event) {
     event.preventDefault();
 
@@ -474,9 +97,10 @@ async function login(event) {
             localStorage.setItem('authToken', authToken);
             localStorage.setItem('userData', JSON.stringify(currentUser));
 
-            updateUserInfo();
             showNotification(`Добро пожаловать, ${currentUser.username}!`, 'success');
-            navigateTo(null, '/');
+            showMainSection();
+            loadReports();
+            event.target.reset();
         } else {
             showNotification(data.error || 'Ошибка входа', 'error');
         }
@@ -485,17 +109,17 @@ async function login(event) {
     }
 }
 
+// Выход
 function logout() {
-    authToken = null;
-    currentUser = null;
     localStorage.removeItem('authToken');
     localStorage.removeItem('userData');
-    updateUserInfo();
-    navigateTo(null, '/');
+    authToken = null;
+    currentUser = null;
+    showAuthSection();
+    showNotification('Вы вышли из системы', 'info');
 }
 
-// ===== ФУНКЦИИ ОТЧЕТОВ =====
-
+// Создание отчета
 async function createReport(event) {
     event.preventDefault();
 
@@ -527,10 +151,9 @@ async function createReport(event) {
     }
 }
 
+// Загрузка отчетов
 async function loadReports() {
     const reportsList = document.getElementById('reports-list');
-    if (!reportsList) return;
-
     reportsList.innerHTML = '<p class="loading">Загрузка...</p>';
 
     try {
@@ -543,13 +166,14 @@ async function loadReports() {
         if (response.ok) {
             displayReports(data.reports);
         } else {
-            reportsList.innerHTML = `<p class="loading">Ошибка загрузки отчетов</p>`;
+            reportsList.innerHTML = '<p class="loading">Ошибка загрузки отчетов</p>';
         }
     } catch (error) {
-        reportsList.innerHTML = `<p class="loading">Ошибка подключения</p>`;
+        reportsList.innerHTML = '<p class="loading">Ошибка подключения к серверу</p>';
     }
 }
 
+// Отображение отчетов
 function displayReports(reports) {
     const reportsList = document.getElementById('reports-list');
 
@@ -566,15 +190,15 @@ function displayReports(reports) {
             </div>
             <div class="report-description">${escapeHtml(report.description)}</div>
             <div class="report-meta">
-                ${report.server_name ? `<span>:🖥️ Сервер: ${escapeHtml(report.server_name)}</span>` : ''}
+                ${report.server_name ? `<span>🖥️ Сервер: ${escapeHtml(report.server_name)}</span>` : ''}
                 <span>👤 Автор: ${escapeHtml(report.author_username || 'Неизвестно')}</span>
                 <span>📅 ${formatDate(report.created_at)}</span>
             </div>
             ${currentUser.id === report.user_id || currentUser.role === 'admin' ? `
                 <div class="report-actions">
                     ${currentUser.role === 'admin' ? `
-                        <select onchange="updateReportStatus(${report.id}, this.value)">
-                            <option value="">Статус...</option>
+                        <select onchange="updateReportStatus(${report.id}, this.value)" class="form-group">
+                            <option value="">Изменить статус...</option>
                             <option value="pending">Ожидает</option>
                             <option value="in_progress">В работе</option>
                             <option value="resolved">Решено</option>
@@ -588,6 +212,7 @@ function displayReports(reports) {
     `).join('');
 }
 
+// Обновление статуса отчета
 async function updateReportStatus(reportId, status) {
     if (!status) return;
 
@@ -601,19 +226,24 @@ async function updateReportStatus(reportId, status) {
             body: JSON.stringify({ status })
         });
 
+        const data = await response.json();
+
         if (response.ok) {
-            showNotification('Статус обновлен', 'success');
+            showNotification('Статус отчета обновлен', 'success');
             loadReports();
         } else {
-            showNotification('Ошибка обновления', 'error');
+            showNotification(data.error || 'Ошибка обновления статуса', 'error');
         }
     } catch (error) {
-        showNotification('Ошибка подключения', 'error');
+        showNotification('Ошибка подключения к серверу', 'error');
     }
 }
 
+// Удаление отчета
 async function deleteReport(reportId) {
-    if (!confirm('Вы уверены?')) return;
+    if (!confirm('Вы уверены, что хотите удалить этот отчет?')) {
+        return;
+    }
 
     try {
         const response = await fetch(`${API_URL}/reports/${reportId}`, {
@@ -621,17 +251,20 @@ async function deleteReport(reportId) {
             headers: { 'Authorization': `Bearer ${authToken}` }
         });
 
+        const data = await response.json();
+
         if (response.ok) {
             showNotification('Отчет удален', 'success');
             loadReports();
         } else {
-            showNotification('Ошибка удаления', 'error');
+            showNotification(data.error || 'Ошибка удаления отчета', 'error');
         }
     } catch (error) {
-        showNotification('Ошибка подключения', 'error');
+        showNotification('Ошибка подключения к серверу', 'error');
     }
 }
 
+// Загрузка пользователей (для админа)
 async function loadUsers() {
     const usersList = document.getElementById('users-list');
     usersList.innerHTML = '<p class="loading">Загрузка...</p>';
@@ -646,13 +279,14 @@ async function loadUsers() {
         if (response.ok) {
             displayUsers(data.users);
         } else {
-            usersList.innerHTML = `<p class="loading">Ошибка загрузки</p>`;
+            usersList.innerHTML = `<p class="loading">${data.error || 'Ошибка загрузки пользователей'}</p>`;
         }
     } catch (error) {
-        usersList.innerHTML = `<p class="loading">Ошибка подключения</p>`;
+        usersList.innerHTML = '<p class="loading">Ошибка подключения к серверу</p>';
     }
 }
 
+// Отображение пользователей
 function displayUsers(users) {
     const usersList = document.getElementById('users-list');
 
@@ -668,18 +302,19 @@ function displayUsers(users) {
                 <span class="user-email">${escapeHtml(user.email)}</span>
             </div>
             <div class="user-actions">
-                <span class="user-role role-${user.role}">${user.role === 'admin' ? 'Админ' : 'Пользователь'}</span>
+                <span class="user-role role-${user.role}">${user.role === 'admin' ? 'Администратор' : 'Пользователь'}</span>
                 ${currentUser.id !== user.id ? `
                     <button onclick="changeUserRole(${user.id}, '${user.role === 'admin' ? 'user' : 'admin'}')" class="btn btn-success">
-                        ${user.role === 'admin' ? 'Юзер' : 'Админ'}
+                        ${user.role === 'admin' ? '↓ Сделать пользователем' : '↑ Сделать админом'}
                     </button>
                     <button onclick="deleteUser(${user.id})" class="btn btn-danger">Удалить</button>
-                ` : '<span>Это вы</span>'}
+                ` : '<span style="color: #718096;">Это вы</span>'}
             </div>
         </div>
     `).join('');
 }
 
+// Изменение роли пользователя
 async function changeUserRole(userId, newRole) {
     try {
         const response = await fetch(`${API_URL}/admin/users/${userId}/role`, {
@@ -691,19 +326,24 @@ async function changeUserRole(userId, newRole) {
             body: JSON.stringify({ role: newRole })
         });
 
+        const data = await response.json();
+
         if (response.ok) {
-            showNotification('Роль изменена', 'success');
+            showNotification('Роль пользователя изменена', 'success');
             loadUsers();
         } else {
-            showNotification('Ошибка', 'error');
+            showNotification(data.error || 'Ошибка изменения роли', 'error');
         }
     } catch (error) {
-        showNotification('Ошибка подключения', 'error');
+        showNotification('Ошибка подключения к серверу', 'error');
     }
 }
 
+// Удаление пользователя
 async function deleteUser(userId) {
-    if (!confirm('Удалить пользователя?')) return;
+    if (!confirm('Вы уверены, что хотите удалить этого пользователя?')) {
+        return;
+    }
 
     try {
         const response = await fetch(`${API_URL}/admin/users/${userId}`, {
@@ -711,19 +351,39 @@ async function deleteUser(userId) {
             headers: { 'Authorization': `Bearer ${authToken}` }
         });
 
+        const data = await response.json();
+
         if (response.ok) {
             showNotification('Пользователь удален', 'success');
             loadUsers();
         } else {
-            showNotification('Ошибка', 'error');
+            showNotification(data.error || 'Ошибка удаления пользователя', 'error');
         }
     } catch (error) {
-        showNotification('Ошибка подключения', 'error');
+        showNotification('Ошибка подключения к серверу', 'error');
     }
 }
 
-// ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
+// Показать секцию аутентификации
+function showAuthSection() {
+    document.getElementById('auth-section').style.display = 'block';
+    document.getElementById('main-section').style.display = 'none';
+    document.getElementById('user-info').style.display = 'none';
+}
 
+// Показать главную секцию
+function showMainSection() {
+    document.getElementById('auth-section').style.display = 'none';
+    document.getElementById('main-section').style.display = 'block';
+    document.getElementById('user-info').style.display = 'flex';
+    document.getElementById('username-display').textContent = `👤 ${currentUser.username} (${currentUser.role === 'admin' ? 'Администратор' : 'Пользователь'})`;
+
+    if (currentUser.role === 'admin') {
+        document.getElementById('admin-section').style.display = 'block';
+    }
+}
+
+// Показать уведомление
 function showNotification(message, type = 'info') {
     const notification = document.getElementById('notification');
     notification.textContent = message;
@@ -734,6 +394,7 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
+// Вспомогательные функции
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
