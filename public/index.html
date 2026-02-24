@@ -50,15 +50,25 @@
                     <div class="ml-10 flex items-baseline space-x-8">
                         <a href="#home"
                             class="hover:text-mc-greenLight transition-colors px-3 py-2 rounded-md text-sm font-medium">Главная</a>
-                        <a href="#about"
-                            class="hover:text-mc-greenLight transition-colors px-3 py-2 rounded-md text-sm font-medium">О
-                            сервере</a>
-                        <a href="#features"
-                            class="hover:text-mc-greenLight transition-colors px-3 py-2 rounded-md text-sm font-medium">Режимы</a>
-                        <a href="#rules"
-                            class="hover:text-mc-greenLight transition-colors px-3 py-2 rounded-md text-sm font-medium">Правила</a>
-                        <a href="login.html" id="login-link"
-                            class="bg-mc-green hover:bg-mc-greenLight text-white px-4 py-2 rounded-lg text-sm font-medium transition-all transform hover:scale-105 shadow-lg shadow-mc-green/20">Вход</a>
+                        <div class="relative group">
+                            <a href="#"
+                                class="hover:text-mc-greenLight transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                                Меню
+                                <span class="ml-1 text-xs">▼</span>
+                            </a>
+                            <div
+                                class="absolute left-0 mt-0 w-48 bg-mc-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                                <a href="#about"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10 first:rounded-t-lg">О
+                                    сервере</a>
+                                <a href="#features"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10">Режимы</a>
+                                <a href="rules-overview.html"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10">Правила</a>
+                                <a href="login.html" id="login-link"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10 last:rounded-b-lg">Вход</a>
+                            </div>
+                        </div>
                         <a href="dashboard.html" id="dashboard-link"
                             class="text-mc-greenLight hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium"
                             style="display: none;">Профиль</a>
@@ -79,12 +89,19 @@
         <div class="hidden md:hidden bg-mc-dark border-t border-white/10" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Главная</a>
-                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">О
-                    сервере</a>
-                <a href="#features"
-                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Режимы</a>
-                <a href="#rules" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Правила</a>
-                <a href="login.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Вход</a>
+                <div class="px-3 py-2">
+                    <div onclick="toggleMobileNavMenu()"
+                        class="block text-base font-medium hover:bg-white/10 cursor-pointer rounded-md p-2">
+                        Меню <span id="nav-mobile-arrow">▶</span>
+                    </div>
+                    <div id="nav-mobile-menu" class="hidden pl-4 space-y-1 mt-2">
+                        <a href="#about" class="block px-2 py-1 text-sm rounded-md hover:bg-white/10">О сервере</a>
+                        <a href="#features" class="block px-2 py-1 text-sm rounded-md hover:bg-white/10">Режимы</a>
+                        <a href="rules-overview.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-white/10">Правила</a>
+                        <a href="login.html" class="block px-2 py-1 text-sm rounded-md hover:bg-white/10">Вход</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>

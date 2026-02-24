@@ -19,11 +19,18 @@
             </div>
             <div class="nav-links">
                 <a href="index.html" class="nav-link">Главная</a>
-                <a href="rules-overview.html" class="nav-link">Обзор</a>
-                <a href="rules-glossary.html" class="nav-link">Глоссарий</a>
-                <a href="rules-guide.html" class="nav-link active">Инструкция</a>
-                <a href="rules-admin.html" class="nav-link">Администрация</a>
+                <div class="nav-dropdown">
+                    <a href="#" class="nav-link">Меню</a>
+                    <div class="dropdown-menu">
+                        <a href="#about">О сервере</a>
+                        <a href="#features">Режимы</a>
+                        <a href="rules-guide.html" class="active">Правила</a>
+                        <a href="login.html">Вход</a>
+                    </div>
+                </div>
             </div>
+        </div>
+        </div>
         </div>
     </nav>
 
@@ -118,6 +125,7 @@
             </div>
         </div>
     </footer>
+    <script src="script.js"></script>
 </body>
 
 </html>

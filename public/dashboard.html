@@ -37,21 +37,25 @@
     <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-mc-darker/80 backdrop-blur-md border-b border-white/10" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-3">
-                    <div
-                        class="w-10 h-10 bg-mc-green rounded-lg flex items-center justify-center shadow-lg shadow-mc-green/20">
-                        <span class="text-white text-lg font-bold">⛏</span>
-                    </div>
-                    <a href="index.html"
-                        class="text-xl font-bold tracking-tight hover:text-mc-greenLight transition-colors">Embro<span
-                            class="text-mc-greenLight">Mine</span></a>
+            <div class="nav-container" style="padding: 12px 0; max-width: 100%;">
+                <div class="logo" style="margin: 0;">
+                    <a href="index.html" style="text-decoration: none; color: inherit;">
+                        <span class="logo-text">EmbroMine</span>
+                    </a>
                 </div>
-
-                <div class="flex items-center gap-4">
-                    <span id="user-info" class="text-mc-greenLight font-semibold"></span>
-                    <button onclick="handleLogout()"
-                        class="text-gray-400 hover:text-mc-greenLight transition-colors px-3 py-2">Выход</button>
+                <div class="nav-links" style="gap: 20px;">
+                    <a href="index.html" class="nav-link">Главная</a>
+                    <div class="nav-dropdown">
+                        <a href="#" class="nav-link">Меню</a>
+                        <div class="dropdown-menu">
+                            <a href="index.html#about">О сервере</a>
+                            <a href="index.html#features">Режимы</a>
+                            <a href="rules-overview.html">Правила</a>
+                        </div>
+                    </div>
+                    <span id="user-info" class="nav-link" style="cursor: default;"></span>
+                    <button onclick="handleLogout()" class="nav-link"
+                        style="background: none; border: none; padding: 8px 12px; cursor: pointer;">Выход</button>
                 </div>
             </div>
         </div>
@@ -144,7 +148,8 @@
             <div class="dashboard-card mb-8">
                 <h2 class="text-2xl font-bold mb-4">🎮 Добро пожаловать на EmbroMine!</h2>
                 <p class="text-gray-300 mb-4">
-                    Вы являетесь спонсором проекта EmbroMine. Это означает, что вы получили доступ к эксклюзивному Minecraft
+                    Вы являетесь спонсором проекта EmbroMine. Это означает, что вы получили доступ к эксклюзивному
+                    Minecraft
                     серверу с уникальным контентом и активным сообществом.
                 </p>
                 <div class="text-gray-400 text-sm space-y-1">

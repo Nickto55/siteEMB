@@ -31,6 +31,30 @@ function toggleMobileMenu() {
     if (menu) menu.classList.toggle('hidden');
 }
 
+// Rules mobile menu toggle
+function toggleRulesMobileMenu() {
+    const rulesMenu = document.getElementById('rules-mobile-menu');
+    const arrow = document.getElementById('rules-mobile-arrow');
+    if (rulesMenu) {
+        rulesMenu.classList.toggle('hidden');
+        if (arrow) {
+            arrow.textContent = rulesMenu.classList.contains('hidden') ? '▶' : '▼';
+        }
+    }
+}
+
+// Navigation mobile menu toggle
+function toggleMobileNavMenu() {
+    const navMenu = document.getElementById('nav-mobile-menu');
+    const arrow = document.getElementById('nav-mobile-arrow');
+    if (navMenu) {
+        navMenu.classList.toggle('hidden');
+        if (arrow) {
+            arrow.textContent = navMenu.classList.contains('hidden') ? '▶' : '▼';
+        }
+    }
+}
+
 // Copy IP to clipboard
 function copyIP() {
     const ip = 'play.embromine.ru';
@@ -289,12 +313,50 @@ function loadUserData() {
     if (profileEmail) profileEmail.textContent = userData.email;
 }
 
+// Dropdown menu handler
+function initDropdownMenu() {
+    const dropdowns = document.querySelectorAll('.nav-dropdown');
+
+    dropdowns.forEach(dropdown => {
+        const trigger = dropdown.querySelector('.nav-link');
+        const menu = dropdown.querySelector('.dropdown-menu');
+
+        if (!trigger || !menu) return;
+
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Close other dropdowns
+            dropdowns.forEach(d => {
+                if (d !== dropdown) {
+                    d.classList.remove('active');
+                }
+            });
+            dropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking on a link inside
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                dropdown.classList.remove('active');
+            });
+        });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.nav-dropdown')) {
+            dropdowns.forEach(d => d.classList.remove('active'));
+        }
+    });
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     createParticles();
     initScrollAnimations();
     initSmoothScroll();
     checkAuthStatus();
+    initDropdownMenu();
 
     // Update stats every 5 seconds
     setInterval(updatePlayerCount, 5000);
