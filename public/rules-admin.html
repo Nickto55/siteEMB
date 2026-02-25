@@ -1,128 +1,284 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Администрация - EmbroMine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mc: {
+                            dark: '#1a1a1a',
+                            darker: '#0f0f0f',
+                            green: '#5D8C30',
+                            greenLight: '#7EB342',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
-<body>
-    <!-- Навигационное меню -->
-    <nav class="main-nav">
-        <div class="nav-container">
-            <div class="logo">
-                <a href="index.html" style="text-decoration: none; color: inherit;">
-                    <span class="logo-text">EmbroMine</span>
-                </a>
-            </div>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">Главная</a>
-                <div class="nav-dropdown">
-                    <a href="#" class="nav-link">Меню</a>
-                    <div class="dropdown-menu">
-                        <a href="#about">О сервере</a>
-                        <a href="#features">Режимы</a>
-                        <a href="rules-admin.html" class="active">Правила</a>
-                        <a href="login.html">Вход</a>
+<body class="bg-mc-darker text-white font-sans antialiased overflow-x-hidden">
+    <!-- Floating Particles Background -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-mc-darker/80 backdrop-blur-md border-b border-white/10 transition-all duration-300"
+        id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-mc-green rounded-lg flex items-center justify-center shadow-lg shadow-mc-green/20">
+                        <span class="text-white text-lg font-bold">E</span>
                     </div>
+                    <a href="index.html"
+                        class="text-xl font-bold tracking-tight hover:text-mc-greenLight transition-colors">
+                        Embro<span class="text-mc-greenLight">Mine</span>
+                    </a>
+                </div>
+
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html"
+                            class="hover:text-mc-greenLight transition-colors px-3 py-2 rounded-md text-sm font-medium">Главная</a>
+                        <div class="relative group">
+                            <a href="#"
+                                class="hover:text-mc-greenLight transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                                Меню
+                                <span class="ml-1 text-xs">▼</span>
+                            </a>
+                            <div
+                                class="absolute left-0 mt-0 w-48 bg-mc-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                                <a href="index.html#about"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10 first:rounded-t-lg">О
+                                    сервере</a>
+                                <a href="index.html#features"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10">Режимы</a>
+                                <a href="rules-overview.html"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10">Правила</a>
+                                <a href="login.html" id="login-link"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10 last:rounded-b-lg">Вход</a>
+                            </div>
+                        </div>
+                        <a href="dashboard.html" id="dashboard-link"
+                            class="text-mc-greenLight hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium"
+                            style="display: none;">Профиль</a>
+                        <button onclick="handleLogout()" id="logout-btn"
+                            class="text-mc-greenLight hover:text-red-400 transition-colors px-3 py-2 rounded-md text-sm font-medium"
+                            style="display: none;">Выход</button>
+                    </div>
+                </div>
+
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-gray-300 hover:text-white p-2">
+                        <span>MENU</span>
+                    </button>
                 </div>
             </div>
         </div>
-        </div>
+
+        <div class="hidden md:hidden bg-mc-dark border-t border-white/10" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Главная</a>
+                <a href="index.html#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">О
+                    сервере</a>
+                <a href="index.html#features"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Режимы</a>
+                <a href="rules-overview.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Правила</a>
+                <a href="login.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Вход</a>
+            </div>
         </div>
     </nav>
 
-    <!-- Контент -->
-    <div class="container">
-        <div class="rules-header">
-            <h1>Администрация сервера</h1>
-            <p>Контакты и информация о команде управления</p>
-        </div>
+    <!-- Main Content -->
+    <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <h1
+                    class="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-white via-mc-greenLight to-mc-green bg-clip-text text-transparent">
+                    Администрация сервера
+                </h1>
+                <p class="text-xl text-gray-400">Контакты и информация о команде управления</p>
+            </div>
 
-        <div class="rules-section">
-            <div class="section-card">
-                <div class="admin-info-box">
-                    <p>Администрация открыта для новых талантливых участников. Если вы проявляете ответственность и
+            <!-- Info Box -->
+            <div class="mb-12">
+                <div class="bg-gradient-to-r from-mc-green/10 to-cyan-400/10 border-l-4 border-mc-green p-6 rounded-lg">
+                    <p class="text-lg leading-relaxed">
+                        Администрация открыта для новых талантливых участников. Если вы проявляете ответственность и
                         уважение к сообществу, вы можете стать частью управления сервером вне зависимости от вашей
-                        текущей роли.</p>
+                        текущей роли.
+                    </p>
                 </div>
+            </div>
 
-                <div class="admin-grid">
-                    <div class="admin-card">
-                        <div class="admin-role">Владелец</div>
-                        <h3>EmbroMine</h3>
-                        <p class="admin-description">Основатель и главный администратор сервера</p>
-                        <p class="admin-contact">Discord: @embro</p>
+            <!-- Admin Team -->
+            <div class="mb-16">
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div
+                        class="bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl hover:border-mc-green/30 transition-all duration-300 hover:transform hover:-translate-y-1">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mb-6 mx-auto text-3xl shadow-lg shadow-yellow-400/20">
+                            👑
+                        </div>
+                        <div
+                            class="inline-block px-4 py-1 bg-yellow-400/20 text-yellow-400 rounded-full text-sm font-semibold mb-4">
+                            Владелец</div>
+                        <h3 class="text-2xl font-bold mb-3">EmbroMine</h3>
+                        <p class="text-gray-400 mb-4">Основатель и главный администратор сервера</p>
+                        <p class="text-sm text-mc-greenLight">Discord: @embro</p>
                     </div>
 
-                    <div class="admin-card">
-                        <div class="admin-role">Модератор</div>
-                        <h3>Команда модераторов</h3>
-                        <p class="admin-description">Следят за порядком в чате и на сервере</p>
-                        <p class="admin-contact">Обратитесь в Discord</p>
+                    <div
+                        class="bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl hover:border-cyan-400/30 transition-all duration-300 hover:transform hover:-translate-y-1">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mb-6 mx-auto text-3xl shadow-lg shadow-cyan-400/20">
+                            🛡️
+                        </div>
+                        <div
+                            class="inline-block px-4 py-1 bg-cyan-400/20 text-cyan-400 rounded-full text-sm font-semibold mb-4">
+                            Модератор</div>
+                        <h3 class="text-2xl font-bold mb-3">Команда модераторов</h3>
+                        <p class="text-gray-400 mb-4">Следят за порядком в чате и на сервере</p>
+                        <p class="text-sm text-mc-greenLight">Обратитесь в Discord</p>
                     </div>
 
-                    <div class="admin-card">
-                        <div class="admin-role">Помощники</div>
-                        <h3>Опытные игроки</h3>
-                        <p class="admin-description">Помогают новичкам адаптироваться на сервере</p>
-                        <p class="admin-contact">В игре: /msg [ник]</p>
+                    <div
+                        class="bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl hover:border-mc-green/30 transition-all duration-300 hover:transform hover:-translate-y-1">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-mc-green to-mc-greenLight rounded-2xl flex items-center justify-center mb-6 mx-auto text-3xl shadow-lg shadow-mc-green/20">
+                            🤝
+                        </div>
+                        <div
+                            class="inline-block px-4 py-1 bg-mc-green/20 text-mc-greenLight rounded-full text-sm font-semibold mb-4">
+                            Помощники</div>
+                        <h3 class="text-2xl font-bold mb-3">Опытные игроки</h3>
+                        <p class="text-gray-400 mb-4">Помогают новичкам адаптироваться на сервере</p>
+                        <p class="text-sm text-mc-greenLight">В игре: /msg [ник]</p>
                     </div>
                 </div>
+            </div>
 
-                <div class="contact-section">
-                    <h3>Контакты для связи</h3>
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <div>
-                                <strong>Discord</strong>
-                                <p>Основной канал связи с администрацией</p>
-                            </div>
+            <!-- Contact Methods -->
+            <div class="mb-16">
+                <div class="bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
+                    <h3 class="text-3xl font-bold mb-8 text-mc-greenLight text-center">Контакты для связи</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div
+                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-purple-500/30 transition-all">
+                            <div class="text-4xl mb-4">💬</div>
+                            <strong class="text-lg block mb-2">Discord</strong>
+                            <p class="text-gray-400 text-sm">Основной канал связи с администрацией</p>
                         </div>
-                        <div class="contact-method">
-                            <div>
-                                <strong>Minecraft In-Game</strong>
-                                <p>Обратитесь к помощникам или модераторам в чате</p>
-                            </div>
+                        <div
+                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-mc-green/30 transition-all">
+                            <div class="text-4xl mb-4">🎮</div>
+                            <strong class="text-lg block mb-2">Minecraft In-Game</strong>
+                            <p class="text-gray-400 text-sm">Обратитесь к помощникам или модераторам в чате</p>
                         </div>
-                        <div class="contact-method">
-                            <div>
-                                <strong>Email</strong>
-                                <p>support@embromine.ru (для серьёзных вопросов)</p>
-                            </div>
+                        <div
+                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-cyan-400/30 transition-all">
+                            <div class="text-4xl mb-4">📧</div>
+                            <strong class="text-lg block mb-2">Email</strong>
+                            <p class="text-gray-400 text-sm">support@embromine.ru (для серьёзных вопросов)</p>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="rules-overview.html"
+                    class="group bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl hover:border-mc-green/50 transition-all duration-300 hover:transform hover:-translate-y-1">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl font-bold group-hover:text-mc-greenLight transition-colors">📖 Обзор правил
+                        </h3>
+                        <span class="text-2xl">→</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Основные принципы и категории</p>
+                </a>
+                <a href="rules-guide.html"
+                    class="group bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl hover:border-mc-green/50 transition-all duration-300 hover:transform hover:-translate-y-1">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl font-bold group-hover:text-mc-greenLight transition-colors">📘 Инструкция
+                        </h3>
+                        <span class="text-2xl">→</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Пошаговое руководство для новичков</p>
+                </a>
+                <a href="rules-glossary.html"
+                    class="group bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl hover:border-mc-green/50 transition-all duration-300 hover:transform hover:-translate-y-1">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl font-bold group-hover:text-mc-greenLight transition-colors">📚 Глоссарий</h3>
+                        <span class="text-2xl">→</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Словарь терминов и определений</p>
+                </a>
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- Футер -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>EmbroMine</h4>
-                    <p>Minecraft сервер для спонсоров</p>
+    <!-- Footer -->
+    <footer class="bg-mc-dark border-t border-white/10 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 bg-mc-green rounded-lg flex items-center justify-center">
+                            <span class="text-white text-lg font-bold">E</span>
+                        </div>
+                        <span class="text-lg font-bold">EmbroMine</span>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed max-w-xs">
+                        Приватный Minecraft сервер для спонсоров проекта.
+                    </p>
                 </div>
-                <div class="footer-section">
-                    <h4>Информация</h4>
-                    <a href="rules-overview.html">Обзор</a>
-                    <a href="rules-glossary.html">Глоссарий</a>
-                    <a href="rules-guide.html">Инструкция</a>
+
+                <div>
+                    <h4 class="font-bold mb-4 text-sm uppercase tracking-wider text-gray-400">Правила</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="rules-overview.html"
+                                class="text-gray-500 hover:text-mc-greenLight transition-colors">Обзор</a></li>
+                        <li><a href="rules-glossary.html"
+                                class="text-gray-500 hover:text-mc-greenLight transition-colors">Глоссарий</a></li>
+                        <li><a href="rules-guide.html"
+                                class="text-gray-500 hover:text-mc-greenLight transition-colors">Инструкция</a></li>
+                        <li><a href="rules-admin.html"
+                                class="text-mc-greenLight hover:text-white transition-colors">Администрация</a></li>
+                    </ul>
                 </div>
-                <div class="footer-section">
-                    <h4>Поддержка</h4>
-                    <a href="rules-admin.html">Администрация</a>
+
+                <div>
+                    <h4 class="font-bold mb-4 text-sm uppercase tracking-wider text-gray-400">Контакты</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="text-gray-500">support@embromine.ru</li>
+                        <li class="text-gray-500">24/7 Поддержка</li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 EmbroMine. Все права защищены.</p>
+
+            <div class="border-t border-white/10 pt-8">
+                <p class="text-gray-600 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.</p>
             </div>
         </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 

@@ -9,6 +9,7 @@ const pool = require('./db');
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
 const reportsRoutes = require('./routes/reports');
+const contentRoutes = require('./routes/content');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -68,6 +69,7 @@ app.get('/health', async (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/reports', reportsRoutes);
+app.use('/api/content', contentRoutes);
 
 // API информация
 app.get('/api', (req, res) => {

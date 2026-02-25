@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контент управление - Пример</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: rgba(93, 140, 48, 0.1);
+            border: 1px solid rgba(93, 140, 48, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #7EB342;
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            background: rgba(93, 140, 48, 0.05);
+            border-left: 4px solid #5D8C30;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+
+        .pages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .page-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(93, 140, 48, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .page-card:hover {
+            background: rgba(93, 140, 48, 0.15);
+            border-color: #7EB342;
+            transform: translateY(-2px);
+        }
+
+        .page-card h3 {
+            color: #7EB342;
+            margin-bottom: 10px;
+        }
+
+        .page-card p {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .page-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-edit {
+            background: #5D8C30;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: #7EB342;
+        }
+
+        .btn-view {
+            background: rgba(93, 140, 48, 0.2);
+            color: #7EB342;
+            border: 1px solid #7EB342;
+        }
+
+        .btn-view:hover {
+            background: #7EB342;
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h2 {
+            color: #7EB342;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 300px;
+            font-family: 'Courier New', monospace;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #7EB342;
+            background: rgba(93, 140, 48, 0.1);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-save {
+            background: #5D8C30;
+            color: white;
+            flex: 1;
+        }
+
+        .btn-save:hover {
+            background: #7EB342;
+        }
+
+        .btn-close {
+            background: #333;
+            color: #aaa;
+            flex: 1;
+        }
+
+        .btn-close:hover {
+            background: #444;
+        }
+
+        .status-message {
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .status-message.success {
+            display: block;
+            background: rgba(93, 140, 48, 0.3);
+            border-left: 4px solid #5D8C30;
+            color: #7EB342;
+        }
+
+        .status-message.error {
+            display: block;
+            background: rgba(220, 53, 69, 0.3);
+            border-left: 4px solid #dc3545;
+            color: #ff7f82;
+        }
+
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(126, 179, 66, 0.3);
+            border-radius: 50%;
+            border-top-color: #7EB342;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>📖 Управление контентом страниц</h1>
+            <p>Система динамической загрузки и редактирования содержимого из базы данных</p>
+            <div class="info-box">
+                <strong>INFO:</strong> Эта система позволяет адмагистраторам редактировать контент страниц
+                через веб-интерфейс. Все изменения сохраняются в базу данных PostgreSQL
+                и автоматически загружаются при посещении страницы.
+            </div>
+        </header>
+
+        <div id="pages-container" class="pages-grid">
+            <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                <div class="loader" style="display: inline-block;"></div>
+                <p style="margin-top: 20px; color: #aaa;">Загрузка списка страниц...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно редактора -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <h2>Редактирование страницы</h2>
+            <form id="edit-form" onsubmit="return false;">
+                <div class="form-group">
+                    <label for="page-title">Заголовок страницы (опционально)</label>
+                    <input type="text" id="page-title" placeholder="Заголовок">
+                </div>
+
+                <div class="form-group">
+                    <label for="page-content">HTML Контент</label>
+                    <textarea id="page-content" placeholder="Вставьте HTML контент здесь..."></textarea>
+                </div>
+
+                <div class="status-message" id="edit-status"></div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-save" onclick="savePageContent()">
+                        💾 Сохранить
+                    </button>
+                    <button type="button" class="btn-close" onclick="closeEditModal()">
+                        ✕ Закрыть
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Скрипт загрузки контента -->
+    <script src="content-manager.js"></script>
+    <script src="content-editor.js"></script>
+
+    <script>
+        let currentEditPage = null;
+
+        // Инициализировать редактор
+        const editor = new ContentEditor({
+            isAdmin: true // В реальном приложении проверяйте токен
+        });
+
+        // Загрузить список страниц при загрузке
+        async function loadPages() {
+            try {
+                const pages = await editor.getAllPages();
+
+                if (!pages || pages.length === 0) {
+                    document.getElementById('pages-container').innerHTML =
+                        '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #aaa;">' +
+                        'Нет страниц для редактирования<br>' +
+                        'Сначала запустите: npm run init-content' +
+                        '</div>';
+                    return;
+                }
+
+                const html = pages.map(page => `
+                    <div class="page-card">
+                        <h3>${page.page_name}</h3>
+                        <p>
+                            <strong>Версия:</strong> ${page.version}<br>
+                            <strong>Статус:</strong> ${page.is_active ? '✓ Активна' : '✗ Неактивна'}<br>
+                            <strong>Обновлена:</strong> ${new Date(page.updated_at).toLocaleDateString('ru-RU')}
+                        </p>
+                        <div class="page-actions">
+                            <button class="btn-edit" onclick="openEditModal('${page.page_name}')">
+                                ✏️ Редактировать
+                            </button>
+                            <button class="btn-view" onclick="viewPagePreview('${page.page_name}')">
+                                👁️ Просмотр
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+
+                document.getElementById('pages-container').innerHTML = html;
+            } catch (error) {
+                console.error('Ошибка при загрузке страниц:', error);
+                document.getElementById('pages-container').innerHTML =
+                    '<div style="grid-column: 1/-1; color: #ff7f82;">Ошибка при загрузке списка страниц</div>';
+            }
+        }
+
+        // Открыть редактор
+        async function openEditModal(pageName) {
+            currentEditPage = pageName;
+            const pageData = await editor.getPageForEditing(pageName);
+
+            if (pageData) {
+                document.getElementById('page-title').value = pageData.title || '';
+                document.getElementById('page-content').value = pageData.content || '';
+                document.getElementById('edit-modal').classList.add('active');
+                document.getElementById('edit-status').className = 'status-message';
+            }
+        }
+
+        // Закрыть редактор
+        function closeEditModal() {
+            document.getElementById('edit-modal').classList.remove('active');
+            currentEditPage = null;
+        }
+
+        // Сохранить контент
+        async function savePageContent() {
+            if (!currentEditPage) return;
+
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '⏳ Сохранение...';
+            btn.disabled = true;
+
+            const title = document.getElementById('page-title').value;
+            const content = document.getElementById('page-content').value;
+
+            const result = await editor.savePageContent(currentEditPage, {
+                title: title || null,
+                content: content
+            });
+
+            if (result) {
+                showStatus('edit-status', '✓ Контент успешно сохранен!', 'success');
+                setTimeout(() => {
+                    closeEditModal();
+                    loadPages();
+                }, 1500);
+            } else {
+                showStatus('edit-status', '✗ Ошибка при сохранении контента', 'error');
+            }
+
+            btn.textContent = originalText;
+            btn.disabled = false;
+        }
+
+        // Показать статус сообщение
+        function showStatus(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `status-message ${type}`;
+        }
+
+        // Просмотр страницы
+        function viewPagePreview(pageName) {
+            const url = `/${pageName}.html`;
+            window.open(url, '_blank');
+        }
+
+        // Закрыть модаль по клику на фон
+        document.getElementById('edit-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'edit-modal') {
+                closeEditModal();
+            }
+        });
+
+        // Загрузить страницы при загрузке документа
+        loadPages();
+    </script>
+</body>
+
+</html>

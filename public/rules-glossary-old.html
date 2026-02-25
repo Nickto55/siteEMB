@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глоссарий - EmbroMine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mc: {
+                            dark: '#1a1a1a',
+                            darker: '#0f0f0f',
+                            green: '#5D8C30',
+                            greenLight: '#7EB342',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-mc-darker text-white font-sans antialiased overflow-x-hidden">
+    <!-- Floating Particles Background -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-mc-darker/80 backdrop-blur-md border-b border-white/10 transition-all duration-300"
+        id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-mc-green rounded-lg flex items-center justify-center shadow-lg shadow-mc-green/20">
+                        <span class="text-white text-lg font-bold">E</span>
+                    </div>
+                    <a href="index.html"
+                        class="text-xl font-bold tracking-tight hover:text-mc-greenLight transition-colors">
+                        Embro<span class="text-mc-greenLight">Mine</span>
+                    </a>
+                </div>
+
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html"
+                            class="hover:text-mc-greenLight transition-colors px-3 py-2 rounded-md text-sm font-medium">Главная</a>
+                        <div class="relative group">
+                            <a href="#"
+                                class="hover:text-mc-greenLight transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                                Меню
+                                <span class="ml-1 text-xs">▼</span>
+                            </a>
+                            <div
+                                class="absolute left-0 mt-0 w-48 bg-mc-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                                <a href="index.html#about"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10 first:rounded-t-lg">О
+                                    сервере</a>
+                                <a href="index.html#features"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10">Режимы</a>
+                                <a href="rules-overview.html"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10">Правила</a>
+                                <a href="login.html" id="login-link"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10 last:rounded-b-lg">Вход</a>
+                            </div>
+                        </div>
+                        <a href="dashboard.html" id="dashboard-link"
+                            class="text-mc-greenLight hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium"
+                            style="display: none;">Профиль</a>
+                        <button onclick="handleLogout()" id="logout-btn"
+                            class="text-mc-greenLight hover:text-red-400 transition-colors px-3 py-2 rounded-md text-sm font-medium"
+                            style="display: none;">Выход</button>
+                    </div>
+                </div>
+
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-gray-300 hover:text-white p-2">
+                        <span>MENU</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="hidden md:hidden bg-mc-dark border-t border-white/10" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Главная</a>
+                <a href="index.html#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">О
+                    сервере</a>
+                <a href="index.html#features"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Режимы</a>
+                <a href="rules-overview.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Правила</a>
+                <a href="login.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Вход</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <h1
+                    class="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-white via-mc-greenLight to-mc-green bg-clip-text text-transparent">
+                    Глоссарий
+                </h1>
+                <p class="text-xl text-gray-400">Словарь основных терминов и определений</p>
+            </div>
+
+            <!-- Категория 1 -->
+            <div class="mb-12">
+                <div class="bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
+                    <div class="glossary-category">
+                        <h2>1. Нечестная игра и запрещённый софт</h2>
+
+                        <div class="glossary-term">
+                            <h4>Читы (Чит-клиент, Чит-моды)</h4>
+                            <p><strong>Пояснение:</strong> Любое стороннее программное обеспечение или модификация игры,
+                                дающие игроку несправедливое и не предусмотренное ванильной игрой преимущество. Это
+                                прямое
+                                нарушение принципа честной игры.</p>
+                            <p><strong>Примеры:</strong> Полёт (Fly), ускорение передвижения (Speed), проход сквозь
+                                блоки
+                                (NoClip, Phase), автоматическая атака по мобам/игрокам (KillAura, Triggerbot),
+                                автоматическое выращивание/сбор ресурсов (AutoFarm), подсветка мобов сквозь стены (ESP).
+                            </p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Запрещённые модификации</h4>
+                            <p><strong>Пояснение:</strong> Конкретный список программ и модов, публикуемый
+                                администрацией.
+                                Даже если мод не является читом в чистом виде, он может попасть в список, если нарушает
+                                баланс или даёт критическое преимущество.</p>
+                            <p><strong>Примеры:</strong> Мини-карта с показом игроков (Radar), авто-перекладка предметов
+                                (Inventory Tweaks), автоматическое перестроение моста (Scaffold Walk).</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Текстуры/Ресурс-паки с преимуществом</h4>
+                            <p><strong>Пояснение:</strong> Изменение графических файлов игры с целью облегчения игрового
+                                процесса.</p>
+                            <p><strong>Примеры:</strong> X-Ray-текстуры (для нахождения руды), текстуры с увеличенной
+                                моделью моба, текстуры без тумана (Fog) или листвы для увеличения дальности обзора.</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Стороннее ПО</h4>
+                            <p><strong>Пояснение:</strong> Любая программа, работающая параллельно с Minecraft и
+                                влияющая на
+                                геймплей.</p>
+                            <p><strong>Примеры:</strong> Макросы на мышках/клавиатурах (авто-кликер, авто-крафт),
+                                программы
+                                для снижения пинга (Lag Switch), скрипты AutoHotkey.</p>
+                        </div>
+                    </div>
+
+                    <div class="glossary-category">
+                        <h2>2. Игровые взаимодействия и нарушения</h2>
+
+                        <div class="glossary-term">
+                            <h4>Гриф (Гриферство)</h4>
+                            <p><strong>Пояснение:</strong> Намеренное причинение вреда чужой собственности без согласия
+                                владельца. Это включает разрушение, поджог и кражу.</p>
+                            <p><strong>Примеры:</strong> Разрушение построек, опустошение сундуков, кража урожая,
+                                использование чужих механизмов без разрешения.</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Личные постройки</h4>
+                            <p><strong>Пояснение:</strong> Объект в мире, созданный и принадлежащий одному конкретному
+                                игроку. Границы должны быть очевидны (забор, стена, табличка). Неприкосновенны без
+                                разрешения владельца.</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Коллективные постройки</h4>
+                            <p><strong>Пояснение:</strong> Проекты, созданные группой игроков или для всего сервера
+                                (дороги,
+                                общественные фермы, спавн-зона, магазинный район). Приравнены к общественному достоянию.
+                            </p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>PvP (Player versus Player)</h4>
+                            <p><strong>Пояснение:</strong> Любое сражение между игроками. Разрешено только по обоюдному
+                                согласию, подтверждённому до начала боя. Нападение без согласия — серьёзное нарушение.
+                            </p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Самозащита</h4>
+                            <p><strong>Пояснение:</strong> Действия, направленные на защиту своей жизни, имущества или
+                                территории от уже начавшегося нападения. Не является нарушением правила о PvP, даже если
+                                агрессор будет убит.</p>
+                        </div>
+                    </div>
+
+                    <div class="glossary-category">
+                        <h2>3. Эксплуатация ошибок</h2>
+
+                        <div class="glossary-term">
+                            <h4>Баг (Ошибка, Глюк)</h4>
+                            <p><strong>Пояснение:</strong> Непреднамеренная ошибка в коде, приводящая к нестандартному
+                                поведению.</p>
+                            <p><strong>Примеры:</strong> Возможность застрять в блоке, получить бесконечные ресурсы,
+                                "упасть" сквозь мир.</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Дюп (Дублирование, Duping)</h4>
+                            <p><strong>Пояснение:</strong> Самый опасный вид бага, позволяющий создавать копии
+                                предметов.
+                                Жёстко преследуется, обычно ведёт к длительному бану.</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Уязвимость</h4>
+                            <p><strong>Пояснение:</strong> Слабое место в защите или логике, которое можно использовать
+                                для
+                                получения выгоды.</p>
+                            <p><strong>Примеры:</strong> Уязвимость в плагине экономики, возможность "сломать" защиту
+                                чужого
+                                региона.</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Лаг-машина</h4>
+                            <p><strong>Пояснение:</strong> Намеренно созданная конструкция, единственная цель которой —
+                                создавать чрезмерную нагрузку на сервер.</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Энтити (Сущности)</h4>
+                            <p><strong>Пояснение:</strong> Все динамические объекты в мире (игроки, мобы, животные,
+                                вагонетки, лодки). Наличие более 50 энтити в одном чанке считается созданием лагов и
+                                наказывается.</p>
+                        </div>
+                    </div>
+
+                    <div class="glossary-category">
+                        <h2>4. Аккаунты и безопасность</h2>
+
+                        <div class="glossary-term">
+                            <h4>Реальные деньги (RMT)</h4>
+                            <p><strong>Пояснение:</strong> Любая сделка, где внутриигровые ценности обмениваются на
+                                настоящие деньги. Строго запрещено.</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Несанкционированный доступ</h4>
+                            <p><strong>Пояснение:</strong> Любая попытка войти на сервер под чужим аккаунтом без
+                                разрешения.
+                                Приравнивается к взлому.</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Альт-аккаунт / Мультиаккаунт</h4>
+                            <p><strong>Пояснение:</strong> Использование одним игроком более одного аккаунта на сервере.
+                                Запрещено для предотвращения обхода наказаний и нечестного накопления ресурсов.</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>"Грязные" вещи</h4>
+                            <p><strong>Пояснение:</strong> Получение, хранение или передача предметов, если известно,
+                                что
+                                они были получены нечестным путём (через читы, дюп, кражу).</p>
+                        </div>
+                    </div>
+
+                    <div class="glossary-category">
+                        <h2>5. Коммуникация и поведение</h2>
+
+                        <div class="glossary-term">
+                            <h4>Завуалированная форма / Пассивная агрессия</h4>
+                            <p><strong>Пояснение:</strong> Выражение оскорблений через намёки, "шутки", сарказм с целью
+                                задеть другого.</p>
+                            <p><strong>Пример:</strong> "Ну конечно, ты как всегда всё сделал гениально"</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Доксинг (Doxxing)</h4>
+                            <p><strong>Пояснение:</strong> Публикация личных данных человека (ФИО, адрес, телефон, фото)
+                                в
+                                публичном пространстве без согласия. Уголовно наказуемо. Ведёт к немедленному и
+                                бесповоротному бану.</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Ложь администрации</h4>
+                            <p><strong>Пояснение:</strong> Предоставление администратору заведомо ложной информации,
+                                поддельных скриншотов при рассмотрении жалобы.</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Обход банов и мутов</h4>
+                            <p><strong>Пояснение:</strong> Использование альт-аккаунта или VPN после блокировки
+                                основного
+                                аккаунта.</p>
+                        </div>
+                    </div>
+
+                    <div class="glossary-category">
+                        <h2>6. Правила Discord</h2>
+
+                        <div class="glossary-term">
+                            <h4>Оффтоп (Offtopic)</h4>
+                            <p><strong>Пояснение:</strong> Обсуждение темы, не соответствующей предназначению канала.
+                            </p>
+                            <p><strong>Пример:</strong> Обсуждение нового сериала в канале #техподдержка</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Флуд</h4>
+                            <p><strong>Пояснение:</strong> Отправка большого количества однотипных, коротких или
+                                бессмысленных сообщений, затрудняющих чтение чата.</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Фейк (Фейковое объявление)</h4>
+                            <p><strong>Пояснение:</strong> Создание ложных, сенсационных новостей с целью вызвать панику
+                                или
+                                насмешки.</p>
+                            <p><strong>Примеры:</strong> "Внимание! Вайп завтра!", "Админ уходит! Раздача админки!"</p>
+                        </div>
+                    </div>
+
+                    <div class="glossary-category">
+                        <h2>7. Правила Minecraft (чат и действия)</h2>
+
+                        <div class="glossary-term">
+                            <h4>Флуд системными сообщениями</h4>
+                            <p><strong>Пояснение:</strong> Намеренное злоупотребление игровыми механизмами для засорения
+                                чата.</p>
+                            <p><strong>Примеры:</strong> Быстрое подключение/отключение от сервера, спам командами,
+                                намеренное создание множества уведомлений о смерти.</p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Провокационные массовые убийства</h4>
+                            <p><strong>Пояснение:</strong> Многократное (3 и более раз) убийство одного и того же
+                                игрока,
+                                который не может дать отпор. Цель — не PvP, а вызов спама в чат и провокация на
+                                нарушение.
+                            </p>
+                        </div>
+
+                        <div class="glossary-term">
+                            <h4>Засорение игрового пространства</h4>
+                            <p><strong>Пояснение:</strong> Создание объектов, не несущих игровой ценности, служащих
+                                только
+                                для вандализма или мусора.</p>
+                            <p><strong>Примеры:</strong> "Столбы" из грязи, разбрасывание табличек, создание "свалок",
+                                спам
+                                в локальный чат.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Футер -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4>EmbroMine</h4>
+                        <p>Minecraft сервер для спонсоров</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Информация</h4>
+                        <a href="rules-overview.html">Обзор</a>
+                        <a href="rules-glossary.html">Глоссарий</a>
+                        <a href="rules-guide.html">Инструкция</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Поддержка</h4>
+                        <a href="rules-admin.html">Администрация</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 EmbroMine. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+        <script src="script.js"></script>
+</body>
+
+</html>
