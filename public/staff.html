@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Личный кабинет - EmbroMine</title>
+    <title>Администрация - EmbroMine</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -87,7 +87,7 @@
 
                         <a href="guides.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Гайды</a>
                         <a href="map.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Карта</a>
-                        <a href="staff.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Админы</a>
+                        <a href="staff.html" class="text-purple-soft hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Админы</a>
                         <a href="support.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Помощь</a>
 
                         <a href="dashboard.html" id="dashboard-link" class="text-purple-soft hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium" style="display: none;">Профиль</a>
@@ -153,118 +153,176 @@
     </nav>
 
     <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <h1 class="text-3xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-white to-purple-soft bg-clip-text text-transparent">
-                Личный кабинет
-            </h1>
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
+                    Администрация
+                </h1>
+                <p class="text-xl text-purple-soft/60">Команда, которая делает EmbroMine лучше</p>
+            </div>
 
-            <div class="grid md:grid-cols-3 gap-8 mb-8">
-                <!-- Profile Card -->
-                <div class="dashboard-card">
-                    <h2 class="text-xl font-bold mb-6 text-purple-soft">Ваш профиль</h2>
-
-                    <div class="space-y-4">
-                        <div>
-                            <p class="text-purple-soft/50 text-sm mb-1">Имя</p>
-                            <p class="text-white font-semibold" id="profile-username">Загрузка...</p>
+            <!-- Основатели -->
+            <div class="mb-12">
+                <h2 class="text-2xl font-bold mb-6 text-center text-purple-soft">👑 Основатели</h2>
+                <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                    <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5 text-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-3xl">👤</span>
                         </div>
-
-                        <div>
-                            <p class="text-purple-soft/50 text-sm mb-1">Email</p>
-                            <p class="text-white font-semibold" id="profile-email">Загрузка...</p>
-                        </div>
-
-                        <div>
-                            <p class="text-purple-soft/50 text-sm mb-1">Статус</p>
-                            <p class="inline-block px-3 py-1 bg-purple-deep/20 text-purple-soft rounded-full text-sm font-semibold">
-                                Спонсор</p>
-                        </div>
+                        <h3 class="text-xl font-bold mb-1">Embro</h3>
+                        <p class="text-yellow-400 text-sm mb-2">Главный администратор</p>
+                        <p class="text-purple-soft/60 text-sm">Основатель проекта, отвечает за развитие сервера</p>
                     </div>
-                </div>
-
-                <!-- Server Status -->
-                <div class="dashboard-card">
-                    <h2 class="text-xl font-bold mb-6 text-purple-soft">📊 Статус сервера</h2>
-
-                    <div class="space-y-4">
-                        <div>
-                            <p class="text-purple-soft/50 text-sm mb-1">Адрес</p>
-                            <p class="text-white font-mono">play.embromine.ru</p>
+                    <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5 text-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-3xl">👤</span>
                         </div>
-
-                        <div>
-                            <p class="text-purple-soft/50 text-sm mb-1">Игроки онлайн</p>
-                            <p class="text-2xl font-bold text-purple-neon" id="player-count">23</p>
-                        </div>
-
-                        <div>
-                            <p class="text-purple-soft/50 text-sm mb-1">Ping</p>
-                            <p class="text-white font-mono" id="ping">12 ms</p>
-                        </div>
-
-                        <button onclick="copyIP()"
-                            class="w-full bg-purple-deep hover:bg-purple-royal text-white font-bold py-2 px-4 rounded-lg transition-all mt-4">
-                            Скопировать IP
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div class="dashboard-card">
-                    <h2 class="text-xl font-bold mb-6 text-purple-soft">🔗 Быстрые ссылки</h2>
-
-                    <div class="space-y-3">
-                        <a href="index.html"
-                            class="block w-full p-3 bg-purple-soft/5 hover:bg-purple-soft/10 border border-purple-soft/10 rounded-lg transition-all text-center text-purple-soft/70 hover:text-purple-soft">
-                            Главная страница
-                        </a>
-
-                        <a href="rules.html"
-                            class="block w-full p-3 bg-purple-soft/5 hover:bg-purple-soft/10 border border-purple-soft/10 rounded-lg transition-all text-center text-purple-soft/70 hover:text-purple-soft">
-                            Правила сервера
-                        </a>
-
-                        <a href="guides.html"
-                            class="block w-full p-3 bg-purple-soft/5 hover:bg-purple-soft/10 border border-purple-soft/10 rounded-lg transition-all text-center text-purple-soft/70 hover:text-purple-soft">
-                            Гайды
-                        </a>
-
-                        <a href="map.html"
-                            class="block w-full p-3 bg-purple-soft/5 hover:bg-purple-soft/10 border border-purple-soft/10 rounded-lg transition-all text-center text-purple-soft/70 hover:text-purple-soft">
-                            Онлайн карта
-                        </a>
-
-                        <a href="https://discord.gg/"
-                            class="block w-full p-3 bg-[#5865F2]/20 hover:bg-[#5865F2]/30 border border-[#5865F2]/30 rounded-lg transition-all text-center text-blue-300 hover:text-blue-200">
-                            Discord сервер
-                        </a>
+                        <h3 class="text-xl font-bold mb-1">CoFounder</h3>
+                        <p class="text-yellow-400 text-sm mb-2">Технический директор</p>
+                        <p class="text-purple-soft/60 text-sm">Отвечает за техническую часть и разработку</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Info Box -->
-            <div class="dashboard-card mb-8">
-                <h2 class="text-2xl font-bold mb-4">🎮 Добро пожаловать на EmbroMine!</h2>
-                <p class="text-purple-soft/70 mb-4">
-                    Вы являетесь спонсором проекта EmbroMine. Это означает, что вы получили доступ к эксклюзивному
-                    Minecraft серверу с уникальным контентом и активным сообществом.
-                </p>
-                <div class="text-purple-soft/50 text-sm space-y-1">
-                    <p><strong>📦 Версия сервера:</strong> 1.20.1</p>
-                    <p><strong>🎮 Режимы:</strong> Survival, Creative, Minigames, Event Arena</p>
-                    <p><strong>💾 Бэкапы:</strong> Ежедневные (00:00 UTC)</p>
-                    <p><strong>🛡️ Защита:</strong> WorldGuard, AntiCheat, 24/7 Модерация</p>
-                    <p><strong>⚡ Оптимизация:</strong> TPS 20, Timings профайл</p>
+            <!-- Администраторы -->
+            <div class="mb-12">
+                <h2 class="text-2xl font-bold mb-6 text-center text-red-400">🔴 Администраторы</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5 text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-2xl">👤</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-1">Admin1</h3>
+                        <p class="text-red-400 text-sm mb-2">Администратор</p>
+                        <p class="text-purple-soft/60 text-sm">Модерация, ивенты</p>
+                    </div>
+                    <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5 text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-2xl">👤</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-1">Admin2</h3>
+                        <p class="text-red-400 text-sm mb-2">Администратор</p>
+                        <p class="text-purple-soft/60 text-sm">Техническая поддержка</p>
+                    </div>
+                    <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5 text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-2xl">👤</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-1">Admin3</h3>
+                        <p class="text-red-400 text-sm mb-2">Администратор</p>
+                        <p class="text-purple-soft/60 text-sm">Разработка плагинов</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Admin Panel Link -->
-            <div class="dashboard-card" id="admin-section" style="display: none;">
-                <h2 class="text-xl font-bold mb-4 text-purple-soft">👑 Админ-панель</h2>
-                <a href="admin-panel.html"
-                    class="inline-block px-6 py-3 bg-gradient-to-r from-purple-deep to-purple-neon hover:from-purple-royal hover:to-purple-soft text-white font-bold rounded-lg transition-all transform hover:scale-105">
-                    Перейти в админ-панель
-                </a>
+            <!-- Модераторы -->
+            <div class="mb-12">
+                <h2 class="text-2xl font-bold mb-6 text-center text-blue-400">🔵 Модераторы</h2>
+                <div class="grid md:grid-cols-4 gap-4">
+                    <div class="bg-void-dark p-4 rounded-xl border border-purple-soft/5 text-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+                            <span class="text-xl">👤</span>
+                        </div>
+                        <h3 class="font-bold mb-1">Mod1</h3>
+                        <p class="text-blue-400 text-sm">Модератор</p>
+                    </div>
+                    <div class="bg-void-dark p-4 rounded-xl border border-purple-soft/5 text-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+                            <span class="text-xl">👤</span>
+                        </div>
+                        <h3 class="font-bold mb-1">Mod2</h3>
+                        <p class="text-blue-400 text-sm">Модератор</p>
+                    </div>
+                    <div class="bg-void-dark p-4 rounded-xl border border-purple-soft/5 text-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+                            <span class="text-xl">👤</span>
+                        </div>
+                        <h3 class="font-bold mb-1">Mod3</h3>
+                        <p class="text-blue-400 text-sm">Модератор</p>
+                    </div>
+                    <div class="bg-void-dark p-4 rounded-xl border border-purple-soft/5 text-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+                            <span class="text-xl">👤</span>
+                        </div>
+                        <h3 class="font-bold mb-1">Mod4</h3>
+                        <p class="text-blue-400 text-sm">Модератор</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Хелперы -->
+            <div class="mb-12">
+                <h2 class="text-2xl font-bold mb-6 text-center text-green-400">🟢 Хелперы</h2>
+                <div class="grid md:grid-cols-4 gap-4">
+                    <div class="bg-void-dark p-4 rounded-xl border border-purple-soft/5 text-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+                            <span class="text-xl">👤</span>
+                        </div>
+                        <h3 class="font-bold mb-1">Helper1</h3>
+                        <p class="text-green-400 text-sm">Хелпер</p>
+                    </div>
+                    <div class="bg-void-dark p-4 rounded-xl border border-purple-soft/5 text-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+                            <span class="text-xl">👤</span>
+                        </div>
+                        <h3 class="font-bold mb-1">Helper2</h3>
+                        <p class="text-green-400 text-sm">Хелпер</p>
+                    </div>
+                    <div class="bg-void-dark p-4 rounded-xl border border-purple-soft/5 text-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+                            <span class="text-xl">👤</span>
+                        </div>
+                        <h3 class="font-bold mb-1">Helper3</h3>
+                        <p class="text-green-400 text-sm">Хелпер</p>
+                    </div>
+                    <div class="bg-void-dark p-4 rounded-xl border border-purple-soft/5 text-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+                            <span class="text-xl">👤</span>
+                        </div>
+                        <h3 class="font-bold mb-1">Helper4</h3>
+                        <p class="text-green-400 text-sm">Хелпер</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Контакты -->
+            <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">📞 Связаться с администрацией</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-deep/10 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-purple-royal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Email</p>
+                            <p class="text-purple-soft/60 text-sm">support@embromine.ru</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-[#5865F2]/10 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-[#5865F2]" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Discord</p>
+                            <p class="text-purple-soft/60 text-sm">discord.gg/embromine</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Telegram</p>
+                            <p class="text-purple-soft/60 text-sm">@embromine_support</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

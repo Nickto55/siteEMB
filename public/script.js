@@ -7,7 +7,7 @@ function createParticles() {
 
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
-        particle.className = 'absolute w-1 h-1 bg-mc-green/20 rounded-full pointer-events-none';
+        particle.className = 'absolute w-1 h-1 bg-purple-royal/20 rounded-full pointer-events-none';
 
         // Random positioning and animation
         const left = Math.random() * 100;
@@ -29,6 +29,18 @@ function createParticles() {
 function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
     if (menu) menu.classList.toggle('hidden');
+}
+
+// Mobile submenu toggle
+function toggleMobileSubmenu(submenuId, arrowId) {
+    const submenu = document.getElementById(submenuId);
+    const arrow = document.getElementById(arrowId);
+    if (submenu) {
+        submenu.classList.toggle('hidden');
+        if (arrow) {
+            arrow.textContent = submenu.classList.contains('hidden') ? '▶' : '▼';
+        }
+    }
 }
 
 // Rules mobile menu toggle
@@ -86,7 +98,7 @@ function showToast(message) {
     if (!toast) {
         toast = document.createElement('div');
         toast.id = 'global-toast';
-        toast.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 bg-[#5D8C30] text-white px-6 py-3 rounded-lg shadow-2xl z-50 transition-all duration-300 opacity-0 translate-y-[-20px] font-medium flex items-center gap-2';
+        toast.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 bg-[#6D28D9] text-white px-6 py-3 rounded-lg shadow-2xl z-50 transition-all duration-300 opacity-0 translate-y-[-20px] font-medium flex items-center gap-2';
         document.body.appendChild(toast);
     }
 
@@ -116,7 +128,7 @@ function updatePlayerCount() {
     // Animate number change
     if (newCount !== current) {
         countElement.style.transform = 'scale(1.2)';
-        countElement.style.color = newCount > current ? '#7EB342' : '#B02E26';
+        countElement.style.color = newCount > current ? '#A855F7' : '#B02E26';
 
         setTimeout(() => {
             countElement.textContent = newCount;
@@ -141,11 +153,11 @@ function handleScroll() {
     if (!navbar) return;
 
     if (window.scrollY > 50) {
-        navbar.classList.add('shadow-lg', 'bg-[#0f0f0f]/95');
-        navbar.classList.remove('bg-[#0f0f0f]/80');
+        navbar.classList.add('shadow-lg', 'bg-[#0a0810]/95');
+        navbar.classList.remove('bg-[#0a0810]/80');
     } else {
-        navbar.classList.remove('shadow-lg', 'bg-[#0f0f0f]/95');
-        navbar.classList.add('bg-[#0f0f0f]/80');
+        navbar.classList.remove('shadow-lg', 'bg-[#0a0810]/95');
+        navbar.classList.add('bg-[#0a0810]/80');
     }
 }
 
@@ -377,7 +389,7 @@ window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
         // Close mobile menu on resize to desktop
-        if (window.innerWidth >= 768) {
+        if (window.innerWidth >= 1024) {
             const menu = document.getElementById('mobile-menu');
             if (menu) menu.classList.add('hidden');
         }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Правила сервера - EmbroMine</title>
+    <title>Гайды - EmbroMine</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -71,12 +71,12 @@
 
                         <!-- Правила Dropdown -->
                         <div class="relative group">
-                            <a href="#" class="text-purple-soft hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                            <a href="#" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
                                 Правила
                                 <span class="ml-1 text-xs">▼</span>
                             </a>
                             <div class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
-                                <a href="rules.html" class="text-purple-soft block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Обзор правил</a>
+                                <a href="rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Обзор правил</a>
                                 <a href="game-rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Игровые правила</a>
                                 <a href="chat-rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Правила общения</a>
                                 <a href="banned-mods.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Запрещенные моды</a>
@@ -85,7 +85,7 @@
                             </div>
                         </div>
 
-                        <a href="guides.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Гайды</a>
+                        <a href="guides.html" class="text-purple-soft hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Гайды</a>
                         <a href="map.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Карта</a>
                         <a href="staff.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Админы</a>
                         <a href="support.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Помощь</a>
@@ -153,74 +153,94 @@
     </nav>
 
     <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
-                    Правила сервера
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
+                    Гайды
                 </h1>
-                <p class="text-xl text-purple-soft/60">Ознакомьтесь с правилами перед игрой</p>
+                <p class="text-xl text-purple-soft/60">Полезные руководства для игроков</p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                <a href="game-rules.html" class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">🎮 Игровые правила</h3>
-                        <span class="text-2xl">→</span>
-                    </div>
-                    <p class="text-purple-soft/60 text-sm">Правила поведения в игре</p>
-                </a>
-                <a href="chat-rules.html" class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">💬 Правила общения</h3>
-                        <span class="text-2xl">→</span>
-                    </div>
-                    <p class="text-purple-soft/60 text-sm">Нормы поведения в чате</p>
-                </a>
-                <a href="banned-mods.html" class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">🚫 Запрещенные моды</h3>
-                        <span class="text-2xl">→</span>
-                    </div>
-                    <p class="text-purple-soft/60 text-sm">Список запрещенных модификаций</p>
-                </a>
-                <a href="punishments.html" class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">⚖️ Система наказаний</h3>
-                        <span class="text-2xl">→</span>
-                    </div>
-                    <p class="text-purple-soft/60 text-sm">Как работает модерация</p>
-                </a>
-                <a href="rules-glossary.html" class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">📚 Глоссарий</h3>
-                        <span class="text-2xl">→</span>
-                    </div>
-                    <p class="text-purple-soft/60 text-sm">Словарь терминов</p>
-                </a>
-                <a href="principles.html" class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">🌟 Базовые принципы</h3>
-                        <span class="text-2xl">→</span>
-                    </div>
-                    <p class="text-purple-soft/60 text-sm">Философия сервера</p>
-                </a>
-            </div>
-
-            <div class="bg-yellow-500/10 border border-yellow-500/30 p-6 rounded-2xl">
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="how-to-join.html" class="group bg-void-dark p-6 rounded-2xl border border-purple-soft/5 hover:border-purple-deep/30 transition-all duration-300 hover:transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-purple-deep/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-deep/20 transition-colors">
+                        <svg class="w-6 h-6 text-purple-royal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
                         </svg>
                     </div>
-                    <div>
-                        <h3 class="font-bold text-yellow-400 mb-2">Важно!</h3>
-                        <p class="text-purple-soft/70 text-sm leading-relaxed">
-                            Играя на сервере EmbroMine, вы автоматически соглашаетесь со всеми правилами. 
-                            Незнание правил не освобождает от ответственности. Администрация оставляет за собой право 
-                            изменять правила в любое время без предварительного уведомления.
-                        </p>
+                    <h3 class="text-lg font-bold mb-2 group-hover:text-purple-soft transition-colors">Как подключиться</h3>
+                    <p class="text-purple-soft/60 text-sm">Пошаговая инструкция по входу на сервер</p>
+                </a>
+
+                <div class="group bg-void-dark p-6 rounded-2xl border border-purple-soft/5 hover:border-cyan-400/30 transition-all duration-300 hover:transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-cyan-400/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-cyan-400/20 transition-colors">
+                        <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/>
+                        </svg>
                     </div>
+                    <h3 class="text-lg font-bold mb-2 group-hover:text-cyan-400 transition-colors">Первые шаги</h3>
+                    <p class="text-purple-soft/60 text-sm">Что делать после входа на сервер</p>
+                </div>
+
+                <div class="group bg-void-dark p-6 rounded-2xl border border-purple-soft/5 hover:border-yellow-400/30 transition-all duration-300 hover:transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-yellow-400/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-yellow-400/20 transition-colors">
+                        <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 group-hover:text-yellow-400 transition-colors">Экономика</h3>
+                    <p class="text-purple-soft/60 text-sm">Как зарабатывать и торговать</p>
+                </div>
+
+                <div class="group bg-void-dark p-6 rounded-2xl border border-purple-soft/5 hover:border-purple-400/30 transition-all duration-300 hover:transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-purple-400/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-400/20 transition-colors">
+                        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 group-hover:text-purple-400 transition-colors">Создание клана</h3>
+                    <p class="text-purple-soft/60 text-sm">Как создать и развивать клан</p>
+                </div>
+
+                <div class="group bg-void-dark p-6 rounded-2xl border border-purple-soft/5 hover:border-pink-400/30 transition-all duration-300 hover:transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-pink-400/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-pink-400/20 transition-colors">
+                        <svg class="w-6 h-6 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 group-hover:text-pink-400 transition-colors">Приват территории</h3>
+                    <p class="text-purple-soft/60 text-sm">Как защитить свои постройки</p>
+                </div>
+
+                <div class="group bg-void-dark p-6 rounded-2xl border border-purple-soft/5 hover:border-blue-400/30 transition-all duration-300 hover:transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-blue-400/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-400/20 transition-colors">
+                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 group-hover:text-blue-400 transition-colors">PvP Гайд</h3>
+                    <p class="text-purple-soft/60 text-sm">Советы для PvP сражений</p>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                <h2 class="text-2xl font-bold mb-4 text-purple-soft">Нужна помощь?</h2>
+                <p class="text-purple-soft/70 mb-4">
+                    Если вы не нашли нужный гайд или у вас остались вопросы, обратитесь в нашу поддержку:
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="support.html" class="inline-flex items-center gap-2 px-6 py-3 bg-purple-deep hover:bg-purple-royal text-white font-semibold rounded-xl transition-all">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                        Техническая помощь
+                    </a>
+                    <a href="https://discord.gg/" class="inline-flex items-center gap-2 px-6 py-3 bg-[#5865F2]/20 hover:bg-[#5865F2]/30 border border-[#5865F2]/30 text-blue-300 hover:text-blue-200 font-semibold rounded-xl transition-all">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/>
+                        </svg>
+                        Discord
+                    </a>
                 </div>
             </div>
         </div>
@@ -228,38 +248,6 @@
 
     <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div class="col-span-2">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-8 h-8 bg-gradient-to-br from-purple-deep to-purple-neon rounded-lg flex items-center justify-center">
-                            <span class="text-white text-lg font-bold">E</span>
-                        </div>
-                        <span class="text-lg font-bold">EmbroMine</span>
-                    </div>
-                    <p class="text-purple-soft/50 text-sm leading-relaxed max-w-xs">
-                        Приватный Minecraft сервер для спонсоров проекта.
-                    </p>
-                </div>
-
-                <div>
-                    <h4 class="font-bold mb-4 text-sm uppercase tracking-wider text-purple-soft/60">Правила</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="game-rules.html" class="text-purple-soft/50 hover:text-purple-soft transition-colors">Игровые правила</a></li>
-                        <li><a href="chat-rules.html" class="text-purple-soft/50 hover:text-purple-soft transition-colors">Правила общения</a></li>
-                        <li><a href="banned-mods.html" class="text-purple-soft/50 hover:text-purple-soft transition-colors">Запрещенные моды</a></li>
-                        <li><a href="punishments.html" class="text-purple-soft/50 hover:text-purple-soft transition-colors">Система наказаний</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-bold mb-4 text-sm uppercase tracking-wider text-purple-soft/60">Контакты</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li class="text-purple-soft/50">support@embromine.ru</li>
-                        <li class="text-purple-soft/50">24/7 Поддержка</li>
-                    </ul>
-                </div>
-            </div>
-
             <div class="border-t border-purple-soft/10 pt-8">
                 <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.</p>
             </div>

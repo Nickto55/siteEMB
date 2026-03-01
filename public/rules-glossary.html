@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="ru" class="scroll-smooth">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Глоссарий - EmbroMine</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        mc: {
-                            dark: '#1a1a1a',
-                            darker: '#0f0f0f',
-                            green: '#5D8C30',
-                            greenLight: '#7EB342',
+                        void: {
+                            black: '#0a0810',
+                            dark: '#120a1a',
+                        },
+                        purple: {
+                            deep: '#6D28D9',
+                            royal: '#8B5CF6',
+                            neon: '#A855F7',
+                            soft: '#C4B5FD',
+                        },
+                        magenta: {
+                            glow: '#D946EF',
                         }
                     },
                     fontFamily: {
@@ -29,569 +34,215 @@
         }
     </script>
 </head>
-
-<body class="bg-mc-darker text-white font-sans antialiased overflow-x-hidden">
-    <!-- Floating Particles Background -->
+<body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
-
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-mc-darker/80 backdrop-blur-md border-b border-white/10 transition-all duration-300"
-        id="navbar">
+    <nav class="fixed w-full z-50 bg-void-black/80 backdrop-blur-md border-b border-purple-soft/10 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
-                    <div
-                        class="w-10 h-10 bg-mc-green rounded-lg flex items-center justify-center shadow-lg shadow-mc-green/20">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-deep to-purple-neon rounded-lg flex items-center justify-center shadow-lg shadow-purple-deep/20">
                         <span class="text-white text-lg font-bold">E</span>
                     </div>
-                    <a href="index.html"
-                        class="text-xl font-bold tracking-tight hover:text-mc-greenLight transition-colors">
-                        Embro<span class="text-mc-greenLight">Mine</span>
+                    <a href="index.html" class="text-xl font-bold tracking-tight hover:text-purple-soft transition-colors">
+                        Embro<span class="text-purple-neon">Mine</span>
                     </a>
                 </div>
 
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="index.html"
-                            class="hover:text-mc-greenLight transition-colors px-3 py-2 rounded-md text-sm font-medium">Главная</a>
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium text-purple-soft/70">Главная</a>
+
+                        <!-- О сервере Dropdown -->
                         <div class="relative group">
-                            <a href="#"
-                                class="hover:text-mc-greenLight transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
-                                Меню
+                            <a href="#" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                                О сервере
                                 <span class="ml-1 text-xs">▼</span>
                             </a>
-                            <div
-                                class="absolute left-0 mt-0 w-48 bg-mc-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                                <a href="index.html#about"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10 first:rounded-t-lg">О
-                                    сервере</a>
-                                <a href="index.html#features"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10">Режимы</a>
-                                <a href="rules-overview.html"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10">Правила</a>
-                                <a href="login.html" id="login-link"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10 last:rounded-b-lg">Вход</a>
+                            <div class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
+                                <a href="description.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Описание</a>
+                                <a href="mechanics.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Механики сервера</a>
+                                <a href="roleplay.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Ролевые элементы</a>
+                                <a href="season-concept.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Концепция сезона</a>
+                                <a href="principles.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 last:rounded-b-lg">Базовые принципы</a>
                             </div>
                         </div>
-                        <a href="dashboard.html" id="dashboard-link"
-                            class="text-mc-greenLight hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium"
-                            style="display: none;">Профиль</a>
-                        <button onclick="handleLogout()" id="logout-btn"
-                            class="text-mc-greenLight hover:text-red-400 transition-colors px-3 py-2 rounded-md text-sm font-medium"
-                            style="display: none;">Выход</button>
+
+                        <!-- Правила Dropdown -->
+                        <div class="relative group">
+                            <a href="#" class="text-purple-soft hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                                Правила
+                                <span class="ml-1 text-xs">▼</span>
+                            </a>
+                            <div class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
+                                <a href="rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Обзор правил</a>
+                                <a href="game-rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Игровые правила</a>
+                                <a href="chat-rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Правила общения</a>
+                                <a href="banned-mods.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Запрещенные моды</a>
+                                <a href="punishments.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Система наказаний</a>
+                                <a href="rules-glossary.html" class="text-purple-soft block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 last:rounded-b-lg">Глоссарий</a>
+                            </div>
+                        </div>
+
+                        <a href="guides.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Гайды</a>
+                        <a href="map.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Карта</a>
+                        <a href="staff.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Админы</a>
+                        <a href="support.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Помощь</a>
+
+                        <a href="dashboard.html" id="dashboard-link" class="text-purple-soft hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium" style="display: none;">Профиль</a>
+                        <a href="login.html" id="login-link" class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium text-purple-soft/70">Вход</a>
+                        <button onclick="handleLogout()" id="logout-btn" class="text-purple-soft hover:text-magenta-glow transition-colors px-3 py-2 rounded-md text-sm font-medium" style="display: none;">Выход</button>
                     </div>
                 </div>
 
-                <div class="md:hidden">
-                    <button onclick="toggleMobileMenu()" class="text-gray-300 hover:text-white p-2">
-                        <span>MENU</span>
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-purple-soft/70 hover:text-purple-soft p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
                     </button>
                 </div>
             </div>
         </div>
 
-        <div class="hidden md:hidden bg-mc-dark border-t border-white/10" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="index.html"
-                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Главная</a>
-                <a href="index.html#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">О
-                    сервере</a>
-                <a href="index.html#features"
-                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Режимы</a>
-                <a href="rules-overview.html"
-                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Правила</a>
-                <a href="login.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Вход</a>
+        <!-- Mobile Menu -->
+        <div class="hidden lg:hidden bg-void-dark border-t border-purple-soft/10" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Главная</a>
+
+                <!-- О сервере Mobile -->
+                <div class="px-3 py-2">
+                    <div onclick="toggleMobileSubmenu('server-submenu', 'server-arrow')" class="flex items-center justify-between cursor-pointer hover:bg-purple-deep/10 rounded-md p-2 text-purple-soft/70">
+                        <span>О сервере</span>
+                        <span id="server-arrow">▶</span>
+                    </div>
+                    <div id="server-submenu" class="hidden pl-4 space-y-1 mt-2">
+                        <a href="description.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Описание</a>
+                        <a href="mechanics.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Механики</a>
+                        <a href="roleplay.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Ролевые элементы</a>
+                        <a href="season-concept.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Концепция сезона</a>
+                        <a href="principles.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Базовые принципы</a>
+                    </div>
+                </div>
+
+                <!-- Правила Mobile -->
+                <div class="px-3 py-2">
+                    <div onclick="toggleMobileSubmenu('rules-submenu', 'rules-arrow')" class="flex items-center justify-between cursor-pointer hover:bg-purple-deep/10 rounded-md p-2 text-purple-soft/70">
+                        <span>Правила</span>
+                        <span id="rules-arrow">▶</span>
+                    </div>
+                    <div id="rules-submenu" class="hidden pl-4 space-y-1 mt-2">
+                        <a href="rules.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Обзор</a>
+                        <a href="game-rules.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Игровые правила</a>
+                        <a href="chat-rules.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Правила общения</a>
+                        <a href="banned-mods.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Запрещенные моды</a>
+                        <a href="punishments.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Система наказаний</a>
+                        <a href="rules-glossary.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Глоссарий</a>
+                    </div>
+                </div>
+
+                <a href="guides.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Гайды</a>
+                <a href="map.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Карта</a>
+                <a href="staff.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Админы</a>
+                <a href="support.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Помощь</a>
+                <a href="login.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Вход</a>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <!-- Header -->
-            <div class="text-center mb-16">
-                <h1
-                    class="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-white via-mc-greenLight to-mc-green bg-clip-text text-transparent">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
                     Глоссарий
                 </h1>
-                <p class="text-xl text-gray-400">Словарь основных терминов и определений</p>
+                <p class="text-xl text-purple-soft/60">Словарь терминов и определений</p>
             </div>
 
-            <!-- Категория 1: Нечестная игра -->
-            <div class="mb-12">
-                <div class="bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
-                    <h2 class="text-3xl font-bold mb-6 text-red-500 flex items-center gap-3">
-                        <span class="bg-red-500/20 p-3 rounded-xl">⚠️</span>
-                        1. Нечестная игра и запрещённый софт
-                    </h2>
-                    <div class="space-y-4">
-                        <!-- Читы -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-red-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-red-400 mb-3">Читы (Чит-клиент, Чит-моды)</h4>
-                            <p class="text-gray-300 mb-2"><strong class="text-white">Пояснение:</strong> Любое стороннее
-                                программное обеспечение или модификация игры,
-                                дающие игроку несправедливое и не предусмотренное ванильной игрой преимущество. Это
-                                прямое
-                                нарушение принципа честной игры.</p>
-                            <p class="text-gray-400"><strong class="text-white">Примеры:</strong> Полёт (Fly), ускорение
-                                передвижения (Speed), проход сквозь
-                                блоки
-                                (NoClip, Phase), автоматическая атака по мобам/игрокам (KillAura, Triggerbot),
-                                автоматическое выращивание/сбор ресурсов (AutoFarm), подсветка мобов сквозь стены (ESP).
-                            </p>
-                        </div>
-
-                        <!-- Запрещённые модификации -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-red-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-red-400 mb-3">Запрещённые модификации</h4>
-                            <p class="text-gray-300 mb-2"><strong class="text-white">Пояснение:</strong> Конкретный
-                                список программ и модов, публикуемый
-                                администрацией.
-                                Даже если мод не является читом в чистом виде, он может попасть в список, если нарушает
-                                баланс или даёт критическое преимущество.</p>
-                            <p class="text-gray-400"><strong class="text-white">Примеры:</strong> Мини-карта с показом
-                                игроков (Radar), авто-перекладка предметов
-                                (Inventory Tweaks), автоматическое перестроение моста (Scaffold Walk).</p>
-                        </div>
-
-                        <!-- Текстуры -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-red-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-red-400 mb-3">Текстуры/Ресурс-паки с преимуществом
-                            </h4>
-                            <p class="text-gray-300 mb-2"><strong class="text-white">Пояснение:</strong> Изменение
-                                графических файлов игры с целью облегчения
-                                игрового
-                                процесса.</p>
-                            <p class="text-gray-400"><strong class="text-white">Примеры:</strong> X-Ray-текстуры (для
-                                нахождения руды), текстуры с увеличенной
-                                моделью моба, текстуры без тумана (Fog) или листвы для увеличения дальности обзора.</p>
-                        </div>
-
-                        <!-- Стороннее ПО -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-red-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-red-400 mb-3">Стороннее ПО</h4>
-                            <p class="text-gray-300 mb-2"><strong class="text-white">Пояснение:</strong> Любая
-                                программа, работающая параллельно с Minecraft и
-                                влияющая на
-                                геймплей.</p>
-                            <p class="text-gray-400"><strong class="text-white">Примеры:</strong> Макросы на
-                                мышках/клавиатурах (авто-кликер, авто-крафт),
-                                программы
-                                для снижения пинга (Lag Switch), скрипты AutoHotkey.</p>
-                        </div>
-                    </div>
+            <div class="space-y-6">
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Гриферство</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Разрушение чужих построек, убийство животных или питомцев других игроков без разрешения.
+                    </p>
                 </div>
-            </div>
 
-            <!-- Категория 2: Игровые взаимодействия -->
-            <div class="mb-12">
-                <div class="bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
-                    <h2 class="text-3xl font-bold mb-6 text-orange-500 flex items-center gap-3">
-                        <span class="bg-orange-500/20 p-3 rounded-xl">⚔️</span>
-                        2. Игровые взаимодействия и нарушения
-                    </h2>
-                    <div class="space-y-4">
-                        <!-- Гриф -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-orange-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-orange-400 mb-3">Гриф (Гриферство)</h4>
-                            <p class="text-gray-300 mb-2"><strong class="text-white">Пояснение:</strong> Намеренное
-                                причинение вреда чужой собственности без
-                                согласия
-                                владельца. Это включает разрушение, поджог и кражу.</p>
-                            <p class="text-gray-400"><strong class="text-white">Примеры:</strong> Разрушение построек,
-                                опустошение сундуков, кража урожая,
-                                использование чужих механизмов без разрешения.</p>
-                        </div>
-
-                        <!-- Личные постройки -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-orange-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-orange-400 mb-3">Личные постройки</h4>
-                            <p class="text-gray-300"><strong class="text-white">Пояснение:</strong> Объект в мире,
-                                созданный и принадлежащий одному конкретному
-                                игроку. Границы должны быть очевидны (забор, стена, табличка). Неприкосновенны без
-                                разрешения владельца.</p>
-                        </div>
-
-                        <!-- Коллективные постройки -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-orange-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-orange-400 mb-3">Коллективные постройки</h4>
-                            <p class="text-gray-300"><strong class="text-white">Пояснение:</strong> Проекты, созданные
-                                группой игроков или для всего сервера
-                                (дороги,
-                                общественные фермы, спавн-зона, магазинный район). Приравнены к общественному достоянию.
-                            </p>
-                        </div>
-
-                        <!-- PvP -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-orange-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-orange-400 mb-3">PvP (Player versus Player)</h4>
-                            <p class="text-gray-300"><strong class="text-white">Пояснение:</strong> Любое сражение между
-                                игроками. Разрешено только по обоюдному
-                                согласию, подтверждённому до начала боя. Нападение без согласия — серьёзное нарушение.
-                            </p>
-                        </div>
-
-                        <!-- Самозащита -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-orange-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-orange-400 mb-3">Самозащита</h4>
-                            <p class="text-gray-300"><strong class="text-white">Пояснение:</strong> Действия,
-                                направленные на защиту своей жизни, имущества или
-                                территории от уже начавшегося нападения. Не является нарушением правила о PvP, даже если
-                                агрессор будет убит.</p>
-                        </div>
-                    </div>
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Чит (Cheat)</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Несанкционированное программное обеспечение, дающее игроку нечестное преимущество (X-Ray, Fly, SpeedHack и т.д.).
+                    </p>
                 </div>
-            </div>
 
-            <!-- Категория 3: Эксплуатация ошибок -->
-            <div class="mb-12">
-                <div class="bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
-                    <h2 class="text-3xl font-bold mb-6 text-purple-500 flex items-center gap-3">
-                        <span class="bg-purple-500/20 p-3 rounded-xl">🐛</span>
-                        3. Эксплуатация ошибок
-                    </h2>
-                    <div class="space-y-4">
-                        <!-- Баг -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-purple-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-purple-400 mb-3">Баг (Ошибка, Глюк)</h4>
-                            <p class="text-gray-300 mb-2"><strong class="text-white">Пояснение:</strong>
-                                Непреднамеренная ошибка в коде, приводящая к
-                                нестандартному
-                                поведению.</p>
-                            <p class="text-gray-400"><strong class="text-white">Примеры:</strong> Возможность застрять в
-                                блоке, получить бесконечные ресурсы,
-                                "упасть" сквозь мир.</p>
-                        </div>
-
-                        <!-- Дюп -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-purple-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-purple-400 mb-3">Дюп (Дублирование, Duping)</h4>
-                            <p class="text-gray-300"><strong class="text-white">Пояснение:</strong> Самый опасный вид
-                                бага, позволяющий создавать копии
-                                предметов.
-                                Жёстко преследуется, обычно ведёт к длительному бану.</p>
-                        </div>
-
-                        <!-- Уязвимость -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-purple-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-purple-400 mb-3">Уязвимость</h4>
-                            <p class="text-gray-300 mb-2"><strong class="text-white">Пояснение:</strong> Слабое место в
-                                защите или логике, которое можно
-                                использовать для
-                                получения выгоды.</p>
-                            <p class="text-gray-400"><strong class="text-white">Примеры:</strong> Уязвимость в плагине
-                                экономики, возможность "сломать" защиту
-                                чужого
-                                региона.</p>
-                        </div>
-
-                        <!-- Лаг-машина -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-purple-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-purple-400 mb-3">Лаг-машина</h4>
-                            <p class="text-gray-300"><strong class="text-white">Пояснение:</strong> Намеренно созданная
-                                конструкция, единственная цель которой —
-                                создавать чрезмерную нагрузку на сервер.</p>
-                        </div>
-
-                        <!-- Энтити -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-purple-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-purple-400 mb-3">Энтити (Сущности)</h4>
-                            <p class="text-gray-300"><strong class="text-white">Пояснение:</strong> Все динамические
-                                объекты в мире (игроки, мобы, животные,
-                                вагонетки, лодки). Наличие более 50 энтити в одном чанке считается созданием лагов и
-                                наказывается.</p>
-                        </div>
-                    </div>
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Флуд / Спам</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Отправка одинаковых сообщений многократно, чрезмерное использование капса или символов в чате.
+                    </p>
                 </div>
-            </div>
 
-            <!-- Категория 4: Аккаунты и безопасность -->
-            <div class="mb-12">
-                <div class="bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
-                    <h2 class="text-3xl font-bold mb-6 text-yellow-500 flex items-center gap-3">
-                        <span class="bg-yellow-500/20 p-3 rounded-xl">🔐</span>
-                        4. Аккаунты и безопасность
-                    </h2>
-                    <div class="space-y-4">
-                        <!-- RMT -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-yellow-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-yellow-400 mb-3">Реальные деньги (RMT)</h4>
-                            <p class="text-gray-300"><strong class="text-white">Пояснение:</strong> Любая сделка, где
-                                внутриигровые ценности обмениваются на
-                                настоящие деньги. Строго запрещено.</p>
-                        </div>
-
-                        <!-- Несанкционированный доступ -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-yellow-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-yellow-400 mb-3">Несанкционированный доступ</h4>
-                            <p class="text-gray-300"><strong class="text-white">Пояснение:</strong> Любая попытка войти
-                                на сервер под чужим аккаунтом без
-                                разрешения.
-                                Приравнивается к взлому.</p>
-                        </div>
-
-                        <!-- Альт-аккаунт -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-yellow-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-yellow-400 mb-3">Альт-аккаунт / Мультиаккаунт</h4>
-                            <p class="text-gray-300"><strong class="text-white">Пояснение:</strong> Использование одним
-                                игроком более одного аккаунта на сервере.
-                                Запрещено для предотвращения обхода наказаний и нечестного накопления ресурсов.</p>
-                        </div>
-
-                        <!-- Грязные вещи -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-yellow-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-yellow-400 mb-3">"Грязные" вещи</h4>
-                            <p class="text-gray-300"><strong class="text-white">Пояснение:</strong> Получение, хранение
-                                или передача предметов, если известно,
-                                что
-                                они были получены нечестным путём (через читы, дюп, кражу).</p>
-                        </div>
-                    </div>
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">PvP</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Player vs Player — сражение между игроками.
+                    </p>
                 </div>
-            </div>
 
-            <!-- Категория 5: Коммуникация и поведение -->
-            <div class="mb-12">
-                <div class="bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
-                    <h2 class="text-3xl font-bold mb-6 text-cyan-500 flex items-center gap-3">
-                        <span class="bg-cyan-500/20 p-3 rounded-xl">💬</span>
-                        5. Коммуникация и поведение
-                    </h2>
-                    <div class="space-y-4">
-                        <!-- Завуалированная форма -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-cyan-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-cyan-400 mb-3">Завуалированная форма / Пассивная
-                                агрессия</h4>
-                            <p class="text-gray-300 mb-2"><strong class="text-white">Пояснение:</strong> Выражение
-                                оскорблений через намёки, "шутки", сарказм с
-                                целью
-                                задеть другого.</p>
-                            <p class="text-gray-400"><strong class="text-white">Пример:</strong> "Ну конечно, ты как
-                                всегда всё сделал гениально"</p>
-                        </div>
-
-                        <!-- Доксинг -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-cyan-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-cyan-400 mb-3">Доксинг (Doxxing)</h4>
-                            <p class="text-gray-300"><strong class="text-white">Пояснение:</strong> Публикация личных
-                                данных человека (ФИО, адрес, телефон, фото)
-                                в
-                                публичном пространстве без согласия. Уголовно наказуемо. Ведёт к немедленному и
-                                бесповоротному бану.</p>
-                        </div>
-
-                        <!-- Ложь администрации -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-cyan-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-cyan-400 mb-3">Ложь администрации</h4>
-                            <p class="text-gray-300"><strong class="text-white">Пояснение:</strong> Предоставление
-                                администратору заведомо ложной информации,
-                                поддельных скриншотов при рассмотрении жалобы.</p>
-                        </div>
-
-                        <!-- Обход банов -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-cyan-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-cyan-400 mb-3">Обход банов и мутов</h4>
-                            <p class="text-gray-300"><strong class="text-white">Пояснение:</strong> Использование
-                                альт-аккаунта или VPN после блокировки основного
-                                аккаунта.</p>
-                        </div>
-                    </div>
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Spawn-killing</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Убийство игрока сразу после его возрождения на спавне.
+                    </p>
                 </div>
-            </div>
 
-            <!-- Категория 6: Правила Discord -->
-            <div class="mb-12">
-                <div class="bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
-                    <h2 class="text-3xl font-bold mb-6 text-blue-500 flex items-center gap-3">
-                        <span class="bg-blue-500/20 p-3 rounded-xl">💻</span>
-                        6. Правила Discord
-                    </h2>
-                    <div class="space-y-4">
-                        <!-- Оффтоп -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-blue-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-blue-400 mb-3">Оффтоп (Offtopic)</h4>
-                            <p class="text-gray-300 mb-2"><strong class="text-white">Пояснение:</strong> Обсуждение
-                                темы, не соответствующей предназначению канала.</p>
-                            <p class="text-gray-400"><strong class="text-white">Пример:</strong> Обсуждение нового
-                                сериала в канале #техподдержка</p>
-                        </div>
-
-                        <!-- Флуд -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-blue-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-blue-400 mb-3">Флуд</h4>
-                            <p class="text-gray-300"><strong class="text-white">Пояснение:</strong> Отправка большого
-                                количества однотипных, коротких или
-                                бессмысленных сообщений, затрудняющих чтение чата.</p>
-                        </div>
-
-                        <!-- Фейк -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-blue-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-blue-400 mb-3">Фейк (Фейковое объявление)</h4>
-                            <p class="text-gray-300 mb-2"><strong class="text-white">Пояснение:</strong> Создание
-                                ложных, сенсационных новостей с целью вызвать
-                                панику или
-                                насмешки.</p>
-                            <p class="text-gray-400"><strong class="text-white">Примеры:</strong> "Внимание! Вайп
-                                завтра!", "Админ уходит! Раздача админки!"</p>
-                        </div>
-                    </div>
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Мут</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Временное ограничение возможности отправлять сообщения в чат как наказание за нарушения.
+                    </p>
                 </div>
-            </div>
 
-            <!-- Категория 7: Правила Minecraft -->
-            <div class="mb-12">
-                <div class="bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
-                    <h2 class="text-3xl font-bold mb-6 text-green-500 flex items-center gap-3">
-                        <span class="bg-green-500/20 p-3 rounded-xl">🎮</span>
-                        7. Правила Minecraft (чат и действия)
-                    </h2>
-                    <div class="space-y-4">
-                        <!-- Флуд системными сообщениями -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-green-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-green-400 mb-3">Флуд системными сообщениями</h4>
-                            <p class="text-gray-300 mb-2"><strong class="text-white">Пояснение:</strong> Намеренное
-                                злоупотребление игровыми механизмами для
-                                засорения
-                                чата.</p>
-                            <p class="text-gray-400"><strong class="text-white">Примеры:</strong> Быстрое
-                                подключение/отключение от сервера, спам командами,
-                                намеренное создание множества уведомлений о смерти.</p>
-                        </div>
-
-                        <!-- Провокационные убийства -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-green-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-green-400 mb-3">Провокационные массовые убийства</h4>
-                            <p class="text-gray-300"><strong class="text-white">Пояснение:</strong> Многократное (3 и
-                                более раз) убийство одного и того же игрока,
-                                который не может дать отпор. Цель — не PvP, а вызов спама в чат и провокация на
-                                нарушение.
-                            </p>
-                        </div>
-
-                        <!-- Засорение пространства -->
-                        <div
-                            class="bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-green-500/20 transition-all">
-                            <h4 class="text-xl font-semibold text-green-400 mb-3">Засорение игрового пространства</h4>
-                            <p class="text-gray-300 mb-2"><strong class="text-white">Пояснение:</strong> Создание
-                                объектов, не несущих игровой ценности, служащих
-                                только
-                                для вандализма или мусора.</p>
-                            <p class="text-gray-400"><strong class="text-white">Примеры:</strong> "Столбы" из грязи,
-                                разбрасывание табличек, создание "свалок",
-                                спам
-                                в локальный чат.</p>
-                        </div>
-                    </div>
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Бан</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Блокировка доступа к серверу как наказание за серьезные нарушения правил.
+                    </p>
                 </div>
-            </div>
 
-            <!-- Navigation Links -->
-            <div class="mt-16">
-                <div class="bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
-                    <h3 class="text-2xl font-bold mb-6 text-center">Другие разделы правил</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <a href="rules-overview.html"
-                            class="group bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-mc-greenLight/50 transition-all text-center">
-                            <div class="text-3xl mb-3">📋</div>
-                            <h4 class="text-lg font-semibold text-mc-greenLight mb-2">Обзор правил</h4>
-                            <p class="text-gray-400 text-sm">Основные принципы и политика сервера</p>
-                        </a>
-                        <a href="rules-guide.html"
-                            class="group bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-mc-greenLight/50 transition-all text-center">
-                            <div class="text-3xl mb-3">📖</div>
-                            <h4 class="text-lg font-semibold text-mc-greenLight mb-2">Полное руководство</h4>
-                            <p class="text-gray-400 text-sm">Детальные правила и инструкции</p>
-                        </a>
-                        <a href="rules-admin.html"
-                            class="group bg-mc-darker p-6 rounded-xl border border-white/5 hover:border-mc-greenLight/50 transition-all text-center">
-                            <div class="text-3xl mb-3">👮</div>
-                            <h4 class="text-lg font-semibold text-mc-greenLight mb-2">Администрирование</h4>
-                            <p class="text-gray-400 text-sm">Наказания и процедуры</p>
-                        </a>
-                    </div>
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Эксплойт</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Использование багов или ошибок игры для получения нечестного преимущества.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Токсичность</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Негативное, агрессивное или провокационное поведение, создающее неприятную атмосферу.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Апелляция</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Обращение к администрации с просьбой пересмотреть выданное наказание.
+                    </p>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-mc-dark/50 backdrop-blur-xl border-t border-white/10 py-12 relative z-10">
+    <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div
-                            class="w-10 h-10 bg-mc-green rounded-lg flex items-center justify-center shadow-lg shadow-mc-green/20">
-                            <span class="text-white text-lg font-bold">E</span>
-                        </div>
-                        <span class="text-xl font-bold">Embro<span class="text-mc-greenLight">Mine</span></span>
-                    </div>
-                    <p class="text-gray-400 text-sm">Minecraft сервер для спонсоров</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4 text-mc-greenLight">Информация</h4>
-                    <div class="space-y-2">
-                        <a href="rules-overview.html"
-                            class="block text-gray-400 hover:text-mc-greenLight transition-colors text-sm">Обзор</a>
-                        <a href="rules-glossary.html"
-                            class="block text-gray-400 hover:text-mc-greenLight transition-colors text-sm">Глоссарий</a>
-                        <a href="rules-guide.html"
-                            class="block text-gray-400 hover:text-mc-greenLight transition-colors text-sm">Инструкция</a>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4 text-mc-greenLight">Поддержка</h4>
-                    <div class="space-y-2">
-                        <a href="rules-admin.html"
-                            class="block text-gray-400 hover:text-mc-greenLight transition-colors text-sm">Администрация</a>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4 text-mc-greenLight">Навигация</h4>
-                    <div class="space-y-2">
-                        <a href="index.html"
-                            class="block text-gray-400 hover:text-mc-greenLight transition-colors text-sm">Главная</a>
-                        <a href="index.html#about"
-                            class="block text-gray-400 hover:text-mc-greenLight transition-colors text-sm">О сервере</a>
-                        <a href="index.html#features"
-                            class="block text-gray-400 hover:text-mc-greenLight transition-colors text-sm">Режимы</a>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-white/10 pt-8 text-center text-gray-400 text-sm">
-                <p>&copy; 2026 EmbroMine. Все права защищены.</p>
+            <div class="border-t border-purple-soft/10 pt-8">
+                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.</p>
             </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
-
 </html>

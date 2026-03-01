@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="ru" class="scroll-smooth">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход - EmbroMine</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        mc: {
-                            dark: '#1a1a1a',
-                            darker: '#0f0f0f',
-                            green: '#5D8C30',
-                            greenLight: '#7EB342',
-                            red: '#B02E26'
+                        void: {
+                            black: '#0a0810',
+                            dark: '#120a1a',
+                        },
+                        purple: {
+                            deep: '#6D28D9',
+                            royal: '#8B5CF6',
+                            neon: '#A855F7',
+                            soft: '#C4B5FD',
+                        },
+                        magenta: {
+                            glow: '#D946EF',
                         }
                     },
                     fontFamily: {
@@ -30,41 +34,129 @@
         }
     </script>
 </head>
-
-<body class="bg-mc-darker text-white font-sans antialiased overflow-x-hidden">
-    <!-- Floating Particles Background -->
+<body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
-
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-mc-darker/80 backdrop-blur-md border-b border-white/10" id="navbar">
+    <nav class="fixed w-full z-50 bg-void-black/80 backdrop-blur-md border-b border-purple-soft/10 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="nav-container" style="padding: 12px 0; max-width: 100%;">
-                <div class="logo" style="margin: 0;">
-                    <a href="index.html" style="text-decoration: none; color: inherit;">
-                        <span class="logo-text">EmbroMine</span>
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-deep to-purple-neon rounded-lg flex items-center justify-center shadow-lg shadow-purple-deep/20">
+                        <span class="text-white text-lg font-bold">E</span>
+                    </div>
+                    <a href="index.html" class="text-xl font-bold tracking-tight hover:text-purple-soft transition-colors">
+                        Embro<span class="text-purple-neon">Mine</span>
                     </a>
                 </div>
-                <div class="nav-links" style="gap: 20px;">
-                    <a href="index.html" class="nav-link">Главная</a>
-                    <div class="nav-dropdown">
-                        <a href="#" class="nav-link">Меню</a>
-                        <div class="dropdown-menu">
-                            <a href="index.html#about">О сервере</a>
-                            <a href="index.html#features">Режимы</a>
-                            <a href="rules-overview.html">Правила</a>
-                            <a href="login.html" class="active">Вход</a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium text-purple-soft/70">Главная</a>
+
+                        <!-- О сервере Dropdown -->
+                        <div class="relative group">
+                            <a href="#" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                                О сервере
+                                <span class="ml-1 text-xs">▼</span>
+                            </a>
+                            <div class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
+                                <a href="description.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Описание</a>
+                                <a href="mechanics.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Механики сервера</a>
+                                <a href="roleplay.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Ролевые элементы</a>
+                                <a href="season-concept.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Концепция сезона</a>
+                                <a href="principles.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 last:rounded-b-lg">Базовые принципы</a>
+                            </div>
                         </div>
+
+                        <!-- Правила Dropdown -->
+                        <div class="relative group">
+                            <a href="#" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                                Правила
+                                <span class="ml-1 text-xs">▼</span>
+                            </a>
+                            <div class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
+                                <a href="rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Обзор правил</a>
+                                <a href="game-rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Игровые правила</a>
+                                <a href="chat-rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Правила общения</a>
+                                <a href="banned-mods.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Запрещенные моды</a>
+                                <a href="punishments.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Система наказаний</a>
+                                <a href="rules-glossary.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 last:rounded-b-lg">Глоссарий</a>
+                            </div>
+                        </div>
+
+                        <a href="guides.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Гайды</a>
+                        <a href="map.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Карта</a>
+                        <a href="staff.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Админы</a>
+                        <a href="support.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Помощь</a>
+
+                        <a href="dashboard.html" id="dashboard-link" class="text-purple-soft hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium" style="display: none;">Профиль</a>
+                        <a href="login.html" id="login-link" class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium text-purple-soft/70">Вход</a>
+                        <button onclick="handleLogout()" id="logout-btn" class="text-purple-soft hover:text-magenta-glow transition-colors px-3 py-2 rounded-md text-sm font-medium" style="display: none;">Выход</button>
                     </div>
                 </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-purple-soft/70 hover:text-purple-soft p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden lg:hidden bg-void-dark border-t border-purple-soft/10" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Главная</a>
+
+                <!-- О сервере Mobile -->
+                <div class="px-3 py-2">
+                    <div onclick="toggleMobileSubmenu('server-submenu', 'server-arrow')" class="flex items-center justify-between cursor-pointer hover:bg-purple-deep/10 rounded-md p-2 text-purple-soft/70">
+                        <span>О сервере</span>
+                        <span id="server-arrow">▶</span>
+                    </div>
+                    <div id="server-submenu" class="hidden pl-4 space-y-1 mt-2">
+                        <a href="description.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Описание</a>
+                        <a href="mechanics.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Механики</a>
+                        <a href="roleplay.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Ролевые элементы</a>
+                        <a href="season-concept.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Концепция сезона</a>
+                        <a href="principles.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Базовые принципы</a>
+                    </div>
+                </div>
+
+                <!-- Правила Mobile -->
+                <div class="px-3 py-2">
+                    <div onclick="toggleMobileSubmenu('rules-submenu', 'rules-arrow')" class="flex items-center justify-between cursor-pointer hover:bg-purple-deep/10 rounded-md p-2 text-purple-soft/70">
+                        <span>Правила</span>
+                        <span id="rules-arrow">▶</span>
+                    </div>
+                    <div id="rules-submenu" class="hidden pl-4 space-y-1 mt-2">
+                        <a href="rules.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Обзор</a>
+                        <a href="game-rules.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Игровые правила</a>
+                        <a href="chat-rules.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Правила общения</a>
+                        <a href="banned-mods.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Запрещенные моды</a>
+                        <a href="punishments.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Система наказаний</a>
+                        <a href="rules-glossary.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Глоссарий</a>
+                    </div>
+                </div>
+
+                <a href="guides.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Гайды</a>
+                <a href="map.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Карта</a>
+                <a href="staff.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Админы</a>
+                <a href="support.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Помощь</a>
+                <a href="login.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Вход</a>
             </div>
         </div>
     </nav>
 
     <!-- Auth Container -->
     <div class="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="max-w-md w-full bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
+        <div class="max-w-md w-full bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-8 shadow-2xl">
             <!-- Tabs -->
-            <div class="flex gap-4 mb-8 border-b border-white/10 pb-4">
+            <div class="flex gap-4 mb-8 border-b border-purple-soft/10 pb-4">
                 <button class="tab-btn active flex-1 text-center" onclick="switchTab('login'); event.preventDefault();">
                     Вход
                 </button>
@@ -89,7 +181,7 @@
                 </div>
 
                 <button type="submit"
-                    class="w-full bg-gradient-to-r from-mc-green to-mc-greenLight hover:from-mc-greenLight hover:to-mc-green text-white font-bold py-3 px-6 rounded-xl transition-all transform hover:scale-[1.02] shadow-lg shadow-mc-green/25 mt-4">
+                    class="w-full bg-gradient-to-r from-purple-deep to-purple-neon hover:from-purple-royal hover:to-purple-soft text-white font-bold py-3 px-6 rounded-xl transition-all transform hover:scale-[1.02] shadow-lg shadow-purple-deep/25 mt-4">
                     Войти
                 </button>
 
@@ -124,28 +216,26 @@
                 </div>
 
                 <button type="submit"
-                    class="w-full bg-gradient-to-r from-mc-green to-mc-greenLight hover:from-mc-greenLight hover:to-mc-green text-white font-bold py-3 px-6 rounded-xl transition-all transform hover:scale-[1.02] shadow-lg shadow-mc-green/25 mt-4">
+                    class="w-full bg-gradient-to-r from-purple-deep to-purple-neon hover:from-purple-royal hover:to-purple-soft text-white font-bold py-3 px-6 rounded-xl transition-all transform hover:scale-[1.02] shadow-lg shadow-purple-deep/25 mt-4">
                     Зарегистрироваться
                 </button>
 
                 <div id="register-message" style="margin-top: 16px;"></div>
             </form>
 
-            <div class="mt-6 pt-6 border-t border-white/10">
-                <p class="text-center text-gray-400 text-sm">
-                    Нет аккаунта? <a href="login.html"
-                        class="text-mc-greenLight hover:text-mc-green transition-colors font-semibold">Зарегистрируйся</a>
+            <div class="mt-6 pt-6 border-t border-purple-soft/10">
+                <p class="text-center text-purple-soft/60 text-sm">
+                    Нет аккаунта? <a href="#" onclick="switchTab('register'); return false;"
+                        class="text-purple-soft hover:text-purple-neon transition-colors font-semibold">Зарегистрируйся</a>
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="fixed bottom-0 w-full bg-mc-darker border-t border-white/10 py-4 text-center text-gray-600 text-sm">
+    <footer class="fixed bottom-0 w-full bg-void-black border-t border-purple-soft/10 py-4 text-center text-purple-soft/40 text-sm">
         <p>© 2026 EmbroMine. Not affiliated with Mojang Studios.</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
-
 </html>

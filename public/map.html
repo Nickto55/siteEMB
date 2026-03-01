@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Правила сервера - EmbroMine</title>
+    <title>Онлайн карта - EmbroMine</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -71,12 +71,12 @@
 
                         <!-- Правила Dropdown -->
                         <div class="relative group">
-                            <a href="#" class="text-purple-soft hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                            <a href="#" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
                                 Правила
                                 <span class="ml-1 text-xs">▼</span>
                             </a>
                             <div class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
-                                <a href="rules.html" class="text-purple-soft block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Обзор правил</a>
+                                <a href="rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Обзор правил</a>
                                 <a href="game-rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Игровые правила</a>
                                 <a href="chat-rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Правила общения</a>
                                 <a href="banned-mods.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Запрещенные моды</a>
@@ -86,7 +86,7 @@
                         </div>
 
                         <a href="guides.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Гайды</a>
-                        <a href="map.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Карта</a>
+                        <a href="map.html" class="text-purple-soft hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Карта</a>
                         <a href="staff.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Админы</a>
                         <a href="support.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Помощь</a>
 
@@ -153,73 +153,103 @@
     </nav>
 
     <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
-                    Правила сервера
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
+                    Онлайн карта
                 </h1>
-                <p class="text-xl text-purple-soft/60">Ознакомьтесь с правилами перед игрой</p>
+                <p class="text-xl text-purple-soft/60">Исследуйте мир EmbroMine</p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                <a href="game-rules.html" class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">🎮 Игровые правила</h3>
-                        <span class="text-2xl">→</span>
-                    </div>
-                    <p class="text-purple-soft/60 text-sm">Правила поведения в игре</p>
-                </a>
-                <a href="chat-rules.html" class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">💬 Правила общения</h3>
-                        <span class="text-2xl">→</span>
-                    </div>
-                    <p class="text-purple-soft/60 text-sm">Нормы поведения в чате</p>
-                </a>
-                <a href="banned-mods.html" class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">🚫 Запрещенные моды</h3>
-                        <span class="text-2xl">→</span>
-                    </div>
-                    <p class="text-purple-soft/60 text-sm">Список запрещенных модификаций</p>
-                </a>
-                <a href="punishments.html" class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">⚖️ Система наказаний</h3>
-                        <span class="text-2xl">→</span>
-                    </div>
-                    <p class="text-purple-soft/60 text-sm">Как работает модерация</p>
-                </a>
-                <a href="rules-glossary.html" class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">📚 Глоссарий</h3>
-                        <span class="text-2xl">→</span>
-                    </div>
-                    <p class="text-purple-soft/60 text-sm">Словарь терминов</p>
-                </a>
-                <a href="principles.html" class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">🌟 Базовые принципы</h3>
-                        <span class="text-2xl">→</span>
-                    </div>
-                    <p class="text-purple-soft/60 text-sm">Философия сервера</p>
-                </a>
-            </div>
-
-            <div class="bg-yellow-500/10 border border-yellow-500/30 p-6 rounded-2xl">
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            <div class="bg-void-dark p-4 rounded-2xl border border-purple-soft/5 mb-8">
+                <div class="aspect-video bg-void-black rounded-xl flex items-center justify-center relative overflow-hidden border border-purple-soft/5">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-deep/5 to-transparent"></div>
+                    <div class="text-center z-10">
+                        <svg class="w-16 h-16 text-purple-royal mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0121 18.382V7.618a1 1 0 01-.553-.894L15 7m0 13V7"/>
                         </svg>
+                        <p class="text-purple-soft/60 mb-4">Интерактивная карта мира</p>
+                        <a href="http://map.embromine.ru" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-purple-deep hover:bg-purple-royal text-white font-semibold rounded-xl transition-all">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                            Открыть полную карту
+                        </a>
                     </div>
-                    <div>
-                        <h3 class="font-bold text-yellow-400 mb-2">Важно!</h3>
-                        <p class="text-purple-soft/70 text-sm leading-relaxed">
-                            Играя на сервере EmbroMine, вы автоматически соглашаетесь со всеми правилами. 
-                            Незнание правил не освобождает от ответственности. Администрация оставляет за собой право 
-                            изменять правила в любое время без предварительного уведомления.
-                        </p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold mb-3 text-purple-soft">🗺️ Основной мир</h3>
+                    <p class="text-purple-soft/60 text-sm mb-4">Основной игровой мир с городами игроков, фермами и постройками.</p>
+                    <div class="flex items-center gap-2 text-sm text-purple-soft/50">
+                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                        Размер: 10000x10000
+                    </div>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold mb-3 text-red-400">🔥 Незер</h3>
+                    <p class="text-purple-soft/60 text-sm mb-4">Мир Незера с фермами и базами игроков.</p>
+                    <div class="flex items-center gap-2 text-sm text-purple-soft/50">
+                        <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                        Размер: 5000x5000
+                    </div>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold mb-3 text-purple-400">🌌 Энд</h3>
+                    <p class="text-purple-soft/60 text-sm mb-4">Мир Энда с фермами эндерменов и городами эндеров.</p>
+                    <div class="flex items-center gap-2 text-sm text-purple-soft/50">
+                        <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+                        Размер: 3000x3000
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                <h3 class="text-lg font-bold mb-4 text-purple-soft">📍 Интересные места</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="flex items-center gap-4 bg-void-black p-4 rounded-xl border border-purple-soft/5">
+                        <div class="w-10 h-10 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+                            <span class="text-yellow-400">🏛️</span>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Спавн</p>
+                            <p class="text-sm text-purple-soft/50">Центральная площадь сервера</p>
+                        </div>
+                        <span class="ml-auto text-sm text-purple-soft/50">0, 0</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-void-black p-4 rounded-xl border border-purple-soft/5">
+                        <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                            <span class="text-blue-400">🏪</span>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Торговый район</p>
+                            <p class="text-sm text-purple-soft/50">Магазины игроков</p>
+                        </div>
+                        <span class="ml-auto text-sm text-purple-soft/50">150, -200</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-void-black p-4 rounded-xl border border-purple-soft/5">
+                        <div class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center">
+                            <span class="text-red-400">⚔️</span>
+                        </div>
+                        <div>
+                            <p class="font-semibold">PvP Арена</p>
+                            <p class="text-sm text-purple-soft/50">Место для сражений</p>
+                        </div>
+                        <span class="ml-auto text-sm text-purple-soft/50">-300, 150</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-void-black p-4 rounded-xl border border-purple-soft/5">
+                        <div class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
+                            <span class="text-green-400">🌾</span>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Фермерский район</p>
+                            <p class="text-sm text-purple-soft/50">Авто-фермы</p>
+                        </div>
+                        <span class="ml-auto text-sm text-purple-soft/50">500, 500</span>
                     </div>
                 </div>
             </div>
@@ -228,38 +258,6 @@
 
     <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div class="col-span-2">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-8 h-8 bg-gradient-to-br from-purple-deep to-purple-neon rounded-lg flex items-center justify-center">
-                            <span class="text-white text-lg font-bold">E</span>
-                        </div>
-                        <span class="text-lg font-bold">EmbroMine</span>
-                    </div>
-                    <p class="text-purple-soft/50 text-sm leading-relaxed max-w-xs">
-                        Приватный Minecraft сервер для спонсоров проекта.
-                    </p>
-                </div>
-
-                <div>
-                    <h4 class="font-bold mb-4 text-sm uppercase tracking-wider text-purple-soft/60">Правила</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="game-rules.html" class="text-purple-soft/50 hover:text-purple-soft transition-colors">Игровые правила</a></li>
-                        <li><a href="chat-rules.html" class="text-purple-soft/50 hover:text-purple-soft transition-colors">Правила общения</a></li>
-                        <li><a href="banned-mods.html" class="text-purple-soft/50 hover:text-purple-soft transition-colors">Запрещенные моды</a></li>
-                        <li><a href="punishments.html" class="text-purple-soft/50 hover:text-purple-soft transition-colors">Система наказаний</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-bold mb-4 text-sm uppercase tracking-wider text-purple-soft/60">Контакты</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li class="text-purple-soft/50">support@embromine.ru</li>
-                        <li class="text-purple-soft/50">24/7 Поддержка</li>
-                    </ul>
-                </div>
-            </div>
-
             <div class="border-t border-purple-soft/10 pt-8">
                 <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.</p>
             </div>
