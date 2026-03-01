@@ -26,6 +26,8 @@
                         },
                         magenta: {
                             glow: '#D946EF',
+                            glow2: '#ffb347',
+                            glow3: '#FFD700',
                         }
                     },
                     fontFamily: {
@@ -41,63 +43,93 @@
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-void-black/80 backdrop-blur-md border-b border-purple-soft/10 transition-all duration-300"
+    <nav class="fixed w-full z-50 bg-void-black/80 backdrop-blur-md border-b border-magenta-glow/10 transition-all duration-300"
         id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
                     <div
-                        class="w-10 h-10 bg-gradient-to-br from-purple-deep to-purple-neon rounded-lg flex items-center justify-center shadow-lg shadow-purple-deep/20">
+                        class="w-10 h-10 bg-gradient-to-br from-purple-deep via-magenta-glow to-purple-neon rounded-lg flex items-center justify-center shadow-lg shadow-magenta-glow/25">
                         <span class="text-white text-lg font-bold">E</span>
                     </div>
-                    <a href="index.html" class="text-xl font-bold tracking-tight hover:text-purple-soft transition-colors">
-                        Embro<span class="text-purple-neon">Mine</span>
+                    <a href="index.html"
+                        class="text-magenta-glow2 font-bold tracking-tight hover:text-magenta-glow3 transition-colors">
+                        Embro<span class="text-magenta-glow">Mine</span>
                     </a>
                 </div>
 
                 <!-- Desktop Navigation -->
                 <div class="hidden lg:block">
                     <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="index.html" class="text-purple-soft px-3 py-2 rounded-md text-sm font-medium">Главная</a>
-                        
+                        <a href="index.html"
+                            class="text-purple-soft px-3 py-2 rounded-md text-sm font-medium">Главная</a>
+
                         <!-- О сервере Dropdown -->
                         <div class="relative group">
-                            <a href="#" class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                            <a href="#"
+                                class="hover:text-magenta-glow transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
                                 О сервере
                                 <span class="ml-1 text-xs">▼</span>
                             </a>
-                            <div class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
-                                <a href="description.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Описание</a>
-                                <a href="mechanics.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10">Механики сервера</a>
-                                <a href="roleplay.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10">Ролевые элементы</a>
-                                <a href="season-concept.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10">Концепция сезона</a>
-                                <a href="principles.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10 last:rounded-b-lg">Базовые принципы</a>
+                            <div
+                                class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
+                                <a href="description.html"
+                                    class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-royal/10 first:rounded-t-lg">Описание</a>
+                                <a href="mechanics.html"
+                                    class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10">Механики
+                                    сервера</a>
+                                <a href="roleplay.html"
+                                    class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-magenta-glow/10">Ролевые
+                                    элементы</a>
+                                <a href="season-concept.html"
+                                    class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10">Концепция
+                                    сезона</a>
+                                <a href="principles.html"
+                                    class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-royal/10 last:rounded-b-lg">Базовые
+                                    принципы</a>
                             </div>
                         </div>
 
                         <!-- Правила Dropdown -->
                         <div class="relative group">
-                            <a href="#" class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                            <a href="#"
+                                class="hover:text-magenta-glow transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
                                 Правила
                                 <span class="ml-1 text-xs">▼</span>
                             </a>
-                            <div class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
-                                <a href="rules.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Обзор правил</a>
-                                <a href="game-rules.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10">Игровые правила</a>
-                                <a href="chat-rules.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10">Правила общения</a>
-                                <a href="banned-mods.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10">Запрещенные моды</a>
-                                <a href="punishments.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10">Система наказаний</a>
-                                <a href="rules-glossary.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10 last:rounded-b-lg">Глоссарий</a>
+                            <div
+                                class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
+                                <a href="rules.html"
+                                    class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10 first:rounded-t-lg">Обзор
+                                    правил</a>
+                                <a href="game-rules.html"
+                                    class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-royal/10">Игровые
+                                    правила</a>
+                                <a href="chat-rules.html"
+                                    class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-magenta-glow/10">Правила
+                                    общения</a>
+                                <a href="banned-mods.html"
+                                    class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10">Запрещенные
+                                    моды</a>
+                                <a href="punishments.html"
+                                    class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10">Система
+                                    наказаний</a>
+                                <a href="rules-glossary.html"
+                                    class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-royal/10 last:rounded-b-lg">Глоссарий</a>
                             </div>
                         </div>
 
-                        <a href="guides.html" class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Гайды</a>
-                        <a href="map.html" class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Карта</a>
-                        <a href="staff.html" class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Админы</a>
-                        <a href="support.html" class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Помощь</a>
-                        
+                        <a href="guides.html"
+                            class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Гайды</a>
+                        <a href="map.html"
+                            class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Карта</a>
+                        <a href="staff.html"
+                            class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Админы</a>
+                        <a href="support.html"
+                            class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Помощь</a>
+
                         <a href="dashboard.html" id="dashboard-link"
-                            class="text-purple-soft hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium"
+                            class="text-purple-soft hover:text-magenta-glow transition-colors px-3 py-2 rounded-md text-sm font-medium"
                             style="display: none;">Профиль</a>
                         <a href="login.html" id="login-link"
                             class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Вход</a>
@@ -109,9 +141,10 @@
 
                 <!-- Mobile Menu Button -->
                 <div class="lg:hidden">
-                    <button onclick="toggleMobileMenu()" class="text-purple-soft/70 hover:text-purple-soft p-2">
+                    <button onclick="toggleMobileMenu()" class="text-purple-soft/70 hover:text-magenta-glow p-2">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
                 </div>
@@ -119,46 +152,72 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div class="hidden lg:hidden bg-void-dark border-t border-purple-soft/10" id="mobile-menu">
+        <div class="hidden lg:hidden bg-void-dark border-t border-magenta-glow/15" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-purple-soft bg-purple-deep/10">Главная</a>
-                
+                <a href="index.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-purple-soft bg-purple-deep/10">Главная</a>
+
                 <!-- О сервере Mobile -->
                 <div class="px-3 py-2">
-                    <div onclick="toggleMobileSubmenu('server-submenu', 'server-arrow')" class="flex items-center justify-between cursor-pointer hover:bg-purple-deep/10 rounded-md p-2 text-purple-soft/70">
+                    <div onclick="toggleMobileSubmenu('server-submenu', 'server-arrow')"
+                        class="flex items-center justify-between cursor-pointer hover:bg-purple-royal/10 rounded-md p-2 text-purple-soft/70">
                         <span>О сервере</span>
                         <span id="server-arrow">▶</span>
                     </div>
                     <div id="server-submenu" class="hidden pl-4 space-y-1 mt-2">
-                        <a href="description.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Описание</a>
-                        <a href="mechanics.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Механики</a>
-                        <a href="roleplay.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Ролевые элементы</a>
-                        <a href="season-concept.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Концепция сезона</a>
-                        <a href="principles.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Базовые принципы</a>
+                        <a href="description.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Описание</a>
+                        <a href="mechanics.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Механики</a>
+                        <a href="roleplay.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Ролевые
+                            элементы</a>
+                        <a href="season-concept.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Концепция
+                            сезона</a>
+                        <a href="principles.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Базовые
+                            принципы</a>
                     </div>
                 </div>
 
                 <!-- Правила Mobile -->
                 <div class="px-3 py-2">
-                    <div onclick="toggleMobileSubmenu('rules-submenu', 'rules-arrow')" class="flex items-center justify-between cursor-pointer hover:bg-purple-deep/10 rounded-md p-2 text-purple-soft/70">
+                    <div onclick="toggleMobileSubmenu('rules-submenu', 'rules-arrow')"
+                        class="flex items-center justify-between cursor-pointer hover:bg-magenta-glow/10 rounded-md p-2 text-purple-soft/70">
                         <span>Правила</span>
                         <span id="rules-arrow">▶</span>
                     </div>
                     <div id="rules-submenu" class="hidden pl-4 space-y-1 mt-2">
-                        <a href="rules.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Обзор</a>
-                        <a href="game-rules.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Игровые правила</a>
-                        <a href="chat-rules.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Правила общения</a>
-                        <a href="banned-mods.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Запрещенные моды</a>
-                        <a href="punishments.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Система наказаний</a>
-                        <a href="rules-glossary.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Глоссарий</a>
+                        <a href="rules.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Обзор</a>
+                        <a href="game-rules.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Игровые
+                            правила</a>
+                        <a href="chat-rules.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Правила
+                            общения</a>
+                        <a href="banned-mods.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Запрещенные
+                            моды</a>
+                        <a href="punishments.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Система
+                            наказаний</a>
+                        <a href="rules-glossary.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Глоссарий</a>
                     </div>
                 </div>
 
-                <a href="guides.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Гайды</a>
-                <a href="map.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Карта</a>
-                <a href="staff.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Админы</a>
-                <a href="support.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Помощь</a>
-                <a href="login.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Вход</a>
+                <a href="guides.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Гайды</a>
+                <a href="map.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Карта</a>
+                <a href="staff.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Админы</a>
+                <a href="support.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Помощь</a>
+                <a href="login.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Вход</a>
             </div>
         </div>
     </nav>
@@ -168,43 +227,47 @@
         <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
             <!-- Background with gradient -->
             <div class="absolute inset-0 bg-gradient-to-b from-void-dark via-void-black to-void-black"></div>
-            
+
             <!-- Decorative elements -->
             <div class="absolute inset-0 overflow-hidden">
-                <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-deep/10 rounded-full blur-3xl"></div>
-                <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-royal/5 rounded-full blur-3xl"></div>
+                <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-deep/15 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-magenta-glow/12 rounded-full blur-3xl"></div>
+                <div class="absolute inset-x-1/3 top-1/3 w-80 h-80 bg-purple-royal/10 rounded-full blur-3xl"></div>
             </div>
 
             <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
                 <div class="mb-8">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-purple-deep/10 border border-purple-deep/30 rounded-full mb-6">
-                        <span class="w-2 h-2 bg-purple-neon rounded-full animate-pulse"></span>
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 bg-void-dark/80 border border-magenta-glow/20 rounded-full mb-6">
+                        <span class="w-2 h-2 bg-magenta-glow rounded-full animate-pulse"></span>
                         <span class="text-sm text-purple-soft">Сервер онлайн</span>
                     </div>
                 </div>
-                
+
                 <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
-                    <span class="bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
+                    <span
+                        class="bg-gradient-to-r from-purple-soft via-magenta-glow to-purple-neon bg-clip-text text-transparent">
                         EmbroMine
                     </span>
                 </h1>
-                
+
                 <p class="text-xl md:text-2xl text-purple-soft/70 mb-8 max-w-2xl mx-auto">
                     Приватный Minecraft сервер для спонсоров с уникальными механиками и дружелюбным комьюнити
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-                    <button onclick="copyIP()" 
-                        class="group relative px-8 py-4 bg-gradient-to-r from-purple-deep to-purple-neon hover:from-purple-royal hover:to-purple-soft text-white font-bold rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-purple-deep/25">
+                    <button onclick="copyIP()"
+                        class="group relative px-8 py-4 bg-gradient-to-r from-purple-deep via-magenta-glow to-purple-neon hover:from-purple-royal hover:via-purple-soft hover:to-magenta-glow text-white font-bold rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-magenta-glow/25">
                         <span class="flex items-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                             </svg>
                             play.embromine.ru
                         </span>
                     </button>
-                    <a href="how-to-join.html" 
-                        class="px-8 py-4 bg-white/5 hover:bg-white/10 border border-purple-soft/20 text-white font-semibold rounded-xl transition-all">
+                    <a href="how-to-join.html"
+                        class="px-8 py-4 bg-void-dark/70 hover:bg-void-dark/90 border border-purple-royal/30 text-purple-soft font-semibold rounded-xl transition-all shadow-lg shadow-purple-royal/10">
                         Как подключиться
                     </a>
                 </div>
@@ -212,11 +275,11 @@
                 <!-- Server Stats -->
                 <div class="grid grid-cols-3 gap-8 max-w-lg mx-auto">
                     <div class="text-center">
-                        <p class="text-3xl font-bold text-purple-neon" id="player-count">23</p>
+                        <p class="text-3xl font-bold text-magenta-glow" id="player-count">23</p>
                         <p class="text-sm text-purple-soft/50">Игроков онлайн</p>
                     </div>
                     <div class="text-center">
-                        <p class="text-3xl font-bold text-purple-neon" id="ping">12</p>
+                        <p class="text-3xl font-bold text-purple-royal" id="ping">12</p>
                         <p class="text-sm text-purple-soft/50">ms пинг</p>
                     </div>
                     <div class="text-center">
@@ -229,7 +292,8 @@
             <!-- Scroll indicator -->
             <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
                 <svg class="w-6 h-6 text-purple-soft/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
             </div>
         </section>
@@ -243,44 +307,59 @@
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <a href="description.html" class="group bg-void-black p-6 rounded-2xl border border-purple-soft/5 hover:border-purple-deep/30 transition-all duration-300 hover:transform hover:-translate-y-2">
-                        <div class="w-12 h-12 bg-purple-deep/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-deep/20 transition-colors">
-                            <svg class="w-6 h-6 text-purple-royal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    <a href="description.html"
+                        class="group bg-void-black p-6 rounded-2xl border border-purple-soft/5 hover:border-purple-royal/40 transition-all duration-300 hover:transform hover:-translate-y-2">
+                        <div
+                            class="w-12 h-12 bg-purple-royal/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-royal/20 transition-colors">
+                            <svg class="w-6 h-6 text-purple-royal" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
                         <h3 class="text-lg font-bold mb-2 group-hover:text-purple-soft transition-colors">Описание</h3>
                         <p class="text-purple-soft/60 text-sm">Узнайте больше о нашем сервере</p>
                     </a>
 
-                    <a href="mechanics.html" class="group bg-void-black p-6 rounded-2xl border border-purple-soft/5 hover:border-cyan-400/30 transition-all duration-300 hover:transform hover:-translate-y-2">
-                        <div class="w-12 h-12 bg-cyan-400/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-cyan-400/20 transition-colors">
-                            <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <a href="mechanics.html"
+                        class="group bg-void-black p-6 rounded-2xl border border-purple-soft/5 hover:border-magenta-glow/40 transition-all duration-300 hover:transform hover:-translate-y-2">
+                        <div
+                            class="w-12 h-12 bg-magenta-glow/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-magenta-glow/20 transition-colors">
+                            <svg class="w-6 h-6 text-magenta-glow" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                         </div>
-                        <h3 class="text-lg font-bold mb-2 group-hover:text-cyan-400 transition-colors">Механики</h3>
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-magenta-glow transition-colors">Механики</h3>
                         <p class="text-purple-soft/60 text-sm">Уникальные игровые механики</p>
                     </a>
 
-                    <a href="guides.html" class="group bg-void-black p-6 rounded-2xl border border-purple-soft/5 hover:border-yellow-400/30 transition-all duration-300 hover:transform hover:-translate-y-2">
-                        <div class="w-12 h-12 bg-yellow-400/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-yellow-400/20 transition-colors">
-                            <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    <a href="guides.html"
+                        class="group bg-void-black p-6 rounded-2xl border border-purple-soft/5 hover:border-purple-soft/50 transition-all duration-300 hover:transform hover:-translate-y-2">
+                        <div
+                            class="w-12 h-12 bg-purple-soft/15 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-soft/25 transition-colors">
+                            <svg class="w-6 h-6 text-purple-soft" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                             </svg>
                         </div>
-                        <h3 class="text-lg font-bold mb-2 group-hover:text-yellow-400 transition-colors">Гайды</h3>
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-purple-soft transition-colors">Гайды</h3>
                         <p class="text-purple-soft/60 text-sm">Полезные руководства</p>
                     </a>
 
-                    <a href="rules.html" class="group bg-void-black p-6 rounded-2xl border border-purple-soft/5 hover:border-red-400/30 transition-all duration-300 hover:transform hover:-translate-y-2">
-                        <div class="w-12 h-12 bg-red-400/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-red-400/20 transition-colors">
-                            <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    <a href="rules.html"
+                        class="group bg-void-black p-6 rounded-2xl border border-purple-soft/5 hover:border-purple-neon/40 transition-all duration-300 hover:transform hover:-translate-y-2">
+                        <div
+                            class="w-12 h-12 bg-purple-neon/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-neon/20 transition-colors">
+                            <svg class="w-6 h-6 text-purple-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
                         </div>
-                        <h3 class="text-lg font-bold mb-2 group-hover:text-red-400 transition-colors">Правила</h3>
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-purple-neon transition-colors">Правила</h3>
                         <p class="text-purple-soft/60 text-sm">Ознакомьтесь с правилами</p>
                     </a>
                 </div>
@@ -296,34 +375,45 @@
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-8">
-                    <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
-                        <div class="w-14 h-14 bg-purple-deep/10 rounded-xl flex items-center justify-center mb-6">
-                            <svg class="w-7 h-7 text-purple-royal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    <div
+                        class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 shadow-lg shadow-magenta-glow/10">
+                        <div class="w-14 h-14 bg-purple-royal/12 rounded-xl flex items-center justify-center mb-6">
+                            <svg class="w-7 h-7 text-purple-royal" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">Закрытое комьюнити</h3>
-                        <p class="text-purple-soft/60 leading-relaxed">Только для спонсоров проекта. Дружелюбная атмосфера и отсутствие токсичности.</p>
+                        <h3 class="text-xl font-bold mb-3 text-purple-soft">Закрытое комьюнити</h3>
+                        <p class="text-purple-soft/60 leading-relaxed">Только для спонсоров проекта. Дружелюбная
+                            атмосфера и отсутствие токсичности.</p>
                     </div>
 
-                    <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
-                        <div class="w-14 h-14 bg-purple-deep/10 rounded-xl flex items-center justify-center mb-6">
-                            <svg class="w-7 h-7 text-purple-royal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    <div
+                        class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 shadow-lg shadow-purple-neon/10">
+                        <div class="w-14 h-14 bg-purple-neon/12 rounded-xl flex items-center justify-center mb-6">
+                            <svg class="w-7 h-7 text-purple-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">Уникальные механики</h3>
-                        <p class="text-purple-soft/60 leading-relaxed">Кастомные плагины и модификации, которых вы не найдете на других серверах.</p>
+                        <h3 class="text-xl font-bold mb-3 text-purple-neon">Уникальные механики</h3>
+                        <p class="text-purple-soft/60 leading-relaxed">Кастомные плагины и модификации, которых вы не
+                            найдете на других серверах.</p>
                     </div>
 
-                    <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
-                        <div class="w-14 h-14 bg-purple-deep/10 rounded-xl flex items-center justify-center mb-6">
-                            <svg class="w-7 h-7 text-purple-royal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    <div
+                        class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 shadow-lg shadow-magenta-glow/10">
+                        <div class="w-14 h-14 bg-magenta-glow/12 rounded-xl flex items-center justify-center mb-6">
+                            <svg class="w-7 h-7 text-magenta-glow" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">Надежная защита</h3>
-                        <p class="text-purple-soft/60 leading-relaxed">Продвинутая система защиты от читеров и гриферов. Ваши постройки в безопасности.</p>
+                        <h3 class="text-xl font-bold mb-3 text-magenta-glow">Надежная защита</h3>
+                        <p class="text-purple-soft/60 leading-relaxed">Продвинутая система защиты от читеров и гриферов.
+                            Ваши постройки в безопасности.</p>
                     </div>
                 </div>
             </div>
@@ -336,7 +426,8 @@
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div class="col-span-2">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-8 h-8 bg-gradient-to-br from-purple-deep to-purple-neon rounded-lg flex items-center justify-center">
+                        <div
+                            class="w-8 h-8 bg-gradient-to-br from-purple-deep to-purple-neon rounded-lg flex items-center justify-center">
                             <span class="text-white text-lg font-bold">E</span>
                         </div>
                         <span class="text-lg font-bold">EmbroMine</span>
@@ -349,10 +440,14 @@
                 <div>
                     <h4 class="font-bold mb-4 text-sm uppercase tracking-wider text-purple-soft/60">Навигация</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="description.html" class="text-purple-soft/50 hover:text-purple-soft transition-colors">О сервере</a></li>
-                        <li><a href="mechanics.html" class="text-purple-soft/50 hover:text-purple-soft transition-colors">Механики</a></li>
-                        <li><a href="guides.html" class="text-purple-soft/50 hover:text-purple-soft transition-colors">Гайды</a></li>
-                        <li><a href="rules.html" class="text-purple-soft/50 hover:text-purple-soft transition-colors">Правила</a></li>
+                        <li><a href="description.html"
+                                class="text-purple-soft/50 hover:text-purple-soft transition-colors">О сервере</a></li>
+                        <li><a href="mechanics.html"
+                                class="text-purple-soft/50 hover:text-purple-soft transition-colors">Механики</a></li>
+                        <li><a href="guides.html"
+                                class="text-purple-soft/50 hover:text-purple-soft transition-colors">Гайды</a></li>
+                        <li><a href="rules.html"
+                                class="text-purple-soft/50 hover:text-purple-soft transition-colors">Правила</a></li>
                     </ul>
                 </div>
 
@@ -366,7 +461,8 @@
             </div>
 
             <div class="border-t border-purple-soft/10 pt-8">
-                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.</p>
+                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
+                </p>
             </div>
         </div>
     </footer>
