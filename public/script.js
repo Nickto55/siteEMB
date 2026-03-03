@@ -1,3 +1,24 @@
+// Ensure favicon is set for all pages
+function setFavicon() {
+    const head = document.head;
+    if (!head) return;
+
+    const existing = head.querySelector('link[rel="icon"]');
+    const href = '/static/photo_2026-03-01_23-30-45.jpg';
+
+    if (existing) {
+        existing.type = 'image/jpeg';
+        existing.href = href;
+        return;
+    }
+
+    const link = document.createElement('link');
+    link.rel = 'icon';
+    link.type = 'image/jpeg';
+    link.href = href;
+    head.appendChild(link);
+}
+
 // Initialize particles
 function createParticles() {
     const container = document.getElementById('particles');
@@ -364,6 +385,7 @@ function initDropdownMenu() {
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    setFavicon();
     createParticles();
     initScrollAnimations();
     initSmoothScroll();

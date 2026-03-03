@@ -38,6 +38,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Раздача статических файлов
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/static', express.static(path.join(__dirname, 'static')));
 
 // Логирование запросов
 app.use((req, res, next) => {
