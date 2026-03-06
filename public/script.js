@@ -341,9 +341,111 @@ function loadUserData() {
     const userData = JSON.parse(user);
     const profileUsername = document.getElementById('profile-username');
     const profileEmail = document.getElementById('profile-email');
+    const profileAvatar = document.getElementById('profile-avatar');
+    const profileAvatarPlaceholder = document.getElementById('profile-avatar-placeholder');
+    const profileBio = document.getElementById('profile-bio');
+    const profileRole = document.getElementById('profile-role');
+    const profileCreatedAt = document.getElementById('profile-created-at');
 
     if (profileUsername) profileUsername.textContent = userData.username;
     if (profileEmail) profileEmail.textContent = userData.email;
+    if (profileBio) profileBio.textContent = userData.bio || 'Не указано';
+    if (profileRole) profileRole.textContent = getRoleName(userData.role);
+    if (profileCreatedAt && userData.created_at) profileCreatedAt.textContent = formatDate(userData.created_at);
+    
+    // Handle avatar display
+    if (profileAvatar && profileAvatarPlaceholder) {
+        if (userData.avatar_url) {
+            profileAvatar.src = userData.avatar_url;
+            profileAvatar.style.display = 'block';
+            profileAvatarPlaceholder.style.display = 'none';
+        } else {
+            profileAvatar.style.display = 'none';
+            profileAvatarPlaceholder.style.display = 'flex';
+            // Show first letter of username
+            profileAvatarPlaceholder.textContent = userData.username ? userData.username.charAt(0).toUpperCase() : '?';
+        }
+    }
+}
+
+function getRoleName(role) {
+    const roles = {
+        'user': 'Пользователь',
+        'moderator': 'Модератор',
+        'admin': 'Администратор'
+    };
+    return roles[role] || role;
+}
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ru-RU', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+}
+
+async function updateProfile(event) {
+    event.preventDefault();
+    
+    const token = localStorage.getItem('token');
+    if (!token) {
+        showToast('Ошибка авторизации');
+        return;
+    }
+
+    const email = document.getElementById('edit-email')?.value;
+    const avatarUrl = document.getElementById('edit-avatar')?.value;
+    const bio = document.getElementById('edit-bio')?.value;
+
+    try {
+        const response = await fetch('/api/auth/profile', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ email, avatar_url: avatarUrl, bio })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            showToast('Профиль успешно обновлен');
+            // Обновляем данные в localStorage
+            const updatedUser = { ...JSON.parse(localStorage.getItem('user')), ...data.user };
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+            // Перезагружаем страницу для отображения изменений
+            setTimeout(() => window.location.reload(), 1000);
+        } else {
+            showToast(data.error || 'Ошибка обновления профиля');
+        }
+    } catch (error) {
+        showToast('Ошибка подключения');
+    }
+}
+
+function toggleEditMode() {
+    const editForm = document.getElementById('edit-profile-form');
+    const viewMode = document.getElementById('profile-view-mode');
+    
+    if (editForm && viewMode) {
+        const isHidden = editForm.classList.contains('hidden');
+        if (isHidden) {
+            // Заполняем форму текущими данными
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (document.getElementById('edit-email')) document.getElementById('edit-email').value = user.email;
+            if (document.getElementById('edit-avatar')) document.getElementById('edit-avatar').value = user.avatar_url || '';
+            if (document.getElementById('edit-bio')) document.getElementById('edit-bio').value = user.bio || '';
+            
+            editForm.classList.remove('hidden');
+            viewMode.classList.add('hidden');
+        } else {
+            editForm.classList.add('hidden');
+            viewMode.classList.remove('hidden');
+        }
+    }
 }
 
 // Dropdown menu handler
