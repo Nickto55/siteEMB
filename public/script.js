@@ -210,18 +210,31 @@ function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+            const href = this.getAttribute('href');
+
+            if (href === '#') {
+                // Scroll to top
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
                 });
-                // Close mobile menu if open
-                const menu = document.getElementById('mobile-menu');
-                if (menu) menu.classList.add('hidden');
+            } else {
+                // Scroll to element
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             }
+
+            // Close mobile menu if open
+            const menu = document.getElementById('mobile-menu');
+            if (menu) menu.classList.add('hidden');
+        }
         });
-    });
+});
 }
 
 // Authentication handler
@@ -292,15 +305,31 @@ function switchTab(tab) {
     const tabs = document.querySelectorAll('.tab-btn');
 
     if (tab === 'login') {
-        loginForm?.classList.remove('hidden');
-        registerForm?.classList.add('hidden');
-        tabs[0]?.classList.add('active');
-        tabs[1]?.classList.remove('active');
+        if (loginForm) {
+            loginForm.style.display = 'block';
+        }
+        if (registerForm) {
+            registerForm.style.display = 'none';
+        }
+        if (tabs[0]) {
+            tabs[0].classList.add('active');
+        }
+        if (tabs[1]) {
+            tabs[1].classList.remove('active');
+        }
     } else {
-        loginForm?.classList.add('hidden');
-        registerForm?.classList.remove('hidden');
-        tabs[0]?.classList.remove('active');
-        tabs[1]?.classList.add('active');
+        if (loginForm) {
+            loginForm.style.display = 'none';
+        }
+        if (registerForm) {
+            registerForm.style.display = 'block';
+        }
+        if (tabs[0]) {
+            tabs[0].classList.remove('active');
+        }
+        if (tabs[1]) {
+            tabs[1].classList.add('active');
+        }
     }
 }
 
@@ -563,6 +592,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     checkAuthStatus();
     initDropdownMenu();
+
+    // Initialize login tabs if on login page
+    if (document.getElementById('login-form') && document.getElementById('register-form')) {
+        switchTab('login'); // Default to login tab
+    }
 
     // Update stats every 5 seconds
     setInterval(updatePlayerCount, 5000);

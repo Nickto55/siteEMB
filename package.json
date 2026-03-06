@@ -6,7 +6,8 @@
     "scripts": {
         "start": "node server.js",
         "dev": "node server.js",
-        "init-content": "node scripts/initialize-content.js"
+        "init-content": "node scripts/initialize-content.js",
+        "check-db": "node scripts/check-db.js"
     },
     "keywords": [
         "express",

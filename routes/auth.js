@@ -13,24 +13,32 @@ const isValidEmail = (email) => {
 // POST /api/auth/register - Регистрация нового пользователя
 router.post('/register', async (req, res) => {
     try {
+        console.log('📝 Попытка регистрации:', req.body);
+
         const { username, email, password } = req.body;
 
         // Валидация входных данных
         if (!username || !email || !password) {
+            console.log('❌ Отсутствуют обязательные поля');
             return res.status(400).json({ error: 'Все поля обязательны' });
         }
 
         if (username.length < 3) {
+            console.log('❌ Имя пользователя слишком короткое');
             return res.status(400).json({ error: 'Имя пользователя должно быть минимум 3 символа' });
         }
 
         if (!isValidEmail(email)) {
+            console.log('❌ Некорректный email:', email);
             return res.status(400).json({ error: 'Некорректный email' });
         }
 
         if (password.length < 6) {
+            console.log('❌ Пароль слишком короткий');
             return res.status(400).json({ error: 'Пароль должен быть минимум 6 символов' });
         }
+
+        console.log('🔍 Проверка существования пользователя...');
 
         // Проверка существования пользователя
         const existingUser = await pool.query(
@@ -39,11 +47,16 @@ router.post('/register', async (req, res) => {
         );
 
         if (existingUser.rows.length > 0) {
+            console.log('❌ Пользователь уже существует');
             return res.status(409).json({ error: 'Пользователь с таким именем или email уже существует' });
         }
 
+        console.log('🔐 Хеширование пароля...');
+
         // Хеширование пароля (salt rounds = 10)
         const hashedPassword = await bcrypt.hash(password, 10);
+
+        console.log('💾 Создание пользователя...');
 
         // Создание пользователя (роль по умолчанию - user)
         const result = await pool.query(
@@ -52,6 +65,8 @@ router.post('/register', async (req, res) => {
         );
 
         const user = result.rows[0];
+
+        console.log('✅ Пользователь успешно зарегистрирован:', user.username);
 
         res.status(201).json({
             message: 'Пользователь успешно зарегистрирован',
@@ -64,7 +79,7 @@ router.post('/register', async (req, res) => {
             }
         });
     } catch (error) {
-        console.error('Ошибка при регистрации:', error);
+        console.error('❌ Ошибка при регистрации:', error);
         res.status(500).json({ error: 'Ошибка сервера при регистрации' });
     }
 });
@@ -72,12 +87,17 @@ router.post('/register', async (req, res) => {
 // POST /api/auth/login - Вход в систему
 router.post('/login', async (req, res) => {
     try {
+        console.log('🔑 Попытка входа:', req.body);
+
         const { username, password } = req.body;
 
         // Валидация входных данных
         if (!username || !password) {
+            console.log('❌ Отсутствуют логин или пароль');
             return res.status(400).json({ error: 'Имя пользователя и пароль обязательны' });
         }
+
+        console.log('🔍 Поиск пользователя...');
 
         // Поиск пользователя
         const result = await pool.query(
@@ -86,16 +106,22 @@ router.post('/login', async (req, res) => {
         );
 
         if (result.rows.length === 0) {
+            console.log('❌ Пользователь не найден');
             return res.status(401).json({ error: 'Неверные учетные данные' });
         }
 
         const user = result.rows[0];
 
+        console.log('🔐 Проверка пароля...');
+
         // Проверка пароля
         const isValidPassword = await bcrypt.compare(password, user.password);
         if (!isValidPassword) {
+            console.log('❌ Неверный пароль');
             return res.status(401).json({ error: 'Неверные учетные данные' });
         }
+
+        console.log('📅 Обновление last_login...');
 
         // Обновление last_login
         await pool.query(
@@ -103,12 +129,16 @@ router.post('/login', async (req, res) => {
             [user.id]
         );
 
+        console.log('🎫 Генерация токена...');
+
         // Генерация JWT токена
         const token = jwt.sign(
             { userId: user.id, role: user.role },
             process.env.JWT_SECRET,
             { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
         );
+
+        console.log('✅ Вход выполнен успешно:', user.username);
 
         res.json({
             message: 'Успешный вход',
@@ -123,7 +153,7 @@ router.post('/login', async (req, res) => {
             }
         });
     } catch (error) {
-        console.error('Ошибка при входе:', error);
+        console.error('❌ Ошибка при входе:', error);
         res.status(500).json({ error: 'Ошибка сервера при входе' });
     }
 });
