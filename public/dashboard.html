@@ -163,9 +163,17 @@
                 <div class="dashboard-card">
                     <h2 class="text-xl font-bold mb-6 text-purple-soft">Ваш профиль</h2>
 
-                    <div class="space-y-4">
+                    <div id="profile-view-mode" class="space-y-4">
+                        <!-- Avatar -->
+                        <div class="flex items-center gap-4 mb-4">
+                            <img id="profile-avatar" src="" alt="Аватар" class="w-16 h-16 rounded-full bg-purple-deep/20 object-cover border-2 border-purple-soft/30" style="display: none;">
+                            <div id="profile-avatar-placeholder" class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-deep to-purple-neon flex items-center justify-center text-white text-2xl font-bold">
+                                ?
+                            </div>
+                        </div>
+
                         <div>
-                            <p class="text-purple-soft/50 text-sm mb-1">Имя</p>
+                            <p class="text-purple-soft/50 text-sm mb-1">Имя пользователя</p>
                             <p class="text-white font-semibold" id="profile-username">Загрузка...</p>
                         </div>
 
@@ -175,11 +183,53 @@
                         </div>
 
                         <div>
-                            <p class="text-purple-soft/50 text-sm mb-1">Статус</p>
-                            <p class="inline-block px-3 py-1 bg-purple-deep/20 text-purple-soft rounded-full text-sm font-semibold">
-                                Спонсор</p>
+                            <p class="text-purple-soft/50 text-sm mb-1">Роль</p>
+                            <p class="inline-block px-3 py-1 bg-purple-deep/20 text-purple-soft rounded-full text-sm font-semibold" id="profile-role">
+                                Загрузка...
+                            </p>
                         </div>
+
+                        <div>
+                            <p class="text-purple-soft/50 text-sm mb-1">О себе</p>
+                            <p class="text-white" id="profile-bio">Загрузка...</p>
+                        </div>
+
+                        <div>
+                            <p class="text-purple-soft/50 text-sm mb-1">Дата регистрации</p>
+                            <p class="text-white" id="profile-created-at">Загрузка...</p>
+                        </div>
+
+                        <button onclick="toggleEditMode()" class="w-full bg-purple-deep hover:bg-purple-royal text-white font-bold py-2 px-4 rounded-lg transition-all mt-4">
+                            Редактировать профиль
+                        </button>
                     </div>
+
+                    <!-- Edit Form -->
+                    <form id="edit-profile-form" onsubmit="updateProfile(event)" class="hidden space-y-4">
+                        <div>
+                            <label class="text-purple-soft/50 text-sm mb-1 block">Email</label>
+                            <input type="email" id="edit-email" class="auth-input w-full bg-void-dark border border-purple-soft/10 rounded-lg px-4 py-2 text-white focus:border-purple-neon focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="text-purple-soft/50 text-sm mb-1 block">URL аватара</label>
+                            <input type="url" id="edit-avatar" class="auth-input w-full bg-void-dark border border-purple-soft/10 rounded-lg px-4 py-2 text-white focus:border-purple-neon focus:outline-none" placeholder="https://example.com/avatar.jpg">
+                        </div>
+
+                        <div>
+                            <label class="text-purple-soft/50 text-sm mb-1 block">О себе</label>
+                            <textarea id="edit-bio" rows="3" class="auth-input w-full bg-void-dark border border-purple-soft/10 rounded-lg px-4 py-2 text-white focus:border-purple-neon focus:outline-none resize-none" placeholder="Расскажите немного о себе..."></textarea>
+                        </div>
+
+                        <div class="flex gap-2">
+                            <button type="submit" class="flex-1 bg-gradient-to-r from-purple-deep to-purple-neon hover:from-purple-royal hover:to-purple-soft text-white font-bold py-2 px-4 rounded-lg transition-all">
+                                Сохранить
+                            </button>
+                            <button type="button" onclick="toggleEditMode()" class="flex-1 bg-void-dark hover:bg-purple-deep/20 text-purple-soft font-bold py-2 px-4 rounded-lg transition-all border border-purple-soft/10">
+                                Отмена
+                            </button>
+                        </div>
+                    </form>
                 </div>
 
                 <!-- Server Status -->

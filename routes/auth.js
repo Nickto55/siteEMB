@@ -97,6 +97,12 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Неверные учетные данные' });
         }
 
+        // Обновление last_login
+        await pool.query(
+            'UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE id = $1',
+            [user.id]
+        );
+
         // Генерация JWT токена
         const token = jwt.sign(
             { userId: user.id, role: user.role },
@@ -111,12 +117,113 @@ router.post('/login', async (req, res) => {
                 id: user.id,
                 username: user.username,
                 email: user.email,
-                role: user.role
+                role: user.role,
+                avatar_url: user.avatar_url,
+                bio: user.bio
             }
         });
     } catch (error) {
         console.error('Ошибка при входе:', error);
         res.status(500).json({ error: 'Ошибка сервера при входе' });
+    }
+});
+
+// GET /api/auth/me - Получение данных текущего пользователя
+router.get('/me', async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return res.status(401).json({ error: 'Токен не предоставлен' });
+        }
+
+        const token = authHeader.split(' ')[1];
+        
+        // Верификация токена
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        
+        // Получение данных пользователя
+        const result = await pool.query(
+            'SELECT id, username, email, role, avatar_url, bio, created_at, last_login FROM users WHERE id = $1',
+            [decoded.userId]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Пользователь не найден' });
+        }
+
+        res.json({ user: result.rows[0] });
+    } catch (error) {
+        if (error.name === 'JsonWebTokenError') {
+            return res.status(401).json({ error: 'Недействительный токен' });
+        }
+        console.error('Ошибка при получении данных пользователя:', error);
+        res.status(500).json({ error: 'Ошибка сервера' });
+    }
+});
+
+// PUT /api/auth/profile - Обновление профиля пользователя
+router.put('/profile', async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return res.status(401).json({ error: 'Токен не предоставлен' });
+        }
+
+        const token = authHeader.split(' ')[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        
+        const { email, avatar_url, bio } = req.body;
+
+        // Проверка существования email (если меняется)
+        if (email) {
+            const existingEmail = await pool.query(
+                'SELECT id FROM users WHERE email = $1 AND id != $2',
+                [email, decoded.userId]
+            );
+            if (existingEmail.rows.length > 0) {
+                return res.status(409).json({ error: 'Email уже используется другим пользователем' });
+            }
+        }
+
+        // Обновление профиля
+        const updateFields = [];
+        const updateValues = [];
+        let paramIndex = 1;
+
+        if (email !== undefined) {
+            updateFields.push(`email = $${paramIndex++}`);
+            updateValues.push(email);
+        }
+        if (avatar_url !== undefined) {
+            updateFields.push(`avatar_url = $${paramIndex++}`);
+            updateValues.push(avatar_url);
+        }
+        if (bio !== undefined) {
+            updateFields.push(`bio = $${paramIndex++}`);
+            updateValues.push(bio);
+        }
+
+        if (updateFields.length === 0) {
+            return res.status(400).json({ error: 'Нет данных для обновления' });
+        }
+
+        updateValues.push(decoded.userId);
+        
+        const result = await pool.query(
+            `UPDATE users SET ${updateFields.join(', ')} WHERE id = $${paramIndex} RETURNING id, username, email, role, avatar_url, bio`,
+            updateValues
+        );
+
+        res.json({ 
+            message: 'Профиль успешно обновлен',
+            user: result.rows[0] 
+        });
+    } catch (error) {
+        if (error.name === 'JsonWebTokenError') {
+            return res.status(401).json({ error: 'Недействительный токен' });
+        }
+        console.error('Ошибка при обновлении профиля:', error);
+        res.status(500).json({ error: 'Ошибка сервера' });
     }
 });
 
