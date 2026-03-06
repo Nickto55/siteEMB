@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="ru" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Администрация - EmbroMine</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -33,121 +35,255 @@
             }
         }
     </script>
+    <style>
+        .skin-viewer {
+            width: 140px;
+            height: 280px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .skin-viewer.compact {
+            width: 100px;
+            height: 200px;
+        }
+
+        .skin-viewer.mini {
+            width: 70px;
+            height: 140px;
+        }
+
+        .skin-viewer canvas {
+            width: 100% !important;
+            height: 100% !important;
+            cursor: grab;
+        }
+
+        .skin-viewer canvas:active {
+            cursor: grabbing;
+        }
+
+        .skin-loading {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(18, 10, 26, 0.8);
+            border-radius: 12px;
+        }
+
+        .skin-spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid rgba(139, 92, 246, 0.2);
+            border-top-color: #8B5CF6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .skin-viewer.compact .skin-spinner,
+        .skin-viewer.mini .skin-spinner {
+            width: 24px;
+            height: 24px;
+            border-width: 2px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .skin-error {
+            position: absolute;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: #ef4444;
+            font-size: 12px;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .skin-viewer.mini .skin-error {
+            font-size: 10px;
+        }
+    </style>
 </head>
+
 <body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-void-black/80 backdrop-blur-md border-b border-purple-soft/10 transition-all duration-300" id="navbar">
+
+    <nav class="fixed w-full z-50 bg-void-black/80 backdrop-blur-md border-b border-purple-soft/10 transition-all duration-300"
+        id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-purple-deep to-purple-neon rounded-lg flex items-center justify-center shadow-lg shadow-purple-deep/20">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-br from-purple-deep to-purple-neon rounded-lg flex items-center justify-center shadow-lg shadow-purple-deep/20">
                         <span class="text-white text-lg font-bold">E</span>
                     </div>
-                    <a href="index.html" class="text-xl font-bold tracking-tight hover:text-purple-soft transition-colors">
+                    <a href="index.html"
+                        class="text-xl font-bold tracking-tight hover:text-purple-soft transition-colors">
                         Embro<span class="text-purple-neon">Mine</span>
                     </a>
                 </div>
 
-                <!-- Desktop Navigation -->
                 <div class="hidden lg:block">
                     <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="index.html" class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium text-purple-soft/70">Главная</a>
+                        <a href="index.html"
+                            class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium text-purple-soft/70">Главная</a>
 
-                        <!-- О сервере Dropdown -->
                         <div class="relative group">
-                            <a href="#" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                            <a href="#"
+                                class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
                                 О сервере
                                 <span class="ml-1 text-xs">▼</span>
                             </a>
-                            <div class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
-                                <a href="description.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Описание</a>
-                                <a href="mechanics.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Механики сервера</a>
-                                <a href="roleplay.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Ролевые элементы</a>
-                                <a href="season-concept.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Концепция сезона</a>
-                                <a href="principles.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 last:rounded-b-lg">Базовые принципы</a>
+                            <div
+                                class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
+                                <a href="description.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Описание</a>
+                                <a href="mechanics.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Механики
+                                    сервера</a>
+                                <a href="roleplay.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Ролевые
+                                    элементы</a>
+                                <a href="season-concept.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Концепция
+                                    сезона</a>
+                                <a href="principles.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 last:rounded-b-lg">Базовые
+                                    принципы</a>
                             </div>
                         </div>
 
-                        <!-- Правила Dropdown -->
                         <div class="relative group">
-                            <a href="#" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                            <a href="#"
+                                class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
                                 Правила
                                 <span class="ml-1 text-xs">▼</span>
                             </a>
-                            <div class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
-                                <a href="rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Обзор правил</a>
-                                <a href="game-rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Игровые правила</a>
-                                <a href="chat-rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Правила общения</a>
-                                <a href="banned-mods.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Запрещенные моды</a>
-                                <a href="punishments.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Система наказаний</a>
-                                <a href="rules-glossary.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 last:rounded-b-lg">Глоссарий</a>
+                            <div
+                                class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
+                                <a href="rules.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Обзор
+                                    правил</a>
+                                <a href="game-rules.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Игровые
+                                    правила</a>
+                                <a href="chat-rules.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Правила
+                                    общения</a>
+                                <a href="banned-mods.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Запрещенные
+                                    моды</a>
+                                <a href="punishments.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Система
+                                    наказаний</a>
+                                <a href="rules-glossary.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 last:rounded-b-lg">Глоссарий</a>
                             </div>
                         </div>
 
-                        <a href="guides.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Гайды</a>
-                        <a href="map.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Карта</a>
-                        <a href="staff.html" class="text-purple-soft hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Админы</a>
-                        <a href="support.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Помощь</a>
+                        <a href="guides.html"
+                            class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Гайды</a>
+                        <a href="map.html"
+                            class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Карта</a>
+                        <a href="staff.html"
+                            class="text-purple-soft hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Админы</a>
+                        <a href="support.html"
+                            class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Помощь</a>
 
-                        <a href="dashboard.html" id="dashboard-link" class="text-purple-soft hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium" style="display: none;">Профиль</a>
-                        <a href="login.html" id="login-link" class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium text-purple-soft/70">Вход</a>
-                        <button onclick="handleLogout()" id="logout-btn" class="text-purple-soft hover:text-magenta-glow transition-colors px-3 py-2 rounded-md text-sm font-medium" style="display: none;">Выход</button>
+                        <a href="dashboard.html" id="dashboard-link"
+                            class="text-purple-soft hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium"
+                            style="display: none;">Профиль</a>
+                        <a href="login.html" id="login-link"
+                            class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium text-purple-soft/70">Вход</a>
+                        <button onclick="handleLogout()" id="logout-btn"
+                            class="text-purple-soft hover:text-magenta-glow transition-colors px-3 py-2 rounded-md text-sm font-medium"
+                            style="display: none;">Выход</button>
                     </div>
                 </div>
 
-                <!-- Mobile Menu Button -->
                 <div class="lg:hidden">
                     <button onclick="toggleMobileMenu()" class="text-purple-soft/70 hover:text-purple-soft p-2">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Menu -->
         <div class="hidden lg:hidden bg-void-dark border-t border-purple-soft/10" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Главная</a>
+                <a href="index.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Главная</a>
 
-                <!-- О сервере Mobile -->
                 <div class="px-3 py-2">
-                    <div onclick="toggleMobileSubmenu('server-submenu', 'server-arrow')" class="flex items-center justify-between cursor-pointer hover:bg-purple-deep/10 rounded-md p-2 text-purple-soft/70">
+                    <div onclick="toggleMobileSubmenu('server-submenu', 'server-arrow')"
+                        class="flex items-center justify-between cursor-pointer hover:bg-purple-deep/10 rounded-md p-2 text-purple-soft/70">
                         <span>О сервере</span>
                         <span id="server-arrow">▶</span>
                     </div>
                     <div id="server-submenu" class="hidden pl-4 space-y-1 mt-2">
-                        <a href="description.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Описание</a>
-                        <a href="mechanics.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Механики</a>
-                        <a href="roleplay.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Ролевые элементы</a>
-                        <a href="season-concept.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Концепция сезона</a>
-                        <a href="principles.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Базовые принципы</a>
+                        <a href="description.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Описание</a>
+                        <a href="mechanics.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Механики</a>
+                        <a href="roleplay.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Ролевые
+                            элементы</a>
+                        <a href="season-concept.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Концепция
+                            сезона</a>
+                        <a href="principles.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Базовые
+                            принципы</a>
                     </div>
                 </div>
 
-                <!-- Правила Mobile -->
                 <div class="px-3 py-2">
-                    <div onclick="toggleMobileSubmenu('rules-submenu', 'rules-arrow')" class="flex items-center justify-between cursor-pointer hover:bg-purple-deep/10 rounded-md p-2 text-purple-soft/70">
+                    <div onclick="toggleMobileSubmenu('rules-submenu', 'rules-arrow')"
+                        class="flex items-center justify-between cursor-pointer hover:bg-purple-deep/10 rounded-md p-2 text-purple-soft/70">
                         <span>Правила</span>
                         <span id="rules-arrow">▶</span>
                     </div>
                     <div id="rules-submenu" class="hidden pl-4 space-y-1 mt-2">
-                        <a href="rules.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Обзор</a>
-                        <a href="game-rules.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Игровые правила</a>
-                        <a href="chat-rules.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Правила общения</a>
-                        <a href="banned-mods.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Запрещенные моды</a>
-                        <a href="punishments.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Система наказаний</a>
-                        <a href="rules-glossary.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Глоссарий</a>
+                        <a href="rules.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Обзор</a>
+                        <a href="game-rules.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Игровые
+                            правила</a>
+                        <a href="chat-rules.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Правила
+                            общения</a>
+                        <a href="banned-mods.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Запрещенные
+                            моды</a>
+                        <a href="punishments.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Система
+                            наказаний</a>
+                        <a href="rules-glossary.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Глоссарий</a>
                     </div>
                 </div>
 
-                <a href="guides.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Гайды</a>
-                <a href="map.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Карта</a>
-                <a href="staff.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Админы</a>
-                <a href="support.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Помощь</a>
-                <a href="login.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Вход</a>
+                <a href="guides.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Гайды</a>
+                <a href="map.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Карта</a>
+                <a href="staff.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Админы</a>
+                <a href="support.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Помощь</a>
+                <a href="login.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Вход</a>
             </div>
         </div>
     </nav>
@@ -155,7 +291,8 @@
     <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-12">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
+                <h1
+                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
                     Администрация
                 </h1>
                 <p class="text-xl text-purple-soft/60">Команда, которая делает EmbroMine лучше</p>
@@ -164,19 +301,16 @@
             <!-- Основатели -->
             <div class="mb-12">
                 <h2 class="text-2xl font-bold mb-6 text-center text-purple-soft">👑 Основатели</h2>
-                <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
                     <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5 text-center">
-                        <div class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                            <span class="text-3xl">👤</span>
-                        </div>
+                        <div class="skin-viewer mb-4" data-username="Embro"></div>
                         <h3 class="text-xl font-bold mb-1">Embro</h3>
                         <p class="text-yellow-400 text-sm mb-2">Главный администратор</p>
                         <p class="text-purple-soft/60 text-sm">Основатель проекта, отвечает за развитие сервера</p>
                     </div>
+
                     <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5 text-center">
-                        <div class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                            <span class="text-3xl">👤</span>
-                        </div>
+                        <div class="skin-viewer mb-4" data-username="CoFounder"></div>
                         <h3 class="text-xl font-bold mb-1">CoFounder</h3>
                         <p class="text-yellow-400 text-sm mb-2">Технический директор</p>
                         <p class="text-purple-soft/60 text-sm">Отвечает за техническую часть и разработку</p>
@@ -189,25 +323,19 @@
                 <h2 class="text-2xl font-bold mb-6 text-center text-red-400">🔴 Администраторы</h2>
                 <div class="grid md:grid-cols-3 gap-6">
                     <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5 text-center">
-                        <div class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                            <span class="text-2xl">👤</span>
-                        </div>
+                        <div class="skin-viewer compact mb-4" data-username="Admin1"></div>
                         <h3 class="text-lg font-bold mb-1">Admin1</h3>
                         <p class="text-red-400 text-sm mb-2">Администратор</p>
                         <p class="text-purple-soft/60 text-sm">Модерация, ивенты</p>
                     </div>
                     <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5 text-center">
-                        <div class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                            <span class="text-2xl">👤</span>
-                        </div>
+                        <div class="skin-viewer compact mb-4" data-username="Admin2"></div>
                         <h3 class="text-lg font-bold mb-1">Admin2</h3>
                         <p class="text-red-400 text-sm mb-2">Администратор</p>
                         <p class="text-purple-soft/60 text-sm">Техническая поддержка</p>
                     </div>
                     <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5 text-center">
-                        <div class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                            <span class="text-2xl">👤</span>
-                        </div>
+                        <div class="skin-viewer compact mb-4" data-username="Admin3"></div>
                         <h3 class="text-lg font-bold mb-1">Admin3</h3>
                         <p class="text-red-400 text-sm mb-2">Администратор</p>
                         <p class="text-purple-soft/60 text-sm">Разработка плагинов</p>
@@ -220,32 +348,24 @@
                 <h2 class="text-2xl font-bold mb-6 text-center text-blue-400">🔵 Модераторы</h2>
                 <div class="grid md:grid-cols-4 gap-4">
                     <div class="bg-void-dark p-4 rounded-xl border border-purple-soft/5 text-center">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto mb-3 flex items-center justify-center">
-                            <span class="text-xl">👤</span>
-                        </div>
-                        <h3 class="font-bold mb-1">Mod1</h3>
-                        <p class="text-blue-400 text-sm">Модератор</p>
+                        <div class="skin-viewer mini mb-3" data-username="Mod1"></div>
+                        <h3 class="font-bold mb-1 text-sm">Mod1</h3>
+                        <p class="text-blue-400 text-xs">Модератор</p>
                     </div>
                     <div class="bg-void-dark p-4 rounded-xl border border-purple-soft/5 text-center">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto mb-3 flex items-center justify-center">
-                            <span class="text-xl">👤</span>
-                        </div>
-                        <h3 class="font-bold mb-1">Mod2</h3>
-                        <p class="text-blue-400 text-sm">Модератор</p>
+                        <div class="skin-viewer mini mb-3" data-username="Mod2"></div>
+                        <h3 class="font-bold mb-1 text-sm">Mod2</h3>
+                        <p class="text-blue-400 text-xs">Модератор</p>
                     </div>
                     <div class="bg-void-dark p-4 rounded-xl border border-purple-soft/5 text-center">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto mb-3 flex items-center justify-center">
-                            <span class="text-xl">👤</span>
-                        </div>
-                        <h3 class="font-bold mb-1">Mod3</h3>
-                        <p class="text-blue-400 text-sm">Модератор</p>
+                        <div class="skin-viewer mini mb-3" data-username="Mod3"></div>
+                        <h3 class="font-bold mb-1 text-sm">Mod3</h3>
+                        <p class="text-blue-400 text-xs">Модератор</p>
                     </div>
                     <div class="bg-void-dark p-4 rounded-xl border border-purple-soft/5 text-center">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto mb-3 flex items-center justify-center">
-                            <span class="text-xl">👤</span>
-                        </div>
-                        <h3 class="font-bold mb-1">Mod4</h3>
-                        <p class="text-blue-400 text-sm">Модератор</p>
+                        <div class="skin-viewer mini mb-3" data-username="Mod4"></div>
+                        <h3 class="font-bold mb-1 text-sm">Mod4</h3>
+                        <p class="text-blue-400 text-xs">Модератор</p>
                     </div>
                 </div>
             </div>
@@ -255,32 +375,24 @@
                 <h2 class="text-2xl font-bold mb-6 text-center text-green-400">🟢 Хелперы</h2>
                 <div class="grid md:grid-cols-4 gap-4">
                     <div class="bg-void-dark p-4 rounded-xl border border-purple-soft/5 text-center">
-                        <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-full mx-auto mb-3 flex items-center justify-center">
-                            <span class="text-xl">👤</span>
-                        </div>
-                        <h3 class="font-bold mb-1">Helper1</h3>
-                        <p class="text-green-400 text-sm">Хелпер</p>
+                        <div class="skin-viewer mini mb-3" data-username="Helper1"></div>
+                        <h3 class="font-bold mb-1 text-sm">Helper1</h3>
+                        <p class="text-green-400 text-xs">Хелпер</p>
                     </div>
                     <div class="bg-void-dark p-4 rounded-xl border border-purple-soft/5 text-center">
-                        <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-full mx-auto mb-3 flex items-center justify-center">
-                            <span class="text-xl">👤</span>
-                        </div>
-                        <h3 class="font-bold mb-1">Helper2</h3>
-                        <p class="text-green-400 text-sm">Хелпер</p>
+                        <div class="skin-viewer mini mb-3" data-username="Helper2"></div>
+                        <h3 class="font-bold mb-1 text-sm">Helper2</h3>
+                        <p class="text-green-400 text-xs">Хелпер</p>
                     </div>
                     <div class="bg-void-dark p-4 rounded-xl border border-purple-soft/5 text-center">
-                        <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-full mx-auto mb-3 flex items-center justify-center">
-                            <span class="text-xl">👤</span>
-                        </div>
-                        <h3 class="font-bold mb-1">Helper3</h3>
-                        <p class="text-green-400 text-sm">Хелпер</p>
+                        <div class="skin-viewer mini mb-3" data-username="Helper3"></div>
+                        <h3 class="font-bold mb-1 text-sm">Helper3</h3>
+                        <p class="text-green-400 text-xs">Хелпер</p>
                     </div>
                     <div class="bg-void-dark p-4 rounded-xl border border-purple-soft/5 text-center">
-                        <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-full mx-auto mb-3 flex items-center justify-center">
-                            <span class="text-xl">👤</span>
-                        </div>
-                        <h3 class="font-bold mb-1">Helper4</h3>
-                        <p class="text-green-400 text-sm">Хелпер</p>
+                        <div class="skin-viewer mini mb-3" data-username="Helper4"></div>
+                        <h3 class="font-bold mb-1 text-sm">Helper4</h3>
+                        <p class="text-green-400 text-xs">Хелпер</p>
                     </div>
                 </div>
             </div>
@@ -291,8 +403,10 @@
                 <div class="grid md:grid-cols-3 gap-6">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 bg-purple-deep/10 rounded-xl flex items-center justify-center">
-                            <svg class="w-6 h-6 text-purple-royal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            <svg class="w-6 h-6 text-purple-royal" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
                         </div>
                         <div>
@@ -303,7 +417,8 @@
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 bg-[#5865F2]/10 rounded-xl flex items-center justify-center">
                             <svg class="w-6 h-6 text-[#5865F2]" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/>
+                                <path
+                                    d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z" />
                             </svg>
                         </div>
                         <div>
@@ -314,7 +429,8 @@
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center">
                             <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                             </svg>
                         </div>
                         <div>
@@ -330,11 +446,479 @@
     <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="border-t border-purple-soft/10 pt-8">
-                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.</p>
+                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
+                </p>
             </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Исправленный Minecraft Skin Viewer с правильной ориентацией
+        class MinecraftSkinViewer {
+            constructor(container, username) {
+                this.container = container;
+                this.username = username;
+                this.renderer = null;
+                this.scene = null;
+                this.camera = null;
+                this.playerGroup = null;
+                this.isDragging = false;
+                this.previousMousePosition = { x: 0, y: 0 };
+                this.targetRotation = { x: 0, y: 0 };
+                this.currentRotation = { x: 0, y: 0 };
+                this.autoRotate = true;
+
+                this.init();
+            }
+
+            async init() {
+                const loading = document.createElement('div');
+                loading.className = 'skin-loading';
+                loading.innerHTML = '<div class="skin-spinner"></div>';
+                this.container.appendChild(loading);
+
+                const error = document.createElement('div');
+                error.className = 'skin-error';
+                error.textContent = 'Ошибка загрузки';
+                this.container.appendChild(error);
+
+                try {
+                    await this.loadSkin();
+                } catch (error) {
+                    console.error(`Failed to load skin for ${this.username}:`, error);
+                    this.showError();
+                }
+            }
+
+            async loadSkin() {
+                try {
+                    const uuidResponse = await fetch(`https://api.mojang.com/users/profiles/minecraft/${this.username}`);
+                    if (!uuidResponse.ok) throw new Error('User not found');
+
+                    const { id: uuid } = await uuidResponse.json();
+
+                    const profileResponse = await fetch(`https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`);
+                    const profile = await profileResponse.json();
+
+                    const properties = profile.properties.find(p => p.name === 'textures');
+                    if (!properties) throw new Error('No textures found');
+
+                    const textures = JSON.parse(atob(properties.value));
+                    const skinUrl = textures.textures.SKIN.url;
+
+                    const textureLoader = new THREE.TextureLoader();
+                    textureLoader.crossOrigin = 'anonymous';
+
+                    textureLoader.load(
+                        skinUrl,
+                        (texture) => {
+                            this.createFullBody(texture);
+                            this.hideLoading();
+                        },
+                        undefined,
+                        () => {
+                            this.load2DFallback();
+                        }
+                    );
+                } catch (error) {
+                    this.load2DFallback();
+                }
+            }
+
+            load2DFallback() {
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = 64;
+                    canvas.height = 64;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+
+                    const texture = new THREE.CanvasTexture(canvas);
+                    texture.magFilter = THREE.NearestFilter;
+                    texture.minFilter = THREE.NearestFilter;
+
+                    this.createFullBody(texture);
+                    this.hideLoading();
+                };
+                img.onerror = () => {
+                    this.showError();
+                };
+                img.src = `https://minotar.net/skin/${this.username}`;
+            }
+
+            createFullBody(texture) {
+                const width = this.container.clientWidth;
+                const height = this.container.clientHeight;
+
+                this.scene = new THREE.Scene();
+
+                // Камера - позиционируем чтобы персонаж был по центру
+                this.camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 1000);
+                this.camera.position.set(0, -0.5, 12);
+                this.camera.lookAt(0, -0.5, 0);
+
+                this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+                this.renderer.setSize(width, height);
+                this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                this.container.appendChild(this.renderer.domElement);
+
+                this.playerGroup = new THREE.Group();
+                this.scene.add(this.playerGroup);
+
+                // Масштаб - увеличиваем чтобы лучше видеть
+                const scale = 0.15;
+                this.playerGroup.scale.set(scale, scale, scale);
+
+                // === ГОЛОВА ===
+                // Размеры в пикселях: 8x8x8
+                const headGroup = new THREE.Group();
+                headGroup.position.y = 12; // Поднимаем голову на высоту тела + половину головы
+
+                const headGeo = new THREE.BoxGeometry(8, 8, 8);
+                const headMats = this.createMaterials(texture, 'head', false);
+                const head = new THREE.Mesh(headGeo, headMats);
+                headGroup.add(head);
+
+                // Шлем (внешний слой) - на 1 пиксель больше с каждой стороны
+                const helmetGeo = new THREE.BoxGeometry(8.5, 8.5, 8.5);
+                const helmetMats = this.createMaterials(texture, 'head', true);
+                const helmet = new THREE.Mesh(helmetGeo, helmetMats);
+                headGroup.add(helmet);
+
+                this.playerGroup.add(headGroup);
+                this.headGroup = headGroup;
+
+                // === ТЕЛО ===
+                const bodyGroup = new THREE.Group();
+                bodyGroup.position.y = 6; // Центр тела на высоте 6 (половина высоты тела 12)
+
+                const bodyGeo = new THREE.BoxGeometry(8, 12, 4);
+                const bodyMats = this.createMaterials(texture, 'body', false);
+                const body = new THREE.Mesh(bodyGeo, bodyMats);
+                bodyGroup.add(body);
+
+                // Куртка (внешний слой)
+                const jacketGeo = new THREE.BoxGeometry(8.5, 12.5, 4.5);
+                const jacketMats = this.createMaterials(texture, 'body', true);
+                const jacket = new THREE.Mesh(jacketGeo, jacketMats);
+                bodyGroup.add(jacket);
+
+                this.playerGroup.add(bodyGroup);
+
+                // === РУКИ ===
+                // Левая рука - слева от тела
+                this.leftArm = this.createLimb(texture, 'leftArm', -6, 10);
+                this.playerGroup.add(this.leftArm);
+
+                // Правая рука - справа от тела
+                this.rightArm = this.createLimb(texture, 'rightArm', 6, 10);
+                this.playerGroup.add(this.rightArm);
+
+                // === НОГИ ===
+                // Левая нога - слева
+                this.leftLeg = this.createLimb(texture, 'leftLeg', -2, 0);
+                this.playerGroup.add(this.leftLeg);
+
+                // Правая нога - справа
+                this.rightLeg = this.createLimb(texture, 'rightLeg', 2, 0);
+                this.playerGroup.add(this.rightLeg);
+
+                // Освещение
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+                this.scene.add(ambientLight);
+
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                directionalLight.position.set(10, 20, 10);
+                this.scene.add(directionalLight);
+
+                const backLight = new THREE.DirectionalLight(0x8b5cf6, 0.4);
+                backLight.position.set(-10, 10, -10);
+                this.scene.add(backLight);
+
+                this.setupEvents();
+                this.animate();
+            }
+
+            createLimb(texture, type, x, y) {
+                const group = new THREE.Group();
+                group.position.set(x, y, 0);
+
+                const isArm = type.includes('Arm');
+                const width = 4;
+                const height = 12;
+                const depth = 4;
+
+                // Внутренний слой
+                const geo = new THREE.BoxGeometry(width, height, depth);
+                const mats = this.createMaterials(texture, type, false);
+                const mesh = new THREE.Mesh(geo, mats);
+                // Смещаем вниз на половину высоты, чтобы точка вращения была вверху (плечо/бедро)
+                mesh.position.y = -height / 2;
+                group.add(mesh);
+
+                // Внешний слой
+                const outerGeo = new THREE.BoxGeometry(width + 1, height + 1, depth + 1);
+                const outerMats = this.createMaterials(texture, type, true);
+                const outerMesh = new THREE.Mesh(outerGeo, outerMats);
+                outerMesh.position.y = -height / 2;
+                group.add(outerMesh);
+
+                return group;
+            }
+
+            createMaterials(texture, part, isOverlay) {
+                const tw = 64;
+                const th = 64;
+
+                // Правильные UV координаты для Minecraft скина
+                // Порядок граней Three.js: right, left, top, bottom, front, back
+                const uvMap = {
+                    head: {
+                        base: [
+                            { u: 0, v: 8, w: 8, h: 8 },   // right
+                            { u: 16, v: 8, w: 8, h: 8 },   // left
+                            { u: 8, v: 0, w: 8, h: 8 },   // top
+                            { u: 16, v: 0, w: 8, h: 8 },   // bottom
+                            { u: 8, v: 8, w: 8, h: 8 },   // front
+                            { u: 24, v: 8, w: 8, h: 8 }    // back
+                        ],
+                        overlay: [
+                            { u: 32, v: 8, w: 8, h: 8 },   // right
+                            { u: 48, v: 8, w: 8, h: 8 },   // left
+                            { u: 40, v: 0, w: 8, h: 8 },   // top
+                            { u: 48, v: 0, w: 8, h: 8 },   // bottom
+                            { u: 40, v: 8, w: 8, h: 8 },   // front
+                            { u: 56, v: 8, w: 8, h: 8 }    // back
+                        ]
+                    },
+                    body: {
+                        base: [
+                            { u: 16, v: 20, w: 4, h: 12 },  // right
+                            { u: 28, v: 20, w: 4, h: 12 },  // left
+                            { u: 20, v: 16, w: 8, h: 4 },   // top
+                            { u: 28, v: 16, w: 8, h: 4 },   // bottom
+                            { u: 20, v: 20, w: 8, h: 12 },  // front
+                            { u: 32, v: 20, w: 8, h: 12 }   // back
+                        ],
+                        overlay: [
+                            { u: 16, v: 36, w: 4, h: 12 },  // right
+                            { u: 28, v: 36, w: 4, h: 12 },  // left
+                            { u: 20, v: 32, w: 8, h: 4 },   // top
+                            { u: 28, v: 32, w: 8, h: 4 },   // bottom
+                            { u: 20, v: 36, w: 8, h: 12 },  // front
+                            { u: 32, v: 36, w: 8, h: 12 }   // back
+                        ]
+                    },
+                    rightArm: {
+                        base: [
+                            { u: 40, v: 20, w: 4, h: 12 },  // right
+                            { u: 48, v: 20, w: 4, h: 12 },  // left
+                            { u: 44, v: 16, w: 4, h: 4 },   // top
+                            { u: 48, v: 16, w: 4, h: 4 },   // bottom
+                            { u: 44, v: 20, w: 4, h: 12 },  // front
+                            { u: 52, v: 20, w: 4, h: 12 }   // back
+                        ],
+                        overlay: [
+                            { u: 40, v: 36, w: 4, h: 12 },  // right
+                            { u: 48, v: 36, w: 4, h: 12 },  // left
+                            { u: 44, v: 32, w: 4, h: 4 },   // top
+                            { u: 48, v: 32, w: 4, h: 4 },   // bottom
+                            { u: 44, v: 36, w: 4, h: 12 },  // front
+                            { u: 52, v: 36, w: 4, h: 12 }   // back
+                        ]
+                    },
+                    leftArm: {
+                        base: [
+                            { u: 32, v: 52, w: 4, h: 12 },  // right (зеркально)
+                            { u: 40, v: 52, w: 4, h: 12 },  // left
+                            { u: 36, v: 48, w: 4, h: 4 },   // top
+                            { u: 40, v: 48, w: 4, h: 4 },   // bottom
+                            { u: 36, v: 52, w: 4, h: 12 },  // front
+                            { u: 44, v: 52, w: 4, h: 12 }   // back
+                        ],
+                        overlay: [
+                            { u: 48, v: 52, w: 4, h: 12 },  // right
+                            { u: 56, v: 52, w: 4, h: 12 },  // left
+                            { u: 52, v: 48, w: 4, h: 4 },   // top
+                            { u: 56, v: 48, w: 4, h: 4 },   // bottom
+                            { u: 52, v: 52, w: 4, h: 12 },  // front
+                            { u: 60, v: 52, w: 4, h: 12 }   // back
+                        ]
+                    },
+                    rightLeg: {
+                        base: [
+                            { u: 0, v: 20, w: 4, h: 12 },  // right
+                            { u: 8, v: 20, w: 4, h: 12 },  // left
+                            { u: 4, v: 16, w: 4, h: 4 },   // top
+                            { u: 8, v: 16, w: 4, h: 4 },   // bottom
+                            { u: 4, v: 20, w: 4, h: 12 },  // front
+                            { u: 12, v: 20, w: 4, h: 12 }   // back
+                        ],
+                        overlay: [
+                            { u: 0, v: 36, w: 4, h: 12 },  // right
+                            { u: 8, v: 36, w: 4, h: 12 },  // left
+                            { u: 4, v: 32, w: 4, h: 4 },   // top
+                            { u: 8, v: 32, w: 4, h: 4 },   // bottom
+                            { u: 4, v: 36, w: 4, h: 12 },  // front
+                            { u: 12, v: 36, w: 4, h: 12 }   // back
+                        ]
+                    },
+                    leftLeg: {
+                        base: [
+                            { u: 16, v: 52, w: 4, h: 12 },  // right (зеркально)
+                            { u: 24, v: 52, w: 4, h: 12 },  // left
+                            { u: 20, v: 48, w: 4, h: 4 },   // top
+                            { u: 24, v: 48, w: 4, h: 4 },   // bottom
+                            { u: 20, v: 52, w: 4, h: 12 },  // front
+                            { u: 28, v: 52, w: 4, h: 12 }   // back
+                        ],
+                        overlay: [
+                            { u: 0, v: 52, w: 4, h: 12 },  // right
+                            { u: 8, v: 52, w: 4, h: 12 },  // left
+                            { u: 4, v: 48, w: 4, h: 4 },   // top
+                            { u: 8, v: 48, w: 4, h: 4 },   // bottom
+                            { u: 4, v: 52, w: 4, h: 12 },  // front
+                            { u: 12, v: 52, w: 4, h: 12 }   // back
+                        ]
+                    }
+                };
+
+                const faces = isOverlay ? uvMap[part].overlay : uvMap[part].base;
+                const materials = [];
+
+                faces.forEach(face => {
+                    const clonedTexture = texture.clone();
+                    clonedTexture.needsUpdate = true;
+
+                    // Вычисляем UV координаты
+                    // V координата инвертирована в Three.js
+                    const u1 = face.u / tw;
+                    const v1 = 1 - (face.v + face.h) / th;
+                    const u2 = (face.u + face.w) / tw;
+                    const v2 = 1 - face.v / th;
+
+                    clonedTexture.offset.set(u1, v1);
+                    clonedTexture.repeat.set(u2 - u1, v2 - v1);
+
+                    materials.push(new THREE.MeshStandardMaterial({
+                        map: clonedTexture,
+                        transparent: true,
+                        opacity: isOverlay ? 0.95 : 1.0,
+                        side: THREE.DoubleSide
+                    }));
+                });
+
+                return materials;
+            }
+
+            setupEvents() {
+                const canvas = this.renderer.domElement;
+
+                canvas.addEventListener('mousedown', (e) => {
+                    this.isDragging = true;
+                    this.autoRotate = false;
+                    this.previousMousePosition = { x: e.clientX, y: e.clientY };
+                });
+
+                canvas.addEventListener('mousemove', (e) => {
+                    if (!this.isDragging) return;
+
+                    const deltaX = e.clientX - this.previousMousePosition.x;
+
+                    this.targetRotation.y += deltaX * 0.01;
+
+                    this.previousMousePosition = { x: e.clientX, y: e.clientY };
+                });
+
+                canvas.addEventListener('mouseup', () => {
+                    this.isDragging = false;
+                    setTimeout(() => { this.autoRotate = true; }, 3000);
+                });
+
+                canvas.addEventListener('mouseleave', () => {
+                    this.isDragging = false;
+                });
+
+                canvas.addEventListener('touchstart', (e) => {
+                    if (e.touches.length === 1) {
+                        this.isDragging = true;
+                        this.autoRotate = false;
+                        this.previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                    }
+                });
+
+                canvas.addEventListener('touchmove', (e) => {
+                    if (!this.isDragging || e.touches.length !== 1) return;
+                    e.preventDefault();
+
+                    const deltaX = e.touches[0].clientX - this.previousMousePosition.x;
+                    this.targetRotation.y += deltaX * 0.01;
+
+                    this.previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                });
+
+                canvas.addEventListener('touchend', () => {
+                    this.isDragging = false;
+                    setTimeout(() => { this.autoRotate = true; }, 3000);
+                });
+            }
+
+            animate() {
+                requestAnimationFrame(() => this.animate());
+
+                const time = Date.now() * 0.001;
+
+                if (this.autoRotate && !this.isDragging) {
+                    this.targetRotation.y += 0.005;
+                }
+
+                // Плавная интерполяция
+                this.currentRotation.y += (this.targetRotation.y - this.currentRotation.y) * 0.1;
+
+                if (this.playerGroup) {
+                    // Вращаем весь персонаж вокруг оси Y
+                    this.playerGroup.rotation.y = this.currentRotation.y;
+
+                    // Анимация дыхания/ходьбы
+                    if (!this.isDragging) {
+                        this.leftArm.rotation.x = Math.sin(time * 2) * 0.1;
+                        this.rightArm.rotation.x = Math.sin(time * 2 + Math.PI) * 0.1;
+                        this.leftLeg.rotation.x = Math.sin(time * 2 + Math.PI) * 0.05;
+                        this.rightLeg.rotation.x = Math.sin(time * 2) * 0.05;
+                    }
+                }
+
+                this.renderer.render(this.scene, this.camera);
+            }
+
+            hideLoading() {
+                const loading = this.container.querySelector('.skin-loading');
+                if (loading) loading.style.display = 'none';
+            }
+
+            showError() {
+                const loading = this.container.querySelector('.skin-loading');
+                const error = this.container.querySelector('.skin-error');
+                if (loading) loading.style.display = 'none';
+                if (error) error.style.display = 'flex';
+            }
+        }
+
+        // Инициализация всех скинов
+        document.addEventListener('DOMContentLoaded', () => {
+            const skinContainers = document.querySelectorAll('.skin-viewer');
+
+            skinContainers.forEach(container => {
+                const username = container.dataset.username;
+                if (username) {
+                    new MinecraftSkinViewer(container, username);
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
