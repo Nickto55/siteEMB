@@ -137,10 +137,10 @@ router.get('/me', async (req, res) => {
         }
 
         const token = authHeader.split(' ')[1];
-        
+
         // Верификация токена
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        
+
         // Получение данных пользователя
         const result = await pool.query(
             'SELECT id, username, email, role, avatar_url, bio, created_at, last_login FROM users WHERE id = $1',
@@ -171,7 +171,7 @@ router.put('/profile', async (req, res) => {
 
         const token = authHeader.split(' ')[1];
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        
+
         const { email, avatar_url, bio } = req.body;
 
         // Проверка существования email (если меняется)
@@ -208,21 +208,80 @@ router.put('/profile', async (req, res) => {
         }
 
         updateValues.push(decoded.userId);
-        
+
         const result = await pool.query(
             `UPDATE users SET ${updateFields.join(', ')} WHERE id = $${paramIndex} RETURNING id, username, email, role, avatar_url, bio`,
             updateValues
         );
 
-        res.json({ 
+        res.json({
             message: 'Профиль успешно обновлен',
-            user: result.rows[0] 
+            user: result.rows[0]
         });
     } catch (error) {
         if (error.name === 'JsonWebTokenError') {
             return res.status(401).json({ error: 'Недействительный токен' });
         }
         console.error('Ошибка при обновлении профиля:', error);
+        res.status(500).json({ error: 'Ошибка сервера' });
+    }
+});
+
+// PUT /api/auth/change-password - Изменение пароля
+router.put('/change-password', async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return res.status(401).json({ error: 'Токен не предоставлен' });
+        }
+
+        const token = authHeader.split(' ')[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        const { currentPassword, newPassword } = req.body;
+
+        // Валидация входных данных
+        if (!currentPassword || !newPassword) {
+            return res.status(400).json({ error: 'Текущий и новый пароль обязательны' });
+        }
+
+        if (newPassword.length < 6) {
+            return res.status(400).json({ error: 'Новый пароль должен быть минимум 6 символов' });
+        }
+
+        // Получаем текущего пользователя
+        const userResult = await pool.query(
+            'SELECT password FROM users WHERE id = $1',
+            [decoded.userId]
+        );
+
+        if (userResult.rows.length === 0) {
+            return res.status(404).json({ error: 'Пользователь не найден' });
+        }
+
+        const user = userResult.rows[0];
+
+        // Проверяем текущий пароль
+        const isValidPassword = await bcrypt.compare(currentPassword, user.password);
+        if (!isValidPassword) {
+            return res.status(400).json({ error: 'Текущий пароль неверен' });
+        }
+
+        // Хешируем новый пароль
+        const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+
+        // Обновляем пароль
+        await pool.query(
+            'UPDATE users SET password = $1 WHERE id = $2',
+            [hashedNewPassword, decoded.userId]
+        );
+
+        res.json({ message: 'Пароль успешно изменен' });
+    } catch (error) {
+        if (error.name === 'JsonWebTokenError') {
+            return res.status(401).json({ error: 'Недействительный токен' });
+        }
+        console.error('Ошибка при изменении пароля:', error);
         res.status(500).json({ error: 'Ошибка сервера' });
     }
 });

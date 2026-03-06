@@ -329,7 +329,7 @@ function checkAuthStatus() {
     }
 }
 
-function loadUserData() {
+async function loadUserData() {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
 
@@ -338,7 +338,29 @@ function loadUserData() {
         return;
     }
 
-    const userData = JSON.parse(user);
+    try {
+        // Загружаем свежие данные пользователя с сервера
+        const response = await fetch('/api/auth/me', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            // Обновляем localStorage свежими данными
+            localStorage.setItem('user', JSON.stringify(data.user));
+        } else if (response.status === 401) {
+            // Токен истек или недействителен
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+            return;
+        }
+    } catch (error) {
+        console.error('Ошибка загрузки данных пользователя:', error);
+    }
+
+    // Теперь используем данные из localStorage (обновленные или старые)
+    const userData = JSON.parse(localStorage.getItem('user'));
     const profileUsername = document.getElementById('profile-username');
     const profileEmail = document.getElementById('profile-email');
     const profileAvatar = document.getElementById('profile-avatar');
@@ -352,7 +374,7 @@ function loadUserData() {
     if (profileBio) profileBio.textContent = userData.bio || 'Не указано';
     if (profileRole) profileRole.textContent = getRoleName(userData.role);
     if (profileCreatedAt && userData.created_at) profileCreatedAt.textContent = formatDate(userData.created_at);
-    
+
     // Handle avatar display
     if (profileAvatar && profileAvatarPlaceholder) {
         if (userData.avatar_url) {
@@ -365,6 +387,12 @@ function loadUserData() {
             // Show first letter of username
             profileAvatarPlaceholder.textContent = userData.username ? userData.username.charAt(0).toUpperCase() : '?';
         }
+    }
+
+    // Show admin section if user is admin
+    const adminSection = document.getElementById('admin-section');
+    if (adminSection && userData.role === 'admin') {
+        adminSection.style.display = 'block';
     }
 }
 
@@ -388,7 +416,7 @@ function formatDate(dateString) {
 
 async function updateProfile(event) {
     event.preventDefault();
-    
+
     const token = localStorage.getItem('token');
     if (!token) {
         showToast('Ошибка авторизации');
@@ -426,10 +454,52 @@ async function updateProfile(event) {
     }
 }
 
+async function changePassword(event) {
+    event.preventDefault();
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+        showToast('Ошибка авторизации');
+        return;
+    }
+
+    const currentPassword = document.getElementById('current-password')?.value;
+    const newPassword = document.getElementById('new-password')?.value;
+    const confirmNewPassword = document.getElementById('confirm-new-password')?.value;
+
+    if (newPassword !== confirmNewPassword) {
+        showToast('Новый пароль и подтверждение не совпадают');
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/auth/change-password', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ currentPassword, newPassword })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            showToast('Пароль успешно изменен');
+            // Очищаем форму
+            event.target.reset();
+        } else {
+            showToast(data.error || 'Ошибка изменения пароля');
+        }
+    } catch (error) {
+        showToast('Ошибка подключения');
+    }
+}
+
 function toggleEditMode() {
     const editForm = document.getElementById('edit-profile-form');
     const viewMode = document.getElementById('profile-view-mode');
-    
+
     if (editForm && viewMode) {
         const isHidden = editForm.classList.contains('hidden');
         if (isHidden) {
@@ -438,7 +508,7 @@ function toggleEditMode() {
             if (document.getElementById('edit-email')) document.getElementById('edit-email').value = user.email;
             if (document.getElementById('edit-avatar')) document.getElementById('edit-avatar').value = user.avatar_url || '';
             if (document.getElementById('edit-bio')) document.getElementById('edit-bio').value = user.bio || '';
-            
+
             editForm.classList.remove('hidden');
             viewMode.classList.add('hidden');
         } else {

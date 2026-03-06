@@ -1,52 +1,155 @@
-# Express.js REST API - Управление пользователями и отчетами
+# EmbroMine - Веб-сайт сервера
 
-Веб-приложение на Express.js с REST API и веб-интерфейсом для управления пользователями и отчетами, работающее с PostgreSQL.
+Веб-приложение для Minecraft сервера EmbroMine с системой аутентификации, личным кабинетом и управлением контентом.
 
-## Технологии
+## 🚀 Возможности
 
-- **Node.js** 18+
-- **Express.js** 4.18.2
-- **PostgreSQL** 15+
-- **JWT** для аутентификации
-- **Bcrypt** для хеширования паролей
-- **Helmet** для безопасности
-- **CORS** для кросс-доменных запросов
+- **Аутентификация пользователей**: Регистрация, вход, JWT токены
+- **Личный кабинет**: Просмотр и редактирование профиля, смена пароля
+- **Админ-панель**: Управление пользователями и контентом
+- **Система контента**: Динамическое управление страницами сайта
+- **Безопасность**: Helmet, CORS, хеширование паролей
+- **Современный UI**: Tailwind CSS, responsive дизайн
 
-## Структура проекта
+## 🛠 Технологии
+
+- **Backend**: Node.js, Express.js
+- **Database**: PostgreSQL
+- **Authentication**: JWT, bcrypt
+- **Frontend**: HTML5, Tailwind CSS, JavaScript
+- **Security**: Helmet, CORS
+
+## 📁 Структура проекта
 
 ```
 .
-├── server.js              # Главный файл сервера
-├── db.js                  # Подключение к PostgreSQL
-├── package.json           # Зависимости проекта
-├── .env                   # Переменные окружения
-├── Dockerfile             # Docker образ
-├── .dockerignore          # Исключения для Docker
-├── QUICKSTART.md          # Быстрый старт системы контента
-├── CONTENT-SYSTEM.md      # Полная документация контент-системы
-├── migrations/
-│   └── 001_create_content_table.sql  # Миграция БД для контента
-├── public/                # Веб-интерфейс (статические файлы)
+├── server.js              # Главный сервер
+├── db.js                  # Подключение к БД
+├── package.json           # Зависимости
+├── .env                   # Конфигурация
+├── migrations/            # Миграции БД
+│   ├── 001_create_content_table.sql
+│   └── 002_create_users_table.sql
+├── public/                # Веб-интерфейс
 │   ├── index.html        # Главная страница
+│   ├── login.html        # Вход/Регистрация
+│   ├── dashboard.html     # Личный кабинет
+│   ├── admin-panel.html   # Админ-панель
 │   ├── style.css         # Стили
-│   ├── script.js         # JavaScript для работы с API
-│   ├── content-manager.js # Система загрузки контента 📖
-│   ├── content-editor.js  # Редактор контента для администраторов 📝
-│   └── content-manager-demo.html # Пример админ-панели управления контентом
+│   └── script.js         # Клиентский JavaScript
 ├── middleware/
-│   └── auth.js           # JWT аутентификация
-├── scripts/
-│   └── initialize-content.js  # Скрипт загрузки HTML файлов в БД 📥
-└── routes/
-    ├── auth.js           # Регистрация и вход
-    ├── admin.js          # Администрирование пользователей
-    ├── reports.js        # Управление отчетами
-    └── content.js        # API контента страниц 📖
+│   └── auth.js           # Аутентификация
+├── routes/               # API маршруты
+│   ├── auth.js          # Аутентификация
+│   ├── admin.js         # Администрирование
+│   ├── reports.js       # Отчеты
+│   └── content.js       # Контент
+└── scripts/
+    └── initialize-content.js  # Загрузка контента
 ```
 
-## Установка
+## ⚡ Быстрый старт
 
-1. **Установите зависимости:**
+### 1. Установка зависимостей
+```bash
+npm install
+```
+
+### 2. Настройка базы данных
+Создайте базу данных PostgreSQL и выполните миграции:
+```bash
+# Выполните SQL файлы из папки migrations/
+# 001_create_content_table.sql
+# 002_create_users_table.sql
+```
+
+### 3. Настройка переменных окружения
+Скопируйте `.env.example` в `.env` и настройте:
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+JWT_SECRET=your-secret-key-here
+PORT=3000
+```
+
+### 4. Запуск
+```bash
+npm start
+```
+
+Сервер будет доступен на http://localhost:3000
+
+## 🔐 Аутентификация
+
+### Регистрация и вход
+- Перейдите на `/login.html`
+- Зарегистрируйтесь или войдите в систему
+- После входа вы будете перенаправлены в личный кабинет
+
+### Личный кабинет (`/dashboard.html`)
+- Просмотр профиля (имя, email, роль, аватар, био)
+- Редактирование профиля
+- Смена пароля
+- Статус сервера
+- Быстрые ссылки
+
+### Админ-панель (`/admin-panel.html`)
+- Доступна только для пользователей с ролью `admin`
+- Управление пользователями
+- Управление контентом страниц
+
+## 📊 API Endpoints
+
+### Аутентификация
+- `POST /api/auth/register` - Регистрация
+- `POST /api/auth/login` - Вход
+- `GET /api/auth/me` - Данные текущего пользователя
+- `PUT /api/auth/profile` - Обновление профиля
+- `PUT /api/auth/change-password` - Смена пароля
+
+### Администрирование
+- `GET /api/admin/users` - Список пользователей
+- `PUT /api/admin/users/:id/role` - Изменение роли
+- `DELETE /api/admin/users/:id` - Удаление пользователя
+
+### Контент
+- `GET /api/content/:page` - Получение страницы
+- `PUT /api/content/:page` - Обновление страницы
+- `GET /api/content` - Список всех страниц
+
+## 🔑 Данные администратора
+
+По умолчанию создан администратор:
+- **Логин**: admin
+- **Пароль**: admin123
+- **Email**: admin@embromine.ru
+
+## 🐳 Docker
+
+```bash
+# Сборка образа
+docker build -t embromine-site .
+
+# Запуск с PostgreSQL
+docker-compose up
+```
+
+## 📝 Разработка
+
+### Добавление новых страниц
+1. Создайте HTML файл в папке `public/`
+2. Выполните `npm run init-content` для загрузки в БД
+3. Страница станет доступна динамически
+
+### Стилизация
+Проект использует Tailwind CSS с кастомной темой EmbroMine (фиолетовые тона, темная тема).
+
+## 🤝 Вклад в проект
+
+1. Fork репозиторий
+2. Создайте feature branch
+3. Commit изменения
+4. Push в branch
+5. Создайте Pull Request
 ```bash
 npm install
 ```
