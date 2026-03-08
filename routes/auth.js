@@ -60,7 +60,7 @@ router.post('/register', async (req, res) => {
 
         // Создание пользователя (роль по умолчанию - user)
         const result = await pool.query(
-            'INSERT INTO users (username, email, password, role) VALUES ($1, $2, $3, $4) RETURNING id, username, email, role, created_at',
+            'INSERT INTO users (username, email, password_hash, role) VALUES ($1, $2, $3, $4) RETURNING id, username, email, role, created_at',
             [username, email, hashedPassword, 'user']
         );
 
@@ -115,7 +115,7 @@ router.post('/login', async (req, res) => {
         console.log('🔐 Проверка пароля...');
 
         // Проверка пароля
-        const isValidPassword = await bcrypt.compare(password, user.password);
+        const isValidPassword = await bcrypt.compare(password, user.password_hash);
         if (!isValidPassword) {
             console.log('❌ Неверный пароль');
             return res.status(401).json({ error: 'Неверные учетные данные' });
@@ -125,7 +125,7 @@ router.post('/login', async (req, res) => {
 
         // Обновление last_login
         await pool.query(
-            'UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE id = $1',
+            'UPDATE users SET updated_at = CURRENT_TIMESTAMP WHERE id = $1',
             [user.id]
         );
 
@@ -147,9 +147,7 @@ router.post('/login', async (req, res) => {
                 id: user.id,
                 username: user.username,
                 email: user.email,
-                role: user.role,
-                avatar_url: user.avatar_url,
-                bio: user.bio
+                role: user.role
             }
         });
     } catch (error) {
@@ -173,7 +171,7 @@ router.get('/me', async (req, res) => {
 
         // Получение данных пользователя
         const result = await pool.query(
-            'SELECT id, username, email, role, avatar_url, bio, created_at, last_login FROM users WHERE id = $1',
+            'SELECT id, username, email, role, created_at FROM users WHERE id = $1',
             [decoded.userId]
         );
 

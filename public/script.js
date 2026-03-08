@@ -232,9 +232,8 @@ function initSmoothScroll() {
             // Close mobile menu if open
             const menu = document.getElementById('mobile-menu');
             if (menu) menu.classList.add('hidden');
-        }
         });
-});
+    });
 }
 
 // Authentication handler
