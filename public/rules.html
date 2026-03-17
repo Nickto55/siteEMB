@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Правила сервера - EmbroMine</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script>
         tailwind.config = {
@@ -35,7 +37,7 @@
     </script>
     <style>
         /* ===== СТИЛИ АККОРДЕОНА ===== */
-        
+
         /* Контейнер одного пункта правил */
         .accordion-item {
             border: 1px solid rgba(139, 92, 246, 0.2);
@@ -44,11 +46,11 @@
             overflow: hidden;
             transition: all 0.3s ease;
         }
-        
+
         .accordion-item:hover {
             border-color: rgba(139, 92, 246, 0.4);
         }
-        
+
         /* Заголовок аккордеона (кнопка) */
         .accordion-header {
             width: 100%;
@@ -65,32 +67,34 @@
             align-items: center;
             transition: all 0.3s ease;
         }
-        
+
         .accordion-header:hover {
             background: rgba(139, 92, 246, 0.1);
         }
-        
+
         /* Активное состояние заголовка */
         .accordion-header.active {
             background: rgba(139, 92, 246, 0.15);
             border-bottom: 1px solid rgba(139, 92, 246, 0.2);
         }
-        
+
         /* Иконка стрелки */
         .accordion-icon {
             width: 1.25rem;
             height: 1.25rem;
             transition: transform 0.3s ease;
             color: #a78bfa;
-            flex-shrink: 0; /* Запрещаем сжатие иконки */
-            margin-left: 1rem; /* Отступ от текста */
+            flex-shrink: 0;
+            /* Запрещаем сжатие иконки */
+            margin-left: 1rem;
+            /* Отступ от текста */
         }
-        
+
         /* Поворот стрелки при открытии */
         .accordion-header.active .accordion-icon {
             transform: rotate(90deg);
         }
-        
+
         /* Контейнер содержимого (скрыт по умолчанию) */
         .accordion-content {
             max-height: 0;
@@ -98,37 +102,37 @@
             transition: max-height 0.3s ease-out, padding 0.3s ease;
             background: rgba(10, 8, 16, 0.4);
         }
-        
+
         /* Открытое состояние содержимого */
         .accordion-content.active {
             /* max-height управляется через JS (используем scrollHeight) */
             transition: max-height 0.5s ease-in;
         }
-        
+
         /* Тело с текстом правил */
         .accordion-body {
             padding: 0 1.5rem;
             color: #a78bfa;
             line-height: 1.6;
         }
-        
+
         .accordion-content.active .accordion-body {
             padding: 1.5rem;
         }
-        
+
         /* ===== ПЕРЕКЛЮЧАТЕЛЬ МУЛЬТИВЫБОРА ===== */
-        
+
         .toggle-switch {
             position: relative;
             display: inline-flex;
             align-items: center;
             cursor: pointer;
         }
-        
+
         .toggle-input {
             display: none;
         }
-        
+
         .toggle-slider {
             width: 3rem;
             height: 1.5rem;
@@ -138,7 +142,7 @@
             transition: all 0.3s ease;
             border: 1px solid rgba(139, 92, 246, 0.3);
         }
-        
+
         .toggle-slider::before {
             content: '';
             position: absolute;
@@ -150,49 +154,54 @@
             left: 0.125rem;
             transition: all 0.3s ease;
         }
-        
-        .toggle-input:checked + .toggle-slider {
+
+        .toggle-input:checked+.toggle-slider {
             background: rgba(139, 92, 246, 0.4);
         }
-        
-        .toggle-input:checked + .toggle-slider::before {
+
+        .toggle-input:checked+.toggle-slider::before {
             transform: translateX(1.5rem);
         }
-        
+
         /* ===== ПОДСВЕТКА ПУНКТОВ ПРАВИЛ ===== */
-        
+
         .rule-highlight {
             background: rgba(139, 92, 246, 0.05);
             border-left: 3px solid #8B5CF6;
-            padding: 1rem; /* Внутренние отступы как в разделе 2 */
+            padding: 1rem;
+            /* Внутренние отступы как в разделе 2 */
             margin: 0.5rem 0;
-            scroll-margin-top: 5rem; /* Отступ при прокрутке к пункту, чтобы не скрывался под фикс. навбаром */
+            scroll-margin-top: 5rem;
+            /* Отступ при прокрутке к пункту, чтобы не скрывался под фикс. навбаром */
         }
-        
+
         /* ===== ИСПРАВЛЕНИЕ ПЕРЕПОЛНЕНИЯ ===== */
-        
+
         /* Перенос длинных слов (для 2.10 и других длинных пунктов) */
         .accordion-body p {
-            word-wrap: break-word;      /* Перенос слов */
-            overflow-wrap: break-word;  /* Современный аналог */
-            hyphens: auto;              /* Автоматические переносы через дефис */
+            word-wrap: break-word;
+            /* Перенос слов */
+            overflow-wrap: break-word;
+            /* Современный аналог */
+            hyphens: auto;
+            /* Автоматические переносы через дефис */
         }
-        
+
         /* Уменьшение отступов на мобильных устройствах */
         @media (max-width: 640px) {
             .accordion-header {
                 padding: 1rem;
                 font-size: 0.875rem;
             }
-            
+
             .accordion-body {
                 padding: 0 1rem;
             }
-            
+
             .accordion-content.active .accordion-body {
                 padding: 1rem;
             }
-            
+
             /* Уменьшаем отступ у иконки на мобильных */
             .accordion-icon {
                 margin-left: 0.5rem;
@@ -200,18 +209,22 @@
         }
     </style>
 </head>
+
 <body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
-    
+
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-void-black/80 backdrop-blur-md border-b border-purple-soft/10 transition-all duration-300" id="navbar">
+    <nav class="fixed w-full z-50 bg-void-black/80 backdrop-blur-md border-b border-purple-soft/10 transition-all duration-300"
+        id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-purple-deep to-purple-neon rounded-lg flex items-center justify-center shadow-lg shadow-purple-deep/20">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-br from-purple-deep to-purple-neon rounded-lg flex items-center justify-center shadow-lg shadow-purple-deep/20">
                         <span class="text-white text-lg font-bold">E</span>
                     </div>
-                    <a href="index.html" class="text-xl font-bold tracking-tight hover:text-purple-soft transition-colors">
+                    <a href="index.html"
+                        class="text-xl font-bold tracking-tight hover:text-purple-soft transition-colors">
                         Embro<span class="text-purple-neon">Mine</span>
                     </a>
                 </div>
@@ -219,47 +232,79 @@
                 <!-- Desktop Navigation -->
                 <div class="hidden lg:block">
                     <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="index.html" class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium text-purple-soft/70">Главная</a>
+                        <a href="index.html"
+                            class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium text-purple-soft/70">Главная</a>
 
                         <!-- О сервере Dropdown -->
                         <div class="relative group">
-                            <a href="#" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                            <a href="#"
+                                class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
                                 О сервере
                                 <span class="ml-1 text-xs">▼</span>
                             </a>
-                            <div class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
-                                <a href="description.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Описание</a>
-                                <a href="mechanics.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Механики сервера</a>
-                                <a href="roleplay.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Ролевые элементы</a>
-                                <a href="season-concept.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Концепция сезона</a>
-                                <a href="principles.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 last:rounded-b-lg">Базовые принципы</a>
+                            <div
+                                class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
+                                <a href="description.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Описание</a>
+                                <a href="mechanics.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Механики
+                                    сервера</a>
+                                <a href="roleplay.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Ролевые
+                                    элементы</a>
+                                <a href="season-concept.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Концепция
+                                    сезона</a>
+                                <a href="principles.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 last:rounded-b-lg">Базовые
+                                    принципы</a>
                             </div>
                         </div>
 
                         <!-- Правила Dropdown -->
                         <div class="relative group">
-                            <a href="#" class="text-purple-soft hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                            <a href="#"
+                                class="text-purple-soft hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
                                 Правила
                                 <span class="ml-1 text-xs">▼</span>
                             </a>
-                            <div class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
-                                <a href="rules.html" class="text-purple-soft block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Обзор правил</a>
-                                <a href="game-rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Игровые правила</a>
-                                <a href="chat-rules.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Правила общения</a>
-                                <a href="banned-mods.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Запрещенные моды</a>
-                                <a href="punishments.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Система наказаний</a>
-                                <a href="rules-glossary.html" class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 last:rounded-b-lg">Глоссарий</a>
+                            <div
+                                class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
+                                <a href="rules.html"
+                                    class="text-purple-soft block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Обзор
+                                    правил</a>
+
+                                <a href='rp-rules.html'
+                                    class='text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10'>Правила
+                                    РП</a>
+                                <a href="banned-mods.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Запрещенные
+                                    моды</a>
+                                <a href="punishments.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Система
+                                    наказаний</a>
+                                <a href="rules-glossary.html"
+                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 last:rounded-b-lg">Глоссарий</a>
                             </div>
                         </div>
 
-                        <a href="guides.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Гайды</a>
-                        <a href="map.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Карта</a>
-                        <a href="staff.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Админы</a>
-                        <a href="support.html" class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Помощь</a>
+                        <a href="guides.html"
+                            class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Гайды</a>
+                        <a href="map.html"
+                            class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Карта</a>
+                        <a href="staff.html"
+                            class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Админы</a>
+                        <a href="support.html"
+                            class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Помощь</a>
 
-                        <a href="dashboard.html" id="dashboard-link" class="text-purple-soft hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium" style="display: none;">Профиль</a>
-                        <a href="login.html" id="login-link" class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium text-purple-soft/70">Вход</a>
-                        <button onclick="handleLogout()" id="logout-btn" class="text-purple-soft hover:text-magenta-glow transition-colors px-3 py-2 rounded-md text-sm font-medium" style="display: none;">Выход</button>
+                        <a href="dashboard.html" id="dashboard-link"
+                            class="text-purple-soft hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium"
+                            style="display: none;">Профиль</a>
+                        <a href="login.html" id="login-link"
+                            class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium text-purple-soft/70">Вход</a>
+                        <button onclick="handleLogout()" id="logout-btn"
+                            class="text-purple-soft hover:text-magenta-glow transition-colors px-3 py-2 rounded-md text-sm font-medium"
+                            style="display: none;">Выход</button>
                     </div>
                 </div>
 
@@ -267,7 +312,8 @@
                 <div class="lg:hidden">
                     <button onclick="toggleMobileMenu()" class="text-purple-soft/70 hover:text-purple-soft p-2">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
                 </div>
@@ -277,44 +323,68 @@
         <!-- Mobile Menu -->
         <div class="hidden lg:hidden bg-void-dark border-t border-purple-soft/10" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Главная</a>
+                <a href="index.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Главная</a>
 
                 <!-- О сервере Mobile -->
                 <div class="px-3 py-2">
-                    <div onclick="toggleMobileSubmenu('server-submenu', 'server-arrow')" class="flex items-center justify-between cursor-pointer hover:bg-purple-deep/10 rounded-md p-2 text-purple-soft/70">
+                    <div onclick="toggleMobileSubmenu('server-submenu', 'server-arrow')"
+                        class="flex items-center justify-between cursor-pointer hover:bg-purple-deep/10 rounded-md p-2 text-purple-soft/70">
                         <span>О сервере</span>
                         <span id="server-arrow">▶</span>
                     </div>
                     <div id="server-submenu" class="hidden pl-4 space-y-1 mt-2">
-                        <a href="description.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Описание</a>
-                        <a href="mechanics.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Механики</a>
-                        <a href="roleplay.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Ролевые элементы</a>
-                        <a href="season-concept.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Концепция сезона</a>
-                        <a href="principles.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Базовые принципы</a>
+                        <a href="description.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Описание</a>
+                        <a href="mechanics.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Механики</a>
+                        <a href="roleplay.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Ролевые
+                            элементы</a>
+                        <a href="season-concept.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Концепция
+                            сезона</a>
+                        <a href="principles.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Базовые
+                            принципы</a>
                     </div>
                 </div>
 
                 <!-- Правила Mobile -->
                 <div class="px-3 py-2">
-                    <div onclick="toggleMobileSubmenu('rules-submenu', 'rules-arrow')" class="flex items-center justify-between cursor-pointer hover:bg-purple-deep/10 rounded-md p-2 text-purple-soft/70">
+                    <div onclick="toggleMobileSubmenu('rules-submenu', 'rules-arrow')"
+                        class="flex items-center justify-between cursor-pointer hover:bg-purple-deep/10 rounded-md p-2 text-purple-soft/70">
                         <span>Правила</span>
                         <span id="rules-arrow">▶</span>
                     </div>
                     <div id="rules-submenu" class="hidden pl-4 space-y-1 mt-2">
-                        <a href="rules.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft">Обзор</a>
-                        <a href="game-rules.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Игровые правила</a>
-                        <a href="chat-rules.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Правила общения</a>
-                        <a href="banned-mods.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Запрещенные моды</a>
-                        <a href="punishments.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Система наказаний</a>
-                        <a href="rules-glossary.html" class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Глоссарий</a>
+                        <a href="rules.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft">Обзор</a>
+
+                        <a href='rp-rules.html'
+                            class='block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70'>Правила
+                            РП</a>
+                        <a href="banned-mods.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Запрещенные
+                            моды</a>
+                        <a href="punishments.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Система
+                            наказаний</a>
+                        <a href="rules-glossary.html"
+                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Глоссарий</a>
                     </div>
                 </div>
 
-                <a href="guides.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Гайды</a>
-                <a href="map.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Карта</a>
-                <a href="staff.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Админы</a>
-                <a href="support.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Помощь</a>
-                <a href="login.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Вход</a>
+                <a href="guides.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Гайды</a>
+                <a href="map.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Карта</a>
+                <a href="staff.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Админы</a>
+                <a href="support.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Помощь</a>
+                <a href="login.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Вход</a>
             </div>
         </div>
     </nav>
@@ -323,17 +393,19 @@
     <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
         <!-- ИЗМЕНЕНИЕ: max-w-5xl -> max-w-4xl для лучшей читаемости длинного текста -->
         <div class="max-w-4xl mx-auto">
-            
+
             <!-- Заголовок страницы -->
             <div class="mb-12">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
+                <h1
+                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
                     Правила сервера
                 </h1>
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <p class="text-purple-soft/60 max-w-2xl">
-                        Официальные правила сервера EmbroMine. Здесь вы найдёте информацию о допустимом поведении, запрещённых действиях и возможных наказаниях за нарушения.
+                        Официальные правила сервера EmbroMine. Здесь вы найдёте информацию о допустимом поведении,
+                        запрещённых действиях и возможных наказаниях за нарушения.
                     </p>
-                    
+
                     <!-- Переключатель мультивыбора -->
                     <div class="flex items-center gap-3">
                         <span class="text-sm text-purple-soft/70">Мультивыбор</span>
@@ -347,13 +419,13 @@
 
             <!-- ===== АККОРДЕОН С ПРАВИЛАМИ ===== -->
             <div class="space-y-3" id="rulesAccordion">
-                
+
                 <!-- Правило 1: Регистрация и аккаунты -->
                 <div class="accordion-item">
                     <button class="accordion-header" onclick="toggleAccordion(this)">
                         <span>1. Правила регистрации и использования аккаунтов на сервере</span>
                         <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
                     </button>
                     <div class="accordion-content">
@@ -361,17 +433,24 @@
                             <div class="space-y-4">
                                 <div class="rule-highlight">
                                     <strong class="text-purple-soft text-lg block mb-2">1.1. Передача аккаунтов</strong>
-                                    <p class="mb-2">Запрещена передача аккаунта третьим лицам. Аккаунт привязан к конкретному игроку и не может быть продан, подарен или передан.</p>
-                                    <p class="text-purple-soft/80">Игрок несёт ответственность за безопасность своего аккаунта; администрация не несёт ответственности за последствия передачи.</p>
+                                    <p class="mb-2">Запрещена передача аккаунта третьим лицам. Аккаунт привязан к
+                                        конкретному игроку и не может быть продан, подарен или передан.</p>
+                                    <p class="text-purple-soft/80">Игрок несёт ответственность за безопасность своего
+                                        аккаунта; администрация не несёт ответственности за последствия передачи.</p>
                                 </div>
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft">1.2.</strong> Запрещено использование никнеймов, содержащих оскорбления, рекламу или нецензурную лексику.
+                                    <strong class="text-purple-soft">1.2.</strong> Запрещено использование никнеймов,
+                                    содержащих оскорбления, рекламу или нецензурную лексику.
                                 </div>
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft">1.3.</strong> Игрок несёт полную ответственность за безопасность своего аккаунта. Администрация не восстанавливает украденные предметы в случае взлома аккаунта.
+                                    <strong class="text-purple-soft">1.3.</strong> Игрок несёт полную ответственность за
+                                    безопасность своего аккаунта. Администрация не восстанавливает украденные предметы в
+                                    случае взлома аккаунта.
                                 </div>
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft">1.4.</strong> Запрещено использование альт-аккаунтов (дополнительных аккаунтов) для обхода наказаний или получения преимуществ.
+                                    <strong class="text-purple-soft">1.4.</strong> Запрещено использование
+                                    альт-аккаунтов (дополнительных аккаунтов) для обхода наказаний или получения
+                                    преимуществ.
                                 </div>
                             </div>
                         </div>
@@ -383,105 +462,161 @@
                     <button class="accordion-header" onclick="toggleAccordion(this)">
                         <span>2. Правила поведения в чате</span>
                         <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body">
                             <!-- ИЗМЕНЕНИЕ: space-y-6 для большего отступа между подпунктами -->
                             <div class="space-y-6">
-                                
+
                                 <!-- 2.1 Нецензурная лексика -->
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">2.1. Нецензурная лексика</strong>
-                                    <p class="mb-2">Запрещено злоупотребление нецензурными выражениями в любой форме и в любом месте.</p>
-                                    <p class="mb-2">В любом обществе нецензурная лексика не является нормой. Нельзя превращать игру в место, где люди спокойно говорят непристойные вещи. Мы понимаем, что для некоторых нецензурно выражаться — норма, и что слово может прозвучать случайно. Именно поэтому просим следить за собой и сводить подобные выражения к минимуму.</p>
-                                    <p class="text-purple-soft/80">В целях сохранения чистого чата и комфортной игры на сервере было добавлено данное правило.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">2.1. Нецензурная
+                                        лексика</strong>
+                                    <p class="mb-2">Запрещено злоупотребление нецензурными выражениями в любой форме и в
+                                        любом месте.</p>
+                                    <p class="mb-2">В любом обществе нецензурная лексика не является нормой. Нельзя
+                                        превращать игру в место, где люди спокойно говорят непристойные вещи. Мы
+                                        понимаем, что для некоторых нецензурно выражаться — норма, и что слово может
+                                        прозвучать случайно. Именно поэтому просим следить за собой и сводить подобные
+                                        выражения к минимуму.</p>
+                                    <p class="text-purple-soft/80">В целях сохранения чистого чата и комфортной игры на
+                                        сервере было добавлено данное правило.</p>
                                 </div>
 
                                 <!-- 2.2 Оскорбления -->
                                 <div class="rule-highlight">
                                     <strong class="text-purple-soft text-lg block mb-2">2.2. Оскорбления</strong>
                                     <p class="mb-2">Запрещено оскорбление игроков в любой форме и в любом месте.</p>
-                                    <p class="mb-2">Сервер создан для отдыха и развлечения, в нём не может быть места перепалкам и ругательствам.</p>
-                                    <p class="text-purple-soft/80">В целях сохранения чистого чата и комфортной игры на сервере было добавлено данное правило.</p>
+                                    <p class="mb-2">Сервер создан для отдыха и развлечения, в нём не может быть места
+                                        перепалкам и ругательствам.</p>
+                                    <p class="text-purple-soft/80">В целях сохранения чистого чата и комфортной игры на
+                                        сервере было добавлено данное правило.</p>
                                 </div>
 
                                 <!-- 2.3 Флуд -->
                                 <div class="rule-highlight">
                                     <strong class="text-purple-soft text-lg block mb-2">2.3. Флуд</strong>
                                     <p class="mb-2">Запрещён любой флуд и действия, которые могут к нему привести.</p>
-                                    <p class="mb-2"><strong>2.3.1.</strong> Запрещается флуд в любой форме и в любом месте.</p>
-                                    <p class="mb-2"><strong>2.3.2.</strong> Запрещается организация или провоцирование массового флуда.</p>
-                                    <p class="mb-2">Такие сообщения отвлекают от игры, заставляют лишний раз переключаться, мешают найти нужную информацию. Помимо прямого флуда, существует косвенный — когда человек просит каждого написать по сообщению разными способами.</p>
-                                    <p class="text-purple-soft/80">В целях сохранения чистого чата и комфортной игры игроков было добавлено данное правило.</p>
+                                    <p class="mb-2"><strong>2.3.1.</strong> Запрещается флуд в любой форме и в любом
+                                        месте.</p>
+                                    <p class="mb-2"><strong>2.3.2.</strong> Запрещается организация или провоцирование
+                                        массового флуда.</p>
+                                    <p class="mb-2">Такие сообщения отвлекают от игры, заставляют лишний раз
+                                        переключаться, мешают найти нужную информацию. Помимо прямого флуда, существует
+                                        косвенный — когда человек просит каждого написать по сообщению разными
+                                        способами.</p>
+                                    <p class="text-purple-soft/80">В целях сохранения чистого чата и комфортной игры
+                                        игроков было добавлено данное правило.</p>
                                 </div>
 
                                 <!-- 2.4 Реклама -->
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">2.4. Реклама сторонних ресурсов</strong>
-                                    <p class="mb-2">Запрещено распространение информации о сторонних ресурсах, не относящихся к серверу.</p>
-                                    <p class="mb-2">Никто не знает наверняка, с какой целью человек рекламирует ресурс. Зачастую это мошенники, пытающиеся выманить личные данные или нажиться на наивных пользователях. Помимо опасности, такая реклама засоряет чат и усложняет его использование.</p>
-                                    <p class="text-purple-soft/80">В целях сохранения чистого чата, комфортной игры и безопасности игроков было добавлено данное правило.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">2.4. Реклама сторонних
+                                        ресурсов</strong>
+                                    <p class="mb-2">Запрещено распространение информации о сторонних ресурсах, не
+                                        относящихся к серверу.</p>
+                                    <p class="mb-2">Никто не знает наверняка, с какой целью человек рекламирует ресурс.
+                                        Зачастую это мошенники, пытающиеся выманить личные данные или нажиться на
+                                        наивных пользователях. Помимо опасности, такая реклама засоряет чат и усложняет
+                                        его использование.</p>
+                                    <p class="text-purple-soft/80">В целях сохранения чистого чата, комфортной игры и
+                                        безопасности игроков было добавлено данное правило.</p>
                                 </div>
 
                                 <!-- 2.5 Коммерческая деятельность -->
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">2.5. Коммерческая деятельность</strong>
+                                    <strong class="text-purple-soft text-lg block mb-2">2.5. Коммерческая
+                                        деятельность</strong>
                                     <p class="mb-2">Запрещена любая коммерческая деятельность.</p>
-                                    <p class="mb-2">Наш сервер — не торговая площадка для продажи товаров (аккаунтов в других играх, инфопродуктов, иных ресурсов). Мы не гарантируем безопасность такой торговли, а подобные сообщения засоряют чат.</p>
-                                    <p class="mb-2">Единственным постановщиком услуг на сервере являемся мы сами. Люди, продающие внутриигровые услуги, зарабатывают на нашем труде и лишают прибыли нас. Это отрицательно сказывается на внутренней экономике.</p>
-                                    <p class="text-purple-soft/80">В целях сохранения чистого чата, а также баланса и прибыли сервера было добавлено данное правило.</p>
+                                    <p class="mb-2">Наш сервер — не торговая площадка для продажи товаров (аккаунтов в
+                                        других играх, инфопродуктов, иных ресурсов). Мы не гарантируем безопасность
+                                        такой торговли, а подобные сообщения засоряют чат.</p>
+                                    <p class="mb-2">Единственным постановщиком услуг на сервере являемся мы сами. Люди,
+                                        продающие внутриигровые услуги, зарабатывают на нашем труде и лишают прибыли
+                                        нас. Это отрицательно сказывается на внутренней экономике.</p>
+                                    <p class="text-purple-soft/80">В целях сохранения чистого чата, а также баланса и
+                                        прибыли сервера было добавлено данное правило.</p>
                                 </div>
 
                                 <!-- 2.6 Провокации -->
                                 <div class="rule-highlight">
                                     <strong class="text-purple-soft text-lg block mb-2">2.6. Провокации</strong>
                                     <p class="mb-2">Запрещена провокация игроков на нарушение правил.</p>
-                                    <p class="mb-2"><strong>2.6.1.</strong> Запрещено оскорбление или негативное упоминание родственников.</p>
-                                    <p class="mb-2"><strong>2.6.2.</strong> Запрещены любые угрозы реальной расправой.</p>
-                                    <p class="mb-2">Неопытные игроки не знают о правилах, а бывалые вместо подсказки нарочно подначивают на нарушение. Такого допускать нельзя. Даже опытный игрок может словить волну неприятных, но цензурных фраз и оскорбить в ответ.</p>
-                                    <p class="text-purple-soft/80">В целях сохранения комфортной игры игроков было добавлено данное правило.</p>
+                                    <p class="mb-2"><strong>2.6.1.</strong> Запрещено оскорбление или негативное
+                                        упоминание родственников.</p>
+                                    <p class="mb-2"><strong>2.6.2.</strong> Запрещены любые угрозы реальной расправой.
+                                    </p>
+                                    <p class="mb-2">Неопытные игроки не знают о правилах, а бывалые вместо подсказки
+                                        нарочно подначивают на нарушение. Такого допускать нельзя. Даже опытный игрок
+                                        может словить волну неприятных, но цензурных фраз и оскорбить в ответ.</p>
+                                    <p class="text-purple-soft/80">В целях сохранения комфортной игры игроков было
+                                        добавлено данное правило.</p>
                                 </div>
 
                                 <!-- 2.7 Неадекватное поведение -->
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">2.7. Неадекватное поведение</strong>
+                                    <strong class="text-purple-soft text-lg block mb-2">2.7. Неадекватное
+                                        поведение</strong>
                                     <p class="mb-2">Запрещено поведение, неприятное большинству игроков на сервере.</p>
-                                    <p class="mb-2">Бывает, что человек не использует нецензурную лексику, никого не оскорбляет, но ведёт себя так, как не ведут себя даже в неприличном обществе. Откровенные разговоры на темы, которые не обсуждают при всех, нахальное поведение и другие подобные проявления запрещены.</p>
-                                    <p class="text-purple-soft/80">В целях сохранения чистого чата и комфорта игроков было добавлено данное правило.</p>
+                                    <p class="mb-2">Бывает, что человек не использует нецензурную лексику, никого не
+                                        оскорбляет, но ведёт себя так, как не ведут себя даже в неприличном обществе.
+                                        Откровенные разговоры на темы, которые не обсуждают при всех, нахальное
+                                        поведение и другие подобные проявления запрещены.</p>
+                                    <p class="text-purple-soft/80">В целях сохранения чистого чата и комфорта игроков
+                                        было добавлено данное правило.</p>
                                 </div>
 
                                 <!-- 2.8 Конфликтные темы -->
                                 <div class="rule-highlight">
                                     <strong class="text-purple-soft text-lg block mb-2">2.8. Конфликтные темы</strong>
-                                    <p class="mb-2">Запрещено разжигание политических, межнациональных или религиозных конфликтов.</p>
-                                    <p class="mb-2">Политика и религия — темы, на которые проще всего задеть человека. Если чьё-то мнение не угодно другим, каждый норовит доказать обратное. Так как сервер в первую очередь игровой, таким дискуссиям не место в чате.</p>
-                                    <p class="text-purple-soft/80">В целях сохранения комфортной игры игроков было добавлено данное правило.</p>
+                                    <p class="mb-2">Запрещено разжигание политических, межнациональных или религиозных
+                                        конфликтов.</p>
+                                    <p class="mb-2">Политика и религия — темы, на которые проще всего задеть человека.
+                                        Если чьё-то мнение не угодно другим, каждый норовит доказать обратное. Так как
+                                        сервер в первую очередь игровой, таким дискуссиям не место в чате.</p>
+                                    <p class="text-purple-soft/80">В целях сохранения комфортной игры игроков было
+                                        добавлено данное правило.</p>
                                 </div>
 
                                 <!-- 2.9 Персональные данные -->
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">2.9. Персональные данные</strong>
-                                    <p class="mb-2">Запрещено распространение и использование персональных данных игроков без их согласия в любом месте и любой форме.</p>
-                                    <p class="mb-2">Технологии стремительно развиваются, но это может сыграть злую шутку. В последнее время популярны деаноны, сливы и способы «запугивания». Мы всегда стоим за сохранение конфиденциальности игроков, поэтому пресекаем попытки распространения их личных данных как внутри сервера, так и вне его.</p>
-                                    <p class="text-purple-soft/80">В целях сохранения комфортной игры на сервере было добавлено данное правило.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">2.9. Персональные
+                                        данные</strong>
+                                    <p class="mb-2">Запрещено распространение и использование персональных данных
+                                        игроков без их согласия в любом месте и любой форме.</p>
+                                    <p class="mb-2">Технологии стремительно развиваются, но это может сыграть злую
+                                        шутку. В последнее время популярны деаноны, сливы и способы «запугивания». Мы
+                                        всегда стоим за сохранение конфиденциальности игроков, поэтому пресекаем попытки
+                                        распространения их личных данных как внутри сервера, так и вне его.</p>
+                                    <p class="text-purple-soft/80">В целях сохранения комфортной игры на сервере было
+                                        добавлено данное правило.</p>
                                 </div>
 
                                 <!-- 2.10 Дезинформация (ИСПРАВЛЕНО: добавлены переносы) -->
                                 <div class="rule-highlight">
                                     <strong class="text-purple-soft text-lg block mb-2">2.10. Дезинформация</strong>
-                                    <p class="mb-2">Запрещено намеренное дезинформирование игроков о готовящихся изменениях на сервере или в его ресурсах.</p>
-                                    <p class="mb-2">Бывают случаи, когда игроки распространяют «слухи» о грядущем вайпе, закрытии режима или ином изменении проекта. Чаще всего они ложны и преследуют цель ввести в заблуждение. С нашей стороны мы не можем допустить распространения подобной дезинформации.</p>
-                                    <p class="text-purple-soft/80">В целях сохранения чистого чата на сервере было добавлено данное правило.</p>
+                                    <p class="mb-2">Запрещено намеренное дезинформирование игроков о готовящихся
+                                        изменениях на сервере или в его ресурсах.</p>
+                                    <p class="mb-2">Бывают случаи, когда игроки распространяют «слухи» о грядущем вайпе,
+                                        закрытии режима или ином изменении проекта. Чаще всего они ложны и преследуют
+                                        цель ввести в заблуждение. С нашей стороны мы не можем допустить распространения
+                                        подобной дезинформации.</p>
+                                    <p class="text-purple-soft/80">В целях сохранения чистого чата на сервере было
+                                        добавлено данное правило.</p>
                                 </div>
 
                                 <!-- 2.11 Подстрекательство -->
                                 <div class="rule-highlight">
                                     <strong class="text-purple-soft text-lg block mb-2">2.11. Подстрекательство</strong>
-                                    <p class="mb-2">Запрещены любые действия или высказывания, подталкивающие других игроков к нарушению правил сервера.</p>
-                                    <p class="mb-2">Неопытные игроки не знают о правилах, а бывалые вместо подсказки нарочно подначивают на нарушение. Такого допускать нельзя, поэтому мы наказываем таких людей.</p>
-                                    <p class="text-purple-soft/80">В целях сохранения комфортной игры на сервере было добавлено данное правило.</p>
+                                    <p class="mb-2">Запрещены любые действия или высказывания, подталкивающие других
+                                        игроков к нарушению правил сервера.</p>
+                                    <p class="mb-2">Неопытные игроки не знают о правилах, а бывалые вместо подсказки
+                                        нарочно подначивают на нарушение. Такого допускать нельзя, поэтому мы наказываем
+                                        таких людей.</p>
+                                    <p class="text-purple-soft/80">В целях сохранения комфортной игры на сервере было
+                                        добавлено данное правило.</p>
                                 </div>
 
                             </div>
@@ -494,291 +629,281 @@
                     <button class="accordion-header" onclick="toggleAccordion(this)">
                         <span>3. Основные правила сервера</span>
                         <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body">
                             <div class="space-y-4">
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.1. Запрещается получать преимущество над игроками нечестным путём</strong>
-                                    <p class="mb-2"><strong>3.1.1.</strong> Использование сторонних модификаций и программ является нарушением.</p>
-                                    <p class="mb-2"><strong>3.1.2.</strong> Использование багов сервера и игры является нарушением.</p>
-                                    <p class="text-purple-soft/80">Равенство игроков — один из важнейших параметров игры на сервере. В целях сохранения равенства игроков, их комфортной игры и справедливости было добавлено данное правило.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.1. Запрещается получать
+                                        преимущество над игроками нечестным путём</strong>
+                                    <p class="mb-2"><strong>3.1.1.</strong> Использование сторонних модификаций и
+                                        программ является нарушением.</p>
+                                    <p class="mb-2"><strong>3.1.2.</strong> Использование багов сервера и игры является
+                                        нарушением.</p>
+                                    <p class="text-purple-soft/80">Равенство игроков — один из важнейших параметров игры
+                                        на сервере. В целях сохранения равенства игроков, их комфортной игры и
+                                        справедливости было добавлено данное правило.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.2. Запрещается создавать постройки или использовать скины/плащи нецензурного характера</strong>
-                                    <p class="mb-2">Minecraft, как и наш сервер, создан для детей. В целях безопасности юных игроков, а также комфортного их времяпровождения на сервере было добавлено данное правило.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.2. Запрещается создавать
+                                        постройки или использовать скины/плащи нецензурного характера</strong>
+                                    <p class="mb-2">Minecraft, как и наш сервер, создан для детей. В целях безопасности
+                                        юных игроков, а также комфортного их времяпровождения на сервере было добавлено
+                                        данное правило.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.3. Запрещается умалчивать о нарушителях</strong>
-                                    <p class="mb-2">В целях сохранения равенства игроков и справедливости было добавлено данное правило.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.3. Запрещается умалчивать о
+                                        нарушителях</strong>
+                                    <p class="mb-2">В целях сохранения равенства игроков и справедливости было добавлено
+                                        данное правило.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.6. Запрещается препятствовать нормальной работе клиента игры других игроков</strong>
-                                    <p class="mb-2">В целях сохранения комфортной и стабильной игры было добавлено данное правило.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.4. Запрещается препятствовать
+                                        нормальной работе клиента игры других игроков</strong>
+                                    <p class="mb-2">В целях сохранения комфортной и стабильной игры было добавлено
+                                        данное правило.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.7. Запрещается обманывать/вводить в заблуждение администрацию проекта</strong>
-                                    <p class="mb-2">В целях сохранения равенства и честной игры игроков было добавлено данное правило.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.5. Запрещается
+                                        обманывать/вводить в заблуждение администрацию проекта</strong>
+                                    <p class="mb-2">В целях сохранения равенства и честной игры игроков было добавлено
+                                        данное правило.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.8. Запрещается создавать механизмы, вызывающие лаги или сбои на сервере</strong>
-                                    <p class="mb-2">Стабильная игра на сервере — приоритетная задача. В целях сохранения комфортной и стабильной игры было добавлено данное правило.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.8. Запрещается создавать
+                                        механизмы, вызывающие лаги или сбои на сервере</strong>
+                                    <p class="mb-2">Стабильная игра на сервере — приоритетная задача. В целях сохранения
+                                        комфортной и стабильной игры было добавлено данное правило.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.9. Запрещается гриферство и порча имущества</strong>
-                                    <p class="mb-2"><strong>3.9.1.</strong> Порча региона/острова игроком, не состоящим в нём, является нарушением.</p>
-                                    <p class="mb-2"><strong>3.9.2.</strong> Создание засад или обман не является нарушением.</p>
-                                    <p class="mb-2"><strong>3.9.3.</strong> Порча региона игроком, состоящим в регионе/острове, не является нарушением.</p>
-                                    <p class="text-purple-soft/80">Комфортная игра — это то, зачем любой игрок приходит на сервер. В целях сохранения комфортной и честной игры на сервере было добавлено данное правило.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.9. Запрещается гриферство и
+                                        порча имущества</strong>
+                                    <p class="mb-2"><strong>3.9.1.</strong> Порча региона/острова игроком, не состоящим
+                                        в нём, является нарушением.</p>
+                                    <p class="mb-2"><strong>3.9.2.</strong> Создание засад или обман не является
+                                        нарушением.</p>
+                                    <p class="mb-2"><strong>3.9.3.</strong> Порча региона игроком, состоящим в
+                                        регионе/острове, не является нарушением.</p>
+                                    <p class="text-purple-soft/80">Комфортная игра — это то, зачем любой игрок приходит
+                                        на сервер. В целях сохранения комфортной и честной игры на сервере было
+                                        добавлено данное правило.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.10. Запрещается нарушать комфортное пребывание в чужом регионе</strong>
-                                    <p class="mb-2"><strong>3.10.1.</strong> Игрокам, не являющимся участниками региона, запрещается создавать условия, нарушающие комфортное пребывание и игровую деятельность его владельца и участников.</p>
-                                    <p class="mb-2"><strong>3.10.2.</strong> Исключением является администрация сервера, которая имеет право вмешаться в игру владельца или участников региона в случае служебной необходимости.</p>
-                                    <p class="text-purple-soft/80">В целях сохранения комфортной и честной игры на сервере было добавлено данное правило.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.10. Запрещается нарушать
+                                        комфортное пребывание в чужом регионе</strong>
+                                    <p class="mb-2"><strong>3.10.1.</strong> Игрокам, не являющимся участниками региона,
+                                        запрещается создавать условия, нарушающие комфортное пребывание и игровую
+                                        деятельность его владельца и участников.</p>
+                                    <p class="mb-2"><strong>3.10.2.</strong> Исключением является администрация сервера,
+                                        которая имеет право вмешаться в игру владельца или участников региона в случае
+                                        служебной необходимости.</p>
+                                    <p class="text-purple-soft/80">В целях сохранения комфортной и честной игры на
+                                        сервере было добавлено данное правило.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.11. Запрещается автофермерство и ботоводство</strong>
-                                    <p class="mb-2"><strong>3.11.1.</strong> Запрещено создание и использование любых автоферм — механизмов для автоматического сбора ресурсов без прямого участия игрока.</p>
-                                    <p class="mb-2"><strong>3.11.2.</strong> Запрещено создание и использование аккаунтов для сбора ресурсов и автоматизации без вмешательства самого игрока, ботоводство.</p>
-                                    <p class="mb-2"><strong>3.11.3.</strong> Ботоводством считается иметь хотя бы один активный аккаунт, который совершает любые полезные действия, которым не управляет игрок, даже если им иногда управляет сам игрок.</p>
-                                    <p class="mb-2"><strong>3.11.4.</strong> Правило действует для всех независимо от их привилегии, уровня или статистики на сервере.</p>
-                                    <p class="text-purple-soft/80">Создание равной игры — приоритетная задача. В целях сохранения честной игры на сервере было добавлено данное правило.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.11. Запрещается автофермерство
+                                        и ботоводство</strong>
+                                    <p class="mb-2"><strong>3.11.1.</strong> Запрещено создание и использование любых
+                                        автоферм — механизмов для автоматического сбора ресурсов без прямого участия
+                                        игрока.</p>
+                                    <p class="mb-2"><strong>3.11.2.</strong> Запрещено создание и использование
+                                        аккаунтов для сбора ресурсов и автоматизации без вмешательства самого игрока,
+                                        ботоводство.</p>
+                                    <p class="mb-2"><strong>3.11.3.</strong> Ботоводством считается иметь хотя бы один
+                                        активный аккаунт, который совершает любые полезные действия, которым не
+                                        управляет игрок, даже если им иногда управляет сам игрок.</p>
+                                    <p class="mb-2"><strong>3.11.4.</strong> Правило действует для всех независимо от их
+                                        привилегии, уровня или статистики на сервере.</p>
+                                    <p class="text-purple-soft/80">Создание равной игры — приоритетная задача. В целях
+                                        сохранения честной игры на сервере было добавлено данное правило.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Правило 4: Правила Политического РП -->
+
                 <div class="accordion-item">
                     <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span>4. Правила Политического РП</span>
+                        <span>4. Дополнительные правила для игроков со статусом Creator</span>
                         <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body">
                             <div class="space-y-4">
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">4.1. Запрещается получать политическое и военное преимущество нечестным путём</strong>
-                                    <p class="mb-2"><strong>4.1.1.</strong> Использование багов плагинов сервера (регионов, экономики, войн, государств) для получения преимущества является нарушением.</p>
-                                    <p class="mb-2"><strong>4.1.2.</strong> Использование альтернативных аккаунтов для обхода санкций, блокировок, участия в войнах или получения политического влияния является нарушением.</p>
-                                    <p class="mb-2"><strong>4.1.3.</strong> Предательство внутри государства с целью передачи ресурсов, территорий или информации врагу вне рамок легального РП-предательства является нарушением.</p>
-                                    <p class="text-purple-soft/80">Политический РП строится на честной борьбе и дипломатии. Обход механик разрушает систему государств и делает бессмысленным политическое строительство.</p>
+                                    <strong class="text-purple-soft">4.1.</strong> Статус Creator предоставляется новым
+                                    игрокам на испытательный срок (7 дней).
                                 </div>
-
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">4.2. Запрещается умышленное нарушение механик политического и военного РП</strong>
-                                    <p class="mb-2"><strong>4.2.1.</strong> Обход системы войн (война без объявления, атака вне времени войны) является нарушением.</p>
-                                    <p class="mb-2"><strong>4.2.2.</strong> Объединение государств или игроков на Solo-режимах против установленных правил является нарушением.</p>
-                                    <p class="mb-2"><strong>4.2.3.</strong> Игра в пользу другого государства (саботаж собственной страны) без обоснованного РП-контекста является нарушением.</p>
-                                    <p class="mb-2"><strong>4.2.4.</strong> Правило не может быть нарушено, если участники остались одни в рамках легального конфликта.</p>
-                                    <p class="text-purple-soft/80">Распределение сил и легитимность войн — основа стабильного политического мира. Нарушение баланса разрушает дипломатическую систему.</p>
+                                    <strong class="text-purple-soft">4.2.</strong> Игроки со статусом Creator имеют
+                                    ограниченные права до подтверждения надёжности.
                                 </div>
-
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">4.3. Запрещается получение политического веса нечестным путём</strong>
-                                    <p class="mb-2"><strong>4.3.1.</strong> Накрутка голосов, репутации, дипломатического влияния с использованием альтернативных аккаунтов является нарушением.</p>
-                                    <p class="mb-2"><strong>4.3.2.</strong> Создание фиктивных государств, городов-призраков для манипуляции политической картой сервера является нарушением.</p>
-                                    <p class="mb-2"><strong>4.3.3.</strong> Искусственная инфляция или дефляция валюты через эксплойты или координированные действия с нарушителями является нарушением.</p>
-                                    <p class="text-purple-soft/80">Политический авторитет должен отражать реальный вклад игрока. Фиктивные государства искажают политическую систему сервера.</p>
+                                    <strong class="text-purple-soft">4.3.</strong> Запрещено использование сложных
+                                    механизмов Redstone и автоматических ферм без разрешения модератора.
                                 </div>
-
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">4.4. Запрещается гриферство вне рамок легальных военных действий</strong>
-                                    <p class="mb-2"><strong>4.4.1.</strong> Разрушение, кража или порча построек, не являющихся объектом активной легальной войны, является нарушением.</p>
-                                    <p class="mb-2"><strong>4.4.2.</strong> Кража ресурсов из чужих сундуков вне рамок войны или без оформленного договора о репарациях является нарушением.</p>
-                                    <p class="mb-2"><strong>4.4.3.</strong> Убийство игроков вне зон PvP или вне состояния войны без РП-обоснования является нарушением.</p>
-                                    <p class="mb-2"><strong>4.4.4.</strong> Создание засад и обман в рамках РП не являются нарушением.</p>
-                                    <p class="text-purple-soft/80">Политический РП допускает интриги, но в рамках установленных механик. Внезапная агрессия вне войны разрушает смысл государственного строительства.</p>
-                                </div>
-
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">4.5. Запрещается нарушать суверенитет государств вне рамок легальных механик</strong>
-                                    <p class="mb-2"><strong>4.5.1.</strong> Незаконное проникновение на территорию государства с целью шпионажа или саботажа вне рамок объявленной войны является нарушением.</p>
-                                    <p class="mb-2"><strong>4.5.2.</strong> Блокада портов, дорог, торговых путей без объявления войны или экономической санкции через легальные механики является нарушением.</p>
-                                    <p class="mb-2"><strong>4.5.3.</strong> Застройка чужой территории снаружи для провокации конфликта является нарушением.</p>
-                                    <p class="text-purple-soft/80">Суверенитет — основа политического РП. Уверенность в защите территории стимулирует инвестиции в строительство и дипломатию.</p>
-                                </div>
-
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">4.6. Запрещается метагейминг</strong>
-                                    <p class="mb-2"><strong>4.6.1.</strong> Использование информации, полученной вне игры (Discord, личные сообщения, стримы), для получения преимущества в РП является нарушением.</p>
-                                    <p class="mb-2"><strong>4.6.2.</strong> Выход из игры во время боевых действий, ареста или РП-ситуаций для избежания последствий (combat logging) является нарушением.</p>
-                                    <p class="mb-2"><strong>4.6.3.</strong> Использование ООС угроз или шантажа для достижения ИЦ целей является нарушением.</p>
-                                    <p class="text-purple-soft/80">Политический РП строится на иммерсии. Метагейминг разрушает доверие и делает шпионаж бессмысленным.</p>
-                                </div>
-
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">4.7. Запрещается злоупотребление дипломатическим иммунитетом</strong>
-                                    <p class="mb-2"><strong>4.7.1.</strong> Использование статуса дипломата для шпионажа или саботажа вне рамок специального РП-договора является нарушением.</p>
-                                    <p class="mb-2"><strong>4.7.2.</strong> Намеренное провоцирование атаки для активации защитных механизмов или получения повода для войны является нарушением.</p>
-                                    <p class="mb-2"><strong>4.7.3.</strong> Использование нейтрального статуса или союзов исключительно для подготовки к предательства без РП-обоснования является нарушением.</p>
-                                    <p class="text-purple-soft/80">Дипломатические механики существуют для развития РП, а не для эксплуатации. Злоупотребление вынуждает страны изолироваться.</p>
-                                </div>
-
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">4.8. Политическое восстание, гражданская война и военный путь к независимости</strong>
-                                    <p class="mb-2"><strong>4.8.1.</strong> Общие положения: Игрок вправе бороться за независимость своего региона или смену политического строя законными методами. Для легитимности восстания требуется соблюдение процедур, прописанных в данном правиле. Использование альтернативных аккаунтов для создания искусственной массовости восстания категорически запрещено.</p>
-                                    <p class="mb-2"><strong>4.8.2.</strong> Мирный путь к независимости: Регион вправе провести референдум о независимости при поддержке большинства активных жителей. Результаты референдума фиксируются администрацией при предоставлении доказательств добровольного участия. Государство обязано признать результаты легального референдума или инициировать дипломатические переговоры.</p>
-                                    <p class="mb-2"><strong>4.8.3.</strong> Политическое восстание: Восстание — вооружённое противостояние властям с целью смены правительства или политического курса без отделения территории. Для объявления восстания требуется публичное заявление лидера с изложением требований и мотивов. Восстание должно поддерживаться минимум тремя активными игроками региона (проверяется администрацией на отсутствие альтов). При подавлении восстания лидеры подлежат аресту или изгнанию по решению правительства.</p>
-                                    <p class="mb-2"><strong>4.8.4.</strong> Гражданская война: Гражданская война — вооружённый конфликт за отделение региона от государства с образованием нового субъекта. Требования для объявления: Публичная декларация независимости с обоснованием; Поддержка минимум пятью активными игроками региона (без альтов); Формирование временного правительства с заявленной политической программой. Гражданская война считается завершённой при: Признании независимости материковым государством; Поражении сепаратистов и возвращении региона под контроль; Посреднической договорённости (автономия, федерализация).</p>
-                                    <p class="mb-2"><strong>4.8.5.</strong> Военный путь к независимости (освободительная война): Применяется, когда мирные методы исчерпаны или правительство отказывается признавать легитимные требования. Условия легитимности: Документированные попытки мирного урегулирования; Поддержка восстания значимой частью населения (проверяется администрацией); Отсутствие иностранного вмешательства на стадии начала конфликта (помощь допустима после объявления войны). Интервенция третьих сторон без объявления войны запрещена и квалифицируется как агрессия.</p>
-                                    <p class="mb-2"><strong>4.8.6.</strong> Запрет на альтернативные аккаунты: Любое участие в восстании, гражданской войне или освободительной войне с использованием альтернативных аккаунтов строго запрещено. Проверка на альтернативные аккаунты проводится администрацией по запросу любой из сторон конфликта. Обнаружение альтов автоматически дискредитирует сторону конфликта и влечёт наказание по разделу 3.11.</p>
-                                    <p class="mb-2"><strong>4.8.7.</strong> Последствия конфликтов: По окончании гражданской или освободительной войны администрация фиксирует новый политический статус региона. Военные преступления (убийство мирных жителей, разрушение гражданской инфраструктуры вне военных объектов) караются отдельно по разделу 4.4. Реинтеграция региона после поражения сепаратистов осуществляется по договорённости сторон при посредничестве администрации.</p>
-                                    <p class="text-purple-soft/80">Данное правило создано для легитимизации внутриполитических конфликтов, предотвращения искусственных восстаний и сохранения баланса между стабильностью государств и правом народа на самоопределение.</p>
+                                    <strong class="text-purple-soft">4.4.</strong> После испытательного срока статус
+                                    автоматически снимается, и игрок получает полные права.
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Правило 5: Статус Creator -->
+                <!-- Правило 5: Дополнительные условия -->
                 <div class="accordion-item">
                     <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span>5. Дополнительные правила для игроков со статусом Creator</span>
+                        <span>5. Дополнительные условия</span>
                         <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body">
                             <div class="space-y-4">
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft">5.1.</strong> Статус Creator предоставляется новым игрокам на испытательный срок (7 дней).
+                                    <strong class="text-purple-soft text-lg block mb-2">5.1. Правила могут быть изменены
+                                        без уведомления пользователей.</strong>
                                 </div>
+
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft">5.2.</strong> Игроки со статусом Creator имеют ограниченные права до подтверждения надёжности.
+                                    <strong class="text-purple-soft text-lg block mb-2">5.2. Денежные средства и
+                                        возврат</strong>
+                                    <p class="mb-2">Денежные средства, потраченные на приобретение статуса "Gold" и
+                                        выше, а также на приобретение игровых предметов/денег/услуг, не возвращаются. За
+                                        выдачу товара не надлежащего качества средства возвращаются клиенту в полном
+                                        объеме на реквизиты, использованные при оплате товара.</p>
                                 </div>
+
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft">5.3.</strong> Запрещено использование сложных механизмов Redstone и автоматических ферм без разрешения модератора.
+                                    <strong class="text-purple-soft text-lg block mb-2">5.3. Администрация может
+                                        изменять возможности каждой привилегии без предупреждения.</strong>
                                 </div>
+
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft">5.4.</strong> После испытательного срока статус автоматически снимается, и игрок получает полные права.
+                                    <strong class="text-purple-soft text-lg block mb-2">5.4. Незнание правил не
+                                        освобождает от ответственности.</strong>
+                                </div>
+
+                                <div class="rule-highlight">
+                                    <strong class="text-purple-soft text-lg block mb-2">5.5. Меры наказания</strong>
+                                    <p class="mb-2">За многократное нарушение правил администрация имеет право снять с
+                                        вас привилегию, заблокировать без шанса разблокировки, обнулить статистику в
+                                        качестве меры наказания.</p>
+                                </div>
+
+                                <div class="rule-highlight">
+                                    <strong class="text-purple-soft text-lg block mb-2">5.6. Административная
+                                        дискреция</strong>
+                                    <p class="mb-2">Администрация самостоятельно выбирает как именно наказать игрока за
+                                        нарушение правил.</p>
+                                </div>
+
+                                <div class="rule-highlight">
+                                    <strong class="text-purple-soft text-lg block mb-2">5.7. Помощь при проблемах с
+                                        аккаунтом</strong>
+                                    <p class="mb-2">Если вы не являетесь настоящим владельцем аккаунта, администрация
+                                        имеет право не помогать вам при проблеме с ним.</p>
+                                </div>
+
+                                <div class="rule-highlight">
+                                    <strong class="text-purple-soft text-lg block mb-2">5.8. Публичная критика
+                                        сервера</strong>
+                                    <p class="mb-2">Запрещается публичная критика сервера не в специально подготовленных
+                                        разделах (на форуме или личных сообщениях VK).</p>
+                                </div>
+
+                                <div class="rule-highlight">
+                                    <strong class="text-purple-soft text-lg block mb-2">5.9. Аккаунты и
+                                        ответственность</strong>
+                                    <p class="mb-2">Взлом/похищение/обмен/продажа вашего аккаунта не является
+                                        оправданием в нарушениях правил.</p>
+                                </div>
+
+                                <div class="rule-highlight">
+                                    <strong class="text-purple-soft text-lg block mb-2">5.10. Дополнительные
+                                        наказания</strong>
+                                    <p class="mb-2">Администрация имеет право наказывать игроков за то, что не написано
+                                        в правилах, если это вредит тем или иным образом серверу или игрокам.</p>
+                                </div>
+
+                                <div class="rule-highlight">
+                                    <strong class="text-purple-soft text-lg block mb-2">5.11. Использование недоработок
+                                        правил</strong>
+                                    <p class="mb-2">В случае использования недоработок в правилах в личных целях,
+                                        администрация имеет право выдать соответствующее наказание.</p>
+                                </div>
+
+                                <div class="rule-highlight">
+                                    <strong class="text-purple-soft text-lg block mb-2">5.12. Сроки обжалования</strong>
+                                    <p class="mb-2">Обжаловать любое наказание можно только в течение 3-х дней с момента
+                                        его выдачи.</p>
+                                </div>
+
+                                <div class="rule-highlight">
+                                    <strong class="text-purple-soft text-lg block mb-2">5.13. Права игроков, жалобы и
+                                        требования</strong>
+                                    <p class="mb-2">1. Вы имеете право подать жалобу на администрацию, если считаете её
+                                        поведение неправильным, оскорбительным.</p>
+                                    <p class="mb-2">2. Вы имеете право оспорить своё наказание, если на момент подачи
+                                        жалобы не прошла половина срока наказания (но не более трёх дней).</p>
+                                    <p class="mb-2">3. Вы можете требовать нас сделать определенные
+                                        обновления/добавления, но мы не обязаны их воплощать.</p>
+                                    <p class="mb-2">4. Вы можете требовать исправления багов и компенсацию, если они
+                                        принесли Вам ущерб, при наличии доказательств.</p>
+                                    <p class="mb-2">5. Вы можете требовать непредвзятое отношение к себе в любых
+                                        ситуациях.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Правило 6: Дополнительные условия -->
+
+                <!-- Правило 6: Требования к администрации -->
                 <div class="accordion-item">
                     <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span>6. Дополнительные условия</span>
+                        <span>6. Требования к администрации</span>
                         <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body">
                             <div class="space-y-4">
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">6.1. Правила могут быть изменены без уведомления пользователей.</strong>
-                                </div>
-
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">6.2. Денежные средства и возврат</strong>
-                                    <p class="mb-2">Денежные средства, потраченные на приобретение статуса "Gold" и выше, а также на приобретение игровых предметов/денег/услуг, не возвращаются. За выдачу товара не надлежащего качества средства возвращаются клиенту в полном объеме на реквизиты, использованные при оплате товара.</p>
-                                </div>
-
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">6.3. Администрация может изменять возможности каждой привилегии без предупреждения.</strong>
-                                </div>
-
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">6.4. Незнание правил не освобождает от ответственности.</strong>
-                                </div>
-
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">6.5. Меры наказания</strong>
-                                    <p class="mb-2">За многократное нарушение правил администрация имеет право снять с вас привилегию, заблокировать без шанса разблокировки, обнулить статистику в качестве меры наказания.</p>
-                                </div>
-
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">6.6. Административная дискреция</strong>
-                                    <p class="mb-2">Администрация самостоятельно выбирает как именно наказать игрока за нарушение правил.</p>
-                                </div>
-
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">6.7. Помощь при проблемах с аккаунтом</strong>
-                                    <p class="mb-2">Если вы не являетесь настоящим владельцем аккаунта, администрация имеет право не помогать вам при проблеме с ним.</p>
-                                </div>
-
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">6.8. Публичная критика сервера</strong>
-                                    <p class="mb-2">Запрещается публичная критика сервера не в специально подготовленных разделах (на форуме или личных сообщениях VK).</p>
-                                </div>
-
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">6.9. Аккаунты и ответственность</strong>
-                                    <p class="mb-2">Взлом/похищение/обмен/продажа вашего аккаунта не является оправданием в нарушениях правил.</p>
-                                </div>
-
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">6.10. Дополнительные наказания</strong>
-                                    <p class="mb-2">Администрация имеет право наказывать игроков за то, что не написано в правилах, если это вредит тем или иным образом серверу или игрокам.</p>
-                                </div>
-
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">6.11. Использование недоработок правил</strong>
-                                    <p class="mb-2">В случае использования недоработок в правилах в личных целях, администрация имеет право выдать соответствующее наказание.</p>
-                                </div>
-
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">6.12. Сроки обжалования</strong>
-                                    <p class="mb-2">Обжаловать любое наказание можно только в течение 3-х дней с момента его выдачи.</p>
-                                </div>
-
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">6.13. Права игроков, жалобы и требования</strong>
-                                    <p class="mb-2">1. Вы имеете право подать жалобу на администрацию, если считаете её поведение неправильным, оскорбительным.</p>
-                                    <p class="mb-2">2. Вы имеете право оспорить своё наказание, если на момент подачи жалобы не прошла половина срока наказания (но не более трёх дней).</p>
-                                    <p class="mb-2">3. Вы можете требовать нас сделать определенные обновления/добавления, но мы не обязаны их воплощать.</p>
-                                    <p class="mb-2">4. Вы можете требовать исправления багов и компенсацию, если они принесли Вам ущерб, при наличии доказательств.</p>
-                                    <p class="mb-2">5. Вы можете требовать непредвзятое отношение к себе в любых ситуациях.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Правило 7: Требования к администрации -->
-                <div class="accordion-item">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span>Ваши основные требования к нам, о которых многие забывают</span>
-                        <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                        </svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <div class="space-y-4">
-                                <div class="rule-highlight">
-                                    <strong class="text-purple-soft">7.1.</strong> Мы обязуемся обеспечивать стабильную работу сервера и регулярные бэкапы мира.
+                                    <strong class="text-purple-soft">6.1.</strong> Мы обязуемся обеспечивать стабильную
+                                    работу сервера и регулярные бэкапы мира.
                                 </div>
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft">7.2.</strong> Мы гарантируем рассмотрение всех обращений в течение 24 часов.
+                                    <strong class="text-purple-soft">6.2.</strong> Мы гарантируем рассмотрение всех
+                                    обращений в течение 24 часов.
                                 </div>
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft">7.3.</strong> Мы обязуемся сохранять нейтралитет в конфликтных ситуациях между игроками.
+                                    <strong class="text-purple-soft">6.3.</strong> Мы обязуемся сохранять нейтралитет в
+                                    конфликтных ситуациях между игроками.
                                 </div>
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft">7.4.</strong> Мы обязуемся уведомлять о технических работах минимум за 1 час до их начала.
+                                    <strong class="text-purple-soft">6.4.</strong> Мы обязуемся уведомлять о технических
+                                    работах минимум за 1 час до их начала.
                                 </div>
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft">7.5.</strong> Мы гарантируем конфиденциальность личных данных игроков.
+                                    <strong class="text-purple-soft">6.5.</strong> Мы гарантируем конфиденциальность
+                                    личных данных игроков.
                                 </div>
                             </div>
                         </div>
@@ -792,14 +917,15 @@
                 <div class="flex items-start gap-4">
                     <div class="w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
                         <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                         </svg>
                     </div>
                     <div>
                         <h3 class="font-bold text-yellow-400 mb-2">Важно!</h3>
                         <p class="text-purple-soft/70 text-sm leading-relaxed">
-                            Играя на сервере EmbroMine, вы автоматически соглашаетесь со всеми правилами. 
-                            Незнание правил не освобождает от ответственности. Администрация оставляет за собой право 
+                            Играя на сервере EmbroMine, вы автоматически соглашаетесь со всеми правилами.
+                            Незнание правил не освобождает от ответственности. Администрация оставляет за собой право
                             изменять правила в любое время без предварительного уведомления.
                         </p>
                     </div>
@@ -808,26 +934,30 @@
 
             <!-- Навигация по разделам -->
             <div class="mt-12 grid md:grid-cols-3 gap-6">
-                <a href="game-rules.html" class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1">
+                <a href="rp-rules.html"
+                    class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1 opacity-0 translate-y-10">
                     <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">🎮 Игровые правила</h3>
+                        <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">🛡️ Правила РП</h3>
                         <span class="text-2xl">→</span>
                     </div>
-                    <p class="text-purple-soft/60 text-sm">Подробные правила поведения в игре</p>
+                    <p class="text-purple-soft/60 text-sm">Политические правила и взаимодействие между государствами</p>
                 </a>
-                <a href="chat-rules.html" class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">💬 Правила общения</h3>
-                        <span class="text-2xl">→</span>
-                    </div>
-                    <p class="text-purple-soft/60 text-sm">Нормы поведения в чате</p>
-                </a>
-                <a href="rules-glossary.html" class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1">
+                <a href="rules-glossary.html"
+                    class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1 opacity-0 translate-y-10">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">📚 Глоссарий</h3>
                         <span class="text-2xl">→</span>
                     </div>
                     <p class="text-purple-soft/60 text-sm">Словарь терминов</p>
+                </a>
+                <a href="banned-mods.html"
+                    class="group bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-6 shadow-2xl hover:border-purple-deep/50 transition-all duration-300 hover:transform hover:-translate-y-1 opacity-0 translate-y-10">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl font-bold group-hover:text-purple-soft transition-colors">⛔ Запрещённые моды
+                        </h3>
+                        <span class="text-2xl">→</span>
+                    </div>
+                    <p class="text-purple-soft/60 text-sm">Список модификаций, использование которых запрещено</p>
                 </a>
             </div>
         </div>
@@ -838,7 +968,8 @@
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div class="col-span-2">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-8 h-8 bg-gradient-to-br from-purple-deep to-purple-neon rounded-lg flex items-center justify-center">
+                        <div
+                            class="w-8 h-8 bg-gradient-to-br from-purple-deep to-purple-neon rounded-lg flex items-center justify-center">
                             <span class="text-white text-lg font-bold">E</span>
                         </div>
                         <span class="text-lg font-bold">EmbroMine</span>
@@ -851,10 +982,20 @@
                 <div>
                     <h4 class="font-bold mb-4 text-sm uppercase tracking-wider text-purple-soft/60">Правила</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="rules.html" class="text-purple-soft hover:text-purple-soft transition-colors">Обзор правил</a></li>
-                        <li><a href="game-rules.html" class="text-purple-soft/50 hover:text-purple-soft transition-colors">Игровые правила</a></li>
-                        <li><a href="chat-rules.html" class="text-purple-soft/50 hover:text-purple-soft transition-colors">Правила общения</a></li>
-                        <li><a href="banned-mods.html" class="text-purple-soft/50 hover:text-purple-soft transition-colors">Запрещенные моды</a></li>
+                        <li><a href="rules.html" class="text-purple-soft hover:text-purple-soft transition-colors">Обзор
+                                правил</a></li>
+
+                        <li><a href='rp-rules.html'
+                                class='text-purple-soft/50 hover:text-purple-soft transition-colors'>Правила РП</a></li>
+                        <li><a href="game-rules.html"
+                                class="text-purple-soft/50 hover:text-purple-soft transition-colors">Игровые правила</a>
+                        </li>
+                        <li><a href="chat-rules.html"
+                                class="text-purple-soft/50 hover:text-purple-soft transition-colors">Правила общения</a>
+                        </li>
+                        <li><a href="banned-mods.html"
+                                class="text-purple-soft/50 hover:text-purple-soft transition-colors">Запрещенные
+                                моды</a></li>
                     </ul>
                 </div>
 
@@ -868,7 +1009,8 @@
             </div>
 
             <div class="border-t border-purple-soft/10 pt-8">
-                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.</p>
+                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
+                </p>
             </div>
         </div>
     </footer>
@@ -906,4 +1048,5 @@
         }
     </script>
 </body>
+
 </html>
