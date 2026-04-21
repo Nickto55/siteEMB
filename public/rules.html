@@ -214,180 +214,7 @@
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-void-black/80 backdrop-blur-md border-b border-purple-soft/10 transition-all duration-300"
-        id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-3">
-                    <div
-                        class="w-10 h-10 bg-gradient-to-br from-purple-deep to-purple-neon rounded-lg flex items-center justify-center shadow-lg shadow-purple-deep/20">
-                        <span class="text-white text-lg font-bold">E</span>
-                    </div>
-                    <a href="index.html"
-                        class="text-xl font-bold tracking-tight hover:text-purple-soft transition-colors">
-                        Embro<span class="text-purple-neon">Mine</span>
-                    </a>
-                </div>
-
-                <!-- Desktop Navigation -->
-                <div class="hidden lg:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="index.html"
-                            class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium text-purple-soft/70">Главная</a>
-
-                        <!-- О сервере Dropdown -->
-                        <div class="relative group">
-                            <a href="#"
-                                class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
-                                О сервере
-                                <span class="ml-1 text-xs">▼</span>
-                            </a>
-                            <div
-                                class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
-                                <a href="description.html"
-                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Описание</a>
-                                <a href="mechanics.html"
-                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Механики
-                                    сервера</a>
-                                <a href="roleplay.html"
-                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Ролевые
-                                    элементы</a>
-                                <a href="season-concept.html"
-                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Концепция
-                                    сезона</a>
-                                <a href="principles.html"
-                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 last:rounded-b-lg">Базовые
-                                    принципы</a>
-                            </div>
-                        </div>
-
-                        <!-- Правила Dropdown -->
-                        <div class="relative group">
-                            <a href="#"
-                                class="text-purple-soft hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
-                                Правила
-                                <span class="ml-1 text-xs">▼</span>
-                            </a>
-                            <div
-                                class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
-                                <a href="rules.html"
-                                    class="text-purple-soft block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 first:rounded-t-lg">Обзор
-                                    правил</a>
-
-                                <a href='rp-rules.html'
-                                    class='text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10'>Правила
-                                    РП</a>
-                                <a href="banned-mods.html"
-                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Запрещенные
-                                    моды</a>
-                                <a href="punishments.html"
-                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10">Система
-                                    наказаний</a>
-                                <a href="rules-glossary.html"
-                                    class="text-purple-soft/70 block px-4 py-2 text-sm hover:text-purple-soft hover:bg-purple-deep/10 last:rounded-b-lg">Глоссарий</a>
-                            </div>
-                        </div>
-
-                        <a href="guides.html"
-                            class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Гайды</a>
-                        <a href="map.html"
-                            class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Карта</a>
-                        <a href="staff.html"
-                            class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Админы</a>
-                        <a href="support.html"
-                            class="text-purple-soft/70 hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium">Помощь</a>
-
-                        <a href="dashboard.html" id="dashboard-link"
-                            class="text-purple-soft hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium"
-                            style="display: none;">Профиль</a>
-                        <a href="login.html" id="login-link"
-                            class="hover:text-purple-soft transition-colors px-3 py-2 rounded-md text-sm font-medium text-purple-soft/70">Вход</a>
-                        <button onclick="handleLogout()" id="logout-btn"
-                            class="text-purple-soft hover:text-magenta-glow transition-colors px-3 py-2 rounded-md text-sm font-medium"
-                            style="display: none;">Выход</button>
-                    </div>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="lg:hidden">
-                    <button onclick="toggleMobileMenu()" class="text-purple-soft/70 hover:text-purple-soft p-2">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div class="hidden lg:hidden bg-void-dark border-t border-purple-soft/10" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="index.html"
-                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Главная</a>
-
-                <!-- О сервере Mobile -->
-                <div class="px-3 py-2">
-                    <div onclick="toggleMobileSubmenu('server-submenu', 'server-arrow')"
-                        class="flex items-center justify-between cursor-pointer hover:bg-purple-deep/10 rounded-md p-2 text-purple-soft/70">
-                        <span>О сервере</span>
-                        <span id="server-arrow">▶</span>
-                    </div>
-                    <div id="server-submenu" class="hidden pl-4 space-y-1 mt-2">
-                        <a href="description.html"
-                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Описание</a>
-                        <a href="mechanics.html"
-                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Механики</a>
-                        <a href="roleplay.html"
-                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Ролевые
-                            элементы</a>
-                        <a href="season-concept.html"
-                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Концепция
-                            сезона</a>
-                        <a href="principles.html"
-                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Базовые
-                            принципы</a>
-                    </div>
-                </div>
-
-                <!-- Правила Mobile -->
-                <div class="px-3 py-2">
-                    <div onclick="toggleMobileSubmenu('rules-submenu', 'rules-arrow')"
-                        class="flex items-center justify-between cursor-pointer hover:bg-purple-deep/10 rounded-md p-2 text-purple-soft/70">
-                        <span>Правила</span>
-                        <span id="rules-arrow">▶</span>
-                    </div>
-                    <div id="rules-submenu" class="hidden pl-4 space-y-1 mt-2">
-                        <a href="rules.html"
-                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft">Обзор</a>
-
-                        <a href='rp-rules.html'
-                            class='block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70'>Правила
-                            РП</a>
-                        <a href="banned-mods.html"
-                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Запрещенные
-                            моды</a>
-                        <a href="punishments.html"
-                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Система
-                            наказаний</a>
-                        <a href="rules-glossary.html"
-                            class="block px-2 py-1 text-sm rounded-md hover:bg-purple-deep/10 text-purple-soft/70">Глоссарий</a>
-                    </div>
-                </div>
-
-                <a href="guides.html"
-                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Гайды</a>
-                <a href="map.html"
-                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Карта</a>
-                <a href="staff.html"
-                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Админы</a>
-                <a href="support.html"
-                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Помощь</a>
-                <a href="login.html"
-                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-deep/10 text-purple-soft/70">Вход</a>
-            </div>
-        </div>
-    </nav>
+    <script src="/js/header.js" defer></script>
 
     <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
     <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
@@ -505,7 +332,8 @@
                                         переключаться, мешают найти нужную информацию. Помимо прямого флуда, существует
                                         косвенный — когда человек просит каждого написать по сообщению разными
                                         способами.</p>
-                                    <p class="mb-2"><strong>Наказание:</strong> Мут до 15 минут (флуд), Бан до 1 часа (массовый флуд).</p>
+                                    <p class="mb-2"><strong>Наказание:</strong> Мут до 15 минут (флуд), Бан до 1 часа
+                                        (массовый флуд).</p>
                                 </div>
 
                                 <!-- 2.4 Реклама -->
@@ -591,7 +419,8 @@
                                     <strong class="text-purple-soft text-lg block mb-2">2.10. Дезинформация</strong>
                                     <p class="mb-2">Запрещено намеренное дезинформирование игроков о готовящихся
                                         изменениях на сервере или в его ресурсах.</p>
-                                    <p class="mb-2">Бывают случаи, когда игроки распространряют «слухи» о грядущем вайпе,
+                                    <p class="mb-2">Бывают случаи, когда игроки распространряют «слухи» о грядущем
+                                        вайпе,
                                         закрытии режима или ином изменении проекта. Чаще всего они ложны и преследуют
                                         цель ввести в заблуждение. С нашей стороны мы не можем допустить распространения
                                         подобной дезинформации.</p>
@@ -626,67 +455,91 @@
                         <div class="accordion-body">
                             <div class="space-y-4">
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.1. Нечестное получение преимущества</strong>
-                                    <p class="mb-2"><strong>3.1.1.</strong> Использование сторонних модификаций и программ является нарушением.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.1. Нечестное получение
+                                        преимущества</strong>
+                                    <p class="mb-2"><strong>3.1.1.</strong> Использование сторонних модификаций и
+                                        программ является нарушением.</p>
                                     <p class="mb-2"><strong>Наказание:</strong> Бан до 14 дней + снятие проходки.</p>
-                                    <p class="mb-2"><strong>3.1.2.</strong> Использование багов сервера и игры является нарушением.</p>
+                                    <p class="mb-2"><strong>3.1.2.</strong> Использование багов сервера и игры является
+                                        нарушением.</p>
                                     <p class="mb-2"><strong>Наказание:</strong> Бан до 24 часов.</p>
                                     <p class="text-purple-soft/80">Равенство игроков — приоритет сервера.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.2. Нецензурные постройки и скины</strong>
-                                    <p class="mb-2">Запрещено создавать постройки или использовать скины/плащи нецензурного характера.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.2. Нецензурные постройки и
+                                        скины</strong>
+                                    <p class="mb-2">Запрещено создавать постройки или использовать скины/плащи
+                                        нецензурного характера.</p>
                                     <p class="mb-2"><strong>Наказание:</strong> Бан 12 часов + снос постройки.</p>
                                     <p class="mb-2">Minecraft создан для детей и комфортного времяпровождения.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.3. Умалчивание о нарушителях</strong>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.3. Умалчивание о
+                                        нарушителях</strong>
                                     <p class="mb-2">Запрещено умалчивать о нарушителях и нарушениях правил.</p>
                                     <p class="mb-2"><strong>Наказание:</strong> Мут до 1 часа.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.4. Препятствование работе клиента</strong>
-                                    <p class="mb-2">Запрещено препятствовать нормальной работе клиента игры других игроков.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.4. Препятствование работе
+                                        клиента</strong>
+                                    <p class="mb-2">Запрещено препятствовать нормальной работе клиента игры других
+                                        игроков.</p>
                                     <p class="mb-2"><strong>Наказание:</strong> Бан до 3 часов.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.5. Обман администрации</strong>
-                                    <p class="mb-2">Запрещено обманывать и вводить в заблуждение администрацию проекта.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.5. Обман
+                                        администрации</strong>
+                                    <p class="mb-2">Запрещено обманывать и вводить в заблуждение администрацию проекта.
+                                    </p>
                                     <p class="mb-2"><strong>Наказание:</strong> Бан до 7 дней.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.8. Механизмы, вызывающие лаги</strong>
-                                    <p class="mb-2">Запрещено создавать механизмы, вызывающие лаги или сбои на сервере.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.8. Механизмы, вызывающие
+                                        лаги</strong>
+                                    <p class="mb-2">Запрещено создавать механизмы, вызывающие лаги или сбои на сервере.
+                                    </p>
                                     <p class="mb-2"><strong>Наказание:</strong> Бан 48 часов + снос постройки.</p>
                                     <p class="mb-2">Стабильная игра — приоритет сервера.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.9. Гриферство и порча имущества</strong>
-                                    <p class="mb-2"><strong>3.9.1.</strong> Порча государства/города игроком, не состоящим в нём, является нарушением.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.9. Гриферство и порча
+                                        имущества</strong>
+                                    <p class="mb-2"><strong>3.9.1.</strong> Порча государства/города игроком, не
+                                        состоящим в нём, является нарушением.</p>
                                     <p class="mb-2"><strong>Наказание:</strong> Бан до 7 дней.</p>
-                                    <p class="mb-2"><strong>3.9.2.</strong> Создание засад или обман не является нарушением.</p>
-                                    <p class="mb-2"><strong>3.9.3.</strong> Порча государства игроком, состоящим в государстве/городе, не является нарушением.</p>
+                                    <p class="mb-2"><strong>3.9.2.</strong> Создание засад или обман не является
+                                        нарушением.</p>
+                                    <p class="mb-2"><strong>3.9.3.</strong> Порча государства игроком, состоящим в
+                                        государстве/городе, не является нарушением.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.10. Нарушение комфорта в чужом государстве/городе</strong>
-                                    <p class="mb-2">Игрокам, не являющимся участниками государства/города, запрещается создавать условия, нарушающие комфорт.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.10. Нарушение комфорта в чужом
+                                        государстве/городе</strong>
+                                    <p class="mb-2">Игрокам, не являющимся участниками государства/города, запрещается
+                                        создавать условия, нарушающие комфорт.</p>
                                     <p class="mb-2"><strong>Наказание:</strong> Мут до 2 часов.</p>
-                                    <p class="mb-2"><strong>Исключение:</strong> Администрация может вмешаться при серьезных нарушениях правил.</p>
+                                    <p class="mb-2"><strong>Исключение:</strong> Администрация может вмешаться при
+                                        серьезных нарушениях правил.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">3.11. Автофермерство и ботоводство</strong>
-                                    <p class="mb-2"><strong>3.11.1.</strong> Запрещено создание и использование любых автоферм для автоматического сбора ресурсов.</p>
-                                    <p class="mb-2"><strong>3.11.2.</strong> Запрещено ботоводство — использование альт-аккаунтов для автоматизации без участия.</p>
-                                    <p class="mb-2"><strong>3.11.3.</strong> Ботоводство — наличие активного аккаунта, совершающего полезные действия без вашего управления.</p>
-                                    <p class="mb-2"><strong>3.11.4.</strong> Правило действует для всех независимо от статуса или проходки.</p>
+                                    <strong class="text-purple-soft text-lg block mb-2">3.11. Автофермерство и
+                                        ботоводство</strong>
+                                    <p class="mb-2"><strong>3.11.1.</strong> Запрещено создание и использование любых
+                                        автоферм для автоматического сбора ресурсов.</p>
+                                    <p class="mb-2"><strong>3.11.2.</strong> Запрещено ботоводство — использование
+                                        альт-аккаунтов для автоматизации без участия.</p>
+                                    <p class="mb-2"><strong>3.11.3.</strong> Ботоводство — наличие активного аккаунта,
+                                        совершающего полезные действия без вашего управления.</p>
+                                    <p class="mb-2"><strong>3.11.4.</strong> Правило действует для всех независимо от
+                                        статуса или проходки.</p>
                                     <p class="mb-2"><strong>Наказание:</strong> Бан до 14 дней.</p>
                                     <p class="text-purple-soft/80">Равная игра — приоритет сервера.</p>
                                 </div>
@@ -708,18 +561,21 @@
                             <div class="space-y-4">
                                 <div class="rule-highlight">
                                     <strong class="text-purple-soft text-lg block mb-2">4.1. Общие положения</strong>
-                                    <p class="mb-2">Креаторы — это участники проекта, создающие контент (видео, стримы, посты), направленный на развитие и популяризацию сервера.</p>
+                                    <p class="mb-2">Креаторы — это участники проекта, создающие контент (видео, стримы,
+                                        посты), направленный на развитие и популяризацию сервера.</p>
                                     <p class="mb-2"><strong>Цель креатора:</strong></p>
                                     <ul class="list-disc list-inside mb-2 text-purple-soft/80">
                                         <li>Привлекать новых игроков</li>
                                         <li>Создавать движ внутри проекта</li>
                                         <li>Формировать атмосферу сервера</li>
                                     </ul>
-                                    <p class="mb-2">Креатор — это не привилегия, а роль с ответственностью. Взамен дается доступ к серверу без необходимости платить подписку.</p>
+                                    <p class="mb-2">Креатор — это не привилегия, а роль с ответственностью. Взамен
+                                        дается доступ к серверу без необходимости платить подписку.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">4.2. Требования к креаторам</strong>
+                                    <strong class="text-purple-soft text-lg block mb-2">4.2. Требования к
+                                        креаторам</strong>
                                     <p class="mb-2"><strong>Креатор обязан:</strong></p>
                                     <ul class="list-disc list-inside mb-3 text-purple-soft/80">
                                         <li>Выпускать контент по серверу на регулярной основе</li>
@@ -751,16 +607,19 @@
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">4.4. Взаимодействие с администрацией</strong>
+                                    <strong class="text-purple-soft text-lg block mb-2">4.4. Взаимодействие с
+                                        администрацией</strong>
                                     <ul class="list-disc list-inside space-y-2 text-purple-soft/80">
                                         <li>Креатор обязан реагировать на запросы администрации</li>
-                                        <li>Обсуждать спорные моменты <strong>ДО публикации</strong> (если это конфликтный контент)</li>
+                                        <li>Обсуждать спорные моменты <strong>ДО публикации</strong> (если это
+                                            конфликтный контент)</li>
                                         <li>Не публиковать внутреннюю информацию без разрешения</li>
                                     </ul>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">4.5. Поддержка от проекта</strong>
+                                    <strong class="text-purple-soft text-lg block mb-2">4.5. Поддержка от
+                                        проекта</strong>
                                     <p class="mb-2"><strong>Креаторы могут получать:</strong></p>
                                     <ul class="list-disc list-inside mb-2 text-purple-soft/80">
                                         <li>Доступ к проекту без подписки</li>
@@ -768,11 +627,13 @@
                                         <li>Участие в ивентах</li>
                                         <li>Продвижение со стороны проекта</li>
                                     </ul>
-                                    <p class="text-purple-soft/80"><strong>Примечание:</strong> Поддержка зависит от активности и качества контента.</p>
+                                    <p class="text-purple-soft/80"><strong>Примечание:</strong> Поддержка зависит от
+                                        активности и качества контента.</p>
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">4.6. Нарушения и санкции</strong>
+                                    <strong class="text-purple-soft text-lg block mb-2">4.6. Нарушения и
+                                        санкции</strong>
                                     <p class="mb-2"><strong>За нарушение правил креатор может получить:</strong></p>
                                     <ul class="list-disc list-inside text-purple-soft/80">
                                         <li>Предупреждение</li>
@@ -822,7 +683,8 @@
                                 </div>
 
                                 <div class="rule-highlight">
-                                    <strong class="text-purple-soft text-lg block mb-2">5.3. Администрация может изменять возможности каждой проходки без предупреждения.</strong>
+                                    <strong class="text-purple-soft text-lg block mb-2">5.3. Администрация может
+                                        изменять возможности каждой проходки без предупреждения.</strong>
                                 </div>
 
                                 <div class="rule-highlight">
@@ -832,7 +694,9 @@
 
                                 <div class="rule-highlight">
                                     <strong class="text-purple-soft text-lg block mb-2">5.5. Меры наказания</strong>
-                                    <p class="mb-2">За многократное нарушение правил администрация имеет право снять с вас проходку, заблокировать без шанса разблокировки, обнулить статистику в качестве меры наказания.</p>
+                                    <p class="mb-2">За многократное нарушение правил администрация имеет право снять с
+                                        вас проходку, заблокировать без шанса разблокировки, обнулить статистику в
+                                        качестве меры наказания.</p>
                                 </div>
 
                                 <div class="rule-highlight">

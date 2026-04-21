@@ -34,32 +34,7 @@
     <!-- Floating Particles Background -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-mc-darker/80 backdrop-blur-md border-b border-white/10" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="nav-container" style="padding: 12px 0; max-width: 100%;">
-                <div class="logo" style="margin: 0;">
-                    <a href="index.html" style="text-decoration: none; color: inherit;">
-                        <span class="logo-text">EmbroMine</span>
-                    </a>
-                </div>
-                <div class="nav-links" style="gap: 20px;">
-                    <a href="index.html" class="nav-link">Главная</a>
-                    <div class="nav-dropdown">
-                        <a href="#" class="nav-link">Меню</a>
-                        <div class="dropdown-menu">
-                            <a href="index.html#about">О сервере</a>
-                            <a href="index.html#features">Режимы</a>
-                            <a href="rules-overview.html">Правила</a>
-                        </div>
-                    </div>
-                    <span id="admin-user" class="nav-link" style="cursor: default;">Администратор</span>
-                    <button onclick="handleLogout()" class="nav-link"
-                        style="background: none; border: none; padding: 8px 12px; cursor: pointer;">Выход</button>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <script src="/js/header.js" defer></script>
 
     <!-- Main Content -->
     <div class="min-h-screen pt-20 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
@@ -181,7 +156,3 @@
 </body>
 
 </html>
-
-
-
-

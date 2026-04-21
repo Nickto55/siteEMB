@@ -35,75 +35,7 @@
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-mc-darker/80 backdrop-blur-md border-b border-white/10 transition-all duration-300"
-        id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-3">
-                    <div
-                        class="w-10 h-10 bg-mc-green rounded-lg flex items-center justify-center shadow-lg shadow-mc-green/20">
-                        <span class="text-white text-lg font-bold">E</span>
-                    </div>
-                    <a href="index.html"
-                        class="text-xl font-bold tracking-tight hover:text-mc-greenLight transition-colors">
-                        Embro<span class="text-mc-greenLight">Mine</span>
-                    </a>
-                </div>
-
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="index.html"
-                            class="hover:text-mc-greenLight transition-colors px-3 py-2 rounded-md text-sm font-medium">Главная</a>
-                        <div class="relative group">
-                            <a href="#"
-                                class="hover:text-mc-greenLight transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center">
-                                Меню
-                                <span class="ml-1 text-xs">▼</span>
-                            </a>
-                            <div
-                                class="absolute left-0 mt-0 w-48 bg-mc-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                                <a href="index.html#about"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10 first:rounded-t-lg">О
-                                    сервере</a>
-                                <a href="index.html#features"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10">Режимы</a>
-                                <a href="rules-overview.html"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10">Правила</a>
-                                <a href="login.html" id="login-link"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:text-mc-greenLight hover:bg-white/10 last:rounded-b-lg">Вход</a>
-                            </div>
-                        </div>
-                        <a href="dashboard.html" id="dashboard-link"
-                            class="text-mc-greenLight hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium"
-                            style="display: none;">Профиль</a>
-                        <button onclick="handleLogout()" id="logout-btn"
-                            class="text-mc-greenLight hover:text-red-400 transition-colors px-3 py-2 rounded-md text-sm font-medium"
-                            style="display: none;">Выход</button>
-                    </div>
-                </div>
-
-                <div class="md:hidden">
-                    <button onclick="toggleMobileMenu()" class="text-gray-300 hover:text-white p-2">
-                        <span>MENU</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="hidden md:hidden bg-mc-dark border-t border-white/10" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="index.html"
-                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Главная</a>
-                <a href="index.html#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">О
-                    сервере</a>
-                <a href="index.html#features"
-                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Режимы</a>
-                <a href="rules-overview.html"
-                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Правила</a>
-                <a href="login.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Вход</a>
-            </div>
-        </div>
-    </nav>
+    <script src="/js/header.js" defer></script>
 
     <!-- Main Content -->
     <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
@@ -283,7 +215,3 @@
 </body>
 
 </html>
-
-
-
-
