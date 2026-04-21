@@ -2,13 +2,14 @@ const { Pool } = require('pg');
 require('dotenv').config();
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: process.env.NODE_ENV === 'production' && process.env.DATABASE_URL.includes('amazonaws.com')
-        ? { rejectUnauthorized: false }
-        : false
+    host: 'db_site-emb',
+    port: 5432,
+    user: 'admin',
+    password: 'mysecretpass',
+    database: 'app_db',
 });
 
-// Проверка подключения
+module.exports = pool;
 pool.on('connect', () => {
     console.log('✓ Подключение к базе данных PostgreSQL установлено');
 });
