@@ -101,7 +101,7 @@
                     </div>
 
                     <!-- Edit Form -->
-                    <form id="edit-profile-form" class="hidden space-y-4">
+                    <form id="edit-profile-form" class="hidden space-y-4" method="POST" onsubmit="event.preventDefault(); return false;">
                         <div>
                             <label class="text-purple-soft/50 text-sm mb-1 block">Email</label>
                             <input type="email" id="edit-email"
@@ -139,7 +139,7 @@
                 <div class="dashboard-card">
                     <h2 class="text-xl font-bold mb-6 text-purple-soft">🔒 Изменить пароль</h2>
 
-                    <form id="change-password-form" class="space-y-4">
+                    <form id="change-password-form" class="space-y-4" method="POST" onsubmit="event.preventDefault(); return false;">
                         <div>
                             <label class="text-purple-soft/50 text-sm mb-1 block">Текущий пароль</label>
                             <input type="password" id="current-password"

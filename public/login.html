@@ -48,16 +48,16 @@
             class="max-w-md w-full bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-8 shadow-2xl">
             <!-- Tabs -->
             <div class="flex gap-4 mb-8 border-b border-purple-soft/10 pb-4">
-                <button class="tab-btn active flex-1 text-center" data-tab="login">
+                <button type="button" class="tab-btn active flex-1 text-center" data-tab="login">
                     Вход
                 </button>
-                <button class="tab-btn flex-1 text-center" data-tab="register">
+                <button type="button" class="tab-btn flex-1 text-center" data-tab="register">
                     Регистрация
                 </button>
             </div>
 
             <!-- Login Form -->
-            <form id="login-form">
+            <form id="login-form" method="POST" onsubmit="event.preventDefault(); return false;">
                 <h2 class="text-2xl font-bold mb-6 text-center">Вход в систему</h2>
 
                 <div class="form-group">
@@ -81,7 +81,7 @@
             </form>
 
             <!-- Register Form -->
-            <form id="register-form">
+            <form id="register-form" method="POST" onsubmit="event.preventDefault(); return false;">
                 <h2 class="text-2xl font-bold mb-6 text-center">Регистрация</h2>
 
                 <div class="form-group">
@@ -129,7 +129,45 @@
         <p>© 2026 EmbroMine. Not affiliated with Mojang Studios.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=2"></script>
+    <script>
+        (function() {
+            var loginForm = document.getElementById('login-form');
+            var registerForm = document.getElementById('register-form');
+            var tabs = document.querySelectorAll('.tab-btn');
+
+            function switchTabLocal(tab) {
+                if (tab === 'login') {
+                    if (loginForm) loginForm.style.display = 'block';
+                    if (registerForm) registerForm.style.display = 'none';
+                    if (tabs[0]) tabs[0].classList.add('active');
+                    if (tabs[1]) tabs[1].classList.remove('active');
+                } else {
+                    if (loginForm) loginForm.style.display = 'none';
+                    if (registerForm) registerForm.style.display = 'block';
+                    if (tabs[0]) tabs[0].classList.remove('active');
+                    if (tabs[1]) tabs[1].classList.add('active');
+                }
+            }
+
+            switchTabLocal('login');
+
+            document.querySelectorAll('[data-tab]').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    switchTabLocal(btn.dataset.tab);
+                });
+            });
+
+            var switchLink = document.getElementById('switch-to-register');
+            if (switchLink) {
+                switchLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    switchTabLocal('register');
+                });
+            }
+        })();
+    </script>
 </body>
 
 </html>

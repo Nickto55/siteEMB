@@ -421,19 +421,23 @@ function handleLogout() {
 }
 
 function checkAuthStatus() {
-    const token = localStorage.getItem('token');
-    const loginLink = document.getElementById('login-link');
-    const dashboardLink = document.getElementById('dashboard-link');
-    const logoutBtn = document.getElementById('logout-btn');
-    const userInfo = document.getElementById('user-info');
+    try {
+        const token = localStorage.getItem('token');
+        const loginLink = document.getElementById('login-link');
+        const dashboardLink = document.getElementById('dashboard-link');
+        const logoutBtn = document.getElementById('logout-btn');
+        const userInfo = document.getElementById('user-info');
 
-    if (token && localStorage.getItem('user')) {
-        const user = JSON.parse(localStorage.getItem('user'));
+        if (token && localStorage.getItem('user')) {
+            const user = JSON.parse(localStorage.getItem('user'));
 
-        if (loginLink) loginLink.style.display = 'none';
-        if (dashboardLink) dashboardLink.style.display = 'inline-block';
-        if (logoutBtn) logoutBtn.style.display = 'inline-block';
-        if (userInfo) userInfo.textContent = `Привет, ${user.username}!`;
+            if (loginLink) loginLink.style.display = 'none';
+            if (dashboardLink) dashboardLink.style.display = 'inline-block';
+            if (logoutBtn) logoutBtn.style.display = 'inline-block';
+            if (userInfo) userInfo.textContent = `Привет, ${user.username}!`;
+        }
+    } catch (e) {
+        console.error('Auth status check error:', e);
     }
 }
 
@@ -690,74 +694,88 @@ function initDropdownMenu() {
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    setFavicon();
-    createParticles();
-    initScrollAnimations();
-    initSmoothScroll();
-    checkAuthStatus();
-    initDropdownMenu();
+    try { setFavicon(); } catch (e) { console.error(e); }
+    try { createParticles(); } catch (e) { console.error(e); }
+    try { initScrollAnimations(); } catch (e) { console.error(e); }
+    try { initSmoothScroll(); } catch (e) { console.error(e); }
+    try { checkAuthStatus(); } catch (e) { console.error(e); }
+    try { initDropdownMenu(); } catch (e) { console.error(e); }
 
     // Initialize login tabs if on login page
-    if (document.getElementById('login-form') && document.getElementById('register-form')) {
-        switchTab('login'); // Default to login tab
+    try {
+        if (document.getElementById('login-form') && document.getElementById('register-form')) {
+            switchTab('login'); // Default to login tab
 
-        // Tab buttons
-        document.querySelectorAll('[data-tab]').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                switchTab(btn.dataset.tab);
+            // Tab buttons
+            document.querySelectorAll('[data-tab]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchTab(btn.dataset.tab);
+                });
             });
-        });
 
-        // Forms
-        const loginForm = document.getElementById('login-form');
-        const registerForm = document.getElementById('register-form');
-        if (loginForm) loginForm.addEventListener('submit', handleLogin);
-        if (registerForm) registerForm.addEventListener('submit', handleRegister);
+            // Forms
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            if (loginForm) loginForm.addEventListener('submit', handleLogin);
+            if (registerForm) registerForm.addEventListener('submit', handleRegister);
 
-        // Switch link
-        const switchLink = document.getElementById('switch-to-register');
-        if (switchLink) {
-            switchLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                switchTab('register');
-            });
+            // Switch link
+            const switchLink = document.getElementById('switch-to-register');
+            if (switchLink) {
+                switchLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchTab('register');
+                });
+            }
         }
-    }
+    } catch (e) { console.error('Login init error:', e); }
 
     // Bind copy IP buttons
-    document.querySelectorAll('#copy-ip-btn, [data-action="copy-ip"]').forEach(btn => {
-        btn.addEventListener('click', copyIP);
-    });
+    try {
+        document.querySelectorAll('#copy-ip-btn, [data-action="copy-ip"]').forEach(btn => {
+            btn.addEventListener('click', copyIP);
+        });
+    } catch (e) { console.error(e); }
 
     // Bind logout buttons
-    document.querySelectorAll('[data-action="logout"]').forEach(btn => {
-        btn.addEventListener('click', handleLogout);
-    });
+    try {
+        document.querySelectorAll('[data-action="logout"]').forEach(btn => {
+            btn.addEventListener('click', handleLogout);
+        });
+    } catch (e) { console.error(e); }
 
     // Mobile menu toggle
-    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-    if (mobileMenuToggle) mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+    try {
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        if (mobileMenuToggle) mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+    } catch (e) { console.error(e); }
 
     // Dashboard: toggle edit mode
-    document.querySelectorAll('[data-action="toggle-edit"]').forEach(btn => {
-        btn.addEventListener('click', toggleEditMode);
-    });
+    try {
+        document.querySelectorAll('[data-action="toggle-edit"]').forEach(btn => {
+            btn.addEventListener('click', toggleEditMode);
+        });
+    } catch (e) { console.error(e); }
 
     // Dashboard: forms
-    const editProfileForm = document.getElementById('edit-profile-form');
-    const changePasswordForm = document.getElementById('change-password-form');
-    if (editProfileForm) editProfileForm.addEventListener('submit', updateProfile);
-    if (changePasswordForm) changePasswordForm.addEventListener('submit', changePassword);
+    try {
+        const editProfileForm = document.getElementById('edit-profile-form');
+        const changePasswordForm = document.getElementById('change-password-form');
+        if (editProfileForm) editProfileForm.addEventListener('submit', updateProfile);
+        if (changePasswordForm) changePasswordForm.addEventListener('submit', changePassword);
+    } catch (e) { console.error(e); }
 
     // Rules accordion delegation
-    const rulesAccordion = document.getElementById('rulesAccordion');
-    if (rulesAccordion && typeof toggleAccordion === 'function') {
-        rulesAccordion.addEventListener('click', (e) => {
-            const header = e.target.closest('.accordion-header');
-            if (header) toggleAccordion(header);
-        });
-    }
+    try {
+        const rulesAccordion = document.getElementById('rulesAccordion');
+        if (rulesAccordion && typeof toggleAccordion === 'function') {
+            rulesAccordion.addEventListener('click', (e) => {
+                const header = e.target.closest('.accordion-header');
+                if (header) toggleAccordion(header);
+            });
+        }
+    } catch (e) { console.error(e); }
 
     // Update stats every 5 seconds
     setInterval(updatePlayerCount, 5000);
@@ -767,9 +785,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', handleScroll);
 
     // Load user data if on protected page
-    if (document.body.id === 'dashboard' || document.body.id === 'admin-panel') {
-        loadUserData();
-    }
+    try {
+        if (document.body.id === 'dashboard' || document.body.id === 'admin-panel') {
+            loadUserData();
+        }
+    } catch (e) { console.error(e); }
 });
 
 // Handle window resize
