@@ -700,6 +700,63 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize login tabs if on login page
     if (document.getElementById('login-form') && document.getElementById('register-form')) {
         switchTab('login'); // Default to login tab
+
+        // Tab buttons
+        document.querySelectorAll('[data-tab]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchTab(btn.dataset.tab);
+            });
+        });
+
+        // Forms
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        if (loginForm) loginForm.addEventListener('submit', handleLogin);
+        if (registerForm) registerForm.addEventListener('submit', handleRegister);
+
+        // Switch link
+        const switchLink = document.getElementById('switch-to-register');
+        if (switchLink) {
+            switchLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchTab('register');
+            });
+        }
+    }
+
+    // Bind copy IP buttons
+    document.querySelectorAll('#copy-ip-btn, [data-action="copy-ip"]').forEach(btn => {
+        btn.addEventListener('click', copyIP);
+    });
+
+    // Bind logout buttons
+    document.querySelectorAll('[data-action="logout"]').forEach(btn => {
+        btn.addEventListener('click', handleLogout);
+    });
+
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    if (mobileMenuToggle) mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+
+    // Dashboard: toggle edit mode
+    document.querySelectorAll('[data-action="toggle-edit"]').forEach(btn => {
+        btn.addEventListener('click', toggleEditMode);
+    });
+
+    // Dashboard: forms
+    const editProfileForm = document.getElementById('edit-profile-form');
+    const changePasswordForm = document.getElementById('change-password-form');
+    if (editProfileForm) editProfileForm.addEventListener('submit', updateProfile);
+    if (changePasswordForm) changePasswordForm.addEventListener('submit', changePassword);
+
+    // Rules accordion delegation
+    const rulesAccordion = document.getElementById('rulesAccordion');
+    if (rulesAccordion && typeof toggleAccordion === 'function') {
+        rulesAccordion.addEventListener('click', (e) => {
+            const header = e.target.closest('.accordion-header');
+            if (header) toggleAccordion(header);
+        });
     }
 
     // Update stats every 5 seconds

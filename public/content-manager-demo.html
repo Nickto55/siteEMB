@@ -272,7 +272,7 @@
     <div id="edit-modal" class="modal">
         <div class="modal-content">
             <h2>Редактирование страницы</h2>
-            <form id="edit-form" onsubmit="return false;">
+            <form id="edit-form">
                 <div class="form-group">
                     <label for="page-title">Заголовок страницы (опционально)</label>
                     <input type="text" id="page-title" placeholder="Заголовок">
@@ -286,10 +286,10 @@
                 <div class="status-message" id="edit-status"></div>
 
                 <div class="modal-actions">
-                    <button type="button" class="btn-save" onclick="savePageContent()">
+                    <button type="button" class="btn-save" id="btn-save-edit">
                         💾 Сохранить
                     </button>
-                    <button type="button" class="btn-close" onclick="closeEditModal()">
+                    <button type="button" class="btn-close" id="btn-close-edit">
                         ✕ Закрыть
                     </button>
                 </div>
@@ -332,10 +332,10 @@
                             <strong>Обновлена:</strong> ${new Date(page.updated_at).toLocaleDateString('ru-RU')}
                         </p>
                         <div class="page-actions">
-                            <button class="btn-edit" onclick="openEditModal('${page.page_name}')">
+                            <button class="btn-edit" data-action="open-edit" data-page="${page.page_name}">
                                 ✏️ Редактировать
                             </button>
-                            <button class="btn-view" onclick="viewPagePreview('${page.page_name}')">
+                            <button class="btn-view" data-action="view-preview" data-page="${page.page_name}">
                                 👁️ Просмотр
                             </button>
                         </div>
@@ -370,10 +370,10 @@
         }
 
         // Сохранить контент
-        async function savePageContent() {
+        async function savePageContent(e) {
             if (!currentEditPage) return;
 
-            const btn = event.target;
+            const btn = e ? e.target : document.getElementById('btn-save-edit');
             const originalText = btn.textContent;
             btn.textContent = '⏳ Сохранение...';
             btn.disabled = true;
@@ -418,6 +418,20 @@
             if (e.target.id === 'edit-modal') {
                 closeEditModal();
             }
+        });
+
+        // Bind static buttons
+        document.getElementById('btn-save-edit').addEventListener('click', savePageContent);
+        document.getElementById('btn-close-edit').addEventListener('click', closeEditModal);
+
+        // Delegate dynamic page actions
+        document.getElementById('pages-container').addEventListener('click', (e) => {
+            const btn = e.target.closest('button');
+            if (!btn) return;
+            const action = btn.dataset.action;
+            const page = btn.dataset.page;
+            if (action === 'open-edit' && page) openEditModal(page);
+            if (action === 'view-preview' && page) viewPagePreview(page);
         });
 
         // Загрузить страницы при загрузке документа

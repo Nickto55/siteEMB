@@ -59,7 +59,7 @@ function renderHeader() {
 
                 <!-- Mobile menu button -->
                 <div class="lg:hidden">
-                    <button onclick="toggleMobileHeaderMenu()" class="text-purple-soft hover:text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-deep">
+                    <button id="mobile-header-menu-toggle" class="text-purple-soft hover:text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-deep">
                         <svg id="mobile-menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
@@ -73,7 +73,7 @@ function renderHeader() {
             <div class="px-4 pt-2 pb-4 space-y-1">
                 <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium ${currentPage === 'index.html' || currentPage === '' ? 'text-purple-soft bg-purple-deep/20' : 'text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10'}">Главная</a>
                 
-                <button onclick="toggleMobileSubmenu('mobile-about-submenu', 'mobile-about-arrow')" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10 flex items-center justify-between">
+                <button id="mobile-about-toggle" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10 flex items-center justify-between">
                     О сервере <span id="mobile-about-arrow" class="text-xs">▶</span>
                 </button>
                 <div id="mobile-about-submenu" class="hidden pl-4 space-y-1">
@@ -82,7 +82,7 @@ function renderHeader() {
                     <a href="season-concept.html" class="block px-3 py-2 rounded-md text-sm text-purple-soft/60 hover:text-purple-soft hover:bg-purple-deep/10">Концепция сезона</a>
                 </div>
 
-                <button onclick="toggleMobileSubmenu('mobile-rules-submenu', 'mobile-rules-arrow')" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10 flex items-center justify-between">
+                <button id="mobile-rules-toggle" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10 flex items-center justify-between">
                     Правила <span id="mobile-rules-arrow" class="text-xs">▶</span>
                 </button>
                 <div id="mobile-rules-submenu" class="hidden pl-4 space-y-1">
@@ -106,6 +106,24 @@ function renderHeader() {
 
     document.body.insertAdjacentHTML('afterbegin', headerHTML);
     checkAuth();
+    bindHeaderEvents();
+}
+
+function bindHeaderEvents() {
+    const mobileToggle = document.getElementById('mobile-header-menu-toggle');
+    if (mobileToggle) mobileToggle.addEventListener('click', toggleMobileHeaderMenu);
+
+    const aboutToggle = document.getElementById('mobile-about-toggle');
+    if (aboutToggle) aboutToggle.addEventListener('click', () => toggleMobileSubmenu('mobile-about-submenu', 'mobile-about-arrow'));
+
+    const rulesToggle = document.getElementById('mobile-rules-toggle');
+    if (rulesToggle) rulesToggle.addEventListener('click', () => toggleMobileSubmenu('mobile-rules-submenu', 'mobile-rules-arrow'));
+
+    const desktopLogout = document.getElementById('desktop-logout-btn');
+    if (desktopLogout) desktopLogout.addEventListener('click', logout);
+
+    const mobileLogout = document.getElementById('mobile-logout-btn');
+    if (mobileLogout) mobileLogout.addEventListener('click', logout);
 }
 
 function checkAuth() {
@@ -126,7 +144,7 @@ function checkAuth() {
             <a href="dashboard.html" class="${isDashboard ? 'text-magenta-glow' : 'text-purple-soft hover:text-magenta-glow'} px-3 py-2 rounded-md text-sm font-medium transition-colors">
                 ${username ? '👤 ' + username : 'Личный кабинет'}
             </a>
-            <button onclick="logout()" class="ml-2 text-red-400 hover:text-red-300 text-sm font-medium px-3 py-2 rounded-md hover:bg-red-400/10 transition-all">
+            <button id="desktop-logout-btn" class="ml-2 text-red-400 hover:text-red-300 text-sm font-medium px-3 py-2 rounded-md hover:bg-red-400/10 transition-all">
                 Выход
             </button>
         `;
@@ -134,7 +152,7 @@ function checkAuth() {
             <a href="dashboard.html" class="block px-3 py-2 rounded-md text-base font-medium ${isDashboard ? 'text-magenta-glow bg-purple-deep/20' : 'text-purple-soft hover:text-magenta-glow hover:bg-purple-deep/10'}">
                 ${username ? '👤 ' + username : 'Личный кабинет'}
             </a>
-            <button onclick="logout()" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-red-400 hover:text-red-300 hover:bg-red-400/10 transition-all">
+            <button id="mobile-logout-btn" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-red-400 hover:text-red-300 hover:bg-red-400/10 transition-all">
                 🚪 Выход
             </button>
         `;

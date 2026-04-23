@@ -58,14 +58,14 @@
                         <a href="dashboard.html" id="dashboard-link"
                             class="text-mc-greenLight hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium"
                             style="display: none;">Профиль</a>
-                        <button onclick="handleLogout()" id="logout-btn"
+                        <button data-action="logout" id="logout-btn"
                             class="text-mc-greenLight hover:text-red-400 transition-colors px-3 py-2 rounded-md text-sm font-medium"
                             style="display: none;">Выход</button>
                     </div>
                 </div>
 
                 <div class="md:hidden">
-                    <button onclick="toggleMobileMenu()" class="text-gray-300 hover:text-white p-2">
+                    <button id="mobile-menu-toggle" class="text-gray-300 hover:text-white p-2">
                         <span>MENU</span>
                     </button>
                 </div>

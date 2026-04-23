@@ -94,14 +94,14 @@
                             <p class="text-white" id="profile-created-at">Загрузка...</p>
                         </div>
 
-                        <button onclick="toggleEditMode()"
+                        <button data-action="toggle-edit"
                             class="w-full bg-purple-deep hover:bg-purple-royal text-white font-bold py-2 px-4 rounded-lg transition-all mt-4">
                             Редактировать профиль
                         </button>
                     </div>
 
                     <!-- Edit Form -->
-                    <form id="edit-profile-form" onsubmit="updateProfile(event)" class="hidden space-y-4">
+                    <form id="edit-profile-form" class="hidden space-y-4">
                         <div>
                             <label class="text-purple-soft/50 text-sm mb-1 block">Email</label>
                             <input type="email" id="edit-email"
@@ -127,7 +127,7 @@
                                 class="flex-1 bg-gradient-to-r from-purple-deep to-purple-neon hover:from-purple-royal hover:to-purple-soft text-white font-bold py-2 px-4 rounded-lg transition-all">
                                 Сохранить
                             </button>
-                            <button type="button" onclick="toggleEditMode()"
+                            <button type="button" data-action="toggle-edit"
                                 class="flex-1 bg-void-dark hover:bg-purple-deep/20 text-purple-soft font-bold py-2 px-4 rounded-lg transition-all border border-purple-soft/10">
                                 Отмена
                             </button>
@@ -139,7 +139,7 @@
                 <div class="dashboard-card">
                     <h2 class="text-xl font-bold mb-6 text-purple-soft">🔒 Изменить пароль</h2>
 
-                    <form id="change-password-form" onsubmit="changePassword(event)" class="space-y-4">
+                    <form id="change-password-form" class="space-y-4">
                         <div>
                             <label class="text-purple-soft/50 text-sm mb-1 block">Текущий пароль</label>
                             <input type="password" id="current-password"
@@ -188,7 +188,7 @@
                             <p class="text-white font-mono" id="ping">12 ms</p>
                         </div>
 
-                        <button onclick="copyIP()"
+                        <button data-action="copy-ip"
                             class="w-full bg-purple-deep hover:bg-purple-royal text-white font-bold py-2 px-4 rounded-lg transition-all mt-4">
                             Скопировать IP
                         </button>

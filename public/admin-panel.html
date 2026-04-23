@@ -48,9 +48,9 @@
 
             <!-- Tabs -->
             <div class="flex gap-4 mb-8 border-b border-white/10 pb-4 flex-wrap">
-                <button class="tab-btn active" onclick="switchAdminTab('users');">👥 Пользователи</button>
-                <button class="tab-btn" onclick="switchAdminTab('reports');">📋 Отчеты</button>
-                <button class="tab-btn" onclick="switchAdminTab('settings');">⚙️ Настройки</button>
+                <button class="tab-btn active" data-admin-tab="users">👥 Пользователи</button>
+                <button class="tab-btn" data-admin-tab="reports">📋 Отчеты</button>
+                <button class="tab-btn" data-admin-tab="settings">⚙️ Настройки</button>
             </div>
 
             <!-- Users Tab -->
@@ -134,12 +134,12 @@
 
     <script src="script.js"></script>
     <script>
-        function switchAdminTab(tab) {
+        function switchAdminTab(tab, clickedBtn) {
             document.querySelectorAll('[id$="-tab"]').forEach(el => el.classList.add('hidden'));
             document.getElementById(tab + '-tab').classList.remove('hidden');
 
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if (clickedBtn) clickedBtn.classList.add('active');
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -147,6 +147,10 @@
                 requireAdmin();
             }
             checkAdminAccess();
+
+            document.querySelectorAll('[data-admin-tab]').forEach(btn => {
+                btn.addEventListener('click', () => switchAdminTab(btn.dataset.adminTab, btn));
+            });
         });
 
         function checkAdminAccess() {

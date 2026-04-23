@@ -48,16 +48,16 @@
             class="max-w-md w-full bg-void-dark/90 backdrop-blur-xl border border-purple-soft/10 rounded-2xl p-8 shadow-2xl">
             <!-- Tabs -->
             <div class="flex gap-4 mb-8 border-b border-purple-soft/10 pb-4">
-                <button class="tab-btn active flex-1 text-center" onclick="switchTab('login'); return false;">
+                <button class="tab-btn active flex-1 text-center" data-tab="login">
                     Вход
                 </button>
-                <button class="tab-btn flex-1 text-center" onclick="switchTab('register'); return false;">
+                <button class="tab-btn flex-1 text-center" data-tab="register">
                     Регистрация
                 </button>
             </div>
 
             <!-- Login Form -->
-            <form id="login-form" onsubmit="handleLogin(event); return false;">
+            <form id="login-form">
                 <h2 class="text-2xl font-bold mb-6 text-center">Вход в систему</h2>
 
                 <div class="form-group">
@@ -81,7 +81,7 @@
             </form>
 
             <!-- Register Form -->
-            <form id="register-form" onsubmit="handleRegister(event); return false;">
+            <form id="register-form">
                 <h2 class="text-2xl font-bold mb-6 text-center">Регистрация</h2>
 
                 <div class="form-group">
@@ -118,7 +118,7 @@
 
             <div class="mt-6 pt-6 border-t border-purple-soft/10">
                 <p class="text-center text-purple-soft/60 text-sm">
-                    Нет аккаунта? <a href="#" onclick="switchTab('register'); return false;"
+                    Нет аккаунта? <a href="#" id="switch-to-register"
                         class="text-purple-soft hover:text-purple-neon transition-colors font-semibold">Зарегистрируйся</a>
                 </p>
             </div>
