@@ -198,10 +198,19 @@ function initScrollAnimations() {
         });
     }, observerOptions);
 
-    // Observe all cards and sections
-    document.querySelectorAll('.group').forEach(el => {
+    // Observe elements explicitly marked with .animate-on-scroll
+    // Also handle legacy .group elements that already have opacity-0 translate-y-10 inline
+    // (was breaking all .group elements by forcing them invisible)
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
         el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
         observer.observe(el);
+    });
+
+    document.querySelectorAll('.group').forEach(el => {
+        if (el.classList.contains('opacity-0') && el.classList.contains('translate-y-10')) {
+            el.classList.add('transition-all', 'duration-700');
+            observer.observe(el);
+        }
     });
 }
 
@@ -236,12 +245,47 @@ function initSmoothScroll() {
     });
 }
 
+// Form validation helpers
+function setFormMessage(containerId, message, type = 'error') {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const colorClass = type === 'error' ? 'text-red-400' : (type === 'success' ? 'text-green-400' : 'text-purple-soft');
+    container.innerHTML = `<p class="${colorClass} text-sm text-center">${message}</p>`;
+}
+
+function setButtonLoading(btn, isLoading, originalText) {
+    if (isLoading) {
+        btn.disabled = true;
+        btn.dataset.originalText = originalText || btn.textContent;
+        btn.innerHTML = '<span class="inline-flex items-center gap-2"><svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Загрузка...</span>';
+        btn.classList.add('opacity-75', 'cursor-not-allowed');
+    } else {
+        btn.disabled = false;
+        btn.textContent = btn.dataset.originalText || originalText;
+        btn.classList.remove('opacity-75', 'cursor-not-allowed');
+    }
+}
+
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 // Authentication handler
 async function handleLogin(event) {
     event.preventDefault();
     const form = event.target;
-    const username = form.querySelector('[name="username"]').value;
+    const username = form.querySelector('[name="username"]').value.trim();
     const password = form.querySelector('[name="password"]').value;
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    // Validation
+    if (!username || !password) {
+        setFormMessage('login-message', 'Введите имя пользователя и пароль');
+        return;
+    }
+
+    setFormMessage('login-message', '');
+    setButtonLoading(submitBtn, true);
 
     try {
         const response = await fetch('/api/auth/login', {
@@ -255,28 +299,59 @@ async function handleLogin(event) {
         if (response.ok) {
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
+            setFormMessage('login-message', 'Вход выполнен успешно! Перенаправление...', 'success');
             showToast('Вход выполнен успешно!');
-            setTimeout(() => window.location.href = 'dashboard.html', 1000);
+            setTimeout(() => {
+                const redirect = new URLSearchParams(window.location.search).get('redirect');
+                window.location.href = redirect || 'dashboard.html';
+            }, 800);
         } else {
-            showToast(data.error || 'Ошибка входа');
+            setFormMessage('login-message', data.error || 'Неверные учетные данные');
         }
     } catch (error) {
-        showToast('Ошибка подключения');
+        setFormMessage('login-message', 'Ошибка подключения к серверу');
+    } finally {
+        setButtonLoading(submitBtn, false);
     }
 }
 
 async function handleRegister(event) {
     event.preventDefault();
     const form = event.target;
-    const username = form.querySelector('[name="username"]').value;
-    const email = form.querySelector('[name="email"]').value;
+    const username = form.querySelector('[name="username"]').value.trim();
+    const email = form.querySelector('[name="email"]').value.trim();
     const password = form.querySelector('[name="password"]').value;
     const passwordConfirm = form.querySelector('[name="password_confirm"]').value;
+    const submitBtn = form.querySelector('button[type="submit"]');
 
-    if (password !== passwordConfirm) {
-        showToast('Пароли не совпадают!');
+    // Frontend validation
+    if (!username || !email || !password || !passwordConfirm) {
+        setFormMessage('register-message', 'Все поля обязательны');
         return;
     }
+
+    if (username.length < 3) {
+        setFormMessage('register-message', 'Имя пользователя должно быть минимум 3 символа');
+        return;
+    }
+
+    if (!isValidEmail(email)) {
+        setFormMessage('register-message', 'Введите корректный email');
+        return;
+    }
+
+    if (password.length < 6) {
+        setFormMessage('register-message', 'Пароль должен быть минимум 6 символов');
+        return;
+    }
+
+    if (password !== passwordConfirm) {
+        setFormMessage('register-message', 'Пароли не совпадают');
+        return;
+    }
+
+    setFormMessage('register-message', '');
+    setButtonLoading(submitBtn, true);
 
     try {
         const response = await fetch('/api/auth/register', {
@@ -288,13 +363,18 @@ async function handleRegister(event) {
         const data = await response.json();
 
         if (response.ok) {
+            setFormMessage('register-message', 'Регистрация успешна! Теперь вы можете войти.', 'success');
             showToast('Регистрация успешна!');
             form.reset();
+            // Switch to login tab after a short delay
+            setTimeout(() => switchTab('login'), 1200);
         } else {
-            showToast(data.error || 'Ошибка регистрации');
+            setFormMessage('register-message', data.error || 'Ошибка регистрации');
         }
     } catch (error) {
-        showToast('Ошибка подключения');
+        setFormMessage('register-message', 'Ошибка подключения к серверу');
+    } finally {
+        setButtonLoading(submitBtn, false);
     }
 }
 
@@ -354,6 +434,31 @@ function checkAuthStatus() {
         if (dashboardLink) dashboardLink.style.display = 'inline-block';
         if (logoutBtn) logoutBtn.style.display = 'inline-block';
         if (userInfo) userInfo.textContent = `Привет, ${user.username}!`;
+    }
+}
+
+function requireAuth() {
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+    if (!token || !user) {
+        window.location.href = 'login.html?redirect=' + encodeURIComponent(window.location.pathname.split('/').pop());
+        return false;
+    }
+    return true;
+}
+
+function requireAdmin() {
+    if (!requireAuth()) return false;
+    try {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user.role !== 'admin') {
+            window.location.href = 'dashboard.html';
+            return false;
+        }
+        return true;
+    } catch (e) {
+        window.location.href = 'login.html';
+        return false;
     }
 }
 

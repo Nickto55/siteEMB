@@ -63,12 +63,13 @@
                 <div class="form-group">
                     <label>Имя пользователя</label>
                     <input type="text" name="username" class="auth-input" placeholder="Введите имя пользователя"
-                        required>
+                        required autocomplete="username">
                 </div>
 
                 <div class="form-group">
                     <label>Пароль</label>
-                    <input type="password" name="password" class="auth-input" placeholder="Введите пароль" required>
+                    <input type="password" name="password" class="auth-input" placeholder="Введите пароль"
+                        required autocomplete="current-password">
                 </div>
 
                 <button type="submit"
@@ -86,24 +87,25 @@
                 <div class="form-group">
                     <label>Имя пользователя</label>
                     <input type="text" name="username" class="auth-input" placeholder="Выберите имя пользователя"
-                        min="3" max="30" required>
+                        minlength="3" maxlength="30" required autocomplete="username">
                 </div>
 
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" name="email" class="auth-input" placeholder="Введите ваш email" required>
+                    <input type="email" name="email" class="auth-input" placeholder="Введите ваш email"
+                        required autocomplete="email">
                 </div>
 
                 <div class="form-group">
                     <label>Пароль</label>
                     <input type="password" name="password" class="auth-input" placeholder="Придумайте надежный пароль"
-                        minlength="6" required>
+                        minlength="6" required autocomplete="new-password">
                 </div>
 
                 <div class="form-group">
                     <label>Подтверждение пароля</label>
                     <input type="password" name="password_confirm" class="auth-input" placeholder="Повторите пароль"
-                        required>
+                        minlength="6" required autocomplete="new-password">
                 </div>
 
                 <button type="submit"
@@ -123,8 +125,7 @@
         </div>
     </div>
 
-    <footer
-        class="fixed bottom-0 w-full bg-void-black border-t border-purple-soft/10 py-4 text-center text-purple-soft/40 text-sm">
+    <footer class="w-full bg-void-black border-t border-purple-soft/10 py-6 text-center text-purple-soft/40 text-sm relative z-10">
         <p>© 2026 EmbroMine. Not affiliated with Mojang Studios.</p>
     </footer>
 

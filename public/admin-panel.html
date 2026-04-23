@@ -39,10 +39,12 @@
     <!-- Main Content -->
     <div class="min-h-screen pt-20 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="max-w-7xl mx-auto">
-            <h1
-                class="text-3xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-white to-mc-greenLight bg-clip-text text-transparent">
-                Панель администратора
-            </h1>
+            <div class="flex items-center justify-between mb-8">
+                <h1 class="text-3xl md:text-5xl font-bold bg-gradient-to-r from-white to-mc-greenLight bg-clip-text text-transparent">
+                    Панель администратора
+                </h1>
+                <span id="admin-user" class="text-sm text-gray-400"></span>
+            </div>
 
             <!-- Tabs -->
             <div class="flex gap-4 mb-8 border-b border-white/10 pb-4 flex-wrap">
@@ -140,16 +142,23 @@
             event.target.classList.add('active');
         }
 
-        // Stub functions for admin panel
         document.addEventListener('DOMContentLoaded', () => {
+            if (typeof requireAdmin === 'function') {
+                requireAdmin();
+            }
             checkAdminAccess();
         });
 
         function checkAdminAccess() {
             const user = localStorage.getItem('user');
-            if (user) {
-                const userData = JSON.parse(user);
-                document.getElementById('admin-user').textContent = `👑 ${userData.username}`;
+            const adminUserEl = document.getElementById('admin-user');
+            if (user && adminUserEl) {
+                try {
+                    const userData = JSON.parse(user);
+                    adminUserEl.textContent = `👑 ${userData.username}`;
+                } catch (e) {
+                    adminUserEl.textContent = '';
+                }
             }
         }
     </script>
