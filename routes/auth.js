@@ -60,7 +60,7 @@ router.post('/register', async (req, res) => {
 
         // Создание пользователя (роль по умолчанию - user)
         const result = await pool.query(
-            'INSERT INTO users (username, email, password_hash, role) VALUES ($1, $2, $3, $4) RETURNING id, username, email, role, created_at',
+            'INSERT INTO users (username, email, password, role) VALUES ($1, $2, $3, $4) RETURNING id, username, email, role, created_at',
             [username, email, hashedPassword, 'user']
         );
 
@@ -115,7 +115,7 @@ router.post('/login', async (req, res) => {
         console.log('🔐 Проверка пароля...');
 
         // Проверка пароля
-        const isValidPassword = await bcrypt.compare(password, user.password_hash);
+        const isValidPassword = await bcrypt.compare(password, user.password);
         if (!isValidPassword) {
             console.log('❌ Неверный пароль');
             return res.status(401).json({ error: 'Неверные учетные данные' });
