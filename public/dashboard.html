@@ -57,6 +57,15 @@
                         <div class="flex-1 min-w-0">
                             <h2 class="text-2xl font-bold mb-6 text-purple-soft">Ваш профиль</h2>
 
+                            <!-- Mobile Skin -->
+                            <div class="lg:hidden flex justify-center my-4">
+                                <div class="relative">
+                                    <div class="absolute inset-0 bg-gradient-to-b from-purple-deep/10 to-transparent rounded-xl"></div>
+                                    <img id="minecraft-skin-mobile" src="" alt="Minecraft Skin" referrerpolicy="no-referrer"
+                                        class="relative z-10 w-[120px] h-auto drop-shadow-[0_0_15px_rgba(168,85,247,0.35)] image-pixelated">
+                                </div>
+                            </div>
+
                             <div id="profile-view-mode" class="space-y-5">
                                 <!-- Avatar & Username Row -->
                                 <div class="flex items-center gap-4">
@@ -70,8 +79,10 @@
                                         </div>
                                     </div>
                                     <div class="min-w-0">
-                                        <p class="text-white font-bold text-xl truncate" id="profile-username">Загрузка...</p>
-                                        <p class="text-purple-soft/60 text-sm truncate" id="profile-email">Загрузка...</p>
+                                        <p class="text-white font-bold text-xl truncate" id="profile-username">
+                                            Загрузка...</p>
+                                        <p class="text-purple-soft/60 text-sm truncate" id="profile-email">Загрузка...
+                                        </p>
                                     </div>
                                 </div>
 
@@ -103,8 +114,9 @@
                             </div>
 
                             <!-- Edit Form -->
-                            <form id="edit-profile-form" class="hidden space-y-4 mt-6 pt-6 border-t border-purple-soft/10"
-                                method="POST" onsubmit="event.preventDefault(); return false;">
+                            <form id="edit-profile-form"
+                                class="hidden space-y-4 mt-6 pt-6 border-t border-purple-soft/10" method="POST"
+                                onsubmit="event.preventDefault(); return false;">
                                 <div>
                                     <label class="text-purple-soft/50 text-sm mb-1 block">Email</label>
                                     <input type="email" id="edit-email"
@@ -178,11 +190,10 @@
                             </div>
                         </div>
 
-                        <!-- Right: Minecraft Skin -->
+                        <!-- Right: Minecraft Skin (desktop only) -->
                         <div class="hidden lg:flex flex-col items-center justify-center relative min-w-[200px]">
-                            <div class="absolute inset-0 bg-gradient-to-b from-purple-deep/10 to-transparent rounded-xl">
-                            </div>
-                            <img id="minecraft-skin" src="" alt="Minecraft Skin"
+                            <div class="absolute inset-0 bg-gradient-to-b from-purple-deep/10 to-transparent rounded-xl"></div>
+                            <img id="minecraft-skin" src="" alt="Minecraft Skin" referrerpolicy="no-referrer"
                                 class="relative z-10 w-[180px] h-auto drop-shadow-[0_0_20px_rgba(168,85,247,0.35)] image-pixelated">
                             <p class="relative z-10 mt-3 text-purple-soft/40 text-xs">Скин Minecraft</p>
                         </div>

@@ -528,9 +528,17 @@ async function loadUserData() {
     }
 
     // Load Minecraft skin
-    if (minecraftSkin && userData.username) {
-        minecraftSkin.src = `https://mc-heads.net/body/${encodeURIComponent(userData.username)}/180`;
-    }
+    const skinUrl = userData.username
+        ? `https://mc-heads.net/body/${encodeURIComponent(userData.username)}/180`
+        : 'https://mc-heads.net/body/Steve/180';
+
+    [document.getElementById('minecraft-skin'), document.getElementById('minecraft-skin-mobile')].forEach(img => {
+        if (!img) return;
+        img.src = skinUrl;
+        img.onerror = () => {
+            img.src = 'https://mc-heads.net/body/Steve/180';
+        };
+    });
 
     // Show admin section if user is admin
     const adminSection = document.getElementById('admin-section');
