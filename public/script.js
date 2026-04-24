@@ -505,6 +505,7 @@ async function loadUserData() {
     const profileBio = document.getElementById('profile-bio');
     const profileRole = document.getElementById('profile-role');
     const profileCreatedAt = document.getElementById('profile-created-at');
+    const minecraftSkin = document.getElementById('minecraft-skin');
 
     if (profileUsername) profileUsername.textContent = userData.username;
     if (profileEmail) profileEmail.textContent = userData.email;
@@ -524,6 +525,11 @@ async function loadUserData() {
             // Show first letter of username
             profileAvatarPlaceholder.textContent = userData.username ? userData.username.charAt(0).toUpperCase() : '?';
         }
+    }
+
+    // Load Minecraft skin
+    if (minecraftSkin && userData.username) {
+        minecraftSkin.src = `https://mc-heads.net/body/${encodeURIComponent(userData.username)}/180`;
     }
 
     // Show admin section if user is admin
@@ -655,6 +661,22 @@ function toggleEditMode() {
     }
 }
 
+function togglePasswordForm() {
+    const form = document.getElementById('change-password-form');
+    const arrow = document.getElementById('password-arrow');
+
+    if (form) {
+        const isHidden = form.classList.contains('hidden');
+        if (isHidden) {
+            form.classList.remove('hidden');
+            if (arrow) arrow.style.transform = 'rotate(180deg)';
+        } else {
+            form.classList.add('hidden');
+            if (arrow) arrow.style.transform = 'rotate(0deg)';
+        }
+    }
+}
+
 // Dropdown menu handler
 function initDropdownMenu() {
     const dropdowns = document.querySelectorAll('.nav-dropdown');
@@ -755,6 +777,13 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
         document.querySelectorAll('[data-action="toggle-edit"]').forEach(btn => {
             btn.addEventListener('click', toggleEditMode);
+        });
+    } catch (e) { console.error(e); }
+
+    // Dashboard: toggle password form
+    try {
+        document.querySelectorAll('[data-action="toggle-password"]').forEach(btn => {
+            btn.addEventListener('click', togglePasswordForm);
         });
     } catch (e) { console.error(e); }
 

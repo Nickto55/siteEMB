@@ -142,19 +142,14 @@ function checkAuth() {
     if (token) {
         const desktopHTML = `
             <a href="dashboard.html" class="${isDashboard ? 'text-magenta-glow' : 'text-purple-soft hover:text-magenta-glow'} px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                ${username ? '👤 ' + username : 'Личный кабинет'}
+                ${username ? '' + username : 'Личный кабинет'}
             </a>
-            <button id="desktop-logout-btn" class="ml-2 text-red-400 hover:text-red-300 text-sm font-medium px-3 py-2 rounded-md hover:bg-red-400/10 transition-all">
-                Выход
-            </button>
         `;
         const mobileHTML = `
             <a href="dashboard.html" class="block px-3 py-2 rounded-md text-base font-medium ${isDashboard ? 'text-magenta-glow bg-purple-deep/20' : 'text-purple-soft hover:text-magenta-glow hover:bg-purple-deep/10'}">
-                ${username ? '👤 ' + username : 'Личный кабинет'}
+                ${username ? '' + username : 'Личный кабинет'}
             </a>
-            <button id="mobile-logout-btn" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-red-400 hover:text-red-300 hover:bg-red-400/10 transition-all">
-                🚪 Выход
-            </button>
+
         `;
         if (authZone) authZone.innerHTML = desktopHTML;
         if (mobileAuthZone) mobileAuthZone.innerHTML = mobileHTML;
@@ -180,7 +175,7 @@ function toggleMobileHeaderMenu() {
     const menu = document.getElementById('mobile-menu');
     const icon = document.getElementById('mobile-menu-icon');
     if (!menu) return;
-    
+
     const isHidden = menu.classList.contains('hidden');
     if (isHidden) {
         menu.classList.remove('hidden');

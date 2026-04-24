@@ -443,3 +443,9 @@ html {
     border-left: 3px solid var(--magenta-glow);
     padding-left: 17px;
 }
+
+/* Pixelated images for Minecraft skins */
+.image-pixelated {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}

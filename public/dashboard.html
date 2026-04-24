@@ -49,204 +49,166 @@
                 Личный кабинет
             </h1>
 
-            <div class="grid md:grid-cols-3 gap-8 mb-8">
-                <!-- Profile Card -->
-                <div class="dashboard-card">
-                    <h2 class="text-xl font-bold mb-6 text-purple-soft">Ваш профиль</h2>
+            <!-- Profile Section -->
+            <div class="mb-8">
+                <div class="dashboard-card relative overflow-hidden">
+                    <div class="flex flex-col lg:flex-row gap-8">
+                        <!-- Left: User Info -->
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-2xl font-bold mb-6 text-purple-soft">Ваш профиль</h2>
 
-                    <div id="profile-view-mode" class="space-y-4">
-                        <!-- Avatar -->
-                        <div class="flex items-center gap-4 mb-4">
-                            <img id="profile-avatar" src="" alt="Аватар"
-                                class="w-16 h-16 rounded-full bg-purple-deep/20 object-cover border-2 border-purple-soft/30"
-                                style="display: none;">
-                            <div id="profile-avatar-placeholder"
-                                class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-deep to-purple-neon flex items-center justify-center text-white text-2xl font-bold">
-                                ?
+                            <div id="profile-view-mode" class="space-y-5">
+                                <!-- Avatar & Username Row -->
+                                <div class="flex items-center gap-4">
+                                    <div class="relative">
+                                        <img id="profile-avatar" src="" alt="Аватар"
+                                            class="w-16 h-16 rounded-full bg-purple-deep/20 object-cover border-2 border-purple-soft/30"
+                                            style="display: none;">
+                                        <div id="profile-avatar-placeholder"
+                                            class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-deep to-purple-neon flex items-center justify-center text-white text-2xl font-bold">
+                                            ?
+                                        </div>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <p class="text-white font-bold text-xl truncate" id="profile-username">Загрузка...</p>
+                                        <p class="text-purple-soft/60 text-sm truncate" id="profile-email">Загрузка...</p>
+                                    </div>
+                                </div>
+
+                                <!-- Info Grid -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-purple-soft/50 text-sm mb-1">Роль</p>
+                                        <p class="inline-block px-3 py-1 bg-purple-deep/20 text-purple-soft rounded-full text-sm font-semibold"
+                                            id="profile-role">
+                                            Загрузка...
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <p class="text-purple-soft/50 text-sm mb-1">Дата регистрации</p>
+                                        <p class="text-white" id="profile-created-at">Загрузка...</p>
+                                    </div>
+
+                                    <div class="sm:col-span-2">
+                                        <p class="text-purple-soft/50 text-sm mb-1">О себе</p>
+                                        <p class="text-white" id="profile-bio">Загрузка...</p>
+                                    </div>
+                                </div>
+
+                                <button data-action="toggle-edit"
+                                    class="w-full sm:w-auto bg-purple-deep hover:bg-purple-royal text-white font-bold py-2 px-6 rounded-lg transition-all">
+                                    Редактировать профиль
+                                </button>
+                            </div>
+
+                            <!-- Edit Form -->
+                            <form id="edit-profile-form" class="hidden space-y-4 mt-6 pt-6 border-t border-purple-soft/10"
+                                method="POST" onsubmit="event.preventDefault(); return false;">
+                                <div>
+                                    <label class="text-purple-soft/50 text-sm mb-1 block">Email</label>
+                                    <input type="email" id="edit-email"
+                                        class="auth-input w-full bg-void-dark border border-purple-soft/10 rounded-lg px-4 py-2 text-white focus:border-purple-neon focus:outline-none">
+                                </div>
+
+                                <div>
+                                    <label class="text-purple-soft/50 text-sm mb-1 block">URL аватара</label>
+                                    <input type="url" id="edit-avatar"
+                                        class="auth-input w-full bg-void-dark border border-purple-soft/10 rounded-lg px-4 py-2 text-white focus:border-purple-neon focus:outline-none"
+                                        placeholder="https://example.com/avatar.jpg">
+                                </div>
+
+                                <div>
+                                    <label class="text-purple-soft/50 text-sm mb-1 block">О себе</label>
+                                    <textarea id="edit-bio" rows="3"
+                                        class="auth-input w-full bg-void-dark border border-purple-soft/10 rounded-lg px-4 py-2 text-white focus:border-purple-neon focus:outline-none resize-none"
+                                        placeholder="Расскажите немного о себе..."></textarea>
+                                </div>
+
+                                <div class="flex gap-2">
+                                    <button type="submit"
+                                        class="flex-1 sm:flex-none bg-gradient-to-r from-purple-deep to-purple-neon hover:from-purple-royal hover:to-purple-soft text-white font-bold py-2 px-6 rounded-lg transition-all">
+                                        Сохранить
+                                    </button>
+                                    <button type="button" data-action="toggle-edit"
+                                        class="flex-1 sm:flex-none bg-void-dark hover:bg-purple-deep/20 text-purple-soft font-bold py-2 px-6 rounded-lg transition-all border border-purple-soft/10">
+                                        Отмена
+                                    </button>
+                                </div>
+                            </form>
+
+                            <!-- Change Password Toggle -->
+                            <div class="mt-6 pt-6 border-t border-purple-soft/10">
+                                <button type="button" data-action="toggle-password"
+                                    class="w-full flex items-center justify-between px-4 py-3 bg-void-dark/50 hover:bg-purple-deep/20 border border-purple-soft/10 rounded-lg transition-all group">
+                                    <span class="text-purple-soft font-medium">Изменить пароль</span>
+                                    <span id="password-arrow"
+                                        class="text-purple-soft/60 transition-transform duration-300 group-hover:text-purple-soft">▼</span>
+                                </button>
+
+                                <form id="change-password-form" class="hidden space-y-4 mt-4" method="POST"
+                                    onsubmit="event.preventDefault(); return false;">
+                                    <div>
+                                        <label class="text-purple-soft/50 text-sm mb-1 block">Текущий пароль</label>
+                                        <input type="password" id="current-password"
+                                            class="auth-input w-full bg-void-dark border border-purple-soft/10 rounded-lg px-4 py-2 text-white focus:border-purple-neon focus:outline-none"
+                                            required>
+                                    </div>
+
+                                    <div>
+                                        <label class="text-purple-soft/50 text-sm mb-1 block">Новый пароль</label>
+                                        <input type="password" id="new-password"
+                                            class="auth-input w-full bg-void-dark border border-purple-soft/10 rounded-lg px-4 py-2 text-white focus:border-purple-neon focus:outline-none"
+                                            minlength="6" required>
+                                    </div>
+
+                                    <div>
+                                        <label class="text-purple-soft/50 text-sm mb-1 block">Подтверждение нового
+                                            пароля</label>
+                                        <input type="password" id="confirm-new-password"
+                                            class="auth-input w-full bg-void-dark border border-purple-soft/10 rounded-lg px-4 py-2 text-white focus:border-purple-neon focus:outline-none"
+                                            minlength="6" required>
+                                    </div>
+
+                                    <button type="submit"
+                                        class="w-full sm:w-auto bg-gradient-to-r from-purple-deep to-purple-neon hover:from-purple-royal hover:to-purple-soft text-white font-bold py-2 px-6 rounded-lg transition-all">
+                                        Изменить пароль
+                                    </button>
+                                </form>
                             </div>
                         </div>
 
-                        <div>
-                            <p class="text-purple-soft/50 text-sm mb-1">Имя пользователя</p>
-                            <p class="text-white font-semibold" id="profile-username">Загрузка...</p>
+                        <!-- Right: Minecraft Skin -->
+                        <div class="hidden lg:flex flex-col items-center justify-center relative min-w-[200px]">
+                            <div class="absolute inset-0 bg-gradient-to-b from-purple-deep/10 to-transparent rounded-xl">
+                            </div>
+                            <img id="minecraft-skin" src="" alt="Minecraft Skin"
+                                class="relative z-10 w-[180px] h-auto drop-shadow-[0_0_20px_rgba(168,85,247,0.35)] image-pixelated">
+                            <p class="relative z-10 mt-3 text-purple-soft/40 text-xs">Скин Minecraft</p>
                         </div>
-
-                        <div>
-                            <p class="text-purple-soft/50 text-sm mb-1">Email</p>
-                            <p class="text-white font-semibold" id="profile-email">Загрузка...</p>
-                        </div>
-
-                        <div>
-                            <p class="text-purple-soft/50 text-sm mb-1">Роль</p>
-                            <p class="inline-block px-3 py-1 bg-purple-deep/20 text-purple-soft rounded-full text-sm font-semibold"
-                                id="profile-role">
-                                Загрузка...
-                            </p>
-                        </div>
-
-                        <div>
-                            <p class="text-purple-soft/50 text-sm mb-1">О себе</p>
-                            <p class="text-white" id="profile-bio">Загрузка...</p>
-                        </div>
-
-                        <div>
-                            <p class="text-purple-soft/50 text-sm mb-1">Дата регистрации</p>
-                            <p class="text-white" id="profile-created-at">Загрузка...</p>
-                        </div>
-
-                        <button data-action="toggle-edit"
-                            class="w-full bg-purple-deep hover:bg-purple-royal text-white font-bold py-2 px-4 rounded-lg transition-all mt-4">
-                            Редактировать профиль
-                        </button>
-                    </div>
-
-                    <!-- Edit Form -->
-                    <form id="edit-profile-form" class="hidden space-y-4" method="POST" onsubmit="event.preventDefault(); return false;">
-                        <div>
-                            <label class="text-purple-soft/50 text-sm mb-1 block">Email</label>
-                            <input type="email" id="edit-email"
-                                class="auth-input w-full bg-void-dark border border-purple-soft/10 rounded-lg px-4 py-2 text-white focus:border-purple-neon focus:outline-none">
-                        </div>
-
-                        <div>
-                            <label class="text-purple-soft/50 text-sm mb-1 block">URL аватара</label>
-                            <input type="url" id="edit-avatar"
-                                class="auth-input w-full bg-void-dark border border-purple-soft/10 rounded-lg px-4 py-2 text-white focus:border-purple-neon focus:outline-none"
-                                placeholder="https://example.com/avatar.jpg">
-                        </div>
-
-                        <div>
-                            <label class="text-purple-soft/50 text-sm mb-1 block">О себе</label>
-                            <textarea id="edit-bio" rows="3"
-                                class="auth-input w-full bg-void-dark border border-purple-soft/10 rounded-lg px-4 py-2 text-white focus:border-purple-neon focus:outline-none resize-none"
-                                placeholder="Расскажите немного о себе..."></textarea>
-                        </div>
-
-                        <div class="flex gap-2">
-                            <button type="submit"
-                                class="flex-1 bg-gradient-to-r from-purple-deep to-purple-neon hover:from-purple-royal hover:to-purple-soft text-white font-bold py-2 px-4 rounded-lg transition-all">
-                                Сохранить
-                            </button>
-                            <button type="button" data-action="toggle-edit"
-                                class="flex-1 bg-void-dark hover:bg-purple-deep/20 text-purple-soft font-bold py-2 px-4 rounded-lg transition-all border border-purple-soft/10">
-                                Отмена
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Change Password -->
-                <div class="dashboard-card">
-                    <h2 class="text-xl font-bold mb-6 text-purple-soft">🔒 Изменить пароль</h2>
-
-                    <form id="change-password-form" class="space-y-4" method="POST" onsubmit="event.preventDefault(); return false;">
-                        <div>
-                            <label class="text-purple-soft/50 text-sm mb-1 block">Текущий пароль</label>
-                            <input type="password" id="current-password"
-                                class="auth-input w-full bg-void-dark border border-purple-soft/10 rounded-lg px-4 py-2 text-white focus:border-purple-neon focus:outline-none"
-                                required>
-                        </div>
-
-                        <div>
-                            <label class="text-purple-soft/50 text-sm mb-1 block">Новый пароль</label>
-                            <input type="password" id="new-password"
-                                class="auth-input w-full bg-void-dark border border-purple-soft/10 rounded-lg px-4 py-2 text-white focus:border-purple-neon focus:outline-none"
-                                minlength="6" required>
-                        </div>
-
-                        <div>
-                            <label class="text-purple-soft/50 text-sm mb-1 block">Подтверждение нового пароля</label>
-                            <input type="password" id="confirm-new-password"
-                                class="auth-input w-full bg-void-dark border border-purple-soft/10 rounded-lg px-4 py-2 text-white focus:border-purple-neon focus:outline-none"
-                                minlength="6" required>
-                        </div>
-
-                        <button type="submit"
-                            class="w-full bg-gradient-to-r from-purple-deep to-purple-neon hover:from-purple-royal hover:to-purple-soft text-white font-bold py-2 px-4 rounded-lg transition-all">
-                            Изменить пароль
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Server Status -->
-                <div class="dashboard-card">
-                    <h2 class="text-xl font-bold mb-6 text-purple-soft">📊 Статус сервера</h2>
-
-                    <div class="space-y-4">
-                        <div>
-                            <p class="text-purple-soft/50 text-sm mb-1">Адрес</p>
-                            <p class="text-white font-mono">play.embromine.ru</p>
-                        </div>
-
-                        <div>
-                            <p class="text-purple-soft/50 text-sm mb-1">Игроки онлайн</p>
-                            <p class="text-2xl font-bold text-purple-neon" id="player-count">23</p>
-                        </div>
-
-                        <div>
-                            <p class="text-purple-soft/50 text-sm mb-1">Ping</p>
-                            <p class="text-white font-mono" id="ping">12 ms</p>
-                        </div>
-
-                        <button data-action="copy-ip"
-                            class="w-full bg-purple-deep hover:bg-purple-royal text-white font-bold py-2 px-4 rounded-lg transition-all mt-4">
-                            Скопировать IP
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div class="dashboard-card">
-                    <h2 class="text-xl font-bold mb-6 text-purple-soft">🔗 Быстрые ссылки</h2>
-
-                    <div class="space-y-3">
-                        <a href="index.html"
-                            class="block w-full p-3 bg-purple-soft/5 hover:bg-purple-soft/10 border border-purple-soft/10 rounded-lg transition-all text-center text-purple-soft/70 hover:text-purple-soft">
-                            Главная страница
-                        </a>
-
-                        <a href="rules.html"
-                            class="block w-full p-3 bg-purple-soft/5 hover:bg-purple-soft/10 border border-purple-soft/10 rounded-lg transition-all text-center text-purple-soft/70 hover:text-purple-soft">
-                            Правила сервера
-                        </a>
-
-                        <a href="guides.html"
-                            class="block w-full p-3 bg-purple-soft/5 hover:bg-purple-soft/10 border border-purple-soft/10 rounded-lg transition-all text-center text-purple-soft/70 hover:text-purple-soft">
-                            Гайды
-                        </a>
-
-                        <a href="map.html"
-                            class="block w-full p-3 bg-purple-soft/5 hover:bg-purple-soft/10 border border-purple-soft/10 rounded-lg transition-all text-center text-purple-soft/70 hover:text-purple-soft">
-                            Онлайн карта
-                        </a>
-
-                        <a href="https://discord.gg/"
-                            class="block w-full p-3 bg-[#5865F2]/20 hover:bg-[#5865F2]/30 border border-[#5865F2]/30 rounded-lg transition-all text-center text-blue-300 hover:text-blue-200">
-                            Discord сервер
-                        </a>
                     </div>
                 </div>
             </div>
 
             <!-- Info Box -->
             <div class="dashboard-card mb-8">
-                <h2 class="text-2xl font-bold mb-4">🎮 Добро пожаловать на EmbroMine!</h2>
+                <h2 class="text-2xl font-bold mb-4">Добро пожаловать на EmbroMine!</h2>
                 <p class="text-purple-soft/70 mb-4">
                     Вы являетесь спонсором проекта EmbroMine. Это означает, что вы получили доступ к эксклюзивному
                     Minecraft серверу с уникальным контентом и активным сообществом.
                 </p>
                 <div class="text-purple-soft/50 text-sm space-y-1">
-                    <p><strong>📦 Версия сервера:</strong> 1.20.1</p>
-                    <p><strong>🎮 Режимы:</strong> Survival, Creative, Minigames, Event Arena</p>
-                    <p><strong>💾 Бэкапы:</strong> Ежедневные (00:00 UTC)</p>
-                    <p><strong>🛡️ Защита:</strong> WorldGuard, AntiCheat, 24/7 Модерация</p>
-                    <p><strong>⚡ Оптимизация:</strong> TPS 20, Timings профайл</p>
+                    <p><strong>Версия сервера:</strong> 1.20.1</p>
+                    <p><strong>Режимы:</strong> Survival, Creative, Minigames, Event Arena</p>
+                    <p><strong>Бэкапы:</strong> Ежедневные (00:00 UTC)</p>
+                    <p><strong>Защита:</strong> WorldGuard, AntiCheat, 24/7 Модерация</p>
+                    <p><strong>Оптимизация:</strong> TPS 20, Timings профайл</p>
                 </div>
             </div>
 
             <!-- Admin Panel Link -->
             <div class="dashboard-card" id="admin-section" style="display: none;">
-                <h2 class="text-xl font-bold mb-4 text-purple-soft">👑 Админ-панель</h2>
+                <h2 class="text-xl font-bold mb-4 text-purple-soft">Админ-панель</h2>
                 <a href="admin-panel.html"
                     class="inline-block px-6 py-3 bg-gradient-to-r from-purple-deep to-purple-neon hover:from-purple-royal hover:to-purple-soft text-white font-bold rounded-lg transition-all transform hover:scale-105">
                     Перейти в админ-панель
