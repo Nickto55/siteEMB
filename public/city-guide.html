@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гайд по Системе Города - EmbroMine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: {
+                            black: '#0a0810',
+                            dark: '#120a1a',
+                        },
+                        purple: {
+                            deep: '#6D28D9',
+                            royal: '#8B5CF6',
+                            neon: '#A855F7',
+                            soft: '#C4B5FD',
+                        },
+                        magenta: {
+                            glow: '#D946EF',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+    <!-- Navigation -->
+    <script src="/js/header.js" defer></script>
+
+    <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1
+                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
+                    Гайд по Системе Города
+                </h1>
+                <p class="text-xl text-purple-soft/60">Полное руководство по строительству и управлению поселением</p>
+                <div class="mt-4 text-sm text-purple-soft/50">
+                    Версия мода: 1.10.8 | API: Forge 47.3.0+
+                </div>
+            </div>
+
+            <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5 mb-8">
+                <p class="text-purple-soft/80 leading-relaxed">
+                    Этот гайд описывает надстройку над механикой Recruits — систему развития поселения от временного лагеря до великой столицы. 
+                    Здесь вы узнаете, как строить, развивать и управлять городом, получать экономические баффы и запускать масштабные проекты.
+                </p>
+            </div>
+
+            <!-- Оглавление -->
+            <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-12">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">Оглавление</h2>
+                <ol class="space-y-2 list-decimal list-inside text-purple-soft/80">
+                    <li><a href="#levels" class="text-purple-neon hover:text-purple-soft transition-colors">Уровни развития города</a></li>
+                    <li><a href="#requirements" class="text-purple-neon hover:text-purple-soft transition-colors">Требования к постройкам по уровням</a></li>
+                    <li><a href="#buildings" class="text-purple-neon hover:text-purple-soft transition-colors">Промышленные и специальные здания</a></li>
+                    <li><a href="#buffs" class="text-purple-neon hover:text-purple-soft transition-colors">Экономические баффы города</a></li>
+                    <li><a href="#indicators" class="text-purple-neon hover:text-purple-soft transition-colors">Динамические показатели</a></li>
+                    <li><a href="#levelup" class="text-purple-neon hover:text-purple-soft transition-colors">Процедура повышения уровня</a></li>
+                    <li><a href="#projects" class="text-purple-neon hover:text-purple-soft transition-colors">Система городских проектов</a></li>
+                    <li><a href="#city-checklist" class="text-purple-neon hover:text-purple-soft transition-colors">Чек-лист градоначальника</a></li>
+                </ol>
+            </div>
+
+            <!-- РАЗДЕЛ 1 -->
+            <div id="levels" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">1. Уровни развития города</h2>
+                
+                <p class="text-purple-soft/80 mb-6">
+                    Поселение проходит эволюцию от временного лагеря до великой столицы. Каждый уровень открывает новые возможности и предъявляет более высокие требования.
+                </p>
+
+                <div class="overflow-x-auto mb-6">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-purple-soft/20">
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Уровень</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Название</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Ключевая характеристика</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-purple-soft/70">
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">0</td>
+                                <td class="px-4 py-3">Лагерь</td>
+                                <td class="px-4 py-3">Неофициальная стоянка. Нет защиты, только общий чат.</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">1</td>
+                                <td class="px-4 py-3">Деревня</td>
+                                <td class="px-4 py-3">Первое официальное поселение. Базовая защита, общий склад, первый бафф.</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">2</td>
+                                <td class="px-4 py-3">Посёлок</td>
+                                <td class="px-4 py-3">Организованное сообщество. Выбор специализации, расширенная инфраструктура.</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">3</td>
+                                <td class="px-4 py-3">Город</td>
+                                <td class="px-4 py-3">Региональный центр. Возможность создавать законы, запускать проекты.</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">4</td>
+                                <td class="px-4 py-3">Столица</td>
+                                <td class="px-4 py-3">Сердце фракции. Даёт глобальный бафф союзникам, право на вассалитет.</td>
+                            </tr>
+                            <tr class="hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">5</td>
+                                <td class="px-4 py-3">Метрополис</td>
+                                <td class="px-4 py-3">Вершина развития. Уникальные постройки, влияние на серверную политику.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-blue-900/20 border border-blue-600/30 rounded-xl p-4">
+                    <p class="text-blue-300/80 text-sm">
+                        <strong>💡 Важно:</strong> Уровень поселения назначается администрацией на основе выполнения требований. 
+                        Система не жёсткая, но служит ориентиром.
+                    </p>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 2 -->
+            <div id="requirements" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">2. Требования к постройкам по уровням</h2>
+                
+                <p class="text-purple-soft/80 mb-6">
+                    Для повышения уровня требуется построить и зарегистрировать определённое количество функциональных зданий.
+                </p>
+
+                <div class="space-y-6">
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h3 class="text-lg font-bold text-purple-neon mb-3">Уровень 1: Деревня (5 построек)</h3>
+                        <ul class="space-y-2 text-purple-soft/80 ml-4 list-disc list-inside">
+                            <li><strong>Жилой дом</strong> — кровать, сундук, стол, свет</li>
+                            <li><strong>Общий склад</strong> — комната с 4+ сундуками</li>
+                            <li><strong>Ферма</strong> — 20+ грядок с водой</li>
+                            <li><strong>Мастерская</strong> — верстак, печь</li>
+                            <li><strong>Частокол/забор</strong> — замкнутый периметр вокруг поселения</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h3 class="text-lg font-bold text-purple-neon mb-3">Уровень 2: Посёлок (включает все 5 + 5 новых)</h3>
+                        <ul class="space-y-2 text-purple-soft/80 ml-4 list-disc list-inside">
+                            <li><strong>Ратуша</strong> — здание для собраний</li>
+                            <li><strong>Специализированная мастерская</strong> — кузница, пекарня и т.п.</li>
+                            <li><strong>Специализированное хранилище</strong> — амбар, рудный склад</li>
+                            <li><strong>Таверна / Постоялый двор</strong> — 2+ гостевые кровати</li>
+                            <li><strong>Укреплённые ворота</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h3 class="text-lg font-bold text-purple-neon mb-3">Уровень 3: Город (включает все 10 + 5 новых)</h3>
+                        <ul class="space-y-2 text-purple-soft/80 ml-4 list-disc list-inside">
+                            <li><strong>Рынок / Торговый ряд</strong> — 3+ торговые точки</li>
+                            <li><strong>Казарма</strong> — стойки с оружием, 2+ кровати для стражи</li>
+                            <li><strong>Библиотека</strong> — 3+ книжных шкафа</li>
+                            <li><strong>Храм / Алтарь</strong> — культовое сооружение</li>
+                            <li><strong>Парк / Сад</strong> — декоративная зона</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h3 class="text-lg font-bold text-purple-neon mb-3">Уровень 4: Столица (20+ типов построек)</h3>
+                        <ul class="space-y-2 text-purple-soft/80 ml-4 list-disc list-inside">
+                            <li><strong>Дворец / Великая ратуша</strong></li>
+                            <li><strong>НИИ / Научно-исследовательский центр</strong></li>
+                            <li><strong>Арена для боёв</strong></li>
+                            <li><strong>Банк / Торговая гильдия</strong></li>
+                            <li><strong>Монумент</strong> — символ фракции</li>
+                        </ul>
+                        <p class="text-purple-soft/80 mt-3"><strong>Дополнительное условие:</strong> Развитая сеть дорог, второй пояс стен или цитадель.</p>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h3 class="text-lg font-bold text-purple-neon mb-3">Уровень 5: Метрополис</h3>
+                        <p class="text-purple-soft/80">
+                            Требует не количества, а масштаба, уникальности и инфраструктурных связей — чудеса архитектуры, связанные комплексы.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 3 -->
+            <div id="buildings" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">3. Промышленные и специальные здания</h2>
+                
+                <p class="text-purple-soft/80 mb-6">
+                    Эти постройки не обязательны для повышения уровня, но дают экономические преимущества и влияют на динамические показатели.
+                </p>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-purple-soft/20">
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Категория</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Примеры построек</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-purple-soft/70">
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Добывающие</td>
+                                <td class="px-4 py-3">Рудник/Шахта, Карьер, Лесопилка, Рыбацкая пристань</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Перерабатывающие</td>
+                                <td class="px-4 py-3">Кузница, Алхимическая лаборатория, Пекарня/Мельница, Каменотёсная</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Сельскохозяйственные</td>
+                                <td class="px-4 py-3">Большая ферма (100+ блоков), Животноводческий комплекс, Пасека, Виноградник</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Логистические</td>
+                                <td class="px-4 py-3">Складской комплекс, Торговый пост, Порт, Конюшня</td>
+                            </tr>
+                            <tr class="hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Уникальные</td>
+                                <td class="px-4 py-3">Инженерная мастерская, Магическое ателье, Верфь дирижаблей</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 4 -->
+            <div id="buffs" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">4. Экономические баффы города</h2>
+                
+                <p class="text-purple-soft/80 mb-6">
+                    Администратор назначает городу баффы, влияющие на экономические процессы. Уровень I — слабый, II — средний, III — максимальный.
+                </p>
+
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-purple-neon mb-4">4.1 Баффы на покупку товаров (скидка у торговцев)</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr class="border-b border-purple-soft/20">
+                                        <th class="px-4 py-3 text-left text-purple-neon font-bold">Бафф</th>
+                                        <th class="px-4 py-3 text-left text-purple-neon font-bold">Эффект</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-purple-soft/70">
+                                    <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                        <td class="px-4 py-3">Скидка на ресурсы I/II/III</td>
+                                        <td class="px-4 py-3">Цены на дерево, камень, руды снижены на 10%/15%/25%</td>
+                                    </tr>
+                                    <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                        <td class="px-4 py-3">Скидка на инструменты I/II/III</td>
+                                        <td class="px-4 py-3">Цены на инструменты и оружие снижены на 10%/20%/30%</td>
+                                    </tr>
+                                    <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                        <td class="px-4 py-3">Скидка на броню I/II/III</td>
+                                        <td class="px-4 py-3">Цены на броню снижены на 10%/20%/30%</td>
+                                    </tr>
+                                    <tr class="hover:bg-purple-deep/10 transition-colors">
+                                        <td class="px-4 py-3">Скидка на еду I/II/III</td>
+                                        <td class="px-4 py-3">Цены на еду снижены на 20%/40%/60%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-purple-neon mb-4">4.2 Баффы на продажу товаров (надбавка у торговцев)</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr class="border-b border-purple-soft/20">
+                                        <th class="px-4 py-3 text-left text-purple-neon font-bold">Бафф</th>
+                                        <th class="px-4 py-3 text-left text-purple-neon font-bold">Эффект</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-purple-soft/70">
+                                    <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                        <td class="px-4 py-3">Надбавка за ресурсы I/II/III</td>
+                                        <td class="px-4 py-3">Цена продажи дерева, камня, руд повышена на 10%/20%/30%</td>
+                                    </tr>
+                                    <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                        <td class="px-4 py-3">Надбавка за инструменты I/II/III</td>
+                                        <td class="px-4 py-3">Цена продажи инструментов и оружия повышена на 5%/10%/15%</td>
+                                    </tr>
+                                    <tr class="hover:bg-purple-deep/10 transition-colors">
+                                        <td class="px-4 py-3">Надбавка за всё I/II/III</td>
+                                        <td class="px-4 py-3">Цена продажи любых товаров повышена на 5%/10%/15%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-purple-neon mb-4">4.3 Баффы на найм NPC</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr class="border-b border-purple-soft/20">
+                                        <th class="px-4 py-3 text-left text-purple-neon font-bold">Бафф</th>
+                                        <th class="px-4 py-3 text-left text-purple-neon font-bold">Эффект</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-purple-soft/70">
+                                    <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                        <td class="px-4 py-3">Дешёвое ополчение I/II/III</td>
+                                        <td class="px-4 py-3">Стоимость найма ополчения снижена на 25%/50%/75%</td>
+                                    </tr>
+                                    <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                        <td class="px-4 py-3">Дешёвые стражи I/II/III</td>
+                                        <td class="px-4 py-3">Стоимость найма стражников снижена на 10%/25%/50%</td>
+                                    </tr>
+                                    <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                        <td class="px-4 py-3">Дешёвые рабочие I/II/III</td>
+                                        <td class="px-4 py-3">Стоимость найма рабочих снижена на 15%/25%/40%</td>
+                                    </tr>
+                                    <tr class="hover:bg-purple-deep/10 transition-colors">
+                                        <td class="px-4 py-3">Дешёвый найм всего I/II/III</td>
+                                        <td class="px-4 py-3">Стоимость найма любых NPC снижена на 5%/15%/30%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-purple-neon mb-4">4.4 Специальные экономические баффы</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr class="border-b border-purple-soft/20">
+                                        <th class="px-4 py-3 text-left text-purple-neon font-bold">Бафф</th>
+                                        <th class="px-4 py-3 text-left text-purple-neon font-bold">Эффект</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-purple-soft/70">
+                                    <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                        <td class="px-4 py-3">Нулевой налог I/II/III</td>
+                                        <td class="px-4 py-3">Налог на сделки между игроками и администратором снижен на 50%/75%/100%</td>
+                                    </tr>
+                                    <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                        <td class="px-4 py-3">Транспортная льгота I/II/III</td>
+                                        <td class="px-4 py-3">Стоимость товаров, привезённых через порт, снижена на 10%/15%/25%</td>
+                                    </tr>
+                                    <tr class="hover:bg-purple-deep/10 transition-colors">
+                                        <td class="px-4 py-3">Мануфактурная комиссия I/II/III</td>
+                                        <td class="px-4 py-3">Налог на продажу товаров из этого города снижен на 20%/40%/60%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 5 -->
+            <div id="indicators" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">5. Динамические показатели города</h2>
+                
+                <p class="text-purple-soft/80 mb-6">
+                    Три основные характеристики (от 0 до 100), которые рассчитываются администрацией и влияют на эффективность баффов.
+                </p>
+
+                <div class="space-y-6">
+                    <div class="bg-green-900/20 border border-green-600/30 rounded-xl p-4">
+                        <h3 class="text-lg font-bold text-green-400 mb-3">Процветание (Экономика)</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="text-green-300 font-bold mb-2">Повышает:</h4>
+                                <ul class="text-green-200/80 text-sm space-y-1 ml-4 list-disc list-inside">
+                                    <li>Торговые сделки</li>
+                                    <li>Работающие промышленные постройки</li>
+                                    <li>Полная казна</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-red-300 font-bold mb-2">Снижает:</h4>
+                                <ul class="text-red-200/80 text-sm space-y-1 ml-4 list-disc list-inside">
+                                    <li>Заброшенные постройки</li>
+                                    <li>Пустая казна</li>
+                                    <li>Кражи</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="text-yellow-400/80 text-sm mt-3 ml-4"><strong>⚠️ При < 30:</strong> Инфляция — цены у торговцев растут на +20%.</p>
+                    </div>
+
+                    <div class="bg-blue-900/20 border border-blue-600/30 rounded-xl p-4">
+                        <h3 class="text-lg font-bold text-blue-400 mb-3">Безопасность (Оборона)</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="text-blue-300 font-bold mb-2">Повышает:</h4>
+                                <ul class="text-blue-200/80 text-sm space-y-1 ml-4 list-disc list-inside">
+                                    <li>Найм стражников</li>
+                                    <li>Целые стены</li>
+                                    <li>Убийство мобов</li>
+                                    <li>Отсутствие краж</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-red-300 font-bold mb-2">Снижает:</h4>
+                                <ul class="text-red-200/80 text-sm space-y-1 ml-4 list-disc list-inside">
+                                    <li>Взломы</li>
+                                    <li>Атаки на ядро города</li>
+                                    <li>Тёмные зоны спавна</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="text-yellow-400/80 text-sm mt-3 ml-4"><strong>⚠️ При < 30:</strong> Бандитизм — шанс потерять часть ресурсов при торговле.</p>
+                    </div>
+
+                    <div class="bg-purple-900/20 border border-purple-600/30 rounded-xl p-4">
+                        <h3 class="text-lg font-bold text-purple-400 mb-3">Единство (Социум)</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="text-purple-300 font-bold mb-2">Повышает:</h4>
+                                <ul class="text-purple-200/80 text-sm space-y-1 ml-4 list-disc list-inside">
+                                    <li>Активные игроки</li>
+                                    <li>Совместные постройки</li>
+                                    <li>Мероприятия</li>
+                                    <li>Голосования</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-red-300 font-bold mb-2">Снижает:</h4>
+                                <ul class="text-red-200/80 text-sm space-y-1 ml-4 list-disc list-inside">
+                                    <li>Внутренние PvP-конфликты</li>
+                                    <li>Неактивность лидера</li>
+                                    <li>Распад фракции</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="text-yellow-400/80 text-sm mt-3 ml-4"><strong>⚠️ При < 30:</strong> Забастовка — все промышленные постройки работают в 2 раза медленнее.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 6 -->
+            <div id="levelup" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">6. Процедура повышения уровня города</h2>
+                
+                <p class="text-purple-soft/80 mb-6">
+                    Многоэтапный, затратный процесс, являющийся событием для всего поселения.
+                </p>
+
+                <div class="space-y-4">
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h4 class="font-bold text-purple-neon mb-3">Этап 1: Предварительные условия</h4>
+                        <ul class="space-y-2 text-purple-soft/80 ml-4 list-disc list-inside">
+                            <li>Выполнены все требования по постройкам для текущего уровня</li>
+                            <li>Все динамические показатели > 50</li>
+                            <li>В казне есть средства на госпошлину</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h4 class="font-bold text-purple-neon mb-3">Этап 2: Инициация</h4>
+                        <p class="text-purple-soft/80 ml-4">Лидер города запускает 1–3 дневный таймер повышения</p>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h4 class="font-bold text-purple-neon mb-3">Этап 3: Подготовка (обязательные этапы)</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm mt-3">
+                                <thead>
+                                    <tr class="border-b border-purple-soft/20">
+                                        <th class="px-4 py-3 text-left text-purple-neon font-bold">Этап</th>
+                                        <th class="px-4 py-3 text-left text-purple-neon font-bold">Описание</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-purple-soft/70">
+                                    <tr class="border-b border-purple-soft/10">
+                                        <td class="px-4 py-3">A) Сбор ресурсов</td>
+                                        <td class="px-4 py-3">Внесение в общественный склад уникального набора ресурсов для нового уровня</td>
+                                    </tr>
+                                    <tr class="border-b border-purple-soft/10">
+                                        <td class="px-4 py-3">B) Испытание</td>
+                                        <td class="px-4 py-3">Защита от волн мобов, достижение торгового оборота или совместная постройка</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3">C) Голосование</td>
+                                        <td class="px-4 py-3">>70% одобрения от жителей (опционально)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h4 class="font-bold text-purple-neon mb-3">Этап 4: Церемония</h4>
+                        <p class="text-purple-soft/80 ml-4">При успехе — визуальные эффекты, списание ресурсов, официальное повышение уровня</p>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h4 class="font-bold text-purple-neon mb-3">Этап 5: Последствия</h4>
+                        <ul class="space-y-2 text-purple-soft/80 ml-4 list-disc list-inside">
+                            <li>Новые права и требования к постройкам</li>
+                            <li>Возможность выбора статуса</li>
+                            <li>Назначение 0–2 новых постоянных баффов (или дебаффов) от администрации</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 7 -->
+            <div id="projects" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">7. Система городских проектов</h2>
+                
+                <p class="text-purple-soft/80 mb-6">
+                    Дополнительные цели, дающие уникальные награды и создающие динамику.
+                </p>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-purple-soft/20">
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Тип проекта</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Суть</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Время</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Влияние</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-purple-soft/70">
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Малый</td>
+                                <td class="px-4 py-3">Оперативное улучшение, устранение проблемы</td>
+                                <td class="px-4 py-3">Часы – 3 дня</td>
+                                <td class="px-4 py-3">Краткосрочный бафф</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Средний</td>
+                                <td class="px-4 py-3">Развитие инфраструктуры, стратегическое усиление</td>
+                                <td class="px-4 py-3">3–7 дней</td>
+                                <td class="px-4 py-3">Среднесрочный бафф</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Великий</td>
+                                <td class="px-4 py-3">Преобразование города, изменение идентичности</td>
+                                <td class="px-4 py-3">1–2 недели</td>
+                                <td class="px-4 py-3">Сильный постоянный бафф</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Превосходный</td>
+                                <td class="px-4 py-3">Сверхзадача, меняющая баланс сил на сервере</td>
+                                <td class="px-4 py-3">3–4 недели</td>
+                                <td class="px-4 py-3">Глобальный бафф для фракции</td>
+                            </tr>
+                            <tr class="hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Божественный</td>
+                                <td class="px-4 py-3">Мифологическое деяние, участие администрации</td>
+                                <td class="px-4 py-3">Неопределённое</td>
+                                <td class="px-4 py-3">Изменение фундаментальных правил</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 8 -->
+            <div id="city-checklist" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">8. Чек-лист градоначальника</h2>
+
+                <div class="space-y-6">
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h3 class="text-lg font-bold text-purple-neon mb-3">Перед основанием поселения:</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Выбрано место (ресурсы, защищённость)</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Построен минимум 1 жилой дом</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Есть запас еды и стройматериалов</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h3 class="text-lg font-bold text-purple-neon mb-3">Для повышения до Деревни (уровень 1):</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>5 обязательных построек (жилой дом, склад, ферма, мастерская, частокол)</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Общий чат настроен</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h3 class="text-lg font-bold text-purple-neon mb-3">Для повышения до Посёлка (уровень 2):</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Все постройки уровня 1</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>+5 новых (ратуша, спецмастерская, хранилище, таверна, ворота)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h3 class="text-lg font-bold text-purple-neon mb-3">Для повышения до Города (уровень 3):</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Все постройки уровня 2</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>+5 новых (рынок, казарма, библиотека, храм, парк)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h3 class="text-lg font-bold text-purple-neon mb-3">Ежемесячное обслуживание:</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Все три показателя > 50 (Процветание, Безопасность, Единство)</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Казна не пуста</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Активность жителей поддерживается</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- КОРОТКО -->
+            <div class="bg-gradient-to-r from-purple-deep/20 to-purple-neon/20 p-8 rounded-2xl border border-purple-soft/20">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">КОРОТКО: САМОЕ ВАЖНОЕ</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-purple-soft/20">
+                                <th class="px-4 py-3 text-left text-yellow-400 font-bold">№</th>
+                                <th class="px-4 py-3 text-left text-yellow-400 font-bold">Правило</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-purple-soft/70">
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">1</td>
+                                <td class="px-4 py-3">Уровень поселения назначается администрацией — стройте по требованиям</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">2</td>
+                                <td class="px-4 py-3">Баффы города (скидки, надбавки, дешёвый найм) — ваша главная экономическая выгода</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">3</td>
+                                <td class="px-4 py-3">Три показателя (Процветание, Безопасность, Единство) не должны падать ниже 30</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">4</td>
+                                <td class="px-4 py-3">Повышение уровня — дорогое и долгое событие (1–3 дня таймер + испытание)</td>
+                            </tr>
+                            <tr class="hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">5</td>
+                                <td class="px-4 py-3">Проекты (от Малых до Божественных) дают уникальные награды и меняют правила игры</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-6 bg-blue-900/20 border border-blue-600/30 rounded-xl p-4">
+                    <p class="text-blue-300/80 text-sm">
+                        Теперь у вас есть полная система управления городом, которая отлично сочетается с механиками Recruits — армией можно защищать город, 
+                        а экономическими баффами — обеспечивать её содержание. 🏙️⚔️
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-purple-soft/10 pt-8">
+                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
