@@ -31,7 +31,11 @@ function renderHeader() {
                             <div class="absolute left-0 mt-0 w-56 bg-void-dark rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-purple-deep/30">
                                 <a href="description.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-royal/10 rounded-t-lg">Описание</a>
                                 <a href="mechanics.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10">Механики</a>
-                                <a href="season-concept.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10 rounded-b-lg">Концепция сезона</a>
+                                <a href="season-concept.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10">Концепция сезона</a>
+                                <a href="principles.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10">Базовые принципы</a>
+                                <a href="roleplay.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10">Ролевые элементы</a>
+                                <a href="how-to-join.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10">Как подключиться</a>
+                                <a href="staff.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10 rounded-b-lg">Администрация</a>
                             </div>
                         </div>
 
@@ -44,7 +48,9 @@ function renderHeader() {
                                 <a href="rp-rules.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10">Правила РП</a>
                                 <a href="game-rules.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10">Игровые правила</a>
                                 <a href="chat-rules.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10">Правила чата</a>
-                                <a href="banned-mods.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10 rounded-b-lg">Запрещённые моды</a>
+                                <a href="banned-mods.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10">Запрещённые моды</a>
+                                <a href="punishments.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10">Система наказаний</a>
+                                <a href="rules-glossary.html" class="block px-4 py-2 text-sm text-purple-soft/70 hover:text-purple-soft hover:bg-purple-neon/10 rounded-b-lg">Глоссарий</a>
                             </div>
                         </div>
 
@@ -80,6 +86,10 @@ function renderHeader() {
                     <a href="description.html" class="block px-3 py-2 rounded-md text-sm text-purple-soft/60 hover:text-purple-soft hover:bg-purple-deep/10">Описание</a>
                     <a href="mechanics.html" class="block px-3 py-2 rounded-md text-sm text-purple-soft/60 hover:text-purple-soft hover:bg-purple-deep/10">Механики</a>
                     <a href="season-concept.html" class="block px-3 py-2 rounded-md text-sm text-purple-soft/60 hover:text-purple-soft hover:bg-purple-deep/10">Концепция сезона</a>
+                    <a href="principles.html" class="block px-3 py-2 rounded-md text-sm text-purple-soft/60 hover:text-purple-soft hover:bg-purple-deep/10">Базовые принципы</a>
+                    <a href="roleplay.html" class="block px-3 py-2 rounded-md text-sm text-purple-soft/60 hover:text-purple-soft hover:bg-purple-deep/10">Ролевые элементы</a>
+                    <a href="how-to-join.html" class="block px-3 py-2 rounded-md text-sm text-purple-soft/60 hover:text-purple-soft hover:bg-purple-deep/10">Как подключиться</a>
+                    <a href="staff.html" class="block px-3 py-2 rounded-md text-sm text-purple-soft/60 hover:text-purple-soft hover:bg-purple-deep/10">Администрация</a>
                 </div>
 
                 <button id="mobile-rules-toggle" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10 flex items-center justify-between">
@@ -91,6 +101,8 @@ function renderHeader() {
                     <a href="game-rules.html" class="block px-3 py-2 rounded-md text-sm text-purple-soft/60 hover:text-purple-soft hover:bg-purple-deep/10">Игровые правила</a>
                     <a href="chat-rules.html" class="block px-3 py-2 rounded-md text-sm text-purple-soft/60 hover:text-purple-soft hover:bg-purple-deep/10">Правила чата</a>
                     <a href="banned-mods.html" class="block px-3 py-2 rounded-md text-sm text-purple-soft/60 hover:text-purple-soft hover:bg-purple-deep/10">Запрещённые моды</a>
+                    <a href="punishments.html" class="block px-3 py-2 rounded-md text-sm text-purple-soft/60 hover:text-purple-soft hover:bg-purple-deep/10">Система наказаний</a>
+                    <a href="rules-glossary.html" class="block px-3 py-2 rounded-md text-sm text-purple-soft/60 hover:text-purple-soft hover:bg-purple-deep/10">Глоссарий</a>
                 </div>
 
                 <a href="guides.html" class="block px-3 py-2 rounded-md text-base font-medium ${currentPage === 'guides.html' ? 'text-purple-soft bg-purple-deep/20' : 'text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10'}">Гайды</a>

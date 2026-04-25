@@ -60,8 +60,11 @@
                             <!-- Mobile Skin -->
                             <div class="lg:hidden flex justify-center my-4">
                                 <div class="relative">
-                                    <div class="absolute inset-0 bg-gradient-to-b from-purple-deep/10 to-transparent rounded-xl"></div>
-                                    <img id="minecraft-skin-mobile" src="" alt="Minecraft Skin" referrerpolicy="no-referrer"
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-b from-purple-deep/10 to-transparent rounded-xl">
+                                    </div>
+                                    <img id="minecraft-skin-mobile" src="" alt="Minecraft Skin"
+                                        referrerpolicy="no-referrer"
                                         class="relative z-10 w-[120px] h-auto drop-shadow-[0_0_15px_rgba(168,85,247,0.35)] image-pixelated">
                                 </div>
                             </div>
@@ -95,11 +98,19 @@
                                             Загрузка...
                                         </p>
                                     </div>
-
-                                    <div>
-                                        <p class="text-purple-soft/50 text-sm mb-1">Дата регистрации</p>
-                                        <p class="text-white" id="profile-created-at">Загрузка...</p>
+                                    <!-- Right: Minecraft Skin (desktop only) -->
+                                    <div
+                                        class="hidden lg:flex flex-col items-center justify-center relative min-w-[200px]">
+                                        <div
+                                            class="absolute inset-0 bg-gradient-to-b from-purple-deep/10 to-transparent rounded-xl">
+                                        </div>
+                                        <img id="minecraft-skin" src="" alt="Minecraft Skin"
+                                            referrerpolicy="no-referrer"
+                                            class="relative z-10 w-[180px] h-auto drop-shadow-[0_0_20px_rgba(168,85,247,0.35)] image-pixelated">
+                                        <p class="relative z-10 mt-3 text-purple-soft/40 text-xs">Скин Minecraft</p>
                                     </div>
+
+
 
                                     <div class="sm:col-span-2">
                                         <p class="text-purple-soft/50 text-sm mb-1">О себе</p>
@@ -111,6 +122,10 @@
                                     class="w-full sm:w-auto bg-purple-deep hover:bg-purple-royal text-white font-bold py-2 px-6 rounded-lg transition-all">
                                     Редактировать профиль
                                 </button>
+                                <div>
+                                    <p class="text-purple-soft/50 text-sm mb-1">Дата регистрации</p>
+                                    <p class="text-white" id="profile-created-at">Загрузка...</p>
+                                </div>
                             </div>
 
                             <!-- Edit Form -->
@@ -190,13 +205,7 @@
                             </div>
                         </div>
 
-                        <!-- Right: Minecraft Skin (desktop only) -->
-                        <div class="hidden lg:flex flex-col items-center justify-center relative min-w-[200px]">
-                            <div class="absolute inset-0 bg-gradient-to-b from-purple-deep/10 to-transparent rounded-xl"></div>
-                            <img id="minecraft-skin" src="" alt="Minecraft Skin" referrerpolicy="no-referrer"
-                                class="relative z-10 w-[180px] h-auto drop-shadow-[0_0_20px_rgba(168,85,247,0.35)] image-pixelated">
-                            <p class="relative z-10 mt-3 text-purple-soft/40 text-xs">Скин Minecraft</p>
-                        </div>
+
                     </div>
                 </div>
             </div>
