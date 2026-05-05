@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гайд по Рекрутам - EmbroMine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: {
+                            black: '#0a0810',
+                            dark: '#120a1a',
+                        },
+                        purple: {
+                            deep: '#6D28D9',
+                            royal: '#8B5CF6',
+                            neon: '#A855F7',
+                            soft: '#C4B5FD',
+                        },
+                        magenta: {
+                            glow: '#D946EF',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+    <!-- Navigation -->
+    <script src="/js/header.js" defer></script>
+
+    <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1
+                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
+                    Гайд по Рекрутам
+                </h1>
+                <p class="text-xl text-purple-soft/60">Полное руководство по найму и управлению войсками</p>
+            </div>
+
+            <!-- Оглавление -->
+            <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-12">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">Оглавление</h2>
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-lg font-bold text-purple-neon mb-3">1. АРМИЯ</h3>
+                        <ol class="space-y-2 list-decimal list-inside text-purple-soft/80 ml-4">
+                            <li><a href="#recruit" class="text-purple-neon hover:text-purple-soft transition-colors">Как нанять рекрута</a></li>
+                            <li><a href="#types" class="text-purple-neon hover:text-purple-soft transition-colors">Типы юнитов</a></li>
+                            <li><a href="#equipment" class="text-purple-neon hover:text-purple-soft transition-colors">Снаряжение и еда</a></li>
+                            <li><a href="#management" class="text-purple-neon hover:text-purple-soft transition-colors">Управление группами</a></li>
+                            <li><a href="#modes" class="text-purple-neon hover:text-purple-soft transition-colors">Боевые режимы</a></li>
+                            <li><a href="#commands" class="text-purple-neon hover:text-purple-soft transition-colors">Команды боя</a></li>
+                            <li><a href="#movement" class="text-purple-neon hover:text-purple-soft transition-colors">Команды движения</a></li>
+                            <li><a href="#other" class="text-purple-neon hover:text-purple-soft transition-colors">Прочие команды</a></li>
+                            <li><a href="#morale" class="text-purple-neon hover:text-purple-soft transition-colors">Мораль и голод</a></li>
+                            <li><a href="#checklist" class="text-purple-neon hover:text-purple-soft transition-colors">Чек-лист командира</a></li>
+                            <li><a href="#addons" class="text-purple-neon hover:text-purple-soft transition-colors">Аддоны и тактики</a></li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-purple-neon mb-3">2. ФРАКЦИЯ</h3>
+                        <ol class="space-y-2 list-decimal list-inside text-purple-soft/80 ml-4">
+                            <li><a href="#territory-what" class="text-purple-neon hover:text-purple-soft transition-colors">Что такое территория во фракции</a></li>
+                            <li><a href="#territory-capture" class="text-purple-neon hover:text-purple-soft transition-colors">Как захватывать чанки</a></li>
+                            <li><a href="#faction-menu" class="text-purple-neon hover:text-purple-soft transition-colors">Управление фракцией через меню</a></li>
+                            <li><a href="#expansion" class="text-purple-neon hover:text-purple-soft transition-colors">Стратегии расширения границ</a></li>
+                            <li><a href="#defense" class="text-purple-neon hover:text-purple-soft transition-colors">Защита территорий</a></li>
+                            <li><a href="#territory-war" class="text-purple-neon hover:text-purple-soft transition-colors">Война за территории</a></li>
+                            <li><a href="#village-expansion" class="text-purple-neon hover:text-purple-soft transition-colors">Аддон Village Expansion</a></li>
+                            <li><a href="#territory-checklist" class="text-purple-neon hover:text-purple-soft transition-colors">Чек-лист территориального магната</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═════════════════════ РАЗДЕЛ 1: АРМИЯ ═════════════════════ -->
+            <div class="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 p-8 rounded-2xl border border-cyan-400/30 mb-12 mt-12">
+                <h2 class="text-3xl font-bold text-cyan-300">1. АРМИЯ</h2>
+                <p class="text-cyan-200/70 mt-2">Набор войск, управление рекрутами, боевые команды и психология армии</p>
+            </div>
+
+            <!-- РАЗДЕЛ 1.1 -->
+            <div id="recruit" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">1.1 Как нанять рекрута</h2>
+                
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Что нужно:</h3>
+                    <ul class="space-y-2 text-purple-soft/80 ml-4">
+                        <li>✓ Изумруды (обычный рекрут = 4)</li>
+                        <li>✓ Снаряжение (броня + оружие)</li>
+                        <li>✓ Еда (для сундука обеспечения)</li>
+                        <li>✓ Безработные жители рядом</li>
+                    </ul>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Способ 1: через благородного жителя</h3>
+                    <ol class="space-y-2 text-purple-soft/80 ml-4">
+                        <li>1. Найдите благородного жителя (в крупных деревнях / казармах)</li>
+                        <li>2. Убедитесь, что рядом есть безработные жители</li>
+                        <li>3. Нажмите → выберите тип рекрута</li>
+                        <li>4. Ближайший безработный житель станет вашим солдатом</li>
+                    </ol>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Способ 2: рабочий стол рекрута (бесплатно)</h3>
+                    <ol class="space-y-2 text-purple-soft/80 ml-4">
+                        <li>1. Купите стол у оружейника или кузнеца</li>
+                        <li>2. Поставьте в деревне</li>
+                        <li>3. Безработный житель подойдёт сам</li>
+                    </ol>
+                </div>
+
+                <div class="bg-red-900/20 border border-red-600/30 rounded-xl p-4 mt-4">
+                    <p class="text-red-400/80">
+                        <strong>⚠️ Важно:</strong> Рекруты прогружают чанки. Если вас нет в сети — их могут убить мобы. 
+                        Держите армию в безопасном, огороженном и освещённом месте.
+                    </p>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 1.2 -->
+            <div id="types" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">1.2 Типы юнитов</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-purple-soft/20">
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Тип</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Цена</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Роль</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Особенности</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-purple-soft/70">
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Рекрут</td>
+                                <td class="px-4 py-3">4</td>
+                                <td class="px-4 py-3">Ближний бой</td>
+                                <td class="px-4 py-3">Универсал, может использовать щит</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Лучник</td>
+                                <td class="px-4 py-3">6</td>
+                                <td class="px-4 py-3">Дальний бой</td>
+                                <td class="px-4 py-3">Стреляет из лука, НЕ умеет использовать щит</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Щитник</td>
+                                <td class="px-4 py-3">10</td>
+                                <td class="px-4 py-3">Тяжёлая пехота</td>
+                                <td class="px-4 py-3">Больше HP, но медленнее</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Арбалетчик</td>
+                                <td class="px-4 py-3">8</td>
+                                <td class="px-4 py-3">Тяжёлый дальний бой</td>
+                                <td class="px-4 py-3">Высокий урон</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Всадник</td>
+                                <td class="px-4 py-3">12</td>
+                                <td class="px-4 py-3">Кавалерия (ближний)</td>
+                                <td class="px-4 py-3">Верхом, щит, таран</td>
+                            </tr>
+                            <tr class="hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Кочевник</td>
+                                <td class="px-4 py-3">12</td>
+                                <td class="px-4 py-3">Кавалерия (дальний)</td>
+                                <td class="px-4 py-3">Верхом, стрельба из лука</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 1.3 -->
+            <div id="equipment" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">1.3 Снаряжение и обеспечение едой</h2>
+                
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Как выдать броню и оружие (ручная выдача):</h3>
+                    <ol class="space-y-2 text-purple-soft/80 ml-4 mb-4">
+                        <li>1. Shift + ПКМ → инвентарь рекрута</li>
+                        <li>2. Положите снаряжение в слоты</li>
+                    </ol>
+                    <div class="bg-blue-900/20 border border-blue-600/30 rounded-xl p-3">
+                        <p class="text-blue-300/80 text-sm">
+                            🎨 <strong>Совет:</strong> Окрашенные шмотки передавайте через Shift, а не мышкой (иначе не наденет)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Автоматическая выдача (через сундук):</h3>
+                    <p class="text-purple-soft/80 mb-2">Рекруты сами берут снаряжение из привязанного сундука</p>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-red-400">🔴 Настройка питания (самое важное)</h3>
+                    <p class="text-purple-soft/80 mb-4">
+                        Без еды у рекрутов падает мораль → они становятся значительно слабее в бою.
+                    </p>
+                    
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4 mb-4">
+                        <h4 class="font-bold text-purple-neon mb-3">Как настроить сундук обеспечения:</h4>
+                        <ol class="space-y-2 text-purple-soft/80 ml-4">
+                            <li>1. Поставьте сундук, наполните едой</li>
+                            <li>2. Нажмите R → подменю «Другие команды» (иконка сундучка)</li>
+                            <li>3. Наведите камеру на сундук → «Обеспечение»</li>
+                        </ol>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4 mb-4">
+                        <h4 class="font-bold text-purple-neon mb-2">Отвязать сундук:</h4>
+                        <ul class="space-y-1 text-purple-soft/80 ml-4">
+                            <li>• Через R → «Другие команды» → Clear upkeep</li>
+                            <li>• Или через инвентарь рекрута (Shift + ПКМ)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-red-900/20 border border-red-600/30 rounded-xl p-4">
+                        <p class="text-red-400/80">
+                            <strong>🔴 Личная ответственность командира.</strong> Сундуки с едой должны быть всегда полными. 
+                            Учитывайте свои возможности по производству еды.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 1.4 -->
+            <div id="management" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">1.4 Управление: группы и меню</h2>
+                
+                <div class="overflow-x-auto mb-6">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-purple-soft/20">
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Действие</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Клавиша</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-purple-soft/70">
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Инвентарь рекрута</td>
+                                <td class="px-4 py-3">Shift + ПКМ</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Командное меню (все группы)</td>
+                                <td class="px-4 py-3">R</td>
+                            </tr>
+                            <tr class="hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Меню команды / фракции</td>
+                                <td class="px-4 py-3">U</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h4 class="font-bold text-purple-neon mb-2">Назначить рекрута в группу:</h4>
+                        <p class="text-purple-soft/80 ml-4">Shift + ПКМ → верхняя полоска → выберите номер группы</p>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h4 class="font-bold text-purple-neon mb-2">Создать новую группу:</h4>
+                        <p class="text-purple-soft/80 ml-4">R → плюсик сверху-слева → введите название</p>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h4 class="font-bold text-purple-neon mb-2">Назначить всех ближайших рекрутов в группу:</h4>
+                        <p class="text-purple-soft/80 ml-4">R → плюсик → выберите группу → «Редактировать» → «Assign nearby recruits»</p>
+                    </div>
+
+                    <div class="bg-blue-900/20 border border-blue-600/30 rounded-xl p-4">
+                        <p class="text-blue-300/80 text-sm">
+                            <strong>💡 Совет:</strong> Сверху-слева в меню R вы выбираете, какой группой сейчас командуете.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 1.5 -->
+            <div id="modes" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">1.5 Боевые режимы</h2>
+                <p class="text-purple-soft/80 mb-6">(выбираются в меню R, иконки слева)</p>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-purple-soft/20">
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Режим</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Поведение</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Когда использовать</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-purple-soft/70">
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Пассивно</td>
+                                <td class="px-4 py-3">Атакует, только если атаковали его</td>
+                                <td class="px-4 py-3">Охрана без провокаций</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Нейтрально</td>
+                                <td class="px-4 py-3">Атакует только враждебных мобов</td>
+                                <td class="px-4 py-3">По умолчанию</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Агрессивно</td>
+                                <td class="px-4 py-3">Атакует вражеских рекрутов и игроков</td>
+                                <td class="px-4 py-3">Война</td>
+                            </tr>
+                            <tr class="hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Рейд</td>
+                                <td class="px-4 py-3">Атакует ВСЕХ существ</td>
+                                <td class="px-4 py-3"><strong class="text-red-400">🔴</strong> только в войне на уничтожение, с осторожностью</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 1.6 -->
+            <div id="commands" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">1.6 Боевые команды</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-purple-soft/20">
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Команда</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Эффект</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Предупреждение</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-purple-soft/70">
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Огонь по позиции</td>
+                                <td class="px-4 py-3">Лучники стреляют залпом в зону</td>
+                                <td class="px-4 py-3">—</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Удерживайте</td>
+                                <td class="px-4 py-3">Прекратить огонь</td>
+                                <td class="px-4 py-3">—</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Атаковать</td>
+                                <td class="px-4 py-3">Атакуют всех мобов в зоне</td>
+                                <td class="px-4 py-3"><strong class="text-red-400">🔴</strong> убивают даже жителей – крайняя осторожность</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Отменить цели</td>
+                                <td class="px-4 py-3">Отмена текущего приказа</td>
+                                <td class="px-4 py-3">—</td>
+                            </tr>
+                            <tr class="hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Использовать луки</td>
+                                <td class="px-4 py-3">Вкл/выкл дальний бой</td>
+                                <td class="px-4 py-3">—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 1.7 -->
+            <div id="movement" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">1.7 Команды перемещения</h2>
+                
+                <div class="overflow-x-auto mb-6">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-purple-soft/20">
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Команда</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Что делает</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Нюансы</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-purple-soft/70">
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Сменить позицию</td>
+                                <td class="px-4 py-3">Формация в точке, куда смотрите</td>
+                                <td class="px-4 py-3">—</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Следовать</td>
+                                <td class="px-4 py-3">Идят за вами</td>
+                                <td class="px-4 py-3">Не умеют спринтовать → могут потеряться</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Вперёд / Назад</td>
+                                <td class="px-4 py-3">±10 блоков, сохраняя формацию</td>
+                                <td class="px-4 py-3">—</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Вернуться к предыдущей позиции</td>
+                                <td class="px-4 py-3">Откат к последней точке</td>
+                                <td class="px-4 py-3">—</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Вольно</td>
+                                <td class="px-4 py-3">Свободное перемещение</td>
+                                <td class="px-4 py-3">⚠️ могут застрять и потеряться</td>
+                            </tr>
+                            <tr class="hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Держать позиции</td>
+                                <td class="px-4 py-3">Остаются на текущем месте</td>
+                                <td class="px-4 py-3">Без указания точки</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-green-900/20 border border-green-600/30 rounded-xl p-4">
+                    <p class="text-green-300/80">
+                        <strong>✅ Рекомендация:</strong> Храните рекрутов через «Сменить позицию» или вручную через ПКМ → «Занять позицию игрока».
+                    </p>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 1.8 -->
+            <div id="other" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">1.8 Прочие команды</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-purple-soft/20">
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Команда</th>
+                                <th class="px-4 py-3 text-left text-purple-neon font-bold">Назначение</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-purple-soft/70">
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Защити это</td>
+                                <td class="px-4 py-3">Сопровождать и защищать моба</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Обеспечение</td>
+                                <td class="px-4 py-3">Привязать сундук с едой</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Clear upkeep</td>
+                                <td class="px-4 py-3">Отвязать сундук</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Отдых</td>
+                                <td class="px-4 py-3">Указать кровати (без реального эффекта)</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Оседлать</td>
+                                <td class="px-4 py-3">Сесть на лошадь / транспорт (корабли)</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Спешиться</td>
+                                <td class="px-4 py-3">Слезть</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Вернуться к...</td>
+                                <td class="px-4 py-3">Обратно на транспорт</td>
+                            </tr>
+                            <tr class="hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">Отряд</td>
+                                <td class="px-4 py-3">Меню отрядов (U)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 1.9 -->
+            <div id="morale" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">1.9 Мораль и голод</h2>
+                
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Почему это важно</h3>
+                    <ul class="space-y-2 text-purple-soft/80 ml-4">
+                        <li>• Без еды → падает мораль</li>
+                        <li>• Низкая мораль → рекрут становится слабее в разы</li>
+                    </ul>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Эффекты морали (0–100)</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-purple-soft/20">
+                                    <th class="px-4 py-3 text-left text-purple-neon font-bold">Уровень</th>
+                                    <th class="px-4 py-3 text-left text-purple-neon font-bold">Эффект</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-purple-soft/70">
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">90+</td>
+                                    <td class="px-4 py-3">Сила I + Сопротивление I</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">20↓</td>
+                                    <td class="px-4 py-3">Слабость II + Медлительность II</td>
+                                </tr>
+                                <tr class="hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">10↓</td>
+                                    <td class="px-4 py-3">Слабость IV + Медлительность III + Тошнота II</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Полная таблица изменений морали</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-purple-soft/20">
+                                    <th class="px-4 py-3 text-left text-purple-neon font-bold">Действие</th>
+                                    <th class="px-4 py-3 text-left text-purple-neon font-bold">Изменение</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-purple-soft/70">
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Атака</td>
+                                    <td class="px-4 py-3">+0.25</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Получение урона</td>
+                                    <td class="px-4 py-3">–0.25</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Убийство моба</td>
+                                    <td class="px-4 py-3">+1</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Убийство рейдера</td>
+                                    <td class="px-4 py-3">+3</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Ваш рекрут убит (кем-либо)</td>
+                                    <td class="px-4 py-3">–2</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Убийство жителя</td>
+                                    <td class="px-4 py-3">–3</td>
+                                </tr>
+                                <tr class="hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Убийство ребёнка</td>
+                                    <td class="px-4 py-3">–10</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-red-900/20 border border-red-600/30 rounded-xl p-4 mb-6">
+                    <h4 class="text-red-400 font-bold mb-3">🔴 ВАЖНО: мораль и война</h4>
+                    <p class="text-red-400/80 mb-4">
+                        В бою работает двойной негативный эффект:
+                    </p>
+                    <ul class="space-y-2 text-red-400/80 ml-4 mb-4">
+                        <li>• Ваши рекруты получают урон → мораль падает</li>
+                        <li>• Ваших рекрутов убивают → мораль падает ещё сильнее (по –2 за каждого погибшего)</li>
+                    </ul>
+                    <p class="text-red-400/80 mb-2">Это означает:</p>
+                    <ul class="space-y-2 text-red-400/80 ml-4">
+                        <li>• Затяжной бой с потерями быстро обрушит мораль всей группы</li>
+                        <li>• Даже выжившие рекруты после гибели товарищей станут значительно слабее</li>
+                        <li>• Война требует быстрых побед и минимизации потерь</li>
+                    </ul>
+                </div>
+
+                <div class="bg-yellow-900/20 border border-yellow-600/30 rounded-xl p-4">
+                    <p class="text-yellow-400/80">
+                        <strong>⚠️ Тактический вывод:</strong> лучше отвести потрёпанный отряд и дать ему поесть/восстановиться, 
+                        чем толкать его дальше с низкой моралью — толку будет ноль.
+                    </p>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 1.10 -->
+            <div id="checklist" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">1.10 Чек-лист командира перед выходом</h2>
+                
+                <div class="space-y-3">
+                    <div class="flex items-start gap-3 text-purple-soft/80">
+                        <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                        <span>У всех рекрутов есть броня и оружие</span>
+                    </div>
+                    <div class="flex items-start gap-3 text-purple-soft/80">
+                        <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                        <span>Сундук обеспечения наполнен едой</span>
+                    </div>
+                    <div class="flex items-start gap-3 text-purple-soft/80">
+                        <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                        <span>Выбран правильный режим поведения (нейтрально / агрессивно)</span>
+                    </div>
+                    <div class="flex items-start gap-3 text-purple-soft/80">
+                        <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                        <span>Группы настроены (если нужно)</span>
+                    </div>
+                    <div class="flex items-start gap-3 text-purple-soft/80">
+                        <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                        <span>Рекруты не оставлены в опасном месте на выгрузку чанков</span>
+                    </div>
+                    <div class="flex items-start gap-3 text-purple-soft/80">
+                        <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                        <span>Помните: потери снижают мораль всей группы</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 1.11 -->
+            <div id="addons" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">1.11 Аддоны и тактики</h2>
+                
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">⭐ Recruits-Extras</h3>
+                    <ul class="space-y-2 text-purple-soft/80 ml-4">
+                        <li>• Убирает лимит дистанции на команды</li>
+                        <li>• Добавляет построения: LINE, SQUARE, CIRCLE, WEDGE</li>
+                    </ul>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Тактические советы</h3>
+                    
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4 mb-4">
+                        <h4 class="font-bold text-purple-neon mb-2">Оборона базы:</h4>
+                        <ul class="space-y-1 text-purple-soft/80 ml-4">
+                            <li>• Щитоносцы → нейтрально, у входа</li>
+                            <li>• Лучники → агрессивно, на стенах</li>
+                            <li>• Кавалерия → на «Следовать» как резерв</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h4 class="font-bold text-purple-neon mb-2">Защита от стрел:</h4>
+                        <p class="text-purple-soft/80 ml-4">Команда «Поднять щиты» перед штурмом</p>
+                    </div>
+                </div>
+
+                <div class="bg-red-900/20 border border-red-600/30 rounded-xl p-4">
+                    <h4 class="text-red-400 font-bold mb-2">Чего НЕ делать:</h4>
+                    <ul class="space-y-1 text-red-400/80 ml-4">
+                        <li>🔴 «Атаковать» рядом с деревнями</li>
+                        <li>🔴 «Рейд» вне режима тотальной войны</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ═════════════════════ РАЗДЕЛ 2: ФРАКЦИЯ ═════════════════════ -->
+            <div class="bg-gradient-to-r from-red-500/10 to-pink-500/10 p-8 rounded-2xl border border-red-400/30 mb-12 mt-12">
+                <h2 class="text-3xl font-bold text-red-300">2. ФРАКЦИЯ</h2>
+                <p class="text-red-200/70 mt-2">Захват территорий, управление землями, войны между фракциями и автоматизация поселений</p>
+            </div>
+
+            <!-- РАЗДЕЛ 2.1 -->
+            <div id="territory-what" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">2.1 Что такое территория во фракции</h2>
+                
+                <p class="text-purple-soft/80 mb-6">
+                    Мод Villager Recruits позволяет захватывать чанки (участки земли 16×16 блоков) и объявлять их своей территорией. Это основа всей политической и военной механики мода.
+                </p>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Ключевые понятия:</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-purple-soft/20">
+                                    <th class="px-4 py-3 text-left text-purple-neon font-bold">Термин</th>
+                                    <th class="px-4 py-3 text-left text-purple-neon font-bold">Значение</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-purple-soft/70">
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Фракция</td>
+                                    <td class="px-4 py-3">Ваша организация (аналог клана или государства)</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Территория/Претензия</td>
+                                    <td class="px-4 py-3">Чанк, который ваша фракция контролирует</td>
+                                </tr>
+                                <tr class="hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Война</td>
+                                    <td class="px-4 py-3">Состояние конфликта между фракциями</td>
+                                </tr>
+                                <tr class="hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Захват</td>
+                                    <td class="px-4 py-3">Процесс присвоения чужого чанка</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 2.2 -->
+            <div id="territory-capture" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">2.2 Как захватывать чанки</h2>
+                
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Механика претензий (Claims)</h3>
+                    <p class="text-purple-soft/80 mb-4">
+                        Чтобы захватить территорию, вам понадобятся изумруды. Чем дальше чанк от вашей существующей территории, тем дороже захват.
+                    </p>
+                    
+                    <h4 class="font-bold text-purple-neon mb-2">Базовый процесс:</h4>
+                    <ol class="space-y-2 text-purple-soft/80 ml-4 mb-4 list-decimal list-inside">
+                        <li>Откройте меню фракции (клавиша U)</li>
+                        <li>Перейдите в раздел управления территорией</li>
+                        <li>Выберите чанк, который хотите захватить</li>
+                        <li>Подтвердите захват (спишутся изумруды)</li>
+                    </ol>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Стратегия захвата</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-purple-soft/20">
+                                    <th class="px-4 py-3 text-left text-purple-neon font-bold">Сценарий</th>
+                                    <th class="px-4 py-3 text-left text-purple-neon font-bold">Рекомендация</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-purple-soft/70">
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Начало игры</td>
+                                    <td class="px-4 py-3">Захватывайте чанк с вашей базой и ближайшие ресурсные точки</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Расширение</td>
+                                    <td class="px-4 py-3">Захватывайте "коридором" до важных локаций</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Оборона</td>
+                                    <td class="px-4 py-3">Захватывайте чанки по периметру, создавая буферную зону</td>
+                                </tr>
+                                <tr class="hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Война</td>
+                                    <td class="px-4 py-3">Захватывайте стратегические чанки (башни, входы в пещеры)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-blue-900/20 border border-blue-600/30 rounded-xl p-4">
+                    <p class="text-blue-300/80 text-sm">
+                        <strong>💡 Совет:</strong> Храните запас изумрудов отдельно — захват территорий дорогой, а в разгар войны цены могут быть непредсказуемыми.
+                    </p>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 2.3 -->
+            <div id="faction-menu" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">2.3 Управление фракцией через меню (U)</h2>
+                
+                <p class="text-purple-soft/80 mb-6">
+                    Меню U — ваш командный центр для всех территориальных вопросов.
+                </p>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Основные функции меню</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-purple-soft/20">
+                                    <th class="px-4 py-3 text-left text-purple-neon font-bold">Раздел</th>
+                                    <th class="px-4 py-3 text-left text-purple-neon font-bold">Что позволяет делать</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-purple-soft/70">
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Team Info</td>
+                                    <td class="px-4 py-3">Просмотр участников, территории, статуса войны</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Claims</td>
+                                    <td class="px-4 py-3">Управление захваченными чанками</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Diplomacy</td>
+                                    <td class="px-4 py-3">Объявление войны, мир, альянсы</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Members</td>
+                                    <td class="px-4 py-3">Приглашение/исключение игроков</td>
+                                </tr>
+                                <tr class="hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Settings</td>
+                                    <td class="px-4 py-3">Настройки фракции (название, знамя)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                    <h4 class="font-bold text-purple-neon mb-3">Создание фракции:</h4>
+                    <ol class="space-y-1 text-purple-soft/80 ml-4 list-decimal list-inside">
+                        <li>Нажмите U</li>
+                        <li>Выберите создание команды/фракции</li>
+                        <li>Потратьте 10 изумрудов</li>
+                        <li>Создайте уникальное знамя</li>
+                        <li>Введите название</li>
+                    </ol>
+                    <p class="text-purple-soft/80 mt-3 ml-4">После создания вы можете приглашать других игроков и управлять общей территорией.</p>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 2.4 -->
+            <div id="expansion" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">2.4 Стратегии расширения границ</h2>
+                
+                <div class="space-y-6">
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h3 class="text-lg font-bold mb-3 text-purple-neon">Фаза 1: Ядро (первые 5–10 чанков)</h3>
+                        <ul class="space-y-2 text-purple-soft/80 ml-4 list-disc list-inside">
+                            <li>Захватите чанк с вашей основной базой</li>
+                            <li>Захватите чанки с фермами еды (обеспечение рекрутов)</li>
+                            <li>Захватите чанк с деревней (источник новых рекрутов)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h3 class="text-lg font-bold mb-3 text-purple-neon">Фаза 2: Развитие (10–30 чанков)</h3>
+                        <ul class="space-y-2 text-purple-soft/80 ml-4 list-disc list-inside">
+                            <li>Создайте "щит" из пустых/защищённых чанков по периметру</li>
+                            <li>Захватите ресурсные чанки (шахты, незер-портал)</li>
+                            <li>Установите аванпосты на границах</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h3 class="text-lg font-bold mb-3 text-purple-neon">Фаза 3: Экспансия (30+ чанков)</h3>
+                        <ul class="space-y-2 text-purple-soft/80 ml-4 list-disc list-inside">
+                            <li>Захватывайте стратегические точки противника</li>
+                            <li>Создайте "дорожную сеть" из захваченных чанков между базами</li>
+                            <li>Используйте аддон Village Expansion для автоматизации</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 2.5 -->
+            <div id="defense" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">2.5 Защита территорий</h2>
+                
+                <p class="text-purple-soft/80 mb-6">
+                    Рекруты, находящиеся на вашей территории, получают преимущества, а враги — штрафы.
+                </p>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Как защитить границы</h3>
+                    
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4 mb-4">
+                        <h4 class="font-bold text-purple-neon mb-2">1. Размещение гарнизонов</h4>
+                        <ul class="space-y-1 text-purple-soft/80 ml-4 list-disc list-inside">
+                            <li>Оставьте группы рекрутов на режиме "Агрессивно" вдоль границ</li>
+                            <li>Используйте команду "Держать позиции" для стационарной обороны</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4 mb-4">
+                        <h4 class="font-bold text-purple-neon mb-2">2. Сторожевые башни</h4>
+                        <ul class="space-y-1 text-purple-soft/80 ml-4 list-disc list-inside">
+                            <li>Постройте башни на границах</li>
+                            <li>Разместите лучников на верхних этажах</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h4 class="font-bold text-purple-neon mb-2">3. Патрули</h4>
+                        <ul class="space-y-1 text-purple-soft/80 ml-4 list-disc list-inside">
+                            <li>Настройте группы на "Следовать" с разными маршрутами</li>
+                            <li>Используйте "Вольно" с осторожностью — могут уйти с территории</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-yellow-900/20 border border-yellow-600/30 rounded-xl p-4">
+                    <h4 class="text-yellow-400 font-bold mb-2">Индикаторы угроз:</h4>
+                    <ul class="space-y-1 text-yellow-400/80 ml-4 list-disc list-inside">
+                        <li>Если чанк атакуют — вы увидите уведомление</li>
+                        <li>Враждебные рекруты на вашей территории подсвечиваются в меню</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 2.6 -->
+            <div id="territory-war" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">2.6 Война за территории</h2>
+                
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Объявление войны</h3>
+                    <ol class="space-y-2 text-purple-soft/80 ml-4 list-decimal list-inside">
+                        <li>Откройте U → Diplomacy</li>
+                        <li>Выберите фракцию-цель</li>
+                        <li>Объявите войну (требуются ресурсы)</li>
+                    </ol>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Типы войн</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-purple-soft/20">
+                                    <th class="px-4 py-3 text-left text-purple-neon font-bold">Тип</th>
+                                    <th class="px-4 py-3 text-left text-purple-neon font-bold">Цель</th>
+                                    <th class="px-4 py-3 text-left text-purple-neon font-bold">Особенности</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-purple-soft/70">
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Пограничный конфликт</td>
+                                    <td class="px-4 py-3">Захват 1–3 чанков</td>
+                                    <td class="px-4 py-3">Быстро, малые силы</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Захват региона</td>
+                                    <td class="px-4 py-3">Аннексия кластера чанков</td>
+                                    <td class="px-4 py-3">Требует координации групп</td>
+                                </tr>
+                                <tr class="hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Тотальная война</td>
+                                    <td class="px-4 py-3">Уничтожение фракции</td>
+                                    <td class="px-4 py-3">Используйте режим "Рейд" с осторожностью</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Тактика захвата вражеских чанков</h3>
+                    <ol class="space-y-2 text-purple-soft/80 ml-4 list-decimal list-inside">
+                        <li><strong>Разведка</strong> — отправьте одного рекрута в режиме "Пассивно" оценить силы</li>
+                        <li><strong>Артподготовка</strong> — команда "Огонь по позиции" для лучников</li>
+                        <li><strong>Штурм</strong> — щитоносцы вперёд (команда "Поднять щиты"), за ними — ближний бой</li>
+                        <li><strong>Закрепление</strong> — после захвата чанка оставьте гарнизон</li>
+                    </ol>
+                </div>
+
+                <div class="bg-red-900/20 border border-red-600/30 rounded-xl p-4">
+                    <p class="text-red-400/80">
+                        <strong>⚠️ Внимание:</strong> При захвате вражеских территорий будьте готовы к контратаке. Гибель ваших рекрутов снижает мораль всей группы (по –2 за каждого убитого).
+                    </p>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 2.7 -->
+            <div id="village-expansion" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">2.7 Аддон Village Expansion: автономные поселения</h2>
+                
+                <p class="text-purple-soft/80 mb-6">
+                    Это официальный аддон, который превращает обычные деревни в самоуправляемые фракции.
+                </p>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Что добавляет аддон</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-purple-soft/20">
+                                    <th class="px-4 py-3 text-left text-purple-neon font-bold">Функция</th>
+                                    <th class="px-4 py-3 text-left text-purple-neon font-bold">Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-purple-soft/70">
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Автономные деревни</td>
+                                    <td class="px-4 py-3">Поселения сами нанимают рекрутов, расширяются и защищаются</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Собственный центр фракции</td>
+                                    <td class="px-4 py-3">У каждой деревни есть свой центр влияния</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Ролевая система</td>
+                                    <td class="px-4 py-3">Жители распределяются по ролям (фермеры, солдаты и т.д.)</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Динамическое расширение</td>
+                                    <td class="px-4 py-3">Деревни могут строить новые структуры и захватывать территорию</td>
+                                </tr>
+                                <tr class="hover:bg-purple-deep/10 transition-colors">
+                                    <td class="px-4 py-3">Реакция на события</td>
+                                    <td class="px-4 py-3">Деревни реагируют на атаки и изменения в мире</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Как это работает</h3>
+                    <p class="text-purple-soft/80 mb-4">
+                        Деревни, созданные аддоном, не требуют вашего участия:
+                    </p>
+                    <ul class="space-y-2 text-purple-soft/80 ml-4 list-disc list-inside">
+                        <li>Они автоматически нанимают рекрутов</li>
+                        <li>Защищают свою территорию</li>
+                        <li>Могут враждовать или торговать с другими деревнями</li>
+                    </ul>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-neon">Взаимодействие с игроком</h3>
+                    <p class="text-purple-soft/80 mb-3">Вы можете:</p>
+                    <ul class="space-y-2 text-purple-soft/80 ml-4 list-disc list-inside">
+                        <li>Заключать альянсы с автономными деревнями</li>
+                        <li>Захватывать их территории (если объявите войну)</li>
+                        <li>Использовать их как источник рекрутов</li>
+                    </ul>
+                </div>
+
+                <div class="bg-blue-900/20 border border-blue-600/30 rounded-xl p-4">
+                    <h4 class="text-blue-300 font-bold mb-2">Установка:</h4>
+                    <ul class="space-y-1 text-blue-300/80 ml-4 list-disc list-inside">
+                        <li>Требует Forge 47.3.0+</li>
+                        <li>Просто положите .jar в папку mods</li>
+                        <li>Совместим с Recruits 1.10.8</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 2.8 -->
+            <div id="territory-checklist" class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">2.8 Чек-лист территориального магната</h2>
+                
+                <div class="space-y-6">
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h3 class="text-lg font-bold mb-3 text-purple-neon">Перед началом экспансии:</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Создана фракция (U → 10 изумрудов)</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Есть запас изумрудов (минимум 30–50 на первые захваты)</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Есть армия из 5+ рекрутов</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Настроен сундук обеспечения с едой</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h3 class="text-lg font-bold mb-3 text-purple-neon">При захвате новых чанков:</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Выбран стратегически важный чанк</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Есть план обороны захваченной территории</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Оставлен гарнизон минимум из 2–3 рекрутов</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-deep/20 border border-purple-soft/20 rounded-xl p-4">
+                        <h3 class="text-lg font-bold mb-3 text-purple-neon">При войне:</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Объявлена война через меню (U → Diplomacy)</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Группы настроены (агрессивный режим)</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-purple-soft/80">
+                                <input type="checkbox" class="mt-1 w-4 h-4 rounded border-purple-soft/30" disabled>
+                                <span>Есть план отступления (на случай контратаки)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- КОРОТКО -->
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-purple-soft/20">
+                                <th class="px-4 py-3 text-left text-yellow-400 font-bold">№</th>
+                                <th class="px-4 py-3 text-left text-yellow-400 font-bold">Правило</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-purple-soft/70">
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">1</td>
+                                <td class="px-4 py-3">Еда важнее брони — без неё рекрут бесполезен</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">2</td>
+                                <td class="px-4 py-3">Сундук обеспечения обязателен</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">3</td>
+                                <td class="px-4 py-3">Группы упрощают управление</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">4</td>
+                                <td class="px-4 py-3">«Атаковать» убивает жителей — осторожно</td>
+                            </tr>
+                            <tr class="border-b border-purple-soft/10 hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">5</td>
+                                <td class="px-4 py-3">Гибель ваших солдат (–2 морали) бьёт по всей группе</td>
+                            </tr>
+                            <tr class="hover:bg-purple-deep/10 transition-colors">
+                                <td class="px-4 py-3">6</td>
+                                <td class="px-4 py-3">Не оставляйте рекрутов в опасных чанках</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-purple-soft/10 pt-8">
+                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
