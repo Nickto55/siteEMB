@@ -35,6 +35,37 @@
             }
         }
     </script>
+    <style>
+        /* FAQ toggle transition */
+        #faq-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.4s ease;
+            opacity: 0;
+        }
+        #faq-container.open {
+            max-height: 2000px;
+            opacity: 1;
+        }
+
+        /* Modal overlay */
+        .modal-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        .modal-content {
+            transform: scale(0.95) translateY(20px);
+            transition: transform 0.3s ease;
+        }
+    </style>
 </head>
 
 <body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
@@ -52,51 +83,39 @@
                 <p class="text-xl text-purple-soft/60">Решение проблем и ответы на вопросы</p>
             </div>
 
-            <!-- FAQ -->
-            <div class="space-y-6 mb-12">
-                <h2 class="text-2xl font-bold text-purple-soft">❓ Частые вопросы</h2>
-
-                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
-                    <h3 class="font-bold text-lg mb-2">Не могу подключиться к серверу</h3>
-                    <p class="text-purple-soft/70 text-sm leading-relaxed">
-                        Проверьте правильность IP адреса: <code
-                            class="bg-void-black px-2 py-1 rounded text-purple-soft">play.embromine.ru</code>.
-                        Убедитесь, что у вас стабильное интернет-соединение и правильная версия Minecraft (1.20.1).
-                    </p>
-                </div>
-
-                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
-                    <h3 class="font-bold text-lg mb-2">Вылетает игра при входе</h3>
-                    <p class="text-purple-soft/70 text-sm leading-relaxed">
-                        Попробуйте удалить моды и зайти без них. Если проблема решена — один из модов несовместим.
-                        Проверьте список запрещенных модов на соответствующей странице.
-                    </p>
-                </div>
-
-                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
-                    <h3 class="font-bold text-lg mb-2">Высокий пинг / лаги</h3>
-                    <p class="text-purple-soft/70 text-sm leading-relaxed">
-                        Проверьте стабильность вашего интернет-соединения. Закройте программы,
-                        которые могут использовать интернет (торренты, стриминг и т.д.).
-                        Попробуйте перезагрузить роутер.
-                    </p>
-                </div>
-
-                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
-                    <h3 class="font-bold text-lg mb-2">Потерял вещи после смерти</h3>
-                    <p class="text-purple-soft/70 text-sm leading-relaxed">
-                        К сожалению, администрация не возвращает вещи, потерянные по причине смерти от мобов,
-                        игроков или других игровых механик. Вещи возвращаются только в случае бага сервера.
-                    </p>
-                </div>
-
-                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
-                    <h3 class="font-bold text-lg mb-2">Как получить роль на Discord?</h3>
-                    <p class="text-purple-soft/70 text-sm leading-relaxed">
-                        Свяжитесь с администрацией в Discord и предоставьте доказательства спонсорства.
-                        После проверки вам будет выдана соответствующая роль.
-                    </p>
-                </div>
+            <!-- Форма обращения -->
+            <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-purple-soft">📝 Создать тикет</h2>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-purple-soft/60 mb-2">Ваш никнейм в
+                            Minecraft</label>
+                        <input type="text"
+                            class="w-full bg-void-black border border-purple-soft/10 rounded-xl px-4 py-3 text-white focus:border-purple-royal focus:outline-none transition-colors"
+                            placeholder="Введите ваш ник">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-purple-soft/60 mb-2">Тема обращения</label>
+                        <select
+                            class="w-full bg-void-black border border-purple-soft/10 rounded-xl px-4 py-3 text-white focus:border-purple-royal focus:outline-none transition-colors">
+                            <option>Техническая проблема</option>
+                            <option>Вопрос по игре</option>
+                            <option>Жалоба на игрока</option>
+                            <option>Апелляция наказания</option>
+                            <option>Другое</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-purple-soft/60 mb-2">Описание проблемы</label>
+                        <textarea rows="4"
+                            class="w-full bg-void-black border border-purple-soft/10 rounded-xl px-4 py-3 text-white focus:border-purple-royal focus:outline-none transition-colors resize-none"
+                            placeholder="Подробно опишите вашу проблему..."></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-purple-deep hover:bg-purple-royal text-white font-bold py-3 px-6 rounded-xl transition-all">
+                        Отправить обращение
+                    </button>
+                </form>
             </div>
 
             <!-- Контакты поддержки -->
@@ -133,42 +152,85 @@
                 </div>
             </div>
 
-            <!-- Форма обращения -->
-            <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
-                <h2 class="text-2xl font-bold mb-6 text-purple-soft">📝 Создать тикет</h2>
-                <form class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-purple-soft/60 mb-2">Ваш никнейм в
-                            Minecraft</label>
-                        <input type="text"
-                            class="w-full bg-void-black border border-purple-soft/10 rounded-xl px-4 py-3 text-white focus:border-purple-royal focus:outline-none transition-colors"
-                            placeholder="Введите ваш ник">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-purple-soft/60 mb-2">Тема обращения</label>
-                        <select
-                            class="w-full bg-void-black border border-purple-soft/10 rounded-xl px-4 py-3 text-white focus:border-purple-royal focus:outline-none transition-colors">
-                            <option>Техническая проблема</option>
-                            <option>Вопрос по игре</option>
-                            <option>Жалоба на игрока</option>
-                            <option>Апелляция наказания</option>
-                            <option>Другое</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-purple-soft/60 mb-2">Описание проблемы</label>
-                        <textarea rows="4"
-                            class="w-full bg-void-black border border-purple-soft/10 rounded-xl px-4 py-3 text-white focus:border-purple-royal focus:outline-none transition-colors resize-none"
-                            placeholder="Подробно опишите вашу проблему..."></textarea>
-                    </div>
-                    <button type="submit"
-                        class="w-full bg-purple-deep hover:bg-purple-royal text-white font-bold py-3 px-6 rounded-xl transition-all">
-                        Отправить обращение
-                    </button>
-                </form>
+            <!-- FAQ Toggle Button -->
+            <div class="text-center mb-4">
+                <button id="faq-toggle-btn"
+                    class="inline-flex items-center gap-2 bg-void-dark border border-purple-soft/10 hover:border-purple-soft/30 text-purple-soft font-semibold py-3 px-8 rounded-xl transition-all">
+                    <span>❓ Частые вопросы</span>
+                    <svg id="faq-arrow" class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- FAQ -->
+            <div id="faq-container" class="space-y-4 mb-12">
+                <div class="faq-item bg-void-dark p-6 rounded-2xl border border-purple-soft/5 cursor-pointer hover:border-purple-soft/20 transition-colors"
+                    data-question="Не могу подключиться к серверу"
+                    data-answer="Проверьте правильность IP адреса: play.embromine.ru. Убедитесь, что у вас стабильное интернет-соединение и правильная версия Minecraft (1.20.1). Также попробуйте перезапустить лаунчер и проверить, не блокирует ли подключение ваш антивирус или брандмауэр.">
+                    <h3 class="font-bold text-lg">Не могу подключиться к серверу</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed mt-2 line-clamp-2">
+                        Проверьте правильность IP адреса: <code class="bg-void-black px-2 py-1 rounded text-purple-soft">play.embromine.ru</code>.
+                        Убедитесь, что у вас стабильное интернет-соединение и правильная версия Minecraft (1.20.1).
+                    </p>
+                </div>
+
+                <div class="faq-item bg-void-dark p-6 rounded-2xl border border-purple-soft/5 cursor-pointer hover:border-purple-soft/20 transition-colors"
+                    data-question="Вылетает игра при входе"
+                    data-answer="Попробуйте удалить моды и зайти без них. Если проблема решена — один из модов несовместим. Проверьте список запрещенных модов на соответствующей странице. Также убедитесь, что у вас достаточно оперативной памяти выделено под Minecraft (рекомендуется минимум 4GB).">
+                    <h3 class="font-bold text-lg">Вылетает игра при входе</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed mt-2 line-clamp-2">
+                        Попробуйте удалить моды и зайти без них. Если проблема решена — один из модов несовместим.
+                        Проверьте список запрещенных модов на соответствующей странице.
+                    </p>
+                </div>
+
+                <div class="faq-item bg-void-dark p-6 rounded-2xl border border-purple-soft/5 cursor-pointer hover:border-purple-soft/20 transition-colors"
+                    data-question="Высокий пинг / лаги"
+                    data-answer="Проверьте стабильность вашего интернет-соединения. Закройте программы, которые могут использовать интернет (торренты, стриминг и т.д.). Попробуйте перезагрузить роутер. Если проблема сохраняется — возможно, дело в географическом расположении или временных проблемах на стороне провайдера.">
+                    <h3 class="font-bold text-lg">Высокий пинг / лаги</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed mt-2 line-clamp-2">
+                        Проверьте стабильность вашего интернет-соединения. Закройте программы,
+                        которые могут использовать интернет (торренты, стриминг и т.д.).
+                        Попробуйте перезагрузить роутер.
+                    </p>
+                </div>
+
+                <div class="faq-item bg-void-dark p-6 rounded-2xl border border-purple-soft/5 cursor-pointer hover:border-purple-soft/20 transition-colors"
+                    data-question="Потерял вещи после смерти"
+                    data-answer="К сожалению, администрация не возвращает вещи, потерянные по причине смерти от мобов, игроков или других игровых механик. Вещи возвращаются только в случае бага сервера. Рекомендуем быть осторожнее и использовать команды привата территории для защиты своих ресурсов.">
+                    <h3 class="font-bold text-lg">Потерял вещи после смерти</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed mt-2 line-clamp-2">
+                        К сожалению, администрация не возвращает вещи, потерянные по причине смерти от мобов,
+                        игроков или других игровых механик. Вещи возвращаются только в случае бага сервера.
+                    </p>
+                </div>
+
+                <div class="faq-item bg-void-dark p-6 rounded-2xl border border-purple-soft/5 cursor-pointer hover:border-purple-soft/20 transition-colors"
+                    data-question="Как получить роль на Discord?"
+                    data-answer="Свяжитесь с администрацией в Discord и предоставьте доказательства спонсорства. После проверки вам будет выдана соответствующая роль. Убедитесь, что ваш Discord аккаунт привязан к вашему игровому профилю.">
+                    <h3 class="font-bold text-lg">Как получить роль на Discord?</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed mt-2 line-clamp-2">
+                        Свяжитесь с администрацией в Discord и предоставьте доказательства спонсорства.
+                        После проверки вам будет выдана соответствующая роль.
+                    </p>
+                </div>
             </div>
         </div>
     </main>
+
+    <!-- FAQ Modal -->
+    <div id="faq-modal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+        <div class="modal-content bg-void-dark border border-purple-soft/20 rounded-2xl max-w-lg w-full p-8 relative shadow-2xl shadow-purple-deep/20">
+            <button id="modal-close" class="absolute top-4 right-4 text-purple-soft/60 hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h3 id="modal-title" class="text-2xl font-bold text-purple-soft pr-8 mb-4"></h3>
+            <div id="modal-body" class="text-purple-soft/80 leading-relaxed text-base"></div>
+        </div>
+    </div>
 
     <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -180,6 +242,59 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // FAQ toggle
+        const faqBtn = document.getElementById('faq-toggle-btn');
+        const faqContainer = document.getElementById('faq-container');
+        const faqArrow = document.getElementById('faq-arrow');
+
+        faqBtn.addEventListener('click', () => {
+            const isOpen = faqContainer.classList.contains('open');
+            if (isOpen) {
+                faqContainer.classList.remove('open');
+                faqArrow.style.transform = 'rotate(0deg)';
+            } else {
+                faqContainer.classList.add('open');
+                faqArrow.style.transform = 'rotate(180deg)';
+            }
+        });
+
+        // FAQ Modal
+        const modal = document.getElementById('faq-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const modalClose = document.getElementById('modal-close');
+
+        function openModal(question, answer) {
+            modalTitle.textContent = question;
+            modalBody.textContent = answer;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const question = item.dataset.question;
+                const answer = item.dataset.answer;
+                openModal(question, answer);
+            });
+        });
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 
 </html>
