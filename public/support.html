@@ -86,32 +86,45 @@
             <!-- Форма обращения -->
             <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
                 <h2 class="text-2xl font-bold mb-6 text-purple-soft">📝 Создать тикет</h2>
-                <form class="space-y-4">
+                <form id="ticket-form" class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-purple-soft/60 mb-2">Ваш никнейм в
                             Minecraft</label>
-                        <input type="text"
+                        <input type="text" id="ticket-username" required
                             class="w-full bg-void-black border border-purple-soft/10 rounded-xl px-4 py-3 text-white focus:border-purple-royal focus:outline-none transition-colors"
                             placeholder="Введите ваш ник">
                     </div>
                     <div>
+                        <label class="block text-sm font-medium text-purple-soft/60 mb-2">Email для связи (необязательно)</label>
+                        <input type="email" id="ticket-email"
+                            class="w-full bg-void-black border border-purple-soft/10 rounded-xl px-4 py-3 text-white focus:border-purple-royal focus:outline-none transition-colors"
+                            placeholder="your@email.com">
+                    </div>
+                    <div>
                         <label class="block text-sm font-medium text-purple-soft/60 mb-2">Тема обращения</label>
-                        <select
+                        <select id="ticket-category" required
                             class="w-full bg-void-black border border-purple-soft/10 rounded-xl px-4 py-3 text-white focus:border-purple-royal focus:outline-none transition-colors">
-                            <option>Техническая проблема</option>
-                            <option>Вопрос по игре</option>
-                            <option>Жалоба на игрока</option>
-                            <option>Апелляция наказания</option>
-                            <option>Другое</option>
+                            <option value="Техническая проблема">Техническая проблема</option>
+                            <option value="Вопрос по игре">Вопрос по игре</option>
+                            <option value="Жалоба на игрока">Жалоба на игрока</option>
+                            <option value="Апелляция наказания">Апелляция наказания</option>
+                            <option value="Другое">Другое</option>
                         </select>
                     </div>
                     <div>
+                        <label class="block text-sm font-medium text-purple-soft/60 mb-2">Тема</label>
+                        <input type="text" id="ticket-subject" required
+                            class="w-full bg-void-black border border-purple-soft/10 rounded-xl px-4 py-3 text-white focus:border-purple-royal focus:outline-none transition-colors"
+                            placeholder="Краткое описание проблемы">
+                    </div>
+                    <div>
                         <label class="block text-sm font-medium text-purple-soft/60 mb-2">Описание проблемы</label>
-                        <textarea rows="4"
+                        <textarea id="ticket-description" rows="4" required
                             class="w-full bg-void-black border border-purple-soft/10 rounded-xl px-4 py-3 text-white focus:border-purple-royal focus:outline-none transition-colors resize-none"
                             placeholder="Подробно опишите вашу проблему..."></textarea>
                     </div>
-                    <button type="submit"
+                    <div id="ticket-message" class="hidden rounded-xl px-4 py-3 text-sm font-medium"></div>
+                    <button type="submit" id="ticket-submit"
                         class="w-full bg-purple-deep hover:bg-purple-royal text-white font-bold py-3 px-6 rounded-xl transition-all">
                         Отправить обращение
                     </button>
@@ -243,6 +256,51 @@
 
     <script src="script.js"></script>
     <script>
+        // Ticket form submission
+        document.getElementById('ticket-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('ticket-submit');
+            const messageEl = document.getElementById('ticket-message');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправка...';
+            messageEl.classList.add('hidden');
+
+            const data = {
+                username: document.getElementById('ticket-username').value.trim(),
+                email: document.getElementById('ticket-email').value.trim(),
+                category: document.getElementById('ticket-category').value,
+                subject: document.getElementById('ticket-subject').value.trim(),
+                description: document.getElementById('ticket-description').value.trim()
+            };
+
+            try {
+                const response = await fetch('/api/tickets', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    messageEl.textContent = '✅ Тикет успешно создан! Мы рассмотрим ваше обращение в ближайшее время.';
+                    messageEl.className = 'rounded-xl px-4 py-3 text-sm font-medium bg-green-500/20 text-green-400';
+                    document.getElementById('ticket-form').reset();
+                } else {
+                    messageEl.textContent = '❌ ' + (result.error || 'Ошибка при создании тикета');
+                    messageEl.className = 'rounded-xl px-4 py-3 text-sm font-medium bg-red-500/20 text-red-400';
+                }
+            } catch (error) {
+                messageEl.textContent = '❌ Ошибка соединения с сервером';
+                messageEl.className = 'rounded-xl px-4 py-3 text-sm font-medium bg-red-500/20 text-red-400';
+            } finally {
+                messageEl.classList.remove('hidden');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Отправить обращение';
+            }
+        });
+
         // FAQ toggle
         const faqBtn = document.getElementById('faq-toggle-btn');
         const faqContainer = document.getElementById('faq-container');

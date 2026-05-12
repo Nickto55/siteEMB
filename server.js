@@ -10,6 +10,7 @@ const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
 const reportsRoutes = require('./routes/reports');
 const contentRoutes = require('./routes/content');
+const ticketsRoutes = require('./routes/tickets');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -75,6 +76,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/reports', reportsRoutes);
 app.use('/api/content', contentRoutes);
+app.use('/api/tickets', ticketsRoutes);
 
 // API информация
 app.get('/api', (req, res) => {
@@ -92,6 +94,14 @@ app.get('/api', (req, res) => {
                 getUser: 'GET /api/admin/users/:id',
                 updateRole: 'PUT /api/admin/users/:id/role',
                 deleteUser: 'DELETE /api/admin/users/:id'
+            },
+            tickets: {
+                create: 'POST /api/tickets',
+                getAll: 'GET /api/tickets',
+                getById: 'GET /api/tickets/:id',
+                updateStatus: 'PUT /api/tickets/:id/status',
+                updatePriority: 'PUT /api/tickets/:id/priority',
+                delete: 'DELETE /api/tickets/:id'
             },
             reports: {
                 getAll: 'GET /api/reports',

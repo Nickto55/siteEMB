@@ -58,6 +58,45 @@ async function checkDatabase() {
             console.log(`👥 Пользователей в базе: ${userCount.rows[0].count}`);
         }
 
+        // Проверка существования таблицы tickets
+        const ticketsTableCheck = await client.query(
+            `SELECT EXISTS (
+                SELECT FROM information_schema.tables
+                WHERE table_name = 'tickets'
+            )`
+        );
+
+        if (!ticketsTableCheck.rows[0].exists) {
+            console.log('❌ Таблица tickets не существует');
+            console.log('🔧 Создаем таблицу tickets...');
+
+            await client.query(`
+                CREATE TABLE IF NOT EXISTS tickets (
+                    id SERIAL PRIMARY KEY,
+                    username VARCHAR(50) NOT NULL,
+                    email VARCHAR(255),
+                    category VARCHAR(50) NOT NULL,
+                    subject VARCHAR(255) NOT NULL,
+                    description TEXT NOT NULL,
+                    status VARCHAR(20) DEFAULT 'open' CHECK (status IN ('open', 'in_progress', 'resolved', 'closed')),
+                    priority VARCHAR(20) DEFAULT 'normal' CHECK (priority IN ('low', 'normal', 'high', 'urgent')),
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    resolved_at TIMESTAMP,
+                    assigned_to INT REFERENCES users(id) ON DELETE SET NULL
+                )
+            `);
+
+            await client.query(`CREATE INDEX IF NOT EXISTS idx_tickets_status ON tickets(status)`);
+            await client.query(`CREATE INDEX IF NOT EXISTS idx_tickets_username ON tickets(username)`);
+            await client.query(`CREATE INDEX IF NOT EXISTS idx_tickets_created_at ON tickets(created_at)`);
+            await client.query(`CREATE INDEX IF NOT EXISTS idx_tickets_assigned_to ON tickets(assigned_to)`);
+
+            console.log('✅ Таблица tickets создана успешно');
+        } else {
+            console.log('✅ Таблица tickets существует');
+        }
+
         client.release();
         console.log('🎉 Проверка завершена успешно');
 
