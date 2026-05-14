@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ролевые элементы - EmbroMine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: {
+                            black: '#0a0810',
+                            dark: '#120a1a',
+                        },
+                        purple: {
+                            deep: '#6D28D9',
+                            royal: '#8B5CF6',
+                            neon: '#A855F7',
+                            soft: '#C4B5FD',
+                        },
+                        magenta: {
+                            glow: '#D946EF',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+    <!-- Navigation -->
+    <script src="/js/header.js" defer></script>
+
+    <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1
+                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
+                    Ролевые элементы
+                </h1>
+                <p class="text-xl text-purple-soft/60">Погрузитесь в атмосферу игры</p>
+            </div>
+
+            <div class="space-y-8">
+                <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-2xl font-bold mb-4 text-purple-soft">🎭 Роли и профессии</h2>
+                    <p class="text-purple-soft/70 leading-relaxed mb-4">
+                        Выберите свою роль в мире EmbroMine. Каждая профессия имеет уникальные способности и
+                        преимущества:
+                    </p>
+                    <ul class="space-y-2 text-purple-soft/70">
+                        <li class="flex items-center gap-2"><span class="text-yellow-400">👑</span>
+                            <strong>Лорд</strong> — управление территориями и кланами</li>
+                        <li class="flex items-center gap-2"><span class="text-gray-400">⚒️</span>
+                            <strong>Кузнец</strong> — создание уникальной брони и оружия</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">🌿</span>
+                            <strong>Фермер</strong> — выращивание редких ресурсов</li>
+                        <li class="flex items-center gap-2"><span class="text-blue-400">🏹</span>
+                            <strong>Охотник</strong> — добыча редких материалов</li>
+                        <li class="flex items-center gap-2"><span class="text-purple-400">✨</span> <strong>Маг</strong>
+                            — использование магических способностей</li>
+                    </ul>
+                </div>
+
+                <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-2xl font-bold mb-4 text-purple-soft">🏛️ Города и поселения</h2>
+                    <p class="text-purple-soft/70 leading-relaxed">
+                        Создавайте собственные города с уникальной архитектурой и правилами.
+                        Приглашайте жителей, стройте инфраструктуру и развивайте свою территорию.
+                        Города могут торговать друг с другом и заключать дипломатические соглашения.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-2xl font-bold mb-4 text-purple-soft">📖 История мира</h2>
+                    <p class="text-purple-soft/70 leading-relaxed">
+                        Каждый сезон сервера имеет свою уникальную историю. Участвуйте в событиях,
+                        влияйте на развитие мира и становитесь частью легенд EmbroMine.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-2xl font-bold mb-4 text-purple-soft">🎉 Ивенты и праздники</h2>
+                    <p class="text-purple-soft/70 leading-relaxed">
+                        Регулярные ролевые ивенты: турниры рыцарей, ярмарки, празднества и многое другое.
+                        Получайте уникальные награды и приятные воспоминания.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-purple-soft/10 pt-8">
+                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

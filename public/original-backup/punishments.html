@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система наказаний - EmbroMine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: {
+                            black: '#0a0810',
+                            dark: '#120a1a',
+                        },
+                        purple: {
+                            deep: '#6D28D9',
+                            royal: '#8B5CF6',
+                            neon: '#A855F7',
+                            soft: '#C4B5FD',
+                        },
+                        magenta: {
+                            glow: '#D946EF',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+    <!-- Navigation -->
+    <script src="/js/header.js" defer></script>
+
+    <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1
+                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
+                    Система наказаний
+                </h1>
+                <p class="text-xl text-purple-soft/60">Как работает модерация</p>
+            </div>
+
+            <div class="space-y-8">
+                <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-2xl font-bold mb-4 text-purple-soft">⚠️ Виды наказаний</h2>
+                    <div class="space-y-4">
+                        <div class="bg-void-black p-4 rounded-xl border border-purple-soft/5">
+                            <h3 class="font-bold text-yellow-400 mb-2">🔇 Мут</h3>
+                            <p class="text-purple-soft/70 text-sm">Временное ограничение возможности писать в чат.
+                                Применяется за нарушения в общении.</p>
+                        </div>
+                        <div class="bg-void-black p-4 rounded-xl border border-purple-soft/5">
+                            <h3 class="font-bold text-orange-400 mb-2">🚫 Кик</h3>
+                            <p class="text-purple-soft/70 text-sm">Отключение от сервера. Применяется за мелкие
+                                нарушения или как предупреждение.</p>
+                        </div>
+                        <div class="bg-void-black p-4 rounded-xl border border-purple-soft/5">
+                            <h3 class="font-bold text-red-400 mb-2">🔒 Бан</h3>
+                            <p class="text-purple-soft/70 text-sm">Временное или перманентное ограничение доступа к
+                                серверу. Применяется за серьезные нарушения.</p>
+                        </div>
+                        <div class="bg-void-black p-4 rounded-xl border border-purple-soft/5">
+                            <h3 class="font-bold text-purple-400 mb-2">📋 Черный список</h3>
+                            <p class="text-purple-soft/70 text-sm">Перманентный бан с запретом на подачу апелляции.
+                                Применяется за особо тяжкие нарушения.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-2xl font-bold mb-4 text-purple-soft">📊 Сроки наказаний</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-purple-soft/10">
+                                    <th class="text-left py-3 px-4 text-purple-soft">Нарушение</th>
+                                    <th class="text-left py-3 px-4 text-purple-soft">1-е нарушение</th>
+                                    <th class="text-left py-3 px-4 text-purple-soft">2-е нарушение</th>
+                                    <th class="text-left py-3 px-4 text-purple-soft">3-е нарушение</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-purple-soft/70">
+                                <tr class="border-b border-purple-soft/5">
+                                    <td class="py-3 px-4">Спам/флуд</td>
+                                    <td class="py-3 px-4">Мут 15 мин</td>
+                                    <td class="py-3 px-4">Мут 2 часа</td>
+                                    <td class="py-3 px-4">Мут 24 часа</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/5">
+                                    <td class="py-3 px-4">Оскорбления</td>
+                                    <td class="py-3 px-4">Мут 1 час</td>
+                                    <td class="py-3 px-4">Мут 6 часов</td>
+                                    <td class="py-3 px-4">Бан 1 день</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/5">
+                                    <td class="py-3 px-4">Воровство</td>
+                                    <td class="py-3 px-4">Бан 1 день</td>
+                                    <td class="py-3 px-4">Бан 3 дня</td>
+                                    <td class="py-3 px-4">Бан 7 дней</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/5">
+                                    <td class="py-3 px-4">Гриферство</td>
+                                    <td class="py-3 px-4">Бан 3 дня</td>
+                                    <td class="py-3 px-4">Бан 7 дней</td>
+                                    <td class="py-3 px-4">Бан 30 дней</td>
+                                </tr>
+                                <tr class="border-b border-purple-soft/5">
+                                    <td class="py-3 px-4">Читы</td>
+                                    <td class="py-3 px-4">Бан навсегда</td>
+                                    <td class="py-3 px-4">—</td>
+                                    <td class="py-3 px-4">—</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-2xl font-bold mb-4 text-purple-soft">📝 Апелляции</h2>
+                    <p class="text-purple-soft/70 leading-relaxed mb-4">
+                        Если вы считаете, что наказание было выдано несправедливо, вы можете подать апелляцию
+                        через Discord сервер или написав на почту support@embromine.ru.
+                    </p>
+                    <p class="text-purple-soft/50 text-sm">
+                        Укажите свой никнейм, дату наказания и причину, по которой вы считаете наказание несправедливым.
+                        Администрация рассмотрит вашу апелляцию в течение 48 часов.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-purple-soft/10 pt-8">
+                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

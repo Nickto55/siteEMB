@@ -14,7 +14,6 @@ class PageContentManager {
 
     /**
      * Инициализация системы
-     * Должна быть вызвана в конце HTML страницы
      */
     async init() {
         if (this.initialized) return;
@@ -22,11 +21,9 @@ class PageContentManager {
         try {
             console.log('📖 Инициализация системы загрузки контента...');
 
-            // Получить название текущей страницы
             const currentPage = this.getCurrentPageName();
             console.log(`📄 Текущая страница: ${currentPage}`);
 
-            // Загрузить контент страницы
             await this.loadPageContent(currentPage);
 
             this.initialized = true;
@@ -50,7 +47,6 @@ class PageContentManager {
      */
     async loadPageContent(pageName) {
         try {
-            // Проверить кэш
             if (this.cacheEnabled && this.cache.has(pageName)) {
                 console.log(`📚 Используется кэшированный контент для ${pageName}`);
                 const cachedContent = this.cache.get(pageName);
@@ -58,29 +54,34 @@ class PageContentManager {
                 return;
             }
 
-            console.log(`🔄 Загужаю контент для ${pageName}...`);
+            console.log(`🔄 Загружаю контент для ${pageName}...`);
 
             const response = await fetch(`${this.apiBaseUrl}/${pageName}`);
 
             if (!response.ok) {
-                console.warn(`⚠ Контент страницы ${pageName} не найден в БД (${response.status})`);
+                if (response.status === 404) {
+                    console.warn(`⚠ Контент страницы ${pageName} не найден в БД`);
+                    this.showFallback(pageName);
+                } else {
+                    console.warn(`⚠ Ошибка загрузки ${pageName}: ${response.status}`);
+                    this.showError(pageName, response.status);
+                }
                 return;
             }
 
             const data = await response.json();
 
             if (data.success && data.data) {
-                // Сохранить в кэш
                 if (this.cacheEnabled) {
                     this.cache.set(pageName, data.data);
                 }
 
-                // Применить контент
                 this.applyContent(pageName, data.data);
                 console.log(`✓ Контент ${pageName} успешно загружен`);
             }
         } catch (error) {
             console.error(`❌ Ошибка при загрузке контента ${pageName}:`, error);
+            this.showError(pageName, 'network');
         }
     }
 
@@ -90,82 +91,105 @@ class PageContentManager {
     applyContent(pageName, contentData) {
         const { title, content } = contentData;
 
-        // Обновить title страницы
         if (title) {
             document.title = title;
         }
 
-        // Обновить или заменить основной контент
-        // Ищет элемент с id='dynamic-content' или основной контент элемент
         const contentElement = document.getElementById('dynamic-content') ||
             document.querySelector('main') ||
             document.querySelector('[role="main"]');
 
         if (contentElement && content) {
-            // Если это полная HTML страница, содержит <html> или <body>
             if (content.includes('<html') || content.includes('<body')) {
-                // Это полная страница - извлечь только контент из body
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = content;
                 const body = tempDiv.querySelector('body');
                 if (body) {
                     contentElement.innerHTML = body.innerHTML;
+                } else {
+                    contentElement.innerHTML = content;
                 }
             } else {
-                // Это фрагмент контента
                 contentElement.innerHTML = content;
             }
 
-            // Переинициализировать скрипты если нужно
             this.reinitializeScripts(contentElement);
+            this.fadeIn(contentElement);
         }
 
-        // Сохранить ссылку на элемент контента
         this.contentElements.set(pageName, contentElement);
+    }
+
+    /**
+     * Плавно показать контент
+     */
+    fadeIn(element) {
+        element.classList.remove('opacity-0');
+        element.classList.add('opacity-100');
+    }
+
+    /**
+     * Показать fallback если контент не найден
+     */
+    showFallback(pageName) {
+        const el = document.getElementById('dynamic-content');
+        if (!el) return;
+
+        el.innerHTML = `
+            <div class="text-center py-20">
+                <div class="text-4xl mb-4">📄</div>
+                <h2 class="text-xl font-bold text-gray-300 mb-2">Контент не найден</h2>
+                <p class="text-gray-500 mb-4">Страница "${pageName}" ещё не создана в базе данных.</p>
+                <a href="admin-panel.html" class="inline-block px-4 py-2 bg-green-600 hover:bg-green-500 text-white text-sm font-medium rounded-lg transition-all">
+                    Перейти в админ-панель
+                </a>
+            </div>
+        `;
+        this.fadeIn(el);
+    }
+
+    /**
+     * Показать ошибку загрузки
+     */
+    showError(pageName, status) {
+        const el = document.getElementById('dynamic-content');
+        if (!el) return;
+
+        el.innerHTML = `
+            <div class="text-center py-20">
+                <div class="text-4xl mb-4">⚠️</div>
+                <h2 class="text-xl font-bold text-gray-300 mb-2">Ошибка загрузки</h2>
+                <p class="text-gray-500">Не удалось загрузить контент страницы "${pageName}" (${status}).</p>
+            </div>
+        `;
+        this.fadeIn(el);
     }
 
     /**
      * Переинициализировать скрипты в загруженном контенте
      */
     reinitializeScripts(containerElement) {
-        // Переинициализировать Tailwind если usado
-        if (window.tailwind && window.tailwind.preflight) {
-            try {
-                // Это может не быть необходимо, но добавлен на случай
-                console.log('📦 Переинициализирую Tailwind...');
-            } catch (error) {
-                console.warn('⚠ Ошибка при переинициализации Tailwind:', error);
-            }
-        }
-
-        // Переинициализировать локальные скрипты если они есть
         const scripts = containerElement.querySelectorAll('script');
         scripts.forEach(script => {
             const newScript = document.createElement('script');
-            newScript.textContent = script.textContent;
+            if (script.src) {
+                newScript.src = script.src;
+            } else {
+                newScript.textContent = script.textContent;
+            }
             script.parentNode.replaceChild(newScript, script);
         });
     }
 
-    /**
-     * Очистить кэш
-     */
     clearCache() {
         this.cache.clear();
         console.log('🗑️ Кэш очищен');
     }
 
-    /**
-     * Получить кэшированный контент
-     */
     getCachedContent(pageName) {
         return this.cache.get(pageName) || null;
     }
 
-    /**
-     * Настроить элемент для динамической загрузки
-     * Можно использовать для загрузки контента в отдельные элементы
-     */
     registerContentElement(elementId, pageName) {
         const element = document.getElementById(elementId);
         if (element) {
@@ -174,9 +198,6 @@ class PageContentManager {
         }
     }
 
-    /**
-     * Загрузить контент в конкретный элемент
-     */
     async loadContentIntoElement(elementId, pageName) {
         const element = document.getElementById(elementId);
         if (!element) {
@@ -200,24 +221,16 @@ class PageContentManager {
     }
 }
 
-/**
- * Глобальный экземпляр менеджера контента
- */
 const pageContentManager = new PageContentManager();
 
-/**
- * Инициализировать при загрузке страницы
- */
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         pageContentManager.init();
     });
 } else {
-    // Документ уже загружен
     pageContentManager.init();
 }
 
-// Экспортировать для использования в других скриптах
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = PageContentManager;
 }

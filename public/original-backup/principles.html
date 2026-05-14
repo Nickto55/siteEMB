@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Базовые принципы - EmbroMine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: {
+                            black: '#0a0810',
+                            dark: '#120a1a',
+                        },
+                        purple: {
+                            deep: '#6D28D9',
+                            royal: '#8B5CF6',
+                            neon: '#A855F7',
+                            soft: '#C4B5FD',
+                        },
+                        magenta: {
+                            glow: '#D946EF',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+    <!-- Navigation -->
+    <script src="/js/header.js" defer></script>
+
+    <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1
+                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
+                    Базовые принципы
+                </h1>
+                <p class="text-xl text-purple-soft/60">Философия нашего сервера</p>
+            </div>
+
+            <div class="space-y-8">
+                <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-2xl font-bold mb-4 text-purple-soft">🤝 Уважение</h2>
+                    <p class="text-purple-soft/70 leading-relaxed">
+                        Мы ценим каждого члена нашего комьюнити. Уважайте других игроков, их труд и время.
+                        Токсичное поведение, оскорбления и троллинг не приветствуются.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-2xl font-bold mb-4 text-purple-soft">⚖️ Честность</h2>
+                    <p class="text-purple-soft/70 leading-relaxed">
+                        Играйте честно. Использование читов, эксплойтов и багов строго запрещено.
+                        Мы создаем среду, где побеждает мастерство, а не нечестные преимущества.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-2xl font-bold mb-4 text-purple-soft">🏗️ Творчество</h2>
+                    <p class="text-purple-soft/70 leading-relaxed">
+                        Стройте, создавайте, экспериментируйте. Мы поощряем креативность и уникальные проекты.
+                        Ваши постройки — это вклад в мир EmbroMine.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-2xl font-bold mb-4 text-purple-soft">🌟 Качество</h2>
+                    <p class="text-purple-soft/70 leading-relaxed">
+                        Мы стремимся к высокому качеству во всем: от стабильности сервера до контента.
+                        Каждое обновление тщательно тестируется перед выходом.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-2xl font-bold mb-4 text-purple-soft">🎮 Удовольствие от игры</h2>
+                    <p class="text-purple-soft/70 leading-relaxed">
+                        Главное — получать удовольствие от процесса. Мы создаем сервер,
+                        на котором приятно проводить время и возвращаться снова и снова.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-purple-soft/10 pt-8">
+                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

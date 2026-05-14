@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth">
 
+<html class="scroll-smooth" lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Техническая помощь - EmbroMine</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Техническая помощь - EmbroMine</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="style.css" rel="stylesheet"/>
+<script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -35,7 +34,7 @@
             }
         }
     </script>
-    <style>
+<style>
         /* FAQ toggle transition */
         #faq-container {
             max-height: 0;
@@ -67,292 +66,37 @@
         }
     </style>
 </head>
-
 <body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
-    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
-    <!-- Navigation -->
-    <script src="/js/header.js" defer></script>
-
-    <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <h1
-                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
-                    Техническая помощь
-                </h1>
-                <p class="text-xl text-purple-soft/60">Решение проблем и ответы на вопросы</p>
-            </div>
-
-            <!-- Форма обращения -->
-            <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
-                <h2 class="text-2xl font-bold mb-6 text-purple-soft">📝 Создать тикет</h2>
-                <form id="ticket-form" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-purple-soft/60 mb-2">Ваш никнейм в
-                            Minecraft</label>
-                        <input type="text" id="ticket-username" required
-                            class="w-full bg-void-black border border-purple-soft/10 rounded-xl px-4 py-3 text-white focus:border-purple-royal focus:outline-none transition-colors"
-                            placeholder="Введите ваш ник">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-purple-soft/60 mb-2">Email для связи (необязательно)</label>
-                        <input type="email" id="ticket-email"
-                            class="w-full bg-void-black border border-purple-soft/10 rounded-xl px-4 py-3 text-white focus:border-purple-royal focus:outline-none transition-colors"
-                            placeholder="your@email.com">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-purple-soft/60 mb-2">Тема обращения</label>
-                        <select id="ticket-category" required
-                            class="w-full bg-void-black border border-purple-soft/10 rounded-xl px-4 py-3 text-white focus:border-purple-royal focus:outline-none transition-colors">
-                            <option value="Техническая проблема">Техническая проблема</option>
-                            <option value="Вопрос по игре">Вопрос по игре</option>
-                            <option value="Жалоба на игрока">Жалоба на игрока</option>
-                            <option value="Апелляция наказания">Апелляция наказания</option>
-                            <option value="Другое">Другое</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-purple-soft/60 mb-2">Тема</label>
-                        <input type="text" id="ticket-subject" required
-                            class="w-full bg-void-black border border-purple-soft/10 rounded-xl px-4 py-3 text-white focus:border-purple-royal focus:outline-none transition-colors"
-                            placeholder="Краткое описание проблемы">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-purple-soft/60 mb-2">Описание проблемы</label>
-                        <textarea id="ticket-description" rows="4" required
-                            class="w-full bg-void-black border border-purple-soft/10 rounded-xl px-4 py-3 text-white focus:border-purple-royal focus:outline-none transition-colors resize-none"
-                            placeholder="Подробно опишите вашу проблему..."></textarea>
-                    </div>
-                    <div id="ticket-message" class="hidden rounded-xl px-4 py-3 text-sm font-medium"></div>
-                    <button type="submit" id="ticket-submit"
-                        class="w-full bg-purple-deep hover:bg-purple-royal text-white font-bold py-3 px-6 rounded-xl transition-all">
-                        Отправить обращение
-                    </button>
-                </form>
-            </div>
-
-            <!-- Контакты поддержки -->
-            <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5 mb-8">
-                <h2 class="text-2xl font-bold mb-6 text-purple-soft">📞 Связаться с поддержкой</h2>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <a href="mailto:support@embromine.ru"
-                        class="flex items-center gap-4 bg-void-black p-4 rounded-xl hover:bg-purple-soft/5 transition-colors border border-purple-soft/5">
-                        <div class="w-12 h-12 bg-purple-deep/10 rounded-xl flex items-center justify-center">
-                            <svg class="w-6 h-6 text-purple-royal" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="font-semibold">Email</p>
-                            <p class="text-purple-soft/60 text-sm">support@embromine.ru</p>
-                        </div>
-                    </a>
-                    <a href="https://discord.gg/"
-                        class="flex items-center gap-4 bg-void-black p-4 rounded-xl hover:bg-purple-soft/5 transition-colors border border-purple-soft/5">
-                        <div class="w-12 h-12 bg-[#5865F2]/10 rounded-xl flex items-center justify-center">
-                            <svg class="w-6 h-6 text-[#5865F2]" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="font-semibold">Discord</p>
-                            <p class="text-purple-soft/60 text-sm">Канал #поддержка</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- FAQ Toggle Button -->
-            <div class="text-center mb-4">
-                <button id="faq-toggle-btn"
-                    class="inline-flex items-center gap-2 bg-void-dark border border-purple-soft/10 hover:border-purple-soft/30 text-purple-soft font-semibold py-3 px-8 rounded-xl transition-all">
-                    <span>❓ Частые вопросы</span>
-                    <svg id="faq-arrow" class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-            </div>
-
-            <!-- FAQ -->
-            <div id="faq-container" class="space-y-4 mb-12">
-                <div class="faq-item bg-void-dark p-6 rounded-2xl border border-purple-soft/5 cursor-pointer hover:border-purple-soft/20 transition-colors"
-                    data-question="Не могу подключиться к серверу"
-                    data-answer="Проверьте правильность IP адреса: play.embromine.ru. Убедитесь, что у вас стабильное интернет-соединение и правильная версия Minecraft (1.20.1). Также попробуйте перезапустить лаунчер и проверить, не блокирует ли подключение ваш антивирус или брандмауэр.">
-                    <h3 class="font-bold text-lg">Не могу подключиться к серверу</h3>
-                    <p class="text-purple-soft/70 text-sm leading-relaxed mt-2 line-clamp-2">
-                        Проверьте правильность IP адреса: <code class="bg-void-black px-2 py-1 rounded text-purple-soft">play.embromine.ru</code>.
-                        Убедитесь, что у вас стабильное интернет-соединение и правильная версия Minecraft (1.20.1).
-                    </p>
-                </div>
-
-                <div class="faq-item bg-void-dark p-6 rounded-2xl border border-purple-soft/5 cursor-pointer hover:border-purple-soft/20 transition-colors"
-                    data-question="Вылетает игра при входе"
-                    data-answer="Попробуйте удалить моды и зайти без них. Если проблема решена — один из модов несовместим. Проверьте список запрещенных модов на соответствующей странице. Также убедитесь, что у вас достаточно оперативной памяти выделено под Minecraft (рекомендуется минимум 4GB).">
-                    <h3 class="font-bold text-lg">Вылетает игра при входе</h3>
-                    <p class="text-purple-soft/70 text-sm leading-relaxed mt-2 line-clamp-2">
-                        Попробуйте удалить моды и зайти без них. Если проблема решена — один из модов несовместим.
-                        Проверьте список запрещенных модов на соответствующей странице.
-                    </p>
-                </div>
-
-                <div class="faq-item bg-void-dark p-6 rounded-2xl border border-purple-soft/5 cursor-pointer hover:border-purple-soft/20 transition-colors"
-                    data-question="Высокий пинг / лаги"
-                    data-answer="Проверьте стабильность вашего интернет-соединения. Закройте программы, которые могут использовать интернет (торренты, стриминг и т.д.). Попробуйте перезагрузить роутер. Если проблема сохраняется — возможно, дело в географическом расположении или временных проблемах на стороне провайдера.">
-                    <h3 class="font-bold text-lg">Высокий пинг / лаги</h3>
-                    <p class="text-purple-soft/70 text-sm leading-relaxed mt-2 line-clamp-2">
-                        Проверьте стабильность вашего интернет-соединения. Закройте программы,
-                        которые могут использовать интернет (торренты, стриминг и т.д.).
-                        Попробуйте перезагрузить роутер.
-                    </p>
-                </div>
-
-                <div class="faq-item bg-void-dark p-6 rounded-2xl border border-purple-soft/5 cursor-pointer hover:border-purple-soft/20 transition-colors"
-                    data-question="Потерял вещи после смерти"
-                    data-answer="К сожалению, администрация не возвращает вещи, потерянные по причине смерти от мобов, игроков или других игровых механик. Вещи возвращаются только в случае бага сервера. Рекомендуем быть осторожнее и использовать команды привата территории для защиты своих ресурсов.">
-                    <h3 class="font-bold text-lg">Потерял вещи после смерти</h3>
-                    <p class="text-purple-soft/70 text-sm leading-relaxed mt-2 line-clamp-2">
-                        К сожалению, администрация не возвращает вещи, потерянные по причине смерти от мобов,
-                        игроков или других игровых механик. Вещи возвращаются только в случае бага сервера.
-                    </p>
-                </div>
-
-                <div class="faq-item bg-void-dark p-6 rounded-2xl border border-purple-soft/5 cursor-pointer hover:border-purple-soft/20 transition-colors"
-                    data-question="Как получить роль на Discord?"
-                    data-answer="Свяжитесь с администрацией в Discord и предоставьте доказательства спонсорства. После проверки вам будет выдана соответствующая роль. Убедитесь, что ваш Discord аккаунт привязан к вашему игровому профилю.">
-                    <h3 class="font-bold text-lg">Как получить роль на Discord?</h3>
-                    <p class="text-purple-soft/70 text-sm leading-relaxed mt-2 line-clamp-2">
-                        Свяжитесь с администрацией в Discord и предоставьте доказательства спонсорства.
-                        После проверки вам будет выдана соответствующая роль.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- FAQ Modal -->
-    <div id="faq-modal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-        <div class="modal-content bg-void-dark border border-purple-soft/20 rounded-2xl max-w-lg w-full p-8 relative shadow-2xl shadow-purple-deep/20">
-            <button id="modal-close" class="absolute top-4 right-4 text-purple-soft/60 hover:text-white transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-            <h3 id="modal-title" class="text-2xl font-bold text-purple-soft pr-8 mb-4"></h3>
-            <div id="modal-body" class="text-purple-soft/80 leading-relaxed text-base"></div>
-        </div>
-    </div>
-
-    <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="border-t border-purple-soft/10 pt-8">
-                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+<!-- Navigation -->
+<script defer="" src="/js/header.js"></script>
+<main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10"><div class="min-h-[50vh] flex items-center justify-center transition-opacity duration-300 opacity-0" data-page-content="true" id="dynamic-content">
+<div class="text-center">
+<div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-white/50"></div>
+<p class="mt-2 text-gray-400 text-sm">Загрузка контента...</p>
+</div>
+</div></main>
+<!-- FAQ Modal -->
+<div class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" id="faq-modal">
+<div class="modal-content bg-void-dark border border-purple-soft/20 rounded-2xl max-w-lg w-full p-8 relative shadow-2xl shadow-purple-deep/20">
+<button class="absolute top-4 right-4 text-purple-soft/60 hover:text-white transition-colors" id="modal-close">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<h3 class="text-2xl font-bold text-purple-soft pr-8 mb-4" id="modal-title"></h3>
+<div class="text-purple-soft/80 leading-relaxed text-base" id="modal-body"></div>
+</div>
+</div>
+<footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="border-t border-purple-soft/10 pt-8">
+<p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
                 </p>
-            </div>
-        </div>
-    </footer>
+</div>
+</div>
+</footer>
+<script src="script.js"></script>
 
-    <script src="script.js"></script>
-    <script>
-        // Ticket form submission
-        document.getElementById('ticket-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const submitBtn = document.getElementById('ticket-submit');
-            const messageEl = document.getElementById('ticket-message');
-            
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Отправка...';
-            messageEl.classList.add('hidden');
-
-            const data = {
-                username: document.getElementById('ticket-username').value.trim(),
-                email: document.getElementById('ticket-email').value.trim(),
-                category: document.getElementById('ticket-category').value,
-                subject: document.getElementById('ticket-subject').value.trim(),
-                description: document.getElementById('ticket-description').value.trim()
-            };
-
-            try {
-                const response = await fetch('/api/tickets', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    messageEl.textContent = '✅ Тикет успешно создан! Мы рассмотрим ваше обращение в ближайшее время.';
-                    messageEl.className = 'rounded-xl px-4 py-3 text-sm font-medium bg-green-500/20 text-green-400';
-                    document.getElementById('ticket-form').reset();
-                } else {
-                    messageEl.textContent = '❌ ' + (result.error || 'Ошибка при создании тикета');
-                    messageEl.className = 'rounded-xl px-4 py-3 text-sm font-medium bg-red-500/20 text-red-400';
-                }
-            } catch (error) {
-                messageEl.textContent = '❌ Ошибка соединения с сервером';
-                messageEl.className = 'rounded-xl px-4 py-3 text-sm font-medium bg-red-500/20 text-red-400';
-            } finally {
-                messageEl.classList.remove('hidden');
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Отправить обращение';
-            }
-        });
-
-        // FAQ toggle
-        const faqBtn = document.getElementById('faq-toggle-btn');
-        const faqContainer = document.getElementById('faq-container');
-        const faqArrow = document.getElementById('faq-arrow');
-
-        faqBtn.addEventListener('click', () => {
-            const isOpen = faqContainer.classList.contains('open');
-            if (isOpen) {
-                faqContainer.classList.remove('open');
-                faqArrow.style.transform = 'rotate(0deg)';
-            } else {
-                faqContainer.classList.add('open');
-                faqArrow.style.transform = 'rotate(180deg)';
-            }
-        });
-
-        // FAQ Modal
-        const modal = document.getElementById('faq-modal');
-        const modalTitle = document.getElementById('modal-title');
-        const modalBody = document.getElementById('modal-body');
-        const modalClose = document.getElementById('modal-close');
-
-        function openModal(question, answer) {
-            modalTitle.textContent = question;
-            modalBody.textContent = answer;
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        document.querySelectorAll('.faq-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const question = item.dataset.question;
-                const answer = item.dataset.answer;
-                openModal(question, answer);
-            });
-        });
-
-        modalClose.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                closeModal();
-            }
-        });
-    </script>
-</body>
-
+<script defer="" src="content-manager.js"></script></body>
 </html>

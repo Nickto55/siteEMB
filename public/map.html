@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth">
 
+<html class="scroll-smooth" lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Онлайн карта - EmbroMine</title>
-    <script src="/js/header.js" defer></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Онлайн карта - EmbroMine</title>
+<script defer="" src="/js/header.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="style.css" rel="stylesheet"/>
+<script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -37,119 +36,24 @@
         }
     </script>
 </head>
-
 <body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
-    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
-    <!-- Navigation -->
-    <script src="/js/header.js" defer></script>
-
-    <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-12">
-                <h1
-                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
-                    Онлайн карта
-                </h1>
-                <p class="text-xl text-purple-soft/60">Исследуйте мир EmbroMine</p>
-            </div>
-
-            <div class="bg-void-dark p-4 rounded-2xl border border-purple-soft/5 mb-8">
-                <div
-                    class="aspect-video bg-void-black rounded-xl flex items-center justify-center relative overflow-hidden border border-purple-soft/5">
-                    <div class="absolute inset-0 bg-gradient-to-br from-purple-deep/5 to-transparent">
-                        <iframe src="http://embromine.mc-play.org:20403/" width="100%" height="600px"></iframe>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
-                    <h3 class="text-lg font-bold mb-3 text-purple-soft">🗺️ Основной мир</h3>
-                    <p class="text-purple-soft/60 text-sm mb-4">Основной игровой мир с городами игроков, фермами и
-                        постройками.</p>
-                    <div class="flex items-center gap-2 text-sm text-purple-soft/50">
-                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-                        Размер: 10000x10000
-                    </div>
-                </div>
-
-                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
-                    <h3 class="text-lg font-bold mb-3 text-red-400">🔥 Незер</h3>
-                    <p class="text-purple-soft/60 text-sm mb-4">Мир Незера с фермами и базами игроков.</p>
-                    <div class="flex items-center gap-2 text-sm text-purple-soft/50">
-                        <span class="w-2 h-2 bg-red-500 rounded-full"></span>
-                        Размер: 5000x5000
-                    </div>
-                </div>
-
-                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
-                    <h3 class="text-lg font-bold mb-3 text-purple-400">🌌 Энд</h3>
-                    <p class="text-purple-soft/60 text-sm mb-4">Мир Энда с фермами эндерменов и городами эндеров.</p>
-                    <div class="flex items-center gap-2 text-sm text-purple-soft/50">
-                        <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
-                        Размер: 3000x3000
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-8 bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
-                <h3 class="text-lg font-bold mb-4 text-purple-soft">📍 Интересные места</h3>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="flex items-center gap-4 bg-void-black p-4 rounded-xl border border-purple-soft/5">
-                        <div class="w-10 h-10 bg-yellow-500/20 rounded-lg flex items-center justify-center">
-                            <span class="text-yellow-400">🏛️</span>
-                        </div>
-                        <div>
-                            <p class="font-semibold">Спавн</p>
-                            <p class="text-sm text-purple-soft/50">Центральная площадь сервера</p>
-                        </div>
-                        <span class="ml-auto text-sm text-purple-soft/50">0, 0</span>
-                    </div>
-                    <div class="flex items-center gap-4 bg-void-black p-4 rounded-xl border border-purple-soft/5">
-                        <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                            <span class="text-blue-400">🏪</span>
-                        </div>
-                        <div>
-                            <p class="font-semibold">Торговый район</p>
-                            <p class="text-sm text-purple-soft/50">Магазины игроков</p>
-                        </div>
-                        <span class="ml-auto text-sm text-purple-soft/50">150, -200</span>
-                    </div>
-                    <div class="flex items-center gap-4 bg-void-black p-4 rounded-xl border border-purple-soft/5">
-                        <div class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center">
-                            <span class="text-red-400">⚔️</span>
-                        </div>
-                        <div>
-                            <p class="font-semibold">PvP Арена</p>
-                            <p class="text-sm text-purple-soft/50">Место для сражений</p>
-                        </div>
-                        <span class="ml-auto text-sm text-purple-soft/50">-300, 150</span>
-                    </div>
-                    <div class="flex items-center gap-4 bg-void-black p-4 rounded-xl border border-purple-soft/5">
-                        <div class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
-                            <span class="text-green-400">🌾</span>
-                        </div>
-                        <div>
-                            <p class="font-semibold">Фермерский район</p>
-                            <p class="text-sm text-purple-soft/50">Авто-фермы</p>
-                        </div>
-                        <span class="ml-auto text-sm text-purple-soft/50">500, 500</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="border-t border-purple-soft/10 pt-8">
-                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+<!-- Navigation -->
+<script defer="" src="/js/header.js"></script>
+<main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10"><div class="min-h-[50vh] flex items-center justify-center transition-opacity duration-300 opacity-0" data-page-content="true" id="dynamic-content">
+<div class="text-center">
+<div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-white/50"></div>
+<p class="mt-2 text-gray-400 text-sm">Загрузка контента...</p>
+</div>
+</div></main>
+<footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="border-t border-purple-soft/10 pt-8">
+<p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
                 </p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-
+</div>
+</div>
+</footer>
+<script src="script.js"></script>
+<script defer="" src="content-manager.js"></script></body>
 </html>

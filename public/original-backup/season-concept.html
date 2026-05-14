@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Концепция сезона - EmbroMine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: {
+                            black: '#0a0810',
+                            dark: '#120a1a',
+                        },
+                        purple: {
+                            deep: '#6D28D9',
+                            royal: '#8B5CF6',
+                            neon: '#A855F7',
+                            soft: '#C4B5FD',
+                        },
+                        magenta: {
+                            glow: '#D946EF',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+    <!-- Navigation -->
+    <script src="/js/header.js" defer></script>
+
+    <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1
+                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
+                    Концепция сезона
+                </h1>
+                <p class="text-xl text-purple-soft/60">Текущий сезон: Заря Королевств</p>
+            </div>
+
+            <div class="space-y-8">
+                <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-2xl font-bold mb-4 text-purple-soft">📅 О сезоне</h2>
+                    <p class="text-purple-soft/70 leading-relaxed mb-4">
+                        Текущий сезон "Заря Королевств" посвящен средневековой эпохе с элементами фэнтези.
+                        Игроки могут создавать королевства, вести войны и заключать союзы.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 mt-6">
+                        <div class="bg-void-black p-4 rounded-xl border border-purple-soft/5">
+                            <p class="text-purple-soft/50 text-sm">Начало сезона</p>
+                            <p class="text-lg font-bold text-white">1 января 2026</p>
+                        </div>
+                        <div class="bg-void-black p-4 rounded-xl border border-purple-soft/5">
+                            <p class="text-purple-soft/50 text-sm">Планируемое окончание</p>
+                            <p class="text-lg font-bold text-white">Июнь 2026</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-2xl font-bold mb-4 text-purple-soft">🗺️ Особенности мира</h2>
+                    <ul class="space-y-3 text-purple-soft/70">
+                        <li class="flex items-start gap-3">
+                            <span class="text-purple-neon mt-1">•</span>
+                            <span>Кастомная генерация мира с уникальными биомами</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-purple-neon mt-1">•</span>
+                            <span>Редкие данжи с ценными сокровищами</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-purple-neon mt-1">•</span>
+                            <span>Особые ресурсы, доступные только в этом сезоне</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-purple-neon mt-1">•</span>
+                            <span>Сезонные ивенты с уникальными наградами</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-void-dark p-8 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-2xl font-bold mb-4 text-purple-soft">🏆 Сезонные достижения</h2>
+                    <p class="text-purple-soft/70 leading-relaxed mb-4">
+                        В конце сезона игроки с наибольшими достижениями получат особые награды
+                        и место в Зале Славы сервера:
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-void-black p-4 rounded-xl text-center border border-purple-soft/5">
+                            <p class="text-2xl mb-2">👑</p>
+                            <p class="font-bold text-white">Король сезона</p>
+                            <p class="text-sm text-purple-soft/50">Самое большое королевство</p>
+                        </div>
+                        <div class="bg-void-black p-4 rounded-xl text-center border border-purple-soft/5">
+                            <p class="text-2xl mb-2">💰</p>
+                            <p class="font-bold text-white">Магнат</p>
+                            <p class="text-sm text-purple-soft/50">Самый богатый игрок</p>
+                        </div>
+                        <div class="bg-void-black p-4 rounded-xl text-center border border-purple-soft/5">
+                            <p class="text-2xl mb-2">⚔️</p>
+                            <p class="font-bold text-white">Чемпион</p>
+                            <p class="text-sm text-purple-soft/50">Победитель PvP турнира</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-purple-soft/10 pt-8">
+                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

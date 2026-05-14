@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth">
 
+<html class="scroll-smooth" lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Инструкция - EmbroMine</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Инструкция - EmbroMine</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="style.css" rel="stylesheet"/>
+<script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -29,220 +28,55 @@
         }
     </script>
 </head>
-
 <body class="bg-mc-darker text-white font-sans antialiased overflow-x-hidden">
-    <!-- Floating Particles Background -->
-    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
-
-    <!-- Navigation -->
-    <script src="/js/header.js" defer></script>
-
-    <!-- Main Content -->
-    <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <!-- Header -->
-            <div class="text-center mb-16">
-                <h1
-                    class="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-white via-mc-greenLight to-mc-green bg-clip-text text-transparent">
-                    Инструкция для новичков
-                </h1>
-                <p class="text-xl text-gray-400">Пошаговое руководство для начинающих игроков</p>
-            </div>
-
-            <!-- О проекте -->
-            <div class="mb-16">
-                <div class="bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
-                    <h2 class="text-3xl font-bold mb-6 text-mc-greenLight">EmbroMine</h2>
-
-                    <div
-                        class="bg-gradient-to-r from-mc-green/10 to-cyan-400/10 border-l-4 border-mc-green p-6 rounded-lg mb-6">
-                        <p class="text-lg leading-relaxed mb-4">
-                            <strong>EmbroMine</strong> — Minecraft сервер для спонсоров. Доступ предоставляется в виде
-                            бонуса
-                            за подписку в Boosty, а не покупается!
-                        </p>
-                        <p class="text-lg leading-relaxed">
-                            Проект создан в формате "от спонсора спонсорам". Каждый участник может вступить в состав
-                            администрации, доказав ответственность и уважение к сообществу.
-                        </p>
-                    </div>
-
-                    <h3 class="text-2xl font-bold mb-8 text-center">Пошаговая инструкция</h3>
-                    <div class="grid md:grid-cols-3 gap-6">
-                        <div
-                            class="bg-mc-darker border border-white/5 rounded-xl p-6 hover:border-mc-green/30 transition-all duration-300 hover:transform hover:-translate-y-1">
-                            <div
-                                class="w-20 h-20 bg-gradient-to-br from-mc-green to-mc-greenLight rounded-2xl flex items-center justify-center mb-6 mx-auto text-3xl font-bold shadow-lg shadow-mc-green/20">
-                                1
-                            </div>
-                            <h4 class="text-xl font-bold mb-3 text-center">Получаем доступ</h4>
-                            <p class="text-gray-400 mb-4 text-center">Доступ к проекту имеется при наличии роли
-                                спонсорства Boosty в Discord</p>
-                            <div class="bg-white/5 rounded-lg p-4">
-                                <ul class="space-y-2 text-sm text-gray-400">
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-mc-greenLight">✓</span>
-                                        <span>Подпишитесь на Boosty</span>
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-mc-greenLight">✓</span>
-                                        <span>Получите роль спонсора в Discord</span>
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-mc-greenLight">✓</span>
-                                        <span>Получите доступ к серверу</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div
-                            class="bg-mc-darker border border-white/5 rounded-xl p-6 hover:border-cyan-400/30 transition-all duration-300 hover:transform hover:-translate-y-1">
-                            <div
-                                class="w-20 h-20 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mb-6 mx-auto text-3xl font-bold shadow-lg shadow-cyan-400/20">
-                                2
-                            </div>
-                            <h4 class="text-xl font-bold mb-3 text-center">Вход на сервер</h4>
-                            <p class="text-gray-400 mb-4 text-center">Для игры у вас должен быть установлен Minecraft и
-                                вы должны быть авторизованы в вайтлисте</p>
-                            <div class="bg-white/5 rounded-lg p-4">
-                                <ul class="space-y-2 text-sm text-gray-400">
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-cyan-400">✓</span>
-                                        <span>Установите Minecraft</span>
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-cyan-400">✓</span>
-                                        <span>Авторизуйтесь в вайтлисте</span>
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-cyan-400">✓</span>
-                                        <span>Подождите одобрения администрации</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div
-                            class="bg-mc-darker border border-white/5 rounded-xl p-6 hover:border-yellow-400/30 transition-all duration-300 hover:transform hover:-translate-y-1">
-                            <div
-                                class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mb-6 mx-auto text-3xl font-bold shadow-lg shadow-yellow-400/20">
-                                3
-                            </div>
-                            <h4 class="text-xl font-bold mb-3 text-center">Играем</h4>
-                            <p class="text-gray-400 mb-4 text-center">Соблюдаем правила, уважаем друг друга и вместе
-                                развиваем проект</p>
-                            <div class="bg-white/5 rounded-lg p-4">
-                                <ul class="space-y-2 text-sm text-gray-400">
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-yellow-400">✓</span>
-                                        <span>Ознакомьтесь с правилами</span>
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-yellow-400">✓</span>
-                                        <span>Уважайте остальных игроков</span>
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-yellow-400">✓</span>
-                                        <span>Развивайте сообщество</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div
-                        class="mt-8 bg-gradient-to-r from-red-500/10 to-orange-500/10 border-l-4 border-red-500 p-6 rounded-lg">
-                        <div class="flex items-start gap-3">
-                            <span class="text-2xl">⚠️</span>
-                            <div>
-                                <strong class="text-red-400 text-lg">Важно!</strong>
-                                <p class="text-gray-300 mt-1">Пункты не пропускать. Выполнять каждый пункт
-                                    последовательно!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Navigation Links -->
-            <div class="grid md:grid-cols-3 gap-6">
-                <a href="rules-overview.html"
-                    class="group bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl hover:border-mc-green/50 transition-all duration-300 hover:transform hover:-translate-y-1">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-mc-greenLight transition-colors">📖 Обзор правил
-                        </h3>
-                        <span class="text-2xl">→</span>
-                    </div>
-                    <p class="text-gray-400 text-sm">Основные принципы и категории</p>
-                </a>
-                <a href="rules-glossary.html"
-                    class="group bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl hover:border-mc-green/50 transition-all duration-300 hover:transform hover:-translate-y-1">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-mc-greenLight transition-colors">📚 Глоссарий</h3>
-                        <span class="text-2xl">→</span>
-                    </div>
-                    <p class="text-gray-400 text-sm">Словарь терминов и определений</p>
-                </a>
-                <a href="rules-admin.html"
-                    class="group bg-mc-dark/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl hover:border-mc-green/50 transition-all duration-300 hover:transform hover:-translate-y-1">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-bold group-hover:text-mc-greenLight transition-colors">👑 Администрация
-                        </h3>
-                        <span class="text-2xl">→</span>
-                    </div>
-                    <p class="text-gray-400 text-sm">Контакты и информация о команде</p>
-                </a>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-mc-dark border-t border-white/10 py-12 relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div class="col-span-2">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-8 h-8 bg-mc-green rounded-lg flex items-center justify-center">
-                            <span class="text-white text-lg font-bold">E</span>
-                        </div>
-                        <span class="text-lg font-bold">EmbroMine</span>
-                    </div>
-                    <p class="text-gray-500 text-sm leading-relaxed max-w-xs">
+<!-- Floating Particles Background -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+<!-- Navigation -->
+<script defer="" src="/js/header.js"></script>
+<!-- Main Content -->
+<main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10"><div class="min-h-[50vh] flex items-center justify-center transition-opacity duration-300 opacity-0" data-page-content="true" id="dynamic-content">
+<div class="text-center">
+<div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-white/50"></div>
+<p class="mt-2 text-gray-400 text-sm">Загрузка контента...</p>
+</div>
+</div></main>
+<!-- Footer -->
+<footer class="bg-mc-dark border-t border-white/10 py-12 relative z-10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid md:grid-cols-4 gap-8 mb-8">
+<div class="col-span-2">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-8 h-8 bg-mc-green rounded-lg flex items-center justify-center">
+<span class="text-white text-lg font-bold">E</span>
+</div>
+<span class="text-lg font-bold">EmbroMine</span>
+</div>
+<p class="text-gray-500 text-sm leading-relaxed max-w-xs">
                         Приватный Minecraft сервер для спонсоров проекта.
                     </p>
-                </div>
-
-                <div>
-                    <h4 class="font-bold mb-4 text-sm uppercase tracking-wider text-gray-400">Правила</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="rules-overview.html"
-                                class="text-gray-500 hover:text-mc-greenLight transition-colors">Обзор</a></li>
-                        <li><a href="rules-glossary.html"
-                                class="text-gray-500 hover:text-mc-greenLight transition-colors">Глоссарий</a></li>
-                        <li><a href="rules-guide.html"
-                                class="text-mc-greenLight hover:text-white transition-colors">Инструкция</a></li>
-                        <li><a href="rules-admin.html"
-                                class="text-gray-500 hover:text-mc-greenLight transition-colors">Администрация</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-bold mb-4 text-sm uppercase tracking-wider text-gray-400">Контакты</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li class="text-gray-500">support@embromine.ru</li>
-                        <li class="text-gray-500">24/7 Поддержка</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="border-t border-white/10 pt-8">
-                <p class="text-gray-600 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-
+</div>
+<div>
+<h4 class="font-bold mb-4 text-sm uppercase tracking-wider text-gray-400">Правила</h4>
+<ul class="space-y-2 text-sm">
+<li><a class="text-gray-500 hover:text-mc-greenLight transition-colors" href="rules-overview.html">Обзор</a></li>
+<li><a class="text-gray-500 hover:text-mc-greenLight transition-colors" href="rules-glossary.html">Глоссарий</a></li>
+<li><a class="text-mc-greenLight hover:text-white transition-colors" href="rules-guide.html">Инструкция</a></li>
+<li><a class="text-gray-500 hover:text-mc-greenLight transition-colors" href="rules-admin.html">Администрация</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4 text-sm uppercase tracking-wider text-gray-400">Контакты</h4>
+<ul class="space-y-2 text-sm">
+<li class="text-gray-500">support@embromine.ru</li>
+<li class="text-gray-500">24/7 Поддержка</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-white/10 pt-8">
+<p class="text-gray-600 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.</p>
+</div>
+</div>
+</footer>
+<script src="script.js"></script>
+<script defer="" src="content-manager.js"></script></body>
 </html>

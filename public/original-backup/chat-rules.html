@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правила общения - EmbroMine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: {
+                            black: '#0a0810',
+                            dark: '#120a1a',
+                        },
+                        purple: {
+                            deep: '#6D28D9',
+                            royal: '#8B5CF6',
+                            neon: '#A855F7',
+                            soft: '#C4B5FD',
+                        },
+                        magenta: {
+                            glow: '#D946EF',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+    <!-- Navigation -->
+    <script src="/js/header.js" defer></script>
+
+    <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1
+                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
+                    Правила общения
+                </h1>
+                <p class="text-xl text-purple-soft/60">Нормы поведения в чате</p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span
+                            class="w-8 h-8 bg-yellow-500/20 text-yellow-400 rounded-lg flex items-center justify-center font-bold">1</span>
+                        <h2 class="text-xl font-bold text-white">Уважительное общение</h2>
+                    </div>
+                    <p class="text-purple-soft/70 leading-relaxed pl-11">
+                        Общайтесь уважительно с другими игроками. Оскорбления, унижение и агрессивное поведение не
+                        допускаются.
+                        Наказание: мут от 30 минут до 24 часов.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span
+                            class="w-8 h-8 bg-yellow-500/20 text-yellow-400 rounded-lg flex items-center justify-center font-bold">2</span>
+                        <h2 class="text-xl font-bold text-white">Запрет на спам</h2>
+                    </div>
+                    <p class="text-purple-soft/70 leading-relaxed pl-11">
+                        Запрещено отправлять одинаковые сообщения многократно, флудить капсом или символами.
+                        Наказание: мут от 15 минут до 2 часов.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span
+                            class="w-8 h-8 bg-yellow-500/20 text-yellow-400 rounded-lg flex items-center justify-center font-bold">3</span>
+                        <h2 class="text-xl font-bold text-white">Запрет на рекламу</h2>
+                    </div>
+                    <p class="text-purple-soft/70 leading-relaxed pl-11">
+                        Запрещена реклама других серверов, сайтов, каналов без разрешения администрации.
+                        Наказание: мут от 24 часов до перманентного бана.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span
+                            class="w-8 h-8 bg-yellow-500/20 text-yellow-400 rounded-lg flex items-center justify-center font-bold">4</span>
+                        <h2 class="text-xl font-bold text-white">Запрет на токсичность</h2>
+                    </div>
+                    <p class="text-purple-soft/70 leading-relaxed pl-11">
+                        Запрещены провокации, троллинг, разжигание конфликтов и токсичное поведение.
+                        Наказание: мут от 2 часов до бана на 3 дня.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span
+                            class="w-8 h-8 bg-yellow-500/20 text-yellow-400 rounded-lg flex items-center justify-center font-bold">5</span>
+                        <h2 class="text-xl font-bold text-white">Запрет на NSFW контент</h2>
+                    </div>
+                    <p class="text-purple-soft/70 leading-relaxed pl-11">
+                        Запрещено отправлять неприемлемый, шокирующий или откровенный контент.
+                        Наказание: бан от 7 до 30 дней.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span
+                            class="w-8 h-8 bg-yellow-500/20 text-yellow-400 rounded-lg flex items-center justify-center font-bold">6</span>
+                        <h2 class="text-xl font-bold text-white">Язык общения</h2>
+                    </div>
+                    <p class="text-purple-soft/70 leading-relaxed pl-11">
+                        Основной язык сервера — русский. Допускается использование английского.
+                        Использование других алфавитов в больших объемах не рекомендуется.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-purple-soft/10 pt-8">
+                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

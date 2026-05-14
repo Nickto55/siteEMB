@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глоссарий - EmbroMine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: {
+                            black: '#0a0810',
+                            dark: '#120a1a',
+                        },
+                        purple: {
+                            deep: '#6D28D9',
+                            royal: '#8B5CF6',
+                            neon: '#A855F7',
+                            soft: '#C4B5FD',
+                        },
+                        magenta: {
+                            glow: '#D946EF',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+    <!-- Navigation -->
+    <script src="/js/header.js" defer></script>
+
+    <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1
+                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
+                    Глоссарий
+                </h1>
+                <p class="text-xl text-purple-soft/60">Словарь терминов и определений</p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Гриферство</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Разрушение чужих построек, убийство животных или питомцев других игроков без разрешения.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Чит (Cheat)</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Несанкционированное программное обеспечение, дающее игроку нечестное преимущество (X-Ray, Fly,
+                        SpeedHack и т.д.).
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Флуд / Спам</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Отправка одинаковых сообщений многократно, чрезмерное использование капса или символов в чате.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">PvP</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Player vs Player — сражение между игроками.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Spawn-killing</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Убийство игрока сразу после его возрождения на спавне.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Мут</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Временное ограничение возможности отправлять сообщения в чат как наказание за нарушения.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Бан</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Блокировка доступа к серверу как наказание за серьезные нарушения правил.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Эксплойт</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Использование багов или ошибок игры для получения нечестного преимущества.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Токсичность</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Негативное, агрессивное или провокационное поведение, создающее неприятную атмосферу.
+                    </p>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h3 class="text-lg font-bold text-purple-soft mb-2">Апелляция</h3>
+                    <p class="text-purple-soft/70 text-sm leading-relaxed">
+                        Обращение к администрации с просьбой пересмотреть выданное наказание.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-purple-soft/10 pt-8">
+                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

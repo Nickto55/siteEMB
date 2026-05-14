@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; 
+        script-src-elem 'self' 'unsafe-inline' https://cdn.tailwindcss.com; 
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; 
+        style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; 
+        font-src 'self' https://fonts.gstatic.com; 
+        img-src 'self' data:;
+    ">
+
+    <title>EmbroMine - Minecraft Сервер для спонсоров</title>
+
+    <link rel="icon" href="/static/photo_2026-03-01_23-30-45.jpg" type="image/jpeg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: {
+                            black: '#0a0810',
+                            dark: '#120a1a',
+                        },
+                        purple: {
+                            deep: '#6D28D9',
+                            royal: '#8B5CF6',
+                            neon: '#A855F7',
+                            soft: '#C4B5FD',
+                        },
+                        'magenta-glow': '#D946EF',
+                        'magenta-glow2': '#ffb347',
+                        'magenta-glow3': '#FFD700',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+
+    <script src="/js/header.js" defer></script>
+
+
+    <main>
+        <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-void-dark via-void-black to-void-black"></div>
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-deep/15 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-magenta-glow/12 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+                    <span
+                        class="bg-gradient-to-r from-purple-soft via-magenta-glow to-purple-neon bg-clip-text text-transparent">
+                        EmbroMine
+                    </span>
+                </h1>
+
+                <p class="text-xl md:text-2xl text-purple-soft/70 mb-8 max-w-2xl mx-auto">
+                    Приватный Minecraft сервер для спонсоров с уникальными механиками и дружелюбным комьюнити
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button id="copy-ip-btn"
+                        class="group relative px-8 py-4 bg-gradient-to-r from-purple-deep via-magenta-glow to-purple-neon hover:from-purple-royal hover:via-purple-soft hover:to-magenta-glow text-white font-bold rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-magenta-glow/25">
+                        play.embromine.ru
+                    </button>
+                    <a href="how-to-join.html"
+                        class="px-8 py-4 bg-void-dark/70 hover:bg-void-dark/90 border border-purple-royal/30 text-purple-soft font-semibold rounded-xl transition-all shadow-lg shadow-purple-royal/10">
+                        Как подключиться
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-void-dark border-t border-purple-soft/10 py-12 text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="text-purple-soft/40 text-sm">© 2026 EmbroMine. Not affiliated with Mojang Studios.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

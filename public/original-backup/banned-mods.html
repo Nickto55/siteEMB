@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запрещенные моды - EmbroMine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: {
+                            black: '#0a0810',
+                            dark: '#120a1a',
+                        },
+                        purple: {
+                            deep: '#6D28D9',
+                            royal: '#8B5CF6',
+                            neon: '#A855F7',
+                            soft: '#C4B5FD',
+                        },
+                        magenta: {
+                            glow: '#D946EF',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="particles"></div>
+    <!-- Navigation -->
+    <script src="/js/header.js" defer></script>
+
+    <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1
+                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-soft to-purple-neon bg-clip-text text-transparent">
+                    Запрещенные моды
+                </h1>
+                <p class="text-xl text-purple-soft/60">Список запрещенных модификаций</p>
+            </div>
+
+            <div class="bg-red-500/10 border border-red-500/30 p-6 rounded-2xl mb-8">
+                <p class="text-red-300 text-center">
+                    <strong>⚠️ Важно:</strong> Использование любого из перечисленных модов приведет к перманентному
+                    бану.
+                    <br>Если вы сомневаетесь в разрешенности мода — спросите в поддержке.
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-xl font-bold mb-4 text-red-400">❌ Читы и хаки</h2>
+                    <ul class="space-y-2 text-purple-soft/70">
+                        <li class="flex items-center gap-2"><span class="text-red-500">•</span> X-Ray (любые
+                            модификации)</li>
+                        <li class="flex items-center gap-2"><span class="text-red-500">•</span> Fly / Freecam</li>
+                        <li class="flex items-center gap-2"><span class="text-red-500">•</span> SpeedHack / Jesus</li>
+                        <li class="flex items-center gap-2"><span class="text-red-500">•</span> KillAura / AutoClicker
+                        </li>
+                        <li class="flex items-center gap-2"><span class="text-red-500">•</span> ESP / WallHack</li>
+                        <li class="flex items-center gap-2"><span class="text-red-500">•</span> AutoFish / AutoFarm</li>
+                        <li class="flex items-center gap-2"><span class="text-red-500">•</span> Scaffold / FastPlace
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-xl font-bold mb-4 text-red-400">❌ Макросы и боты</h2>
+                    <ul class="space-y-2 text-purple-soft/70">
+                        <li class="flex items-center gap-2"><span class="text-red-500">•</span> Любые макросы на
+                            мыши/клавиатуре</li>
+                        <li class="flex items-center gap-2"><span class="text-red-500">•</span> AutoHotkey скрипты</li>
+                        <li class="flex items-center gap-2"><span class="text-red-500">•</span> Боты и автокликеры</li>
+                        <li class="flex items-center gap-2"><span class="text-red-500">•</span> Click Assist</li>
+                    </ul>
+                </div>
+
+                <div class="bg-void-dark p-6 rounded-2xl border border-purple-soft/5">
+                    <h2 class="text-xl font-bold mb-4 text-red-400">❌ Эксплойты</h2>
+                    <ul class="space-y-2 text-purple-soft/70">
+                        <li class="flex items-center gap-2"><span class="text-red-500">•</span> Duping моды</li>
+                        <li class="flex items-center gap-2"><span class="text-red-500">•</span> Crash моды</li>
+                        <li class="flex items-center gap-2"><span class="text-red-500">•</span> Lag моды</li>
+                        <li class="flex items-center gap-2"><span class="text-red-500">•</span> Book Hack</li>
+                    </ul>
+                </div>
+
+                <div class="bg-green-500/10 border border-green-500/30 p-6 rounded-2xl">
+                    <h2 class="text-xl font-bold mb-4 text-green-400">✅ Разрешенные моды</h2>
+                    <ul class="space-y-2 text-purple-soft/70">
+                        <li class="flex items-center gap-2"><span class="text-green-500">•</span> OptiFine / Sodium</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">•</span> MiniMap (без radar
+                            игроков)</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">•</span> JEI / REI</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">•</span> ShulkerBoxTooltip</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">•</span> Inventory Profiles
+                        </li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">•</span> Litematica (без
+                            принтера)</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">•</span> Tweakeroo (без
+                            чит-функций)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-purple-soft/10 pt-8">
+                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
