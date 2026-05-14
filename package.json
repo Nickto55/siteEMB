@@ -6,6 +6,10 @@
     "scripts": {
         "start": "node server.js",
         "dev": "node server.js",
+        "setup": "node scripts/setup.js",
+        "setup:fresh": "node scripts/setup.js --fresh",
+        "setup:migrate": "node scripts/setup.js --migrate-only",
+        "setup:content": "node scripts/setup.js --init-content",
         "init-content": "node scripts/initialize-content.js",
         "check-db": "node scripts/check-db.js"
     },

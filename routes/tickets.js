@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db');
 const { authenticateToken, requireAdmin } = require('../middleware/auth');
+const { Logger } = require('../utils/logger');
+const logger = new Logger('Tickets');
 
 // POST /api/tickets - Создать новый тикет (доступно всем, без авторизации)
 router.post('/', async (req, res) => {
@@ -37,7 +39,7 @@ router.post('/', async (req, res) => {
             ticket: result.rows[0]
         });
     } catch (error) {
-        console.error('Ошибка при создании тикета:', error);
+        logger.error('Ошибка при создании тикета', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера при создании тикета' });
     }
 });
@@ -75,7 +77,7 @@ router.get('/', authenticateToken, requireAdmin, async (req, res) => {
             count: result.rows.length
         });
     } catch (error) {
-        console.error('Ошибка при получении тикетов:', error);
+        logger.error('Ошибка при получении тикетов', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера при получении тикетов' });
     }
 });
@@ -99,7 +101,7 @@ router.get('/:id', authenticateToken, requireAdmin, async (req, res) => {
 
         res.json({ ticket: result.rows[0] });
     } catch (error) {
-        console.error('Ошибка при получении тикета:', error);
+        logger.error('Ошибка при получении тикета', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера' });
     }
 });
@@ -143,7 +145,7 @@ router.put('/:id/status', authenticateToken, requireAdmin, async (req, res) => {
             ticket: result.rows[0]
         });
     } catch (error) {
-        console.error('Ошибка при обновлении статуса тикета:', error);
+        logger.error('Ошибка при обновлении статуса тикета', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера при обновлении статуса' });
     }
 });
@@ -173,7 +175,7 @@ router.put('/:id/priority', authenticateToken, requireAdmin, async (req, res) =>
             ticket: result.rows[0]
         });
     } catch (error) {
-        console.error('Ошибка при обновлении приоритета:', error);
+        logger.error('Ошибка при обновлении приоритета', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера при обновлении приоритета' });
     }
 });
@@ -192,7 +194,7 @@ router.delete('/:id', authenticateToken, requireAdmin, async (req, res) => {
 
         res.json({ message: 'Тикет успешно удален' });
     } catch (error) {
-        console.error('Ошибка при удалении тикета:', error);
+        logger.error('Ошибка при удалении тикета', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера при удалении тикета' });
     }
 });

@@ -1,5 +1,7 @@
 const { Pool } = require('pg');
 require('dotenv').config();
+const { Logger } = require('./utils/logger');
+const logger = new Logger('DB');
 
 const pool = new Pool({
     host: 'db_site-emb',
@@ -9,13 +11,12 @@ const pool = new Pool({
     database: 'app_db',
 });
 
-module.exports = pool;
 pool.on('connect', () => {
-    console.log('✓ Подключение к базе данных PostgreSQL установлено');
+    logger.info('Подключение к базе данных PostgreSQL установлено');
 });
 
 pool.on('error', (err) => {
-    console.error('Ошибка подключения к БД:', err);
+    logger.error('Ошибка подключения к БД:', { error: err.message });
     process.exit(-1);
 });
 

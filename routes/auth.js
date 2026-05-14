@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const pool = require('../db');
+const { Logger } = require('../utils/logger');
+const logger = new Logger('Auth');
 
 // Валидация email
 const isValidEmail = (email) => {
@@ -13,32 +15,32 @@ const isValidEmail = (email) => {
 // POST /api/auth/register - Регистрация нового пользователя
 router.post('/register', async (req, res) => {
     try {
-        console.log('📝 Попытка регистрации:', req.body);
+        logger.info('Попытка регистрации', { username: req.body.username });
 
         const { username, email, password } = req.body;
 
         // Валидация входных данных
         if (!username || !email || !password) {
-            console.log('❌ Отсутствуют обязательные поля');
+            logger.warn('Отсутствуют обязательные поля при регистрации');
             return res.status(400).json({ error: 'Все поля обязательны' });
         }
 
         if (username.length < 3) {
-            console.log('❌ Имя пользователя слишком короткое');
+            logger.warn('Имя пользователя слишком короткое');
             return res.status(400).json({ error: 'Имя пользователя должно быть минимум 3 символа' });
         }
 
         if (!isValidEmail(email)) {
-            console.log('❌ Некорректный email:', email);
+            logger.warn('Некорректный email', { email });
             return res.status(400).json({ error: 'Некорректный email' });
         }
 
         if (password.length < 6) {
-            console.log('❌ Пароль слишком короткий');
+            logger.warn('Пароль слишком короткий');
             return res.status(400).json({ error: 'Пароль должен быть минимум 6 символов' });
         }
 
-        console.log('🔍 Проверка существования пользователя...');
+        logger.debug('Проверка существования пользователя...');
 
         // Проверка существования пользователя
         const existingUser = await pool.query(
@@ -47,16 +49,16 @@ router.post('/register', async (req, res) => {
         );
 
         if (existingUser.rows.length > 0) {
-            console.log('❌ Пользователь уже существует');
+            logger.warn('Попытка регистрации существующего пользователя', { username, email });
             return res.status(409).json({ error: 'Пользователь с таким именем или email уже существует' });
         }
 
-        console.log('🔐 Хеширование пароля...');
+        logger.debug('Хеширование пароля...');
 
         // Хеширование пароля (salt rounds = 10)
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        console.log('💾 Создание пользователя...');
+        logger.debug('Создание пользователя...');
 
         // Создание пользователя (роль по умолчанию - user)
         const result = await pool.query(
@@ -66,7 +68,7 @@ router.post('/register', async (req, res) => {
 
         const user = result.rows[0];
 
-        console.log('✅ Пользователь успешно зарегистрирован:', user.username);
+        logger.info('Пользователь успешно зарегистрирован', { username: user.username, id: user.id });
 
         res.status(201).json({
             message: 'Пользователь успешно зарегистрирован',
@@ -79,7 +81,7 @@ router.post('/register', async (req, res) => {
             }
         });
     } catch (error) {
-        console.error('❌ Ошибка при регистрации:', error);
+        logger.error('Ошибка при регистрации', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера при регистрации' });
     }
 });
@@ -87,17 +89,17 @@ router.post('/register', async (req, res) => {
 // POST /api/auth/login - Вход в систему
 router.post('/login', async (req, res) => {
     try {
-        console.log('🔑 Попытка входа:', req.body);
+        logger.info('Попытка входа', { username: req.body.username });
 
         const { username, password } = req.body;
 
         // Валидация входных данных
         if (!username || !password) {
-            console.log('❌ Отсутствуют логин или пароль');
+            logger.warn('Отсутствуют логин или пароль');
             return res.status(400).json({ error: 'Имя пользователя и пароль обязательны' });
         }
 
-        console.log('🔍 Поиск пользователя...');
+        logger.debug('Поиск пользователя...');
 
         // Поиск пользователя
         const result = await pool.query(
@@ -106,22 +108,22 @@ router.post('/login', async (req, res) => {
         );
 
         if (result.rows.length === 0) {
-            console.log('❌ Пользователь не найден');
+            logger.warn('Пользователь не найден', { username });
             return res.status(401).json({ error: 'Неверные учетные данные' });
         }
 
         const user = result.rows[0];
 
-        console.log('🔐 Проверка пароля...');
+        logger.debug('Проверка пароля...');
 
         // Проверка пароля
         const isValidPassword = await bcrypt.compare(password, user.password);
         if (!isValidPassword) {
-            console.log('❌ Неверный пароль');
+            logger.warn('Неверный пароль', { username });
             return res.status(401).json({ error: 'Неверные учетные данные' });
         }
 
-        console.log('📅 Обновление last_login...');
+        logger.debug('Обновление last_login...');
 
         // Обновление last_login
         await pool.query(
@@ -129,7 +131,7 @@ router.post('/login', async (req, res) => {
             [user.id]
         );
 
-        console.log('🎫 Генерация токена...');
+        logger.debug('Генерация токена...');
 
         // Генерация JWT токена
         const token = jwt.sign(
@@ -138,7 +140,7 @@ router.post('/login', async (req, res) => {
             { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
         );
 
-        console.log('✅ Вход выполнен успешно:', user.username);
+        logger.info('Вход выполнен успешно', { username: user.username, id: user.id });
 
         res.json({
             message: 'Успешный вход',
@@ -151,7 +153,7 @@ router.post('/login', async (req, res) => {
             }
         });
     } catch (error) {
-        console.error('❌ Ошибка при входе:', error);
+        logger.error('Ошибка при входе', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера при входе' });
     }
 });
@@ -184,7 +186,7 @@ router.get('/me', async (req, res) => {
         if (error.name === 'JsonWebTokenError') {
             return res.status(401).json({ error: 'Недействительный токен' });
         }
-        console.error('Ошибка при получении данных пользователя:', error);
+        logger.error('Ошибка при получении данных пользователя', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера' });
     }
 });
@@ -250,7 +252,7 @@ router.put('/profile', async (req, res) => {
         if (error.name === 'JsonWebTokenError') {
             return res.status(401).json({ error: 'Недействительный токен' });
         }
-        console.error('Ошибка при обновлении профиля:', error);
+        logger.error('Ошибка при обновлении профиля', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера' });
     }
 });
@@ -309,7 +311,7 @@ router.put('/change-password', async (req, res) => {
         if (error.name === 'JsonWebTokenError') {
             return res.status(401).json({ error: 'Недействительный токен' });
         }
-        console.error('Ошибка при изменении пароля:', error);
+        logger.error('Ошибка при изменении пароля', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера' });
     }
 });

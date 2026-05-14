@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db');
 const { authenticateToken } = require('../middleware/auth');
+const { Logger } = require('../utils/logger');
+const logger = new Logger('Reports');
 
 // Все роуты требуют аутентификации
 router.use(authenticateToken);
@@ -34,7 +36,7 @@ router.get('/', async (req, res) => {
             count: result.rows.length
         });
     } catch (error) {
-        console.error('Ошибка при получении отчетов:', error);
+        logger.error('Ошибка при получении отчетов', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера при получении отчетов' });
     }
 });
@@ -58,7 +60,7 @@ router.get('/:id', async (req, res) => {
 
         res.json({ report: result.rows[0] });
     } catch (error) {
-        console.error('Ошибка при получении отчета:', error);
+        logger.error('Ошибка при получении отчета', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера' });
     }
 });
@@ -94,7 +96,7 @@ router.post('/', async (req, res) => {
             report: result.rows[0]
         });
     } catch (error) {
-        console.error('Ошибка при создании отчета:', error);
+        logger.error('Ошибка при создании отчета', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера при создании отчета' });
     }
 });
@@ -168,7 +170,7 @@ router.put('/:id', async (req, res) => {
             report: result.rows[0]
         });
     } catch (error) {
-        console.error('Ошибка при обновлении отчета:', error);
+        logger.error('Ошибка при обновлении отчета', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера при обновлении отчета' });
     }
 });
@@ -196,7 +198,7 @@ router.delete('/:id', async (req, res) => {
 
         res.json({ message: 'Отчет успешно удален' });
     } catch (error) {
-        console.error('Ошибка при удалении отчета:', error);
+        logger.error('Ошибка при удалении отчета', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера при удалении отчета' });
     }
 });

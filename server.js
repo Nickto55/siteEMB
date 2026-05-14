@@ -4,6 +4,9 @@ const path = require('path');
 const helmet = require('helmet');
 const cors = require('cors');
 const pool = require('./db');
+const { Logger } = require('./utils/logger');
+
+const logger = new Logger('Server');
 
 // Импорт роутов
 const authRoutes = require('./routes/auth');
@@ -11,6 +14,7 @@ const adminRoutes = require('./routes/admin');
 const reportsRoutes = require('./routes/reports');
 const contentRoutes = require('./routes/content');
 const ticketsRoutes = require('./routes/tickets');
+const setupRoutes = require('./routes/setup');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -46,15 +50,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/static', express.static(path.join(__dirname, 'static')));
 
 // Логирование запросов
-app.use((req, res, next) => {
-    console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
-    next();
-});
+app.use(Logger.requestLogger);
 
 // Health check endpoint
 app.get('/health', async (req, res) => {
     try {
-        // Проверка подключения к БД
         await pool.query('SELECT 1');
         res.json({
             status: 'ok',
@@ -62,6 +62,7 @@ app.get('/health', async (req, res) => {
             database: 'connected'
         });
     } catch (error) {
+        logger.error('Health check failed', { error: error.message });
         res.status(503).json({
             status: 'error',
             timestamp: new Date().toISOString(),
@@ -77,6 +78,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/reports', reportsRoutes);
 app.use('/api/content', contentRoutes);
 app.use('/api/tickets', ticketsRoutes);
+app.use('/api/setup', setupRoutes);
 
 // API информация
 app.get('/api', (req, res) => {
@@ -87,13 +89,25 @@ app.get('/api', (req, res) => {
             health: '/health',
             auth: {
                 register: 'POST /api/auth/register',
-                login: 'POST /api/auth/login'
+                login: 'POST /api/auth/login',
+                me: 'GET /api/auth/me',
+                profile: 'PUT /api/auth/profile',
+                changePassword: 'PUT /api/auth/change-password'
             },
             admin: {
-                getUsers: 'GET /api/admin/users',
+                stats: 'GET /api/admin/stats',
+                users: 'GET /api/admin/users',
+                logs: 'GET /api/admin/logs',
                 getUser: 'GET /api/admin/users/:id',
                 updateRole: 'PUT /api/admin/users/:id/role',
                 deleteUser: 'DELETE /api/admin/users/:id'
+            },
+            setup: {
+                check: 'POST /api/setup/check',
+                migrate: 'POST /api/setup/migrate',
+                initContent: 'POST /api/setup/init-content',
+                createAdmin: 'POST /api/setup/create-admin',
+                full: 'POST /api/setup/full'
             },
             tickets: {
                 create: 'POST /api/tickets',
@@ -109,6 +123,14 @@ app.get('/api', (req, res) => {
                 create: 'POST /api/reports',
                 update: 'PUT /api/reports/:id',
                 delete: 'DELETE /api/reports/:id'
+            },
+            content: {
+                getPage: 'GET /api/content/:pageName',
+                getAll: 'GET /api/content/admin/all',
+                update: 'PUT /api/content/:pageName',
+                create: 'POST /api/content/page',
+                delete: 'DELETE /api/content/:pageName',
+                history: 'GET /api/content/:pageName/history'
             }
         }
     });
@@ -125,8 +147,12 @@ app.use((req, res) => {
 });
 
 // Обработчик ошибок
+app.use(Logger.errorLogger);
 app.use((err, req, res, next) => {
-    console.error('Ошибка сервера:', err.stack);
+    logger.error('Внутренняя ошибка сервера', {
+        error: err.message,
+        stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+    });
     res.status(500).json({
         error: 'Внутренняя ошибка сервера',
         message: process.env.NODE_ENV === 'development' ? err.message : undefined
@@ -135,31 +161,41 @@ app.use((err, req, res, next) => {
 
 // Запуск сервера
 const server = app.listen(PORT, () => {
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.log('🚀 Сервер запущен');
-    console.log(`📍 Порт: ${PORT}`);
-    console.log(`🌐 URL: http://localhost:${PORT}`);
-    console.log(`🔒 Окружение: ${process.env.NODE_ENV || 'development'}`);
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    logger.info('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    logger.info('🚀 Сервер запущен');
+    logger.info(`📍 Порт: ${PORT}`);
+    logger.info(`🌐 URL: http://localhost:${PORT}`);
+    logger.info(`🔒 Окружение: ${process.env.NODE_ENV || 'development'}`);
+    logger.info('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 });
 
 // Корректное завершение
 process.on('SIGTERM', () => {
-    console.log('SIGTERM получен, закрываем сервер...');
+    logger.info('SIGTERM получен, закрываем сервер...');
     server.close(() => {
-        console.log('Сервер закрыт');
+        logger.info('Сервер закрыт');
         pool.end();
         process.exit(0);
     });
 });
 
 process.on('SIGINT', () => {
-    console.log('\nSIGINT получен, закрываем сервер...');
+    logger.info('SIGINT получен, закрываем сервер...');
     server.close(() => {
-        console.log('Сервер закрыт');
+        logger.info('Сервер закрыт');
         pool.end();
         process.exit(0);
     });
+});
+
+// Обработка необработанных ошибок
+process.on('uncaughtException', (err) => {
+    logger.fatal('Необработанное исключение', { error: err.message, stack: err.stack });
+    process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    logger.fatal('Необработанный reject', { reason });
 });
 
 module.exports = app;

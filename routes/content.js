@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db');
 const { authenticateToken, requireAdmin } = require('../middleware/auth');
+const { Logger } = require('../utils/logger');
+const logger = new Logger('Content');
 
 // GET /api/content/:pageName - Получить контент страницы (публичный доступ)
 router.get('/:pageName', async (req, res) => {
@@ -22,7 +24,7 @@ router.get('/:pageName', async (req, res) => {
             data: result.rows[0]
         });
     } catch (error) {
-        console.error('Ошибка при получении контента:', error);
+        logger.error('Ошибка при получении контента', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера при получении контента' });
     }
 });
@@ -59,7 +61,7 @@ router.get('/:pageName/history', authenticateToken, requireAdmin, async (req, re
             data: result.rows
         });
     } catch (error) {
-        console.error('Ошибка при получении истории:', error);
+        logger.error('Ошибка при получении истории', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера' });
     }
 });
@@ -123,7 +125,7 @@ router.put('/:pageName', authenticateToken, requireAdmin, async (req, res) => {
             client.release();
         }
     } catch (error) {
-        console.error('Ошибка при обновлении контента:', error);
+        logger.error('Ошибка при обновлении контента', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера при обновлении контента' });
     }
 });
@@ -153,7 +155,7 @@ router.post('/page', authenticateToken, requireAdmin, async (req, res) => {
         if (error.code === '23505') { // Unique constraint violation
             return res.status(400).json({ error: 'Страница с таким названием уже существует' });
         }
-        console.error('Ошибка при создании страницы:', error);
+        logger.error('Ошибка при создании страницы', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера при создании страницы' });
     }
 });
@@ -177,7 +179,7 @@ router.delete('/:pageName', authenticateToken, requireAdmin, async (req, res) =>
             message: 'Страница успешно удалена'
         });
     } catch (error) {
-        console.error('Ошибка при удалении страницы:', error);
+        logger.error('Ошибка при удалении страницы', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера при удалении страницы' });
     }
 });
@@ -194,7 +196,7 @@ router.get('/admin/all', authenticateToken, requireAdmin, async (req, res) => {
             data: result.rows
         });
     } catch (error) {
-        console.error('Ошибка при получении страниц:', error);
+        logger.error('Ошибка при получении страниц', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера' });
     }
 });
