@@ -11,6 +11,7 @@
         "setup:migrate": "node scripts/setup.js --migrate-only",
         "setup:content": "node scripts/setup.js --init-content",
         "init-content": "node scripts/initialize-content.js",
+        "fix-schema": "node scripts/apply-fix-schema.js",
         "check-db": "node scripts/check-db.js"
     },
     "keywords": [

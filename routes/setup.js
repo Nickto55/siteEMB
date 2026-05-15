@@ -10,6 +10,26 @@ const logger = new Logger('SetupAPI');
 router.use(authenticateToken);
 router.use(requireAdmin);
 
+// GET /api/setup/check - Проверить статус системы (для админ-панели)
+router.get('/check', async (req, res) => {
+    try {
+        const engine = new SetupEngine();
+        const envCheck = await engine.checkEnv();
+        const dbCheck = await engine.checkDbConnection();
+
+        res.json({
+            success: true,
+            env: envCheck,
+            database: dbCheck,
+            ready: envCheck.ok && dbCheck.ok,
+            logs: engine.logs
+        });
+    } catch (error) {
+        logger.error('Ошибка проверки системы', { error: error.message });
+        res.status(500).json({ error: 'Ошибка сервера', details: error.message });
+    }
+});
+
 // POST /api/setup/check - Проверить статус системы
 router.post('/check', async (req, res) => {
     try {
