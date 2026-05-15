@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Статус тикета - EmbroMine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="style.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: { black: '#0a0810', dark: '#120a1a' },
+                        purple: { deep: '#6D28D9', royal: '#8B5CF6', neon: '#A855F7', soft: '#C4B5FD' },
+                        magenta: { glow: '#D946EF' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .ticket-card { animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-void-black text-white font-sans antialiased overflow-x-hidden">
+    <script defer="" src="/js/header.js"></script>
+    <main class="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-xl mx-auto">
+            <div class="text-center mb-10">
+                <h1 class="text-3xl md:text-4xl font-bold text-purple-soft mb-3">Статус обращения</h1>
+                <p class="text-purple-soft/60 text-sm">Введите номер тикета и email, указанный при создании</p>
+            </div>
+
+            <div class="bg-void-dark border border-purple-soft/10 rounded-2xl p-6 md:p-8 shadow-xl shadow-purple-deep/10">
+                <form id="check-form" class="space-y-4">
+                    <div>
+                        <label class="block text-purple-soft/80 text-sm font-medium mb-1">Номер тикета</label>
+                        <input type="number" id="ticket-id" class="w-full bg-void-black border border-purple-soft/20 rounded-lg px-4 py-3 text-white placeholder-purple-soft/30 focus:outline-none focus:border-purple-royal transition-colors" placeholder="Например: 12" required>
+                    </div>
+                    <div>
+                        <label class="block text-purple-soft/80 text-sm font-medium mb-1">Email</label>
+                        <input type="email" id="ticket-email" class="w-full bg-void-black border border-purple-soft/20 rounded-lg px-4 py-3 text-white placeholder-purple-soft/30 focus:outline-none focus:border-purple-royal transition-colors" placeholder="your@email.com" required>
+                    </div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-purple-deep to-purple-royal hover:from-purple-royal hover:to-purple-neon text-white font-semibold py-3 rounded-lg transition-all duration-300 shadow-lg shadow-purple-deep/30">
+                        Проверить статус
+                    </button>
+                </form>
+
+                <div id="ticket-result" class="hidden mt-6 pt-6 border-t border-purple-soft/10"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-void-dark border-t border-purple-soft/10 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-purple-soft/10 pt-8">
+                <p class="text-purple-soft/40 text-sm text-center">© 2026 EmbroMine. Not affiliated with Mojang Studios.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('check-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('ticket-id').value;
+            const email = document.getElementById('ticket-email').value;
+            const result = document.getElementById('ticket-result');
+            result.innerHTML = '<div class="text-center text-purple-soft/60 py-4">Загрузка...</div>';
+            result.classList.remove('hidden');
+
+            try {
+                const res = await fetch(`/api/tickets/public/${id}?email=${encodeURIComponent(email)}`);
+                const data = await res.json();
+                if (!res.ok) {
+                    result.innerHTML = `<div class="text-center text-red-400 py-4">${data.error || 'Тикет не найден'}</div>`;
+                    return;
+                }
+                const t = data.ticket;
+                const statusMap = { open: 'Открыт', in_progress: 'В процессе', resolved: 'Решён', closed: 'Закрыт' };
+                const statusColors = { open: 'text-yellow-400', in_progress: 'text-blue-400', resolved: 'text-green-400', closed: 'text-gray-400' };
+                result.innerHTML = `
+                    <div class="ticket-card">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="font-bold text-white text-lg">#${t.id}</span>
+                            <span class="${statusColors[t.status] || 'text-gray-400'} font-medium">${statusMap[t.status] || t.status}</span>
+                            <span class="text-xs bg-purple-deep/20 text-purple-soft px-2 py-0.5 rounded">${t.priority}</span>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">${escapeHtml(t.subject)}</h3>
+                        <p class="text-purple-soft/70 text-sm mb-3">${escapeHtml(t.description)}</p>
+                        <div class="text-xs text-purple-soft/40 mb-4">
+                            <p>Категория: ${escapeHtml(t.category)}</p>
+                            <p>Создан: ${new Date(t.created_at).toLocaleString('ru-RU')}</p>
+                            ${t.resolved_at ? `<p>Решён: ${new Date(t.resolved_at).toLocaleString('ru-RU')}</p>` : ''}
+                        </div>
+                        ${t.admin_response ? `
+                        <div class="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
+                            <p class="text-green-400 text-xs font-semibold mb-1">Ответ администратора</p>
+                            <p class="text-gray-300 text-sm whitespace-pre-wrap">${escapeHtml(t.admin_response)}</p>
+                            <p class="text-gray-500 text-xs mt-2">${new Date(t.responded_at).toLocaleString('ru-RU')}</p>
+                        </div>` : '<p class="text-purple-soft/40 text-sm italic">Ожидает ответа администратора...</p>'}
+                    </div>
+                `;
+            } catch (err) {
+                result.innerHTML = '<div class="text-center text-red-400 py-4">Ошибка соединения</div>';
+            }
+        });
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

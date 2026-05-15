@@ -82,6 +82,34 @@ router.get('/', authenticateToken, requireAdmin, async (req, res) => {
     }
 });
 
+// GET /api/tickets/public/:id - Публичный просмотр тикета по ID + email
+router.get('/public/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { email } = req.query;
+
+        if (!email) {
+            return res.status(400).json({ error: 'Email обязателен для просмотра тикета' });
+        }
+
+        const result = await pool.query(
+            `SELECT id, username, email, category, subject, description, status, priority,
+                    admin_response, responded_at, created_at, resolved_at
+             FROM tickets WHERE id = $1 AND (email = $2 OR email IS NULL)`,
+            [id, email]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Тикет не найден или email не совпадает' });
+        }
+
+        res.json({ ticket: result.rows[0] });
+    } catch (error) {
+        logger.error('Ошибка при публичном получении тикета', { error: error.message });
+        res.status(500).json({ error: 'Ошибка сервера' });
+    }
+});
+
 // GET /api/tickets/:id - Получить тикет по ID (только для администраторов)
 router.get('/:id', authenticateToken, requireAdmin, async (req, res) => {
     try {
@@ -103,6 +131,36 @@ router.get('/:id', authenticateToken, requireAdmin, async (req, res) => {
     } catch (error) {
         logger.error('Ошибка при получении тикета', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера' });
+    }
+});
+
+// PUT /api/tickets/:id/response - Ответить на тикет (только для администраторов)
+router.put('/:id/response', authenticateToken, requireAdmin, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { response } = req.body;
+
+        if (!response || response.trim().length < 2) {
+            return res.status(400).json({ error: 'Ответ должен быть минимум 2 символа' });
+        }
+
+        const ticketCheck = await pool.query('SELECT id FROM tickets WHERE id = $1', [id]);
+        if (ticketCheck.rows.length === 0) {
+            return res.status(404).json({ error: 'Тикет не найден' });
+        }
+
+        const result = await pool.query(
+            `UPDATE tickets SET admin_response = $1, responded_at = CURRENT_TIMESTAMP, assigned_to = $2, status = 'resolved' WHERE id = $3 RETURNING *`,
+            [response.trim(), req.user.id, id]
+        );
+
+        res.json({
+            message: 'Ответ успешно отправлен',
+            ticket: result.rows[0]
+        });
+    } catch (error) {
+        logger.error('Ошибка при ответе на тикет', { error: error.message });
+        res.status(500).json({ error: 'Ошибка сервера при отправке ответа' });
     }
 });
 

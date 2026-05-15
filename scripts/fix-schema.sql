@@ -53,6 +53,10 @@ CREATE TABLE IF NOT EXISTS reports (
 CREATE INDEX IF NOT EXISTS idx_reports_status ON reports(status);
 CREATE INDEX IF NOT EXISTS idx_reports_user_id ON reports(user_id);
 
+-- Добавить поля для ответа администратора на тикеты
+ALTER TABLE tickets ADD COLUMN IF NOT EXISTS admin_response TEXT;
+ALTER TABLE tickets ADD COLUMN IF NOT EXISTS responded_at TIMESTAMP;
+
 -- 4. Создать таблицы контента (если отсутствуют)
 CREATE TABLE IF NOT EXISTS page_content (
     id SERIAL PRIMARY KEY,

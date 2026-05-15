@@ -57,6 +57,7 @@ function renderHeader() {
                         <a href="guides.html" class="nav-link ${currentPage === 'guides.html' ? 'text-purple-soft bg-purple-deep/20' : 'text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10'} px-3 py-2 rounded-md text-sm font-medium transition-all">Гайды</a>
                         <a href="map.html" class="nav-link ${currentPage === 'map.html' ? 'text-purple-soft bg-purple-deep/20' : 'text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10'} px-3 py-2 rounded-md text-sm font-medium transition-all">Карта</a>
                         <a href="support.html" class="nav-link ${currentPage === 'support.html' ? 'text-purple-soft bg-purple-deep/20' : 'text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10'} px-3 py-2 rounded-md text-sm font-medium transition-all">Поддержка</a>
+                        <a href="ticket-status.html" class="nav-link ${currentPage === 'ticket-status.html' ? 'text-purple-soft bg-purple-deep/20' : 'text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10'} px-3 py-2 rounded-md text-sm font-medium transition-all">Статус тикета</a>
 
                         <div id="auth-zone" class="inline-block ml-2 pl-2 border-l border-purple-soft/10">
                         </div>
@@ -108,6 +109,7 @@ function renderHeader() {
                 <a href="guides.html" class="block px-3 py-2 rounded-md text-base font-medium ${currentPage === 'guides.html' ? 'text-purple-soft bg-purple-deep/20' : 'text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10'}">Гайды</a>
                 <a href="map.html" class="block px-3 py-2 rounded-md text-base font-medium ${currentPage === 'map.html' ? 'text-purple-soft bg-purple-deep/20' : 'text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10'}">Карта</a>
                 <a href="support.html" class="block px-3 py-2 rounded-md text-base font-medium ${currentPage === 'support.html' ? 'text-purple-soft bg-purple-deep/20' : 'text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10'}">Поддержка</a>
+                <a href="ticket-status.html" class="block px-3 py-2 rounded-md text-base font-medium ${currentPage === 'ticket-status.html' ? 'text-purple-soft bg-purple-deep/20' : 'text-purple-soft/70 hover:text-purple-soft hover:bg-purple-deep/10'}">Статус тикета</a>
 
                 <div id="mobile-auth-zone" class="pt-2 mt-2 border-t border-purple-soft/10">
                 </div>

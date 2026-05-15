@@ -5,7 +5,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 
 PUBLIC_DIR = Path(__file__).parent.parent / 'public'
-EXCLUDE = {'admin-panel.html', 'content-manager-demo.html', 'login.html'}
+EXCLUDE = {'admin-panel.html', 'content-manager-demo.html', 'login.html', 'dashboard.html', 'ticket-status.html'}
 BACKUP_DIR = PUBLIC_DIR / 'original-backup'
 
 PLACEHOLDER = '''<div id="dynamic-content" class="min-h-[50vh] flex items-center justify-center transition-opacity duration-300 opacity-0" data-page-content="true">

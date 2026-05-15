@@ -66,10 +66,10 @@
             @apply px-4 py-2 bg-white/5 hover:bg-white/10 text-gray-300 text-sm font-medium rounded-lg transition-all border border-white/10;
         }
         .form-input {
-            @apply w-full bg-mc-darker border border-white/10 rounded-lg px-4 py-2 text-white text-sm focus:border-mc-green/50 focus:outline-none transition-all;
+            @apply w-full bg-mc-darker border border-white/10 rounded-lg px-4 py-2 text-white text-sm focus:border-mc-green/50 focus:outline-none transition-all placeholder:text-gray-500;
         }
         .form-select {
-            @apply bg-mc-darker border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:border-mc-green/50 focus:outline-none;
+            @apply bg-mc-darker border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:border-mc-green/50 focus:outline-none appearance-none;
         }
         /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -136,7 +136,7 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                     <span class="sidebar-text">Назад на сайт</span>
                 </a>
-                <button onclick="handleLogout()" class="sidebar-link w-full text-left mt-1">
+                <button onclick="handleLogout()" class="sidebar-link w-full mt-1 justify-start">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
                     <span class="sidebar-text">Выйти</span>
                 </button>
@@ -449,7 +449,7 @@
                         </div>
                         <div>
                             <label class="block text-gray-400 text-sm mb-2">IP адрес сервера</label>
-                            <input type="text" value="play.embromine.ru" class="form-input bg-white/5" readonly>
+                            <input type="text" value="play.embromine.ru" class="form-input" readonly>
                         </div>
                         <div>
                             <label class="block text-gray-400 text-sm mb-2">Максимум игроков</label>
@@ -506,7 +506,7 @@
         <div class="flex-1 flex overflow-hidden">
             <div class="w-1/2 border-r border-white/10 flex flex-col">
                 <div class="px-4 py-2 bg-mc-darker border-b border-white/5 text-xs text-gray-400 font-mono uppercase tracking-wider">HTML</div>
-                <textarea id="editor-textarea" class="flex-1 bg-mc-darker text-gray-300 font-mono text-sm p-4 resize-none focus:outline-none" spellcheck="false"></textarea>
+                <textarea id="editor-textarea" class="flex-1 bg-mc-darker text-gray-300 font-mono text-sm p-4 resize-none focus:outline-none border border-white/10 rounded-lg" spellcheck="false"></textarea>
             </div>
             <div class="w-1/2 flex flex-col">
                 <div class="px-4 py-2 bg-mc-darker border-b border-white/5 text-xs text-gray-400 font-mono uppercase tracking-wider">Preview</div>
@@ -647,7 +647,13 @@
             if (!text) return '';
             const div = document.createElement('div');
             div.textContent = text;
-            return div.innerHTML;
+            return div.innerHTML.replace(/'/g, '&#039;');
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
         }
 
         function formatDate(dateString) {
@@ -867,7 +873,16 @@
                                     <option value="high" ${t.priority==='high'?'selected':''}>Высокий</option>
                                     <option value="urgent" ${t.priority==='urgent'?'selected':''}>Срочный</option>
                                 </select>
+                                <button onclick="showTicketReply(${t.id})" class="text-mc-green hover:text-green-300 text-xs py-1 text-left">💬 Ответить</button>
                                 <button onclick="deleteTicket(${t.id})" class="text-red-400 hover:text-red-300 text-xs py-1 text-left">🗑 Удалить</button>
+                            </div>
+                        </div>
+                        ${t.admin_response ? `<div class="mt-3 p-3 bg-green-500/10 border border-green-500/20 rounded-lg"><p class="text-green-400 text-xs font-semibold mb-1">Ответ администратора (${formatDate(t.responded_at)}):</p><p class="text-gray-300 text-sm whitespace-pre-wrap">${escapeHtml(t.admin_response)}</p></div>` : ''}
+                        <div id="ticket-reply-${t.id}" class="hidden mt-3">
+                            <textarea id="ticket-reply-text-${t.id}" class="form-input text-xs w-full h-20 mb-2" placeholder="Введите ответ..."></textarea>
+                            <div class="flex gap-2">
+                                <button onclick="submitTicketReply(${t.id})" class="btn btn-primary text-xs py-1 px-3">Отправить</button>
+                                <button onclick="hideTicketReply(${t.id})" class="btn text-xs py-1 px-3">Отмена</button>
                             </div>
                         </div>
                     </div>
@@ -905,6 +920,28 @@
                 const res = await api(`/api/tickets/${id}`, { method: 'DELETE' });
                 if (res.ok) { showToast('Тикет удален'); loadTickets(); }
                 else showToast('Ошибка удаления', 'error');
+            } catch (e) { showToast('Ошибка соединения', 'error'); }
+        }
+
+        function showTicketReply(id) {
+            document.getElementById(`ticket-reply-${id}`).classList.remove('hidden');
+        }
+        function hideTicketReply(id) {
+            document.getElementById(`ticket-reply-${id}`).classList.add('hidden');
+        }
+        async function submitTicketReply(id) {
+            const text = document.getElementById(`ticket-reply-text-${id}`).value;
+            if (!text || text.trim().length < 2) {
+                showToast('Ответ слишком короткий', 'error');
+                return;
+            }
+            try {
+                const res = await api(`/api/tickets/${id}/response`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ response: text.trim() })
+                });
+                if (res.ok) { showToast('Ответ отправлен'); loadTickets(); }
+                else showToast('Ошибка отправки ответа', 'error');
             } catch (e) { showToast('Ошибка соединения', 'error'); }
         }
 
