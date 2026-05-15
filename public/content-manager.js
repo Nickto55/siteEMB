@@ -140,9 +140,6 @@ class PageContentManager {
                 <div class="text-4xl mb-4">📄</div>
                 <h2 class="text-xl font-bold text-gray-300 mb-2">Контент не найден</h2>
                 <p class="text-gray-500 mb-4">Страница "${pageName}" ещё не создана в базе данных.</p>
-                <a href="admin-panel.html" class="inline-block px-4 py-2 bg-green-600 hover:bg-green-500 text-white text-sm font-medium rounded-lg transition-all">
-                    Перейти в админ-панель
-                </a>
             </div>
         `;
         this.fadeIn(el);

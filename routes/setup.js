@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const pool = require('../db');
 const { authenticateToken, requireAdmin } = require('../middleware/auth');
 const { SetupEngine } = require('../lib/setup-engine');
 const { Logger } = require('../utils/logger');
@@ -110,6 +111,51 @@ router.post('/full', async (req, res) => {
     } catch (error) {
         logger.error('Ошибка полной установки', { error: error.message });
         res.status(500).json({ error: 'Ошибка сервера', details: error.message });
+    }
+});
+
+// GET /api/setup/db-info - Детальная информация о базе данных
+router.get('/db-info', async (req, res) => {
+    try {
+        const client = await pool.connect();
+
+        const versionResult = await client.query('SELECT version()');
+        const version = versionResult.rows[0].version;
+
+        const tablesResult = await client.query(`
+            SELECT table_name
+            FROM information_schema.tables
+            WHERE table_schema = 'public' AND table_type = 'BASE TABLE'
+            ORDER BY table_name
+        `);
+
+        const tables = [];
+        for (const row of tablesResult.rows) {
+            let count = null;
+            try {
+                const countRes = await client.query(`SELECT COUNT(*) FROM "${row.table_name}"`);
+                count = parseInt(countRes.rows[0].count);
+            } catch (e) {
+                count = null;
+            }
+            tables.push({ name: row.table_name, rows: count });
+        }
+
+        client.release();
+
+        res.json({
+            success: true,
+            connected: true,
+            version: version.split(' ')[1],
+            tables
+        });
+    } catch (error) {
+        logger.error('Ошибка получения информации о БД', { error: error.message });
+        res.status(500).json({
+            success: false,
+            connected: false,
+            error: error.message
+        });
     }
 });
 
